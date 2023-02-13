@@ -22,4 +22,5 @@
 ### 2023.02.05~
 
 
-[전체 대략적 디자인 Figma Design](https://www.figma.com/file/ndJjGc6edEYel3tvo5ZsKr/Untitled?node-id=1%3A2&t=K6SYZlhiHiuidXpb-1)
+[초기 기능 디자인 Figma](https://www.figma.com/file/ndJjGc6edEYel3tvo5ZsKr/Untitled?node-id=1%3A2&t=K6SYZlhiHiuidXpb-1)
+- 전체적인 디자인이 아닌 각각의 페이지에 어떤 기능들을 넣을지 구상한 내용입니다.
