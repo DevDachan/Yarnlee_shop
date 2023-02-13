@@ -1,0 +1,53 @@
+.detail_img{
+  width :100% !important;
+  height: 100% !important;
+}
+
+.detail_span_img{
+  height: 100% !important;
+}
+
+.pd0{
+  padding: 0px !important;
+}
+.mg0{
+  margin: 0px !important;
+}
+.mb1{
+  margin-bottom: 1rem !important;
+}
+.ralign{
+  text-align: right;
+}
+.lalign{
+  text-align: left;
+}
+.calign{
+  text-align: center;
+}
+
+.number_input{
+  width: 30px !important;
+  text-align: center;
+  margin:auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+
+.bt_up_down{
+  padding:5px;
+  width: 30px;
+  height: 30px;
+  font-size: 5px;
+}
+
+.detail_main{
+  margin: 2rem !important;
+}
+.detail_main_nav{
+  margin-bottom: 50px;
+}

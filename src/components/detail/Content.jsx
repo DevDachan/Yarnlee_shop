@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Main(props) {
   const navigate = useNavigate();
+  const [productNum, setProductNum] = useState(1);
+
+  const productUpDown = (e,temp) =>{
+    if(temp == "up"){
+      setProductNum(productNum+1);
+    }else{
+      if(productNum > 1){
+        setProductNum(productNum-1);
+      }
+    }
+  }
+
   const Wrapper = styled.div`
       padding: 16px;
       width: calc(100% - 32px);
@@ -14,13 +26,37 @@ function Main(props) {
   `;
   return (
       <Wrapper>
-        <div id="main">
-          <div class="inner">
-            <h1>Generic Page</h1>
-            <span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-            <p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-            <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+        <div className="detail_main" id="main">
+          <div className="inner">
+            <h1>Circle Tote Bag</h1>
+            <div className="row detail_main_nav">
+
+              <div className="col-sm-6" name="imgDiv">
+                <span className="image main detail_span_img"><img className="detail_img" src="images/pic13.jpg" alt="" /></span>
+              </div>
+
+              <div className="col-sm-6" name="selectDiv">
+
+                <div className="col-sm-12 row mg0 mb1" name="numberDiv">
+                  <div className="col-5 ralign pd0">
+                    <button className="bt_up_down" onClick={(e) => productUpDown(e,"down")}> {"<"} </button>
+                  </div>
+                  <div className="col-2 calign">
+                    <input type="number" className="number_input" id="product_num" onChange={(e) => setProductNum(e.target.value) } min="1" max="10" value={productNum}/>
+                  </div>
+                  <div className="col-5 lalign pd0">
+                    <button className="bt_up_down" onClick={(e) => productUpDown(e,"up")}> {">"} </button>
+                  </div>
+                </div>
+
+                <div className="col-sm-12 calign">
+                  <button className="bt_order" onClick={(e) => {}}> Order </button>
+                </div>
+              </div>
+
+            </div>
+            <p>여기는 상품 설명이 들어갈 공간입니다.</p>
+            <p>자유롭게 상품에 대한 설명을 적어주시면 됩니다.</p>
           </div>
         </div>
 
