@@ -7,14 +7,40 @@
   height: 100% !important;
 }
 
+.order_span_img{
+  height: 80px;
+}
+.order_img{
+  width :80px !important;
+  height: 80px !important;
+}
+
 .pd0{
   padding: 0px !important;
+}
+.pt1{
+  padding-top: 1rem !important;
+}
+.pt2{
+  padding-top: 2rem !important;
+}
+.pt3{
+  padding-top: 3rem !important;
 }
 .mg0{
   margin: 0px !important;
 }
 .mb1{
   margin-bottom: 1rem !important;
+}
+.mt1{
+  margin-top: 1rem !important;
+}
+.mt2{
+  margin-top: 2rem !important;
+}
+.mt3{
+  margin-top: 3rem !important;
 }
 .ralign{
   text-align: right;
@@ -30,6 +56,11 @@
   width: 30px !important;
   text-align: center;
   margin:auto;
+}
+
+
+.nowrap{
+  white-space:nowrap;
 }
 
 input::-webkit-outer-spin-button,
@@ -50,4 +81,59 @@ input::-webkit-inner-spin-button {
 }
 .detail_main_nav{
   margin-bottom: 50px;
+}
+
+#imgDiv{
+  height: 100%;
+}
+
+
+/* Gird in order page*/
+
+
+.order_main{
+  margin: 2rem !important;
+  width: 80% !important;
+}
+.order-grid{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.gr-1{
+  grid-column: auto / span 1;
+}
+.gr-2{
+  grid-column: auto / span 2;
+}
+.gr-3{
+  grid-column: auto / span 3;
+}
+.gr-4{
+  grid-column: auto / span 4;
+}
+.gr-5{
+  grid-column: auto / span 5;
+}
+.gr-6{
+  grid-column: auto / span 6;
+}
+.gr-7{
+  grid-column: auto / span 7;
+}
+.gr-8{
+  grid-column: auto / span 8;
+}
+
+.gr-9{
+  grid-column: auto / span 9;
+}
+.gr-10{
+  grid-column: auto / span 10;
+}
+.gr-11{
+  grid-column: auto / span 11;
+}
+.gr-12{
+  grid-column: auto / span 12;
 }
