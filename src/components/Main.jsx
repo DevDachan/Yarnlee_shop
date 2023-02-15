@@ -8,7 +8,8 @@ import ItemList from "./list/ItemList";
 function Main(props) {
   const navigate = useNavigate();
   const Wrapper = styled.div`
-      padding: 16px;
+      padding: 0 2.5em;
+      margin: 0 auto;
       width: calc(100% - 32px);
       display: flex;
       flex-direction: column;
@@ -18,7 +19,7 @@ function Main(props) {
   return (
       <Wrapper>
           <div id="main">
-            <div class="inner">
+            <div class="inner mg0">
               <header>
                 <h1>안녕하십니까!!<br />
                 예제 쇼핑몰 페이지입니다!</h1>

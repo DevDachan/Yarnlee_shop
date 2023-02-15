@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function Main(props) {
   const navigate = useNavigate();
   const [productNum, setProductNum] = useState(1);
+  const numberRef = useRef(1);
 
   const productUpDown = (e,temp) =>{
     if(temp == "up"){
-      setProductNum(productNum+1);
+      numberRef.current.value = Number(numberRef.current.value)+1;
     }else{
-      if(productNum > 1){
-        setProductNum(productNum-1);
+      if(numberRef.current.value > 1){
+        numberRef.current.value = Number(numberRef.current.value)-1;
       }
     }
   }
+
+  const order = () =>{
+     navigate("/order");
+  }
+
 
   const Wrapper = styled.div`
       padding: 16px;
@@ -36,11 +42,20 @@ function Main(props) {
                 <span className="image main detail_span_img"><img className="detail_img" src="images/pic13.jpg" alt="" /></span>
               </div>
 
-              <div className="col-12-medium calign" name="selectDiv" style={{paddingTop: "20%"}}>
+              <div className="col-12-medium calign" name="selectDiv" style={{paddingTop: "10%"}}>
 
                 <div className="col-12-medium mt2">
-                  <h2>판매 가격: 32000 원</h2>
-                  <h2>배송 도착 예정일 : 5일 후</h2>
+                  <h2 class="lalign">판매 가격: 32000 원</h2>
+                  <h2 class="lalign">배송 예정일 : 5일~7일 </h2>
+                </div>
+
+                <div className="col-12-medium mb1">
+                  <select id="select_color" defaultValue="">
+                    <option value="" disabled > Color </option>
+                    <option value="americano">Green</option>
+                    <option value="caffe latte">Blue</option>
+                    <option value="cafe au lait">Yellow</option>
+                  </select>
                 </div>
 
                 <div className="col-12-medium row mg0 mb1" name="numberDiv">
@@ -48,7 +63,7 @@ function Main(props) {
                     <button className="bt_up_down" onClick={(e) => productUpDown(e,"down")}> {"<"} </button>
                   </div>
                   <div className="col-2 calign pd0">
-                    <input type="number" className="number_input" id="product_num" onChange={(e) => setProductNum(e.target.value) } min="1" max="10" value={productNum}/>
+                    <input type="number" className="number_input" id="product_num" min="1" max="10" ref={numberRef} value={numberRef.current}/>
                   </div>
                   <div className="col-5 lalign pd0">
                     <button className="bt_up_down" onClick={(e) => productUpDown(e,"up")}> {">"} </button>
@@ -56,7 +71,7 @@ function Main(props) {
                 </div>
 
                 <div className="col-sm-12 calign">
-                  <button className="bt_order" onClick={(e) => {}}> Order </button>
+                  <button className="bt_order" onClick={(e) => navigate("/order")}> Order </button>
                 </div>
               </div>
 

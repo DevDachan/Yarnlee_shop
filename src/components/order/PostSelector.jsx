@@ -4,7 +4,6 @@ import DaumPostcode from 'react-daum-postcode';
 
 import Modal from 'react-bootstrap/Modal';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function PostSelector(props){
   const [show, setShow] = useState(false);

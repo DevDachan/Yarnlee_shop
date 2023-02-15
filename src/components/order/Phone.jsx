@@ -41,6 +41,7 @@ function Phone() {
         <input
           id="phoneNum"
           name="user-num"
+          className="prl1"
           value={phoneNum}
           ref={phoneRef}
           onChange={handlePhone}
