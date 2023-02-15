@@ -5,6 +5,7 @@ import styled from "styled-components";
 function Main(props) {
   const navigate = useNavigate();
   const [productNum, setProductNum] = useState(1);
+  const [visibleAlert, setVisibleAlert] = useState(false);
   const numberRef = useRef(1);
 
   const productUpDown = (e,temp) =>{
@@ -17,9 +18,14 @@ function Main(props) {
     }
   }
 
-  const order = () =>{
-     navigate("/order");
+  const orderClick = () =>{
+    if(document.getElementById("select_color").value != ""){
+      navigate("/order");
+    }else{
+      document.getElementById("alert_p").innerText = "색상을 선택해주세요!";
+    }
   }
+
 
 
   const Wrapper = styled.div`
@@ -45,16 +51,16 @@ function Main(props) {
               <div className="col-12-medium calign" name="selectDiv" style={{paddingTop: "10%"}}>
 
                 <div className="col-12-medium mt2">
-                  <h2 class="lalign">판매 가격: 32000 원</h2>
-                  <h2 class="lalign">배송 예정일 : 5일~7일 </h2>
+                  <h2 class="calign">판매 가격: 32000 원</h2>
+                  <h2 class="calign">배송 예정일 : 5일~7일 </h2>
                 </div>
 
                 <div className="col-12-medium mb1">
                   <select id="select_color" defaultValue="">
-                    <option value="" disabled > Color </option>
-                    <option value="americano">Green</option>
-                    <option value="caffe latte">Blue</option>
-                    <option value="cafe au lait">Yellow</option>
+                    <option value="" disabled className="option_select" > Color </option>
+                    <option value="americano" className="option_select">Green</option>
+                    <option value="caffe latte" className="option_select">Blue</option>
+                    <option value="cafe au lait" className="option_select">Yellow</option>
                   </select>
                 </div>
 
@@ -63,15 +69,20 @@ function Main(props) {
                     <button className="bt_up_down" onClick={(e) => productUpDown(e,"down")}> {"<"} </button>
                   </div>
                   <div className="col-2 calign pd0">
-                    <input type="number" className="number_input" id="product_num" min="1" max="10" ref={numberRef} value={numberRef.current}/>
+                    <input type="number" className="number_input" id="product_num" min="1" max="10" ref={numberRef} defaultValue={numberRef.current}/>
                   </div>
                   <div className="col-5 lalign pd0">
                     <button className="bt_up_down" onClick={(e) => productUpDown(e,"up")}> {">"} </button>
                   </div>
                 </div>
 
+                <div className="col-12" id="alert_div">
+                  <p id="alert_p"></p>
+                </div>
+
+
                 <div className="col-sm-12 calign">
-                  <button className="bt_order" onClick={(e) => navigate("/order")}> Order </button>
+                  <button className="bt_order" onClick={orderClick}> Order </button>
                 </div>
               </div>
 

@@ -23,7 +23,7 @@ function Remittance(props) {
 
   return (
     <div className="grid_t calign" id="image_container">
-      <div className="gr-3 pt1">
+      <div className="gr-4 pt1">
         <h2>송금 내역</h2>
       </div>
 
@@ -31,7 +31,7 @@ function Remittance(props) {
         <label id="lb_image" htmlFor="image_remittance">Upload</label>
       </div>
 
-      <div className="gr-6">
+      <div className="gr-5">
         <img id="img" src='' />
       </div>
 
