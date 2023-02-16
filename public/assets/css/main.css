@@ -226,15 +226,15 @@ input, select, textarea {
 	h6 {
 		font-size: 0.8em;
 	}
-
+/*
 	@media screen and (max-width: 980px) {
 
-		h1 br, h2 br, h3 br, h4 br, h5 br, h6 br {
+		h1 br, h2 br, h3 br, h4 br, h5 br, h6  {
 			display: none;
 		}
 
 	}
-
+*/
 	@media screen and (max-width: 736px) {
 
 		h2 {
@@ -243,18 +243,6 @@ input, select, textarea {
 
 		h3 {
 			font-size: 0.8em;
-		}
-
-	}
-
-	@media screen and (max-width: 600px) {
-
-		h2 {
-			font-size: 0.6em;
-		}
-
-		h3 {
-			font-size: 0.4em;
 		}
 
 	}

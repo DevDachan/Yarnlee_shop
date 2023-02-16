@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import ItemList from "./list/ItemList";
-// 나중에 현재 전체 목록 itemList로 변경하기.
 
-function Main(props) {
+function AdminItemList(props) {
   const navigate = useNavigate();
   const Wrapper = styled.div`
-      padding: 0 2.5em;
-      margin: 0 auto;
+      padding: 16px;
       width: calc(100% - 32px);
       display: flex;
       flex-direction: column;
@@ -19,10 +16,12 @@ function Main(props) {
   return (
       <Wrapper>
           <div id="main">
-            <div className="inner mg0">
+            <div className="inner">
               <header>
-                <h1>안녕하십니까!!</h1>
-                <h1>예제 쇼핑몰 페이지입니다!</h1>
+                <textarea placeholder="메인 화면에서 나타날 내용 입력">
+                  <h1>안녕하십니까!!<br />
+                  예제 쇼핑몰 페이지입니다!</h1>
+                </textarea>
               </header>
               <section className="tiles">
                 <article className="style1">
@@ -160,8 +159,10 @@ function Main(props) {
               </section>
             </div>
           </div>
+
+
       </Wrapper>
   );
 }
 
-export default Main;
+export default AdminItemList;

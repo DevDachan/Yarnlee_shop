@@ -39,7 +39,7 @@ function Login(props) {
               <h3> Password </h3>
             </div>
             <div class="gr-9">
-              <input type="text" id="ip_pwd" value={pwd}/>
+              <input type="password" id="ip_pwd" value={pwd}/>
             </div>
             <div class="gr-6 ralign mt1 mr1">
               <button onClick={onClick}> 로그인 </button>

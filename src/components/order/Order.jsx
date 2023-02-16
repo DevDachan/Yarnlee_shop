@@ -41,8 +41,10 @@ function Main(props) {
                   <h2 style={{color: "#00db9a"}}> 주문 상세 </h2>
                 </div>
                 <div className="gr-8 calign" style={{paddingTop: "20px"}}>
-                  <h3> 서클 토트백 | 그린 | 수량 1 </h3>
-                  <h3> 서클 토트백 | 그린 | 수량 1 </h3>
+                  <div>
+                    서클 토트백 | 그린 | 수량 1
+                    서클 토트백 | 그린 | 수량 1
+                  </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
                   <h3> 총액 : 32000원 </h3>
