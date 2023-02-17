@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
-import Phone from "./Phone";
-import PostSelector from "./PostSelector";
-import Remittance from "./Remittance";
+import Phone from "../order/Phone";
+import PostSelector from "../order/PostSelector";
+import Remittance from "../order/Remittance";
 
 
-function Order(props) {
+function OrderHistroy(props) {
   const navigate = useNavigate();
   const [address, setAddress] = useState();
   const [zoneCode, setZonecode] = useState();
@@ -58,7 +58,7 @@ function Order(props) {
                 <h2 className="mg0">주문자 이름</h2>
               </div>
               <div className="gr-8">
-                <input type="text" className="prl1" id="ip_name"></input>
+                <input type="text" disabled className="prl1" id="ip_name" defaultValue="서다찬"></input>
               </div>
 
 
@@ -67,23 +67,20 @@ function Order(props) {
                 <h2 className="mg0">전화번호</h2>
               </div>
               <div className="gr-8">
-                <Phone / >
+                <input type="text" disabled className="prl1" id="ip_phone" defaultValue="010-6888-9999"></input>
               </div>
 
               <div className="gr-4 calign mt3">
-                <PostSelector
-                  setAddress = {setAddress}
-                  setZonecode = {setZonecode}
-                />
+                <h2 className="mg0">주소</h2>
               </div>
               <div className="gr-8 mt3">
-                <input type="text" className="prl1"  disabled id="zoneCode" value={zoneCode} />
+                <input type="text" className="prl1"  disabled id="zoneCode" defaultValue="313131" />
               </div>
               <div className="gr-12">
-                <input type="text" className="prl1"  disabled id="address" value={address} />
+                <input type="text" className="prl1"  disabled id="address" defaultValue="경상북도 포항시 북구 흥해읍" />
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" id="address_detail" placeholder="상세주소"/>
+                <input type="text" required className="prl1" disabled id="address_detail" placeholder="한동대학교"/>
               </div>
 
               <div className="gr-12 mt3">
@@ -93,7 +90,7 @@ function Order(props) {
               </div>
 
               <div className="gr-12 calign pt3">
-                <button className="bt_order" onClick={(e) => {}}> Order </button>
+                <button className="bt_order" onClick={(e) => {navigate("../orderList")}}> 목록으로 </button>
               </div>
 
 
@@ -105,4 +102,4 @@ function Order(props) {
   );
 }
 
-export default Order;
+export default OrderHistroy;
