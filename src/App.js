@@ -15,11 +15,13 @@ import Content from "./components/detail/Content";
 import Order from "./components/order/Order";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
-import AdminMain from "./components/admin/main/AdminMain";
 import Nav from "./components/Nav";
-import AdminOrderList from "./components/admin/orderList/AdminOrderList";
 import OrderList from "./components/orderList/OrderList";
 import OrderHistory from "./components/orderHistory/OrderHistory";
+import AdminOrderList from "./components/admin/orderList/AdminOrderList";
+import AdminOrderHistory from "./components/admin/orderHistory/AdminOrderHistory";
+import AdminMain from "./components/admin/main/AdminMain";
+
 
 
 // 사용자 정의 태그 생성하기
@@ -38,7 +40,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/adminMain" element={<AdminMain />}></Route>
         <Route path="/adminOrderList" element={<AdminOrderList />}></Route>
-
+        <Route path="/adminOrderHistory" element={<AdminOrderHistory />}></Route> 
 
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

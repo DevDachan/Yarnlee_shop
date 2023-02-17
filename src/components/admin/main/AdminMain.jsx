@@ -109,8 +109,8 @@ function AdminMain(props) {
           <h2>순서 바꾸기</h2>
 
           <div className="grid_t mb2">
-            <div className="gr-9">
-              <p>Magna </p>
+            <div className="gr-6">
+              <h3>Magna </h3>
             </div>
             <div className="gr-3">
               <select>
@@ -118,10 +118,13 @@ function AdminMain(props) {
                 <option value="ad">2</option>
                 <option value="qd">3</option>
               </select>
+            </div>
+            <div className="gr-3 ml3" >
+              <button > 관리 </button>
             </div>
 
-            <div className="gr-9">
-              <p>Lorem </p>
+            <div className="gr-6">
+              <h3>Lorem </h3>
             </div>
             <div className="gr-3">
               <select>
@@ -129,10 +132,13 @@ function AdminMain(props) {
                 <option value="ad">2</option>
                 <option value="qd">3</option>
               </select>
+            </div>
+            <div className="gr-3 ml3" >
+              <button > 관리 </button>
             </div>
 
-            <div className="gr-9">
-              <p>Feugiat </p>
+            <div className="gr-6">
+              <h3>Feugiat </h3>
             </div>
             <div className="gr-3">
               <select>
@@ -140,10 +146,13 @@ function AdminMain(props) {
                 <option value="ad">2</option>
                 <option value="qd">3</option>
               </select>
+            </div>
+            <div className="gr-3 ml3" >
+              <button > 관리 </button>
             </div>
 
-            <div className="gr-9">
-              <p>Magna </p>
+            <div className="gr-6">
+              <h3>Magna </h3>
             </div>
             <div className="gr-3">
               <select>
@@ -151,6 +160,9 @@ function AdminMain(props) {
                 <option value="ad">2</option>
                 <option value="qd">3</option>
               </select>
+            </div>
+            <div className="gr-3 ml3" >
+              <button > 관리 </button>
             </div>
           </div>
 

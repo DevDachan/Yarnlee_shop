@@ -16,7 +16,7 @@ function AdminOrderList(props) {
     const navigate = useNavigate();
 
     const viewOrder = () =>{
-
+      navigate("../adminOrderHistory");
     }
 
 
