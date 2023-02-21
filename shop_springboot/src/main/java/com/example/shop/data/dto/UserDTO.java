@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
-public class ProductDTO {
+public class UserDTO {
   @NotNull
   private int id;
 

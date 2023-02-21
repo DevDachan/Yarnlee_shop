@@ -1,6 +1,6 @@
 package com.example.shop.data.entity;
 
-import com.example.shop.data.dto.ProductDTO;
+import com.example.shop.data.dto.AdminDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -18,31 +18,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-@Table(name = "product")
-public class ProductEntity {
+@Table(name = "admin")
+public class AdminEntity {
   @Id
-  int id;
+  String id;
 
-  String name;
-
-  int price;
-
-  String detail;
-
-  int deliveryCost;
-
-  String deliveryTime;
+  String password;
 
 
-
-  public ProductDTO toDto(){
-    return ProductDTO.builder()
+  public AdminDTO toDto(){
+    return AdminDTO.builder()
         .id(id)
-        .name(name)
-        .price(price)
-        .detail(detail)
-        .deliveryTime(deliveryTime)
-        .deliveryCost(deliveryCost)
+        .password(password)
         .build();
   }
 }

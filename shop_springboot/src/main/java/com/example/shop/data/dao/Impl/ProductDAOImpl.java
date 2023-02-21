@@ -28,7 +28,5 @@ public class ProductDAOImpl implements ProductDAO {
     return productEntity;
   }
 
-
-
 }
 

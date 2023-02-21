@@ -1,9 +1,10 @@
 package com.example.shop.data.entity;
 
-import com.example.shop.data.dto.ProductDTO;
+import com.example.shop.data.dto.ImageDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,31 +19,24 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-@Table(name = "product")
-public class ProductEntity {
+@Table(name = "image")
+public class ImageEntity {
   @Id
   int id;
 
-  String name;
+  String data;
 
-  int price;
+  String mimetype;
 
-  String detail;
-
-  int deliveryCost;
-
-  String deliveryTime;
+  String size;
 
 
-
-  public ProductDTO toDto(){
-    return ProductDTO.builder()
+  public ImageDTO toDto(){
+    return ImageDTO.builder()
         .id(id)
-        .name(name)
-        .price(price)
-        .detail(detail)
-        .deliveryTime(deliveryTime)
-        .deliveryCost(deliveryCost)
+        .data(data)
+        .mimetype(mimetype)
+        .size(size)
         .build();
   }
 }
