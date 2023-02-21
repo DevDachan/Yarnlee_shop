@@ -30,4 +30,4 @@
 <br/>
 
 
-#### DB 구성 [DB.md](https://github.com/DevDachan/React-shopping/blob/main/DB.md)
+#### DB 구성 [DB.md](https://github.com/DevDachan/React_Shopping/blob/main/DB.md)
