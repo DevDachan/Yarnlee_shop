@@ -1,6 +1,6 @@
 package com.example.shop.data.dto;
 
-import com.example.shop.data.entity.ProductEntity;
+import com.example.shop.data.entity.ProductColorEntity;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,33 +15,16 @@ import lombok.ToString;
 @Builder
 public class ProductColorDTO {
   @NotNull
-  private int id;
+  private int productId;
 
   @NotNull
-  private String name;
-
-  @NotNull
-  private int price;
-
-  @NotNull
-  private String detail;
-
-  @NotNull
-  private int deliveryCost;
-
-  @NotNull
-  private String deliveryTime;
+  private String color;
 
 
-
-  public ProductEntity toEntity(){
-    return ProductEntity.builder()
-        .id(id)
-        .name(name)
-        .price(price)
-        .detail(detail)
-        .deliveryTime(deliveryTime)
-        .deliveryCost(deliveryCost)
+  public ProductColorEntity toEntity(){
+    return ProductColorEntity.builder()
+        .productId(productId)
+        .color(color)
         .build();
   }
 

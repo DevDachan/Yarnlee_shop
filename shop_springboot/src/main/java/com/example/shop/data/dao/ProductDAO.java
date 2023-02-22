@@ -4,5 +4,5 @@ import com.example.shop.data.entity.ProductEntity;
 
 public interface ProductDAO {
   ProductEntity saveProduct(ProductEntity productEntity);
-  ProductEntity getProduct (String productId);
+  ProductEntity getProduct (int productId);
 }

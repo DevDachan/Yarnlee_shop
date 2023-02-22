@@ -19,7 +19,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-@Table(name = "order_detail")
+@Table(name = "order")
 public class OrderEntity {
   @Id
   int id;
@@ -36,7 +36,7 @@ public class OrderEntity {
 
   String orderPhone;
 
-  String orderZoneCode;
+  String orderZonecode;
 
   String orderAddress;
 
@@ -53,7 +53,7 @@ public class OrderEntity {
         .totalCost(totalCost)
         .orderName(orderName)
         .orderPhone(orderPhone)
-        .orderZoneCode(orderZoneCode)
+        .orderZonecode(orderZonecode)
         .orderAddress(orderAddress)
         .addressDetail(addressDetail)
         .imageId(imageId)

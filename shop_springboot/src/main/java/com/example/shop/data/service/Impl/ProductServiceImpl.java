@@ -21,20 +21,20 @@ public class ProductServiceImpl implements ProductService {
   // Service(Client) <-> Controller : DTO
   // Service <-> DAO(DB) : Entity
   @Override
-  public ProductDTO saveProduct(String productId, String productName, int productPrice, String productDetail){
-    ProductEntity productEntity = productDataHandeler.saveProductEntity(productId, productName, productPrice, productDetail);
+  public ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime){
+    ProductEntity productEntity = productDataHandeler.saveProductEntity(productId, productName, productPrice, productDetail,deliveryCost, deliveryTime);
 
-    ProductDTO productDTO = new ProductDTO(productEntity.getProductId(), productEntity.getProductName(),
-        productEntity.getProductPrice(), productEntity.getProductDetail());
+    ProductDTO productDTO = new ProductDTO(productEntity.getId(), productEntity.getName(),
+        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime());
     return productDTO;
   }
 
   @Override
-  public ProductDTO getProduct(String productId){
+  public ProductDTO getProduct(int productId){
     ProductEntity productEntity = productDataHandeler.getProductEntity(productId);
 
-    ProductDTO productDTO = new ProductDTO(productEntity.getProductId(), productEntity.getProductName(),
-        productEntity.getProductPrice(), productEntity.getProductDetail());
+    ProductDTO productDTO = new ProductDTO(productEntity.getId(), productEntity.getName(),
+        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime());
     return productDTO;
   }
 

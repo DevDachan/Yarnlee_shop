@@ -36,7 +36,7 @@ public class OrderDTO {
   private String orderPhone;
 
   @NotNull
-  private String orderZoneCode;
+  private String orderZonecode;
 
   @NotNull
   private String orderAddress;
@@ -60,7 +60,7 @@ public class OrderDTO {
         .totalCost(totalCost)
         .orderName(orderName)
         .orderPhone(orderPhone)
-        .orderZoneCode(orderZoneCode)
+        .orderZonecode(orderZonecode)
         .orderAddress(orderAddress)
         .addressDetail(addressDetail)
         .imageId(imageId)
