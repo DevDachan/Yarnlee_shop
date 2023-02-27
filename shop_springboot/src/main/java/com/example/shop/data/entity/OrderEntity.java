@@ -30,13 +30,17 @@ public class OrderEntity {
 
   int productId;
 
+  String color;
+
+  int num;
+
   int totalCost;
 
   String orderName;
 
   String orderPhone;
 
-  String orderZonecode;
+  int orderZonecode;
 
   String orderAddress;
 
@@ -50,6 +54,8 @@ public class OrderEntity {
         .orderDate(orderDate)
         .userId(userId)
         .productId(productId)
+        .color(color)
+        .num(num)
         .totalCost(totalCost)
         .orderName(orderName)
         .orderPhone(orderPhone)

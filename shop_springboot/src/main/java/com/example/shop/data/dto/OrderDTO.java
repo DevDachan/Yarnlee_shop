@@ -27,6 +27,12 @@ public class OrderDTO {
   private int productId;
 
   @NotNull
+  private String color;
+
+  @NotNull
+  private int num;
+
+  @NotNull
   private int totalCost;
 
   @NotNull
@@ -36,7 +42,7 @@ public class OrderDTO {
   private String orderPhone;
 
   @NotNull
-  private String orderZonecode;
+  private int orderZonecode;
 
   @NotNull
   private String orderAddress;
@@ -57,6 +63,8 @@ public class OrderDTO {
         .orderDate(orderDate)
         .userId(userId)
         .productId(productId)
+        .color(color)
+        .num(num)
         .totalCost(totalCost)
         .orderName(orderName)
         .orderPhone(orderPhone)
