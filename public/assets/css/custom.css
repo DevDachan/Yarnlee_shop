@@ -151,6 +151,10 @@ td{
   margin: auto;
 }
 
+.send{
+  width:100% !important;
+  text-align: center;
+}
 
 
 /* Gird in order page*/

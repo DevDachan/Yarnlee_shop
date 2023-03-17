@@ -20,8 +20,8 @@ function Footer(props){
               <textarea name="message" id="message" placeholder="Message"></textarea>
             </div>
           </div>
-          <ul class="actions">
-            <li><input type="submit" value="Send" class="primary" /></li>
+          <ul class="actions send">
+            <li class="send"><input type="submit" class="send" value="Send" class="primary" /></li>
           </ul>
         </form>
       </section>
