@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import axios from "axios";
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -18,11 +18,44 @@ function Login(props) {
     const [pwd, setPwd] = useState();
 
 
-    const onClick = () =>{
-      navigate(`/`);
-    }
     const goRegister = () =>{
       navigate(`/register`);
+    }
+
+    const onClick = () =>{
+      console.log(id);
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/user/login',
+        data: {
+          userId: id,
+          password: pwd
+        }
+      })
+      .then(function (response){
+        //handle success
+        if(response.data !== "false"){
+          window.sessionStorage.setItem("name", response.data);
+          navigate('../', {
+            state: {
+              userName: "dachan"
+            }
+          });
+        }
+
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+          navigate('./', {
+          state: {
+            userName: "dachan"
+          }
+        });
+      })
+      .then(function(){
+        // always executed
+      });
     }
 
 
@@ -33,13 +66,13 @@ function Login(props) {
               <h3> ID </h3>
             </div>
             <div class="gr-9">
-              <input type="text" id="ip_id" value={id}/>
+              <input type="text" id="ip_id" value={id} onChange={(e) =>setId(e.target.value)}/>
             </div>
             <div class="gr-3">
               <h3> Password </h3>
             </div>
             <div class="gr-9">
-              <input type="password" id="ip_pwd" value={pwd}/>
+              <input type="password" id="ip_pwd" value={pwd} onChange={(e) =>setPwd(e.target.value)}/>
             </div>
             <div class="gr-6 ralign mt1 mr1">
               <button onClick={onClick}> 로그인 </button>
