@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import axios from "axios";
 import Phone from "../order/Phone";
 import PostSelector from "../order/PostSelector";
 
@@ -21,14 +21,65 @@ function Register(props) {
     const [id, setId] = useState();
     const [pwd, setPwd] = useState();
     const [pwd2, setPwd2] = useState();
-
+    const [userName, setUserName] = useState();
     const [address, setAddress] = useState();
     const [zoneCode, setZonecode] = useState();
 
 
 
     const onClick = () =>{
-      navigate(`/`);
+      const formData = new FormData();
+      formData.append("userId", id);
+      formData.append("password", pwd);
+      formData.append("userName", userName);
+      formData.append("phone", document.getElementById("phoneNum"));
+      formData.append("zoneCode", zoneCode);
+      formData.append("address", address);
+      formData.append("addressDetail", document.getElementById("address_detail"));
+
+      console.log(  document.getElementById("ip_id").value,
+        document.getElementById("ip_pwd").value,
+         document.getElementById("ip_name").value,
+       document.getElementById("phoneNum").value,
+         zoneCode,
+         address,
+         document.getElementById("address_detail").value);
+
+
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/user/register',
+        data: {
+          id: document.getElementById("ip_id").value,
+          password: document.getElementById("ip_pwd").value,
+          name: document.getElementById("ip_name").value,
+          phone: document.getElementById("phoneNum").value,
+          zoneCode: zoneCode,
+          address: address,
+          addressDetail: document.getElementById("address_detail").value
+        }
+      })
+      .then(function (response){
+        //handle success
+        window.sessionStorage.setItem("name", response.data.id);
+        navigate('../', {
+          state: {
+            userName: "dachan"
+          }
+        });
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+          navigate('./', {
+          state: {
+            userName: "dachan"
+          }
+        });
+      })
+      .then(function(){
+        // always executed
+      });
     }
 
     return (
@@ -42,6 +93,12 @@ function Register(props) {
               <input type="text" id="ip_id" value={id}/>
             </div>
 
+            <div class="gr-3">
+              <h3> 이름 </h3>
+            </div>
+            <div class="gr-9">
+              <input type="text" id="ip_name" value={userName}/>
+            </div>
 
             <div class="gr-3">
               <h3> 비밀번호 </h3>
@@ -63,7 +120,7 @@ function Register(props) {
             <div className="gr-9">
               <Phone />
             </div>
-            
+
 
             <div className="gr-4 calign mt2">
               <PostSelector

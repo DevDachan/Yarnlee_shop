@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/user")
 @EnableWebMvc
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
   private UserService userService;
 
@@ -28,8 +30,9 @@ public class UserController {
   }
 
 
-  @PostMapping(value="/regiseter")
+  @PostMapping(value="/register")
   public ResponseEntity<UserDTO> createProduct(@Valid @RequestBody UserDTO userDto) {
+    System.out.println(userDto);
     String userId = userDto.getId();
     String password = userDto.getPassword();
     String userName= userDto.getName();
