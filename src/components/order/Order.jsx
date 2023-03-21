@@ -1,28 +1,85 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
-
+import axios from "axios";
 
 import Phone from "./Phone";
 import PostSelector from "./PostSelector";
 import Remittance from "./Remittance";
 
+const Wrapper = styled.div`
+    padding: 16px;
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+`;
+
+
 
 function Order(props) {
   const navigate = useNavigate();
+  const location = useLocation();
+
+
+  const [phoneNum, setPhoneNum] = useState();
   const [address, setAddress] = useState();
   const [zoneCode, setZonecode] = useState();
-  const remittanceImage = useRef();
+  const [imageId, setImageId] = useState();
+  const [addressDetail, setAddressDetail] = useState();
+  const productId = location.state.productId;
+  const color = location.state.color;
+  const numberOfProduct = location.state.productNum;
+  const totalCost = numberOfProduct * location.state.productPrice;
 
-  const Wrapper = styled.div`
-      padding: 16px;
-      width: calc(100% - 32px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-  `;
+
+  const remittanceImage = useRef();
+  console.log(phoneNum);
+  console.log(address);
+  console.log(zoneCode);
+
+  const order = (e) =>{
+
+    const formData = new FormData();
+    formData.append("name", document.getElementById("ip_name").value);
+    formData.append("phone", phoneNum);
+    formData.append("zoneCode", zoneCode);
+    formData.append("address", address);
+    formData.append("addressDetail", addressDetail);
+    formData.append("productId", productId);
+    formData.append("color", productId);
+    formData.append("number", numberOfProduct);
+    formData.append("totalCost", totalCost);
+    formData.append("imageId", imageId);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/user/order',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      navigate('./', {
+        state: {
+          userName: "dachan"
+        }
+      });
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+        navigate('./', {
+        state: {
+          userName: "dachan"
+        }
+      });
+    })
+    .then(function(){
+      // always executed
+    });
+  }
 
   return (
       <Wrapper>
@@ -42,12 +99,11 @@ function Order(props) {
                 </div>
                 <div className="gr-8 calign" style={{paddingTop: "20px"}}>
                   <div>
-                    서클 토트백 | 그린 | 수량 1
-                    서클 토트백 | 그린 | 수량 1
+                    서클 토트백 | {color} | 수량 {numberOfProduct}
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
-                  <h3> 총액 : 32000원 </h3>
+                  <h3> 총액 : {totalCost}원 </h3>
                 </div>
               </div>
             </div>
@@ -67,13 +123,13 @@ function Order(props) {
                 <h2 className="mg0">전화번호</h2>
               </div>
               <div className="gr-8">
-                <Phone / >
+                <Phone phoneNum={phoneNum || ""} setPhoneNum={setPhoneNum}/ >
               </div>
 
               <div className="gr-4 calign mt3">
                 <PostSelector
-                  setAddress = {setAddress}
-                  setZonecode = {setZonecode}
+                  setAddress = {setAddress || ""}
+                  setZonecode = {setZonecode || ""}
                 />
               </div>
               <div className="gr-8 mt3">
@@ -83,17 +139,18 @@ function Order(props) {
                 <input type="text" className="prl1"  disabled id="address" value={address} />
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" id="address_detail" placeholder="상세주소"/>
+                <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}/>
               </div>
 
               <div className="gr-12 mt3">
                 <Remittance
                   remittanceImage = {remittanceImage}
+                  setImageId = {setImageId}
                 />
               </div>
 
               <div className="gr-12 calign pt3">
-                <button className="bt_order" onClick={(e) => {}}> Order </button>
+                <button className="bt_order" onClick={order}> Order </button>
               </div>
 
 

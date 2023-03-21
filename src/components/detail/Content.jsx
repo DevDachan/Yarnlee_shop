@@ -4,8 +4,7 @@ import styled from "styled-components";
 
 function Main(props) {
   const navigate = useNavigate();
-  const [productNum, setProductNum] = useState(1);
-  const [visibleAlert, setVisibleAlert] = useState(false);
+  //const [productNum, setProductNum] = useState(1);
   const numberRef = useRef(1);
 
   const productUpDown = (e,temp) =>{
@@ -20,7 +19,15 @@ function Main(props) {
 
   const orderClick = () =>{
     if(document.getElementById("select_color").value != ""){
-      navigate("/order");
+
+      navigate("/order", {
+          state: {
+            productId: 1,
+            productNum: numberRef.current.value,
+            productPrice: 3000, //productPrice,
+            color: document.getElementById("select_color").value
+          }
+        });
     }else{
       document.getElementById("alert_p").innerText = "색상을 선택해주세요!";
     }
@@ -51,16 +58,16 @@ function Main(props) {
               <div className="col-12-medium calign" name="selectDiv" style={{paddingTop: "10%"}}>
 
                 <div className="col-12-medium mt2">
-                  <h2 class="calign">판매 가격: 32000 원</h2>
-                  <h2 class="calign">배송 예정일 : 5일~7일 </h2>
+                  <h2 className="calign">판매 가격: 32000 원</h2>
+                  <h2 className="calign">배송 예정일 : 5일~7일 </h2>
                 </div>
 
                 <div className="col-12-medium mb1">
                   <select id="select_color" defaultValue="">
                     <option value="" disabled className="option_select" > Color </option>
-                    <option value="americano" className="option_select">Green</option>
-                    <option value="caffe latte" className="option_select">Blue</option>
-                    <option value="cafe au lait" className="option_select">Yellow</option>
+                    <option value="Green" className="option_select">Green</option>
+                    <option value="Blue" className="option_select">Blue</option>
+                    <option value="Yellow" className="option_select">Yellow</option>
                   </select>
                 </div>
 

@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 
 function Remittance(props) {
 
+  const remittanceImage = props.remittanceImage;
+  const setImageId = props.setImageId;
 
   const selectImage = (e) => {
     const file = e.target.files[0];
     const newImage = document.getElementById("img");
-
     const render = new FileReader();
 
     render.readAsDataURL(file);
@@ -16,9 +17,9 @@ function Remittance(props) {
       newImage.style.height = "150px";
       newImage.style.visibility  = "visible";
       newImage.style.objectFit = "contain";
-      props.remittanceImage = render.result;
+      remittanceImage.value = render.result;
     }
-
+    setImageId(1);
   }
 
   return (

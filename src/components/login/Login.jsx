@@ -61,23 +61,23 @@ function Login(props) {
 
     return (
         <Wrapper>
-          <div class="grid_t" style={{margin: "30px"}}>
-            <div class="gr-3">
+          <div className="grid_t" style={{margin: "30px"}}>
+            <div className="gr-3">
               <h3> ID </h3>
             </div>
-            <div class="gr-9">
+            <div className="gr-9">
               <input type="text" id="ip_id" value={id} onChange={(e) =>setId(e.target.value)}/>
             </div>
-            <div class="gr-3">
+            <div className="gr-3">
               <h3> Password </h3>
             </div>
-            <div class="gr-9">
+            <div className="gr-9">
               <input type="password" id="ip_pwd" value={pwd} onChange={(e) =>setPwd(e.target.value)}/>
             </div>
-            <div class="gr-6 ralign mt1 mr1">
+            <div className="gr-6 ralign mt1 mr1">
               <button onClick={onClick}> 로그인 </button>
             </div>
-            <div class="gr-6 lalign mt1 mr1">
+            <div className="gr-6 lalign mt1 mr1">
               <button onClick={goRegister}> 회원 가입</button>
             </div>
           </div>

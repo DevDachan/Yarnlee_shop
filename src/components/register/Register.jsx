@@ -66,33 +66,33 @@ function Register(props) {
 
     return (
         <Wrapper>
-          <div class="grid_t" style={{margin: "30px"}}>
+          <div className="grid_t" style={{margin: "30px"}}>
 
-            <div class="gr-3">
+            <div className="gr-3">
               <h3> 아이디 </h3>
             </div>
-            <div class="gr-9">
+            <div className="gr-9">
               <input type="text" id="ip_id" value={id} onChange={(e) =>setId(e.target.value)}/>
             </div>
 
-            <div class="gr-3">
+            <div className="gr-3">
               <h3> 이름 </h3>
             </div>
-            <div class="gr-9">
+            <div className="gr-9">
               <input type="text" id="ip_name" value={userName} onChange={(e) =>setUserName(e.target.value)}/>
             </div>
 
-            <div class="gr-3">
+            <div className="gr-3">
               <h3> 비밀번호 </h3>
             </div>
-            <div class="gr-9">
+            <div className="gr-9">
               <input type="password" id="ip_pwd" value={pwd} onChange={(e) =>setPwd(e.target.value)}/>
             </div>
 
-            <div class="gr-3">
+            <div className="gr-3">
               <h3> 비밀번호 확인 </h3>
             </div>
-            <div class="gr-9">
+            <div className="gr-9">
               <input type="password" id="ip_pwd" value={pwd2}/>
             </div>
 
@@ -125,7 +125,7 @@ function Register(props) {
 
 
 
-            <div class="gr-12 calign mt2 mr1">
+            <div className="gr-12 calign mt2 mr1">
               <button onClick={onClick}> 회원 가입</button>
             </div>
           </div>
