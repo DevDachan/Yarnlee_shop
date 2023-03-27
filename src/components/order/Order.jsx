@@ -43,25 +43,29 @@ function Order(props) {
   const order = (e) =>{
 
     const formData = new FormData();
-    formData.append("name", document.getElementById("ip_name").value);
-    formData.append("phone", phoneNum);
-    formData.append("zoneCode", zoneCode);
-    formData.append("address", address);
-    formData.append("addressDetail", addressDetail);
+    formData.append("id", 1);
+    formData.append("orderDate", "2023-05-23");
+    formData.append("userId", "guest");
     formData.append("productId", productId);
     formData.append("color", productId);
-    formData.append("number", numberOfProduct);
+    formData.append("num", numberOfProduct);
     formData.append("totalCost", totalCost);
-    formData.append("imageId", imageId);
+    formData.append("orderName", document.getElementById("ip_name").value);
+    formData.append("orderPhone", phoneNum);
+    formData.append("orderZoneCode", zoneCode);
+    formData.append("orderAddress", address);
+    formData.append("addressDetail", addressDetail);
+    formData.append("imageId", 53);
+
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/user/order',
+      url: 'http://localhost:8090/shop-backend/order/insert',
       data: formData
     })
     .then(function (response){
       //handle success
-      navigate('./', {
+      navigate('../', {
         state: {
           userName: "dachan"
         }
@@ -139,7 +143,9 @@ function Order(props) {
                 <input type="text" className="prl1"  disabled id="address" value={address} />
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}/>
+                <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}
+                  onChange={(e) =>setAddressDetail(e.target.value)}
+                />
               </div>
 
               <div className="gr-12 mt3">

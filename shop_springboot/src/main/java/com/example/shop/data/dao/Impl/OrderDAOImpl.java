@@ -4,6 +4,7 @@ package com.example.shop.data.dao.Impl;
 import com.example.shop.data.dao.OrderDAO;
 import com.example.shop.data.entity.OrderEntity;
 import com.example.shop.data.repository.OrderRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,11 @@ public class OrderDAOImpl implements OrderDAO {
     return orderEntity;
   }
 
+  @Override
+  public List<Integer> findDistinctId(){
+    List<Integer> distinctIdList = orderRepository.findDistinctId();
+
+    return distinctIdList;
+  }
 }
 

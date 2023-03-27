@@ -5,9 +5,16 @@ import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.entity.OrderEntity;
 import com.example.shop.data.handler.OrderDataHandler;
 import com.example.shop.data.service.OrderService;
+import com.example.shop.data.repository.OrderRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+
 
 @Service
 @EnableWebMvc
@@ -52,4 +59,26 @@ public class OrderServiceImpl implements OrderService {
     return orderDTO;
   }
 
+  @Override
+  public int getRandomId(){
+    List<Integer> randomIdList = new ArrayList<>();
+
+    randomIdList = orderDataHandeler.findDistinctId();
+
+    int tempRandomId = 0;
+    int min = 100000, max = 999999;
+    Random random = new Random();
+    random.setSeed(System.nanoTime());
+
+    for(int i = 0 ; ; i++){
+      tempRandomId = random.nextInt((max - min) + min);
+      if(randomIdList.indexOf(tempRandomId) == -1){
+        break;
+      }
+    }
+    int randomId = tempRandomId;
+
+    return randomId;
+
+  }
 }

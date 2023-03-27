@@ -4,6 +4,7 @@ import com.example.shop.data.dao.OrderDAO;
 import com.example.shop.data.entity.OrderEntity;
 import com.example.shop.data.handler.OrderDataHandler;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,4 +36,6 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
     return orderDAO.getOrder(orderId);
   }
 
+  @Override
+  public List<Integer> findDistinctId(){ return orderDAO.findDistinctId(); }
 }

@@ -1,6 +1,7 @@
 package com.example.shop.data.handler;
 
 import com.example.shop.data.entity.OrderEntity;
+import java.util.List;
 
 public interface OrderDataHandler {
   OrderEntity saveOrderEntity(
@@ -10,4 +11,6 @@ public interface OrderDataHandler {
   );
 
   OrderEntity getOrderEntity(int orderId);
+
+  List<Integer> findDistinctId();
 }

@@ -9,5 +9,6 @@ public interface OrderService {
       String addressDetail, int imageId
     );
 
+  int getRandomId();
   OrderDTO getOrder(int productId);
 }
