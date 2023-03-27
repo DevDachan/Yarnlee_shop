@@ -49,4 +49,5 @@ function Remittance(props) {
     </div>
   );
 }
+
 export default Remittance;

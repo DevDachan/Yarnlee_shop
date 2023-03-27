@@ -36,9 +36,10 @@ function Order(props) {
 
 
   const remittanceImage = useRef();
-  console.log(phoneNum);
-  console.log(address);
-  console.log(zoneCode);
+
+  const goBack = (e) =>{
+    navigate(-1);
+  }
 
   const order = (e) =>{
 
@@ -155,10 +156,13 @@ function Order(props) {
                 />
               </div>
 
-              <div className="gr-12 calign pt3">
-                <button className="bt_order" onClick={order}> Order </button>
+              <div className="gr-6 calign pt3">
+                <button className="bt_order" onClick={goBack}> Back </button>
               </div>
 
+              <div className="gr-6 calign pt3">
+                <button className="bt_order" onClick={order}> Order </button>
+              </div>
 
             </div>
           </div>

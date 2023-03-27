@@ -1,10 +1,6 @@
 import React, { useState, useRef } from 'react';
 
 function Phone(props) {
-  // State와 Ref를 2개 사용하는 이유는 먼저 해당 값이 수정이 될 수 있게 할 것인가 때문이다.
-  // Ref는 수정이 될 수 있는 값
-  // State는 직접 수정이 될 수 없고 setNum으로 수정이 가능하다.
-
 
   const phoneRef = useRef();
   const phoneNum = props.phoneNum;
@@ -40,16 +36,15 @@ function Phone(props) {
   };
 
   return (
-        <input
-          id="phoneNum"
-          name="user-num"
-          className="prl1"
-          value={phoneNum}
-          ref={phoneRef}
-          onChange={handlePhone}
-          type="tel"
-        />
-
+    <input
+      id="phoneNum"
+      name="user-num"
+      className="prl1"
+      value={phoneNum}
+      ref={phoneRef}
+      onChange={handlePhone}
+      type="tel"
+    />
   );
 };
 
