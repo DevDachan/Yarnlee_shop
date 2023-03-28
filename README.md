@@ -18,6 +18,12 @@
 ## :computer: 프로젝트 소개 \(개인\)
 쇼핑몰 관련 서비스입니다.
 
+<img src="https://user-images.githubusercontent.com/111109411/228116588-5b5eac4d-25aa-4797-bbbd-c7f396d9034d.png" width=80%>
+
+<img src="https://user-images.githubusercontent.com/111109411/228116610-551bbe11-6930-4e63-a223-67162b676135.png" width=80%>
+
+  
+
 
 ## :calendar: 프로젝트 기간
 ### 2023.02.05~
@@ -31,3 +37,5 @@
 
 
 #### DB 구성 [DB.md](https://github.com/DevDachan/React_Shopping/blob/main/DB.md)
+
+
