@@ -5,6 +5,8 @@ import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.service.ProductService;
 import jakarta.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RestController
 @RequestMapping("/shop-backend/product")
+@CrossOrigin(origins = "http://localhost:3000")
 @EnableWebMvc
 public class ProductController {
   private ProductService productService;
@@ -46,6 +49,16 @@ public class ProductController {
     return productDTO;
   }
 
+  @GetMapping(value = "/productList")
+  public HashMap<String,Object> getProductList() {
+    long startTime = System.currentTimeMillis();
+    HashMap<String,Object> map = new HashMap<String,Object>();
+
+    List<ProductDTO> productDTO = productService.getProductList();
+
+    map.put("productContent", productDTO);
+    return map;
+  }
 
   @DeleteMapping(value = "/delete/id/{productId}")
   public ProductDTO deleteProduct(@PathVariable String productId) {

@@ -4,6 +4,8 @@ import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.handler.ProductDataHandler;
 import com.example.shop.data.service.ProductService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -35,6 +37,20 @@ public class ProductServiceImpl implements ProductService {
 
     ProductDTO productDTO = new ProductDTO(productEntity.getId(), productEntity.getName(),
         productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime());
+    return productDTO;
+  }
+  @Override
+  public List<ProductDTO> getProductList(){
+    List<ProductEntity> productListEntity = productDataHandeler.getProductListEntity();
+    List<ProductDTO> productDTO = new ArrayList();
+
+    for(var i = 0; i < productListEntity.size(); i++){
+      ProductDTO temp = new ProductDTO(productListEntity.get(i).getId(), productListEntity.get(i).getName(),
+          productListEntity.get(i).getPrice(), productListEntity.get(i).getDetail(), productListEntity.get(i).getDeliveryCost(), productListEntity.get(i).getDeliveryTime());
+
+      productDTO.add(temp);
+    }
+
     return productDTO;
   }
 

@@ -4,6 +4,7 @@ import com.example.shop.data.dao.ProductDAO;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.handler.ProductDataHandler;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +28,6 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
     return productDAO.getProduct(productId);
   }
 
+  @Override
+  public List<ProductEntity> getProductListEntity(){ return productDAO.getProductList();}
 }

@@ -21,8 +21,7 @@ function Main(props) {
           <div id="main">
             <div className="inner mg0">
               <header>
-                <h1>안녕하십니까!!</h1>
-                <h1>예제 쇼핑몰 페이지입니다!</h1>
+                <h1>Only Handmade</h1>
               </header>
               <section className="tiles">
                 <article className="style1">

@@ -3,12 +3,19 @@ package com.example.shop.data.repository;
 import com.example.shop.data.entity.ProductEntity;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
   // 조회
   List<ProductEntity> findByName(String name);
+
+  @Query(value = "SELECT * FROM product", nativeQuery = true)
+  List<ProductEntity> getListAll();
+
   // 존재 유무
   boolean existsByName(String name);
+
+
 
   ProductEntity getById(int id);
 
