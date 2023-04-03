@@ -44,14 +44,14 @@ function Main(props) {
 
     for(var i = 0; i < productList.length; i++){
       arr.push(
-        <article className={"style"+(i+1)}>
+        <article>
           <span className="image">
-            <img src={"images/pic0"+(i+1)+".jpg"} alt="" />
+            <img src={"images/product"+(i+1)+".jpg"} alt="" />
           </span>
           <a href="content">
             <h2>{productList[i].name}</h2>
             <div className="content">
-              <p>{productList[i].content}.</p>
+              <p>{productList[i].detail}.</p>
             </div>
           </a>
         </article>);
@@ -72,17 +72,6 @@ function Main(props) {
                 {
                   productList == undefined ? "": makeProductContent()
                 }
-                <article className="style1">
-                  <span className="image">
-                    <img src="images/pic01.jpg" alt="" />
-                  </span>
-                  <a href="content">
-                    <h2>Magna</h2>
-                    <div className="content">
-                      <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
-                    </div>
-                  </a>
-                </article>
               </section>
             </div>
           </div>
