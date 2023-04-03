@@ -23,11 +23,11 @@ public class ProductServiceImpl implements ProductService {
   // Service(Client) <-> Controller : DTO
   // Service <-> DAO(DB) : Entity
   @Override
-  public ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime){
-    ProductEntity productEntity = productDataHandeler.saveProductEntity(productId, productName, productPrice, productDetail,deliveryCost, deliveryTime);
+  public ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime,String imageId){
+    ProductEntity productEntity = productDataHandeler.saveProductEntity(productId, productName, productPrice, productDetail,deliveryCost, deliveryTime, imageId);
 
     ProductDTO productDTO = new ProductDTO(productEntity.getId(), productEntity.getName(),
-        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime());
+        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime(),productEntity.getImageId());
     return productDTO;
   }
 
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     ProductEntity productEntity = productDataHandeler.getProductEntity(productId);
 
     ProductDTO productDTO = new ProductDTO(productEntity.getId(), productEntity.getName(),
-        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime());
+        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime(), productEntity.getImageId());
     return productDTO;
   }
   @Override
@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
 
     for(var i = 0; i < productListEntity.size(); i++){
       ProductDTO temp = new ProductDTO(productListEntity.get(i).getId(), productListEntity.get(i).getName(),
-          productListEntity.get(i).getPrice(), productListEntity.get(i).getDetail(), productListEntity.get(i).getDeliveryCost(), productListEntity.get(i).getDeliveryTime());
+          productListEntity.get(i).getPrice(), productListEntity.get(i).getDetail(), productListEntity.get(i).getDeliveryCost(), productListEntity.get(i).getDeliveryTime(),productListEntity.get(i).getImageId());
 
       productDTO.add(temp);
     }

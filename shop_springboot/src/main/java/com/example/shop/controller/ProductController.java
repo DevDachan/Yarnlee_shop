@@ -35,8 +35,8 @@ public class ProductController {
     String productDetail = productDto.getDetail();
     int deliveryCost = productDto.getDeliveryCost();
     String deliveryTime = productDto.getDeliveryTime();
-
-    ProductDTO response = productService.saveProduct(productId,productName,productPrice,productDetail,deliveryCost,deliveryTime);
+    String imageId = productDto.getImageId();
+    ProductDTO response = productService.saveProduct(productId,productName,productPrice,productDetail,deliveryCost,deliveryTime,imageId);
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 

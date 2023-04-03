@@ -46,7 +46,7 @@ function Main(props) {
       arr.push(
         <article>
           <span className="image">
-            <img src={"images/product"+(i+1)+".jpg"} alt="" />
+            <img src={"images/"+productList[i].imageId} alt="" />
           </span>
           <a href="content">
             <h2>{productList[i].name}</h2>

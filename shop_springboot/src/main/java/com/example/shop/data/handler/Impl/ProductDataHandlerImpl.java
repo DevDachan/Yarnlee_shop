@@ -18,8 +18,8 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
     public ProductDataHandlerImpl(ProductDAO productDAO) {this.productDAO = productDAO;}
 
     @Override
-    public ProductEntity saveProductEntity(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime){
-      ProductEntity productEntity = new ProductEntity(productId, productName, productPrice, productDetail, deliveryCost, deliveryTime);
+    public ProductEntity saveProductEntity(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime, String imageId){
+      ProductEntity productEntity = new ProductEntity(productId, productName, productPrice, productDetail, deliveryCost, deliveryTime,imageId);
       return productDAO.saveProduct(productEntity);
     }
 

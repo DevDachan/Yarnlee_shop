@@ -32,7 +32,7 @@ public class ProductDTO {
   @NotNull
   private String deliveryTime;
 
-
+  @NotNull String imageId;
 
   public ProductEntity toEntity(){
     return ProductEntity.builder()
@@ -42,6 +42,7 @@ public class ProductDTO {
         .detail(detail)
         .deliveryTime(deliveryTime)
         .deliveryCost(deliveryCost)
+        .imageId(imageId)
         .build();
   }
 

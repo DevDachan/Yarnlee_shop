@@ -4,7 +4,7 @@ import com.example.shop.data.dto.ProductDTO;
 import java.util.List;
 
 public interface ProductService {
-  ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime);
+  ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime, String imageId);
 
   ProductDTO getProduct(int productId);
 
