@@ -33,7 +33,10 @@ public class ProductDAOImpl implements ProductDAO {
     List<ProductEntity> productEntity = productRepository.getListAll();
     return productEntity;
   }
-
+  @Override
+  public void changePosition(int id, int nextId){
+    productRepository.changePosition(id,nextId);
+  }
 
 }
 

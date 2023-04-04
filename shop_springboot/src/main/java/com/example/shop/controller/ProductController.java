@@ -36,7 +36,9 @@ public class ProductController {
     int deliveryCost = productDto.getDeliveryCost();
     String deliveryTime = productDto.getDeliveryTime();
     String imageId = productDto.getImageId();
-    ProductDTO response = productService.saveProduct(productId,productName,productPrice,productDetail,deliveryCost,deliveryTime,imageId);
+    int position = productDto.getPosition();
+
+    ProductDTO response = productService.saveProduct(productId,productName,productPrice,productDetail,deliveryCost,deliveryTime,imageId,position);
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 
@@ -59,6 +61,31 @@ public class ProductController {
     map.put("productContent", productDTO);
     return map;
   }
+  @PostMapping(value = "/changePosition")
+  public HashMap<String,Object> changePosition(
+      @RequestParam String direction,
+      @RequestParam int position
+      ) {
+    long startTime = System.currentTimeMillis();
+    HashMap<String,Object> map = new HashMap<String,Object>();
+
+    var nextPosition = 0;
+    if(direction.equals("up") ){
+      nextPosition = position - 1;
+    }else{
+      nextPosition = position + 1;
+    }
+
+    productService.changeId(position, 0);
+    productService.changeId(nextPosition, position);
+    productService.changeId(0, nextPosition);
+
+    List<ProductDTO> productDTO = productService.getProductList();
+
+    map.put("productContent", productDTO);
+    return map;
+  }
+
 
   @DeleteMapping(value = "/delete/id/{productId}")
   public ProductDTO deleteProduct(@PathVariable String productId) {

@@ -9,13 +9,14 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
   // 조회
   List<ProductEntity> findByName(String name);
 
-  @Query(value = "SELECT * FROM product", nativeQuery = true)
+  @Query(value = "SELECT * FROM product ORDER BY position", nativeQuery = true)
   List<ProductEntity> getListAll();
 
   // 존재 유무
   boolean existsByName(String name);
 
-
+  @Query(value = "UPDATE product SET position=:nextId WHERE position=:id", nativeQuery = true)
+  void changePosition(int id,int nextId);
 
   ProductEntity getById(int id);
 

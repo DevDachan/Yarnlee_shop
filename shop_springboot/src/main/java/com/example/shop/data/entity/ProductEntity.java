@@ -35,6 +35,7 @@ public class ProductEntity {
 
   String imageId;
 
+  int position;
   public ProductDTO toDto(){
     return ProductDTO.builder()
         .id(id)
@@ -44,6 +45,7 @@ public class ProductEntity {
         .deliveryTime(deliveryTime)
         .deliveryCost(deliveryCost)
         .imageId(imageId)
+        .position(position)
         .build();
   }
 }

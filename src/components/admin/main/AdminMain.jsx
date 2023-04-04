@@ -1,21 +1,123 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import axios from "axios";
 import AdminItemList from "./list/AdminItemList";
 // 나중에 현재 전체 목록 itemList로 변경하기.
 
+
+
+const Wrapper = styled.div`
+    padding: 0 2.5em;
+    margin: 0 auto;
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
+
 function AdminMain(props) {
   const navigate = useNavigate();
-  const Wrapper = styled.div`
-      padding: 0 2.5em;
-      margin: 0 auto;
-      width: calc(100% - 32px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-  `;
+  const [productList, setProductList] = useState();
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/product/productList'
+    })
+    .then(function (response){
+      //handle success
+      setProductList(response.data.productContent);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  },[]);
+
+
+  function makeProductContent(){
+    var arr = [];
+
+    for(var i = 0; i < productList.length; i++){
+      arr.push(
+        <article>
+          <span className="image">
+            <img src={"images/"+productList[i].imageId} alt="" />
+          </span>
+          <a>
+            <input type="text" defaultValue={productList[i].name} />
+            <div className="content">
+              <input type="text" defaultValue={productList[i].detail} />
+            </div>
+          </a>
+        </article>
+      );
+    }
+    return arr;
+  }
+
+  function makeChangePosition(){
+    var arr = [];
+    for(var i = 0; i < productList.length; i++){
+      arr.push(
+        <>
+          <div className="gr-1">
+            <h3>{productList[i].position}</h3>
+          </div>
+          <div className="gr-5 mr3">
+            <h3>{productList[i].name}</h3>
+          </div>
+          <div className="gr-3">
+            <button name="up" id={productList[i].position} onClick={changePosition} className="mr3"> ^ </button>
+            <button name="down" id={productList[i].position} onClick={changePosition} > v </button>
+          </div>
+          <div className="gr-3 ml3" >
+            <button > 관리 </button>
+          </div>
+        </>
+      );
+    }
+    return arr;
+  }
+
+  const changePosition = (e) => {
+    var check = e.target.name;
+    var num = e.target.id;
+    const formData = new FormData();
+
+    if(check == "up" && num == 1){
+      return;
+    }else if(check == "down" && num == productList.length){
+      return;
+    }else{
+      formData.append("direction", check);
+      formData.append("position", num);
+    }
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/changePosition',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setProductList(response.data.productContent);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
   return (
       <Wrapper>
           <div id="main">
@@ -26,81 +128,9 @@ function AdminMain(props) {
                 </textarea>
               </header>
               <section className="tiles mt2">
-                <article className="style1">
-                  <span className="image">
-                    <img src="images/pic01.jpg" alt="" />
-                  </span>
-                  <a>
-                    <input type="text" defaultValue="Magna" />
-                    <div className="content">
-                      <input type="text" defaultValue="Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat" />
-                    </div>
-                  </a>
-                </article>
-
-                <article className="style2">
-                  <span className="image">
-                    <img src="images/pic02.jpg" alt="" />
-                  </span>
-                  <a>
-                    <input type="text" defaultValue="Magna" />
-                    <div className="content">
-                      <input type="text" defaultValue="Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat" />
-                    </div>
-                  </a>
-                </article>
-
-
-                <article className="style3">
-                  <span className="image">
-                    <img src="images/pic03.jpg" alt="" />
-                  </span>
-                  <a>
-                    <input type="text" defaultValue="Magna" />
-                    <div className="content">
-                      <input type="text" defaultValue="Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat" />
-                    </div>
-                  </a>
-                </article>
-
-                <article className="style4">
-                  <span className="image">
-                    <img src="images/pic04.jpg" alt="" />
-                  </span>
-                  <a>
-                    <input type="text" defaultValue="Magna" />
-                    <div className="content">
-                      <input type="text" defaultValue="Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat" />
-                    </div>
-                  </a>
-                </article>
-
-                <article className="style5">
-                  <span className="image">
-                    <img src="images/pic05.jpg" alt="" />
-                  </span>
-                  <a>
-                    <input type="text" defaultValue="Magna" />
-                    <div className="content">
-                      <input type="text" defaultValue="Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat" />
-                    </div>
-                  </a>
-                </article>
-
-                <article className="style6">
-                  <span className="image">
-                    <img src="images/pic06.jpg" alt="" />
-                  </span>
-                  <a>
-                    <input type="text" defaultValue="Magna" />
-                    <div className="content">
-                      <input type="text" defaultValue="Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat" />
-                    </div>
-                  </a>
-                </article>
-
-
-
+              {
+                productList == undefined ? "": makeProductContent()
+              }
               </section>
             </div>
           </div>
@@ -109,61 +139,9 @@ function AdminMain(props) {
           <h2>순서 바꾸기</h2>
 
           <div className="grid_t mb2">
-            <div className="gr-6">
-              <h3>Magna </h3>
-            </div>
-            <div className="gr-3">
-              <select>
-                <option value="sd">1</option>
-                <option value="ad">2</option>
-                <option value="qd">3</option>
-              </select>
-            </div>
-            <div className="gr-3 ml3" >
-              <button > 관리 </button>
-            </div>
-
-            <div className="gr-6">
-              <h3>Lorem </h3>
-            </div>
-            <div className="gr-3">
-              <select>
-                <option value="sd">1</option>
-                <option value="ad">2</option>
-                <option value="qd">3</option>
-              </select>
-            </div>
-            <div className="gr-3 ml3" >
-              <button > 관리 </button>
-            </div>
-
-            <div className="gr-6">
-              <h3>Feugiat </h3>
-            </div>
-            <div className="gr-3">
-              <select>
-                <option value="sd">1</option>
-                <option value="ad">2</option>
-                <option value="qd">3</option>
-              </select>
-            </div>
-            <div className="gr-3 ml3" >
-              <button > 관리 </button>
-            </div>
-
-            <div className="gr-6">
-              <h3>Magna </h3>
-            </div>
-            <div className="gr-3">
-              <select>
-                <option value="sd">1</option>
-                <option value="ad">2</option>
-                <option value="qd">3</option>
-              </select>
-            </div>
-            <div className="gr-3 ml3" >
-              <button > 관리 </button>
-            </div>
+          {
+            productList == undefined ? "":makeChangePosition()
+          }
           </div>
 
       </Wrapper>

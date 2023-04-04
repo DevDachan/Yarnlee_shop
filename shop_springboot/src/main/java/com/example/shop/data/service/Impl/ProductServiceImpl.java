@@ -23,11 +23,12 @@ public class ProductServiceImpl implements ProductService {
   // Service(Client) <-> Controller : DTO
   // Service <-> DAO(DB) : Entity
   @Override
-  public ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime,String imageId){
-    ProductEntity productEntity = productDataHandeler.saveProductEntity(productId, productName, productPrice, productDetail,deliveryCost, deliveryTime, imageId);
+  public ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime,String imageId,int position){
+    ProductEntity productEntity = productDataHandeler.saveProductEntity(productId, productName, productPrice, productDetail,deliveryCost, deliveryTime, imageId,position);
 
     ProductDTO productDTO = new ProductDTO(productEntity.getId(), productEntity.getName(),
-        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime(),productEntity.getImageId());
+        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(),
+        productEntity.getDeliveryTime(),productEntity.getImageId(), productEntity.getPosition());
     return productDTO;
   }
 
@@ -36,7 +37,9 @@ public class ProductServiceImpl implements ProductService {
     ProductEntity productEntity = productDataHandeler.getProductEntity(productId);
 
     ProductDTO productDTO = new ProductDTO(productEntity.getId(), productEntity.getName(),
-        productEntity.getPrice(), productEntity.getDetail(), productEntity.getDeliveryCost(), productEntity.getDeliveryTime(), productEntity.getImageId());
+        productEntity.getPrice(), productEntity.getDetail(),
+        productEntity.getDeliveryCost(), productEntity.getDeliveryTime(),
+        productEntity.getImageId(), productEntity.getPosition());
     return productDTO;
   }
   @Override
@@ -46,12 +49,18 @@ public class ProductServiceImpl implements ProductService {
 
     for(var i = 0; i < productListEntity.size(); i++){
       ProductDTO temp = new ProductDTO(productListEntity.get(i).getId(), productListEntity.get(i).getName(),
-          productListEntity.get(i).getPrice(), productListEntity.get(i).getDetail(), productListEntity.get(i).getDeliveryCost(), productListEntity.get(i).getDeliveryTime(),productListEntity.get(i).getImageId());
+          productListEntity.get(i).getPrice(), productListEntity.get(i).getDetail(),
+          productListEntity.get(i).getDeliveryCost(), productListEntity.get(i).getDeliveryTime(),
+          productListEntity.get(i).getImageId(), productListEntity.get(i).getPosition()
+      );
 
       productDTO.add(temp);
     }
-
     return productDTO;
+  }
+  @Override
+  public void changeId(int id, int nextId){
+    productDataHandeler.changePosition(id,nextId);
   }
 
 }

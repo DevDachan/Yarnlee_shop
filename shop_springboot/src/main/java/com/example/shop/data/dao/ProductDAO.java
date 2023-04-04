@@ -9,4 +9,5 @@ public interface ProductDAO {
 
   List<ProductEntity> getProductList();
 
+  void changePosition(int id, int nextId);
 }
