@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-function Main(props) {
+function Content(props) {
   const navigate = useNavigate();
   //const [productNum, setProductNum] = useState(1);
   const numberRef = useRef(1);
+  const {productId} = useParams();
+  console.log(productId);
 
   const productUpDown = (e, temp) => {
     if (temp === "up") {
@@ -50,7 +52,7 @@ function Main(props) {
           <div className="row detail_main_nav">
 
             <div className="col-12-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="detail_img" src="images/pic13.jpg" alt="" /></span>
+              <span className="image main detail_span_img"><img className="detail_img" src={"../images/product"+productId+".jpg"} alt="" /></span>
             </div>
 
             <div className="col-12-medium calign" name="selectDiv" style={{paddingTop: "10%"}}>
@@ -104,4 +106,4 @@ function Main(props) {
   );
 }
 
-export default Main;
+export default Content;
