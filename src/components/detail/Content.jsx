@@ -1,13 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
+
+const Wrapper = styled.div`
+  padding: 16px;
+  width: calc(100% - 32px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+`;
+
 
 function Content(props) {
   const navigate = useNavigate();
   //const [productNum, setProductNum] = useState(1);
   const numberRef = useRef(1);
   const {productId} = useParams();
-  console.log(productId);
+  const [product, setProduct] = useState();
 
   const productUpDown = (e, temp) => {
     if (temp === "up") {
@@ -25,7 +37,9 @@ function Content(props) {
         state: {
           productId: 1,
           productNum: numberRef.current.value,
-          productPrice: 3000,
+          productPrice: product.price,
+          productName: product.name,
+          deliveryCost: product.deliveryCost,
           color: document.getElementById("select_color").value,
         },
       });
@@ -34,21 +48,29 @@ function Content(props) {
     }
   };
 
-  const Wrapper = styled.div`
-    padding: 16px;
-    width: calc(100% - 32px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-  `;
+  useEffect(() => {
+      axios({
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
+      })
+      .then(function (response){
+        //handle success
+        setProduct(response.data);
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
 
   return (
     <Wrapper>
       <div className="detail_main" id="main">
         <div className="inner">
-          <h1>Circle Tote Bag</h1>
+          <h1>{product == undefined ? "":product.name}</h1>
           <div className="row detail_main_nav">
 
             <div className="col-12-medium" id="imgDiv">
@@ -58,8 +80,8 @@ function Content(props) {
             <div className="col-12-medium calign" name="selectDiv" style={{paddingTop: "10%"}}>
 
               <div className="col-12-medium mt2">
-                <h2 className="calign">판매 가격: 32000 원</h2>
-                <h2 className="calign">배송 예정일 : 5일~7일 </h2>
+                <h2 className="calign">판매 가격: {product == undefined ? "":product.price}원</h2>
+                <h2 className="calign">배송 예정일 : {product == undefined ? "":product.deliveryTime} </h2>
               </div>
 
               <div className="col-12-medium mb1">
@@ -96,8 +118,7 @@ function Content(props) {
           </div>
 
           <div style={{textAlign: "center"}}>
-            <p>여기는 상품 설명이 들어갈 공간입니다.</p>
-            <p>자유롭게 상품에 대한 설명을 적어주시면 됩니다.</p>
+            <p>{product == undefined ? "":product.detail}</p>
           </div>
 
         </div>

@@ -30,10 +30,11 @@ function Order(props) {
   const [imageId, setImageId] = useState();
   const [addressDetail, setAddressDetail] = useState();
   const productId = location.state.productId;
+  const productName = location.state.productName;
   const color = location.state.color;
   const numberOfProduct = location.state.productNum;
-  const totalCost = numberOfProduct * location.state.productPrice;
-
+  const deliveryCost = location.state.deliveryCost;
+  const totalCost = numberOfProduct * location.state.productPrice + deliveryCost;
 
   const remittanceImage = useRef();
 
@@ -42,7 +43,6 @@ function Order(props) {
   }
 
   const order = (e) =>{
-
     const formData = new FormData();
     formData.append("id", 1);
     formData.append("orderDate", "2023-05-23");
@@ -57,7 +57,6 @@ function Order(props) {
     formData.append("orderAddress", address);
     formData.append("addressDetail", addressDetail);
     formData.append("imageId", 53);
-
 
     axios({
       method: "post",
@@ -86,16 +85,20 @@ function Order(props) {
     });
   }
 
+
+
+
+
   return (
       <Wrapper>
         <div className="order_main" id="main">
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-2" id="imgDiv">
-                <span className="image main order_span_img"><img className="order_img" src="images/pic13.jpg" alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={"images/product"+productId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-10 calign">
-                <h1>Circle Tote Bag</h1>
+                <h1>{productName}</h1>
               </div>
 
               <div className="gr-12 mb2 grid_t" style={{boxShadow: "3px 3px 3px 3px rgb(98 217 182)", borderRadius:"20px"}}>
@@ -104,10 +107,11 @@ function Order(props) {
                 </div>
                 <div className="gr-8 calign" style={{paddingTop: "20px"}}>
                   <div>
-                    서클 토트백 | {color} | 수량 {numberOfProduct}
+                    {productName} | {color} | 수량 {numberOfProduct}
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
+                  <p>상품 금액: {numberOfProduct * location.state.productPrice}원 , 배송비: {deliveryCost}원</p>
                   <h3> 총액 : {totalCost}원 </h3>
                 </div>
               </div>
