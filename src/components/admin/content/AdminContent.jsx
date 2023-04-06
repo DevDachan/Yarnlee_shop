@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import EmojiPicker from 'emoji-picker-react';
+import Modal from 'react-bootstrap/Modal';
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -20,6 +22,10 @@ function AdminContent(props) {
   const numberRef = useRef(1);
   const {productId} = useParams();
   const [product, setProduct] = useState();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleOpen = () => setShow(true);
 
   const productUpDown = (e, temp) => {
     if (temp === "up") {
@@ -66,6 +72,11 @@ function AdminContent(props) {
       });
     },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
 
+  const pickEmo = (e) => {
+    console.log(e.emoji);
+    document.getElementById("contentArea").innerHTML = document.getElementById("contentArea").innerHTML+ e.emoji;
+    handleClose();
+  }
   return (
     <Wrapper>
       <div className="detail_main" id="main">
@@ -126,8 +137,20 @@ function AdminContent(props) {
 
           </div>
 
-          <div style={{textAlign: "center"}}>
-            <p>{product == undefined ? "":product.detail}</p>
+          <button onClick={handleOpen} variant="outline-primary">이모티콘</button>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header>
+              <Modal.Title></Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <EmojiPicker onEmojiClick={pickEmo}/>
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>닫기</button>
+            </Modal.Footer>
+          </Modal>
+          <div style={{textAlign: "center"}} contenteditable="true" id="contentArea">
+            {product == undefined ? "":product.detail}
           </div>
 
         </div>
