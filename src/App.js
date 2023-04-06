@@ -22,7 +22,7 @@ import AdminOrderList from "./components/admin/orderList/AdminOrderList";
 import AdminOrderHistory from "./components/admin/orderHistory/AdminOrderHistory";
 import AdminMain from "./components/admin/main/AdminMain";
 
-
+import AdminContent from "./components/admin/content/AdminContent";
 
 // 사용자 정의 태그 생성하기
 function App() {
@@ -41,6 +41,8 @@ function App() {
         <Route path="/adminMain" element={<AdminMain />}></Route>
         <Route path="/adminOrderList" element={<AdminOrderList />}></Route>
         <Route path="/adminOrderHistory" element={<AdminOrderHistory />}></Route>
+
+        <Route path="/adminContent/:productId" element={<AdminContent />}></Route>
 
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

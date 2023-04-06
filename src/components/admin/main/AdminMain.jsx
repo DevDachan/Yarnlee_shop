@@ -48,7 +48,7 @@ function AdminMain(props) {
       arr.push(
         <article>
           <span className="image">
-            <img src={"images/"+productList[i].imageId} alt="" />
+            <img src={"images/product"+productList[i].imageId+".jpg"} alt="" />
           </span>
           <a>
             <input type="text" defaultValue={productList[i].name} />

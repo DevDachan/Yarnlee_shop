@@ -311,3 +311,18 @@ td{
 .ft_bold{
   font-weight: bold !important;
 }
+
+
+
+/* Admin */
+.ip-admin-content-head{
+  margin-left: 0px;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.ip-admin-content-info{
+  margin-left: 0px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
