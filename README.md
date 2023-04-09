@@ -74,18 +74,10 @@
 - 관리자가 상품 관리를 위한 쉬운 인터페이스가 제공이 되어야 한다.
 - 서버-클라이언트 구조로 Spring Boot와 React를 사용함으로써 각각의 기능을 분리 시킨다.
 
-## Database ERD
-![image](https://user-images.githubusercontent.com/70511859/230717716-83a5fe7f-0812-4d85-9cb0-478408bf203f.png)
-
-
 
 [초기 기능 디자인 Figma](https://www.figma.com/file/ndJjGc6edEYel3tvo5ZsKr/Untitled?node-id=1%3A2&t=K6SYZlhiHiuidXpb-1)
 - 전체적인 디자인이 아닌 각각의 페이지에 어떤 기능들을 넣을지 구상한 내용입니다.
 
 <br/>
-<br/>
-
-
-#### DB 구성 [DB.md](https://github.com/DevDachan/React_Shopping/blob/main/DB.md)
 
 
