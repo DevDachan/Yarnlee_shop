@@ -81,3 +81,112 @@
 <br/>
 
 
+## 컴포넌트 구조
+```
+components
+|
+|   Main.jsx
+|   Nav.jsx
+|   NotFound.jsx
+|
++---admin
+|   +---content
+|   |       AdminContent.jsx
+|   |
+|   +---main
+|   |   |   AdminMain.jsx
+|   |   |
+|   |   \---list
+|   |           AdminItemList.jsx
+|   |
+|   +---orderHistory
+|   |       AdminOrderHistory.jsx
+|   |
+|   \---orderList
+|           AdminOrderList.jsx
+|
++---detail
+|       Content.jsx
+|
++---list
+|       Item.jsx
+|       ItemList.jsx
+|
++---login
+|       Login.jsx
+|
++---order
+|       Order.jsx
+|       Phone.jsx
+|       PostSelector(past).jsx
+|       PostSelector.jsx
+|       Remittance.jsx
+|
++---orderHistory
+|       OrderHistory.jsx
+|
++---orderList
+|       OrderList.jsx
+|
+\---register
+        Register.jsx
+```
+
+
+## Spring Boot JPA 
+
+```
++---dao
+|   |   OrderDAO.java
+|   |   ProductDAO.java
+|   |   UserDAO.java
+|   |
+|   \---Impl
+|           OrderDAOImpl.java
+|           ProductDAOImpl.java
+|           UserDAOImpl.java
+|
++---dto
+|       AdminDTO.java
+|       ImageDTO.java
+|       OrderDetailDTO.java
+|       OrderDTO.java
+|       ProductColorDTO.java
+|       ProductDTO.java
+|       UserDTO.java
+|
++---entity
+|       AdminEntity.java
+|       BaseEntity.java
+|       ImageEntity.java
+|       OrderDetailEntity.java
+|       OrderEntity.java
+|       ProductColorEntity.java
+|       ProductEntity.java
+|       UserEntity.java
+|
++---handler
+|   |   OrderDataHandler.java
+|   |   ProductDataHandler.java
+|   |   UserDataHandler.java
+|   |
+|   \---Impl
+|           OrderDataHandlerImpl.java
+|           ProductDataHandlerImpl.java
+|           UserDataHandlerImpl.java
+|
++---repository
+|       OrderRepository.java
+|       ProductRepository.java
+|       UserRepository.java
+|
+\---service
+    |   OrderService.java
+    |   ProductService.java
+    |   UserService.java
+    |
+    \---Impl
+            OrderServiceImpl.java
+            ProductServiceImpl.java
+            UserServiceImpl.java
+```
