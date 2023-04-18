@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 function AdminMain(props) {
   const navigate = useNavigate();
   const [productList, setProductList] = useState();
+  const [relandering, setRelangering] = useState();
 
   useEffect(() => {
     axios({
@@ -41,6 +42,60 @@ function AdminMain(props) {
   },[]);
 
 
+  const changeName = (e) =>{
+    let content = e.target.value;
+    let id = e.target.id;
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/changeName',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
+  const changeSubDetail = (e) =>{
+    let content = e.target.value;
+    let id = e.target.id;
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/changeSubDetail',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
+
+
   function makeProductContent(){
     var arr = [];
 
@@ -51,9 +106,9 @@ function AdminMain(props) {
             <img src={"images/product"+productList[i].imageId+".jpg"} alt="" />
           </span>
           <a>
-            <input type="text" defaultValue={productList[i].name} />
+            <input type="text" id={productList[i].id} onChange={ (e) => changeName(e)} defaultValue={productList[i].name} />
             <div className="content">
-              <input type="text" defaultValue={productList[i].detail} />
+              <input type="text" id={productList[i].id} onChange={ (e) => changeSubDetail(e)}  defaultValue={productList[i].subDetail} />
             </div>
           </a>
         </article>

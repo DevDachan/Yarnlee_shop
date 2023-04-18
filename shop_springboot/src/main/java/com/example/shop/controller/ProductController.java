@@ -33,12 +33,13 @@ public class ProductController {
     String productName = productDto.getName();
     int productPrice = productDto.getPrice();
     String productDetail = productDto.getDetail();
+    String productSubDetail = productDto.getSubDetail();
     int deliveryCost = productDto.getDeliveryCost();
     String deliveryTime = productDto.getDeliveryTime();
     String imageId = productDto.getImageId();
     int position = productDto.getPosition();
 
-    ProductDTO response = productService.saveProduct(productId,productName,productPrice,productDetail,deliveryCost,deliveryTime,imageId,position);
+    ProductDTO response = productService.saveProduct(productId,productName,productPrice,productDetail,productSubDetail,deliveryCost,deliveryTime,imageId,position);
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 
@@ -47,8 +48,29 @@ public class ProductController {
     long startTime = System.currentTimeMillis();
 
     ProductDTO productDTO = productService.getProduct(productId);
-
     return productDTO;
+  }
+
+  @PostMapping(value = "/changeName")
+  public void changeName(@RequestParam("id") int productId,
+                                  @RequestParam("content") String content) {
+    long startTime = System.currentTimeMillis();
+
+    productService.changeName(productId,content);
+  }
+
+  @PostMapping(value = "/changeSubDetail")
+  public void changeSubDetail(@RequestParam("id") int productId,
+      @RequestParam("content") String content) {
+    long startTime = System.currentTimeMillis();
+    productService.changeSubDetail(productId,content);
+  }
+
+  @PostMapping(value = "/changeDetail")
+  public void changeDetail(@RequestParam("id") int productId,
+      @RequestParam("content") String content) {
+    long startTime = System.currentTimeMillis();
+    productService.changeDetail(productId,content);
   }
 
   @GetMapping(value = "/productList")

@@ -22,9 +22,11 @@ public class ProductDTO {
 
   @NotNull
   private int price;
-
   @NotNull
   private String detail;
+
+  @NotNull
+  String subDetail;
 
   @NotNull
   private int deliveryCost;
@@ -42,6 +44,7 @@ public class ProductDTO {
         .name(name)
         .price(price)
         .detail(detail)
+        .subDetail(subDetail)
         .deliveryTime(deliveryTime)
         .deliveryCost(deliveryCost)
         .imageId(imageId)

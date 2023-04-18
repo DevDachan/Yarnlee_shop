@@ -29,6 +29,9 @@ public class ProductEntity {
 
   String detail;
 
+  String subDetail;
+
+
   int deliveryCost;
 
   String deliveryTime;
@@ -42,6 +45,7 @@ public class ProductEntity {
         .name(name)
         .price(price)
         .detail(detail)
+        .subDetail(subDetail)
         .deliveryTime(deliveryTime)
         .deliveryCost(deliveryCost)
         .imageId(imageId)

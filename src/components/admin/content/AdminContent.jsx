@@ -18,11 +18,12 @@ const Wrapper = styled.div`
 
 function AdminContent(props) {
   const navigate = useNavigate();
-  //const [productNum, setProductNum] = useState(1);
   const numberRef = useRef(1);
   const {productId} = useParams();
   const [product, setProduct] = useState();
   const [show, setShow] = useState(false);
+  const [relandering, setRelangering] = useState();
+
 
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
@@ -37,22 +38,57 @@ function AdminContent(props) {
     }
   };
 
-  const orderClick = () => {
-    if (document.getElementById("select_color").value !== "") {
-      navigate("/order", {
-        state: {
-          productId: 1,
-          productNum: numberRef.current.value,
-          productPrice: product.price,
-          productName: product.name,
-          deliveryCost: product.deliveryCost,
-          color: document.getElementById("select_color").value,
-        },
-      });
-    } else {
-      document.getElementById("alert_p").innerText = "색상을 선택해주세요!";
-    }
-  };
+  const changeName = (e) =>{
+    let content = e.target.value;
+    let id = e.target.id;
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/changeName',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
+  const changeDetail = (e) =>{
+    let content = document.getElementById("contentArea").innerHTML;
+    let id = productId;
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/changeDetail',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
 
   useEffect(() => {
       axios({
@@ -66,9 +102,6 @@ function AdminContent(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-      })
-      .then(function(){
-        // always executed
       });
     },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
 
@@ -77,6 +110,13 @@ function AdminContent(props) {
     document.getElementById("contentArea").innerHTML = document.getElementById("contentArea").innerHTML+ e.emoji;
     handleClose();
   }
+
+  const insertImage = (e) => {
+    console.log(e);
+    document.getElementById("contentArea").innerHTML = document.getElementById("contentArea").innerHTML+ e.target.value;
+    handleClose();
+  }
+
   return (
     <Wrapper>
       <div className="detail_main" id="main">
@@ -130,26 +170,32 @@ function AdminContent(props) {
               </div>
 
               <div className="gr-12 calign">
-                <button className="bt_order" onClick={orderClick}> Order </button>
+                <button className="bt_order" > Order </button>
               </div>
 
             </div>
 
           </div>
-
-          <button onClick={handleOpen} variant="outline-primary">이모티콘</button>
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header>
-              <Modal.Title></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <EmojiPicker onEmojiClick={pickEmo}/>
-            </Modal.Body>
-            <Modal.Footer>
-              <button onClick={handleClose}>닫기</button>
-            </Modal.Footer>
-          </Modal>
-          <div style={{textAlign: "center"}} contenteditable="true" id="contentArea">
+          <div className="grid_t">
+            <div className="gr-6">
+              <button onClick={handleOpen} variant="outline-primary">이모티콘</button>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header>
+                  <Modal.Title></Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <EmojiPicker onEmojiClick={pickEmo}/>
+                </Modal.Body>
+                <Modal.Footer>
+                  <button onClick={handleClose}>닫기</button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+            <div className="gr-6">
+              <input type="file" onChange={insertImage} />
+            </div>
+          </div>
+          <div style={{textAlign: "center"}} contenteditable="true" id="contentArea" onInput={(e) => changeDetail(e)}>
             {product == undefined ? "":product.detail}
           </div>
 

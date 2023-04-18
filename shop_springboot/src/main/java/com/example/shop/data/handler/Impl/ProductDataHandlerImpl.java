@@ -18,9 +18,9 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
     public ProductDataHandlerImpl(ProductDAO productDAO) {this.productDAO = productDAO;}
 
     @Override
-    public ProductEntity saveProductEntity(int productId, String productName, int productPrice, String productDetail, int deliveryCost, String deliveryTime, String imageId, int position){
+    public ProductEntity saveProductEntity(int productId, String productName, int productPrice, String productDetail,String productSubDetail, int deliveryCost, String deliveryTime, String imageId, int position){
 
-      ProductEntity productEntity = new ProductEntity(productId, productName, productPrice, productDetail, deliveryCost, deliveryTime,imageId,position);
+      ProductEntity productEntity = new ProductEntity(productId, productName, productPrice, productDetail,productSubDetail, deliveryCost, deliveryTime,imageId,position);
       return productDAO.saveProduct(productEntity);
     }
 
@@ -33,4 +33,13 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   public List<ProductEntity> getProductListEntity(){ return productDAO.getProductList();}
   @Override
   public void changePosition(int id, int nextId){ productDAO.changePosition(id, nextId); };
+
+  @Override
+  public void changeName(int id, String content){ productDAO.changeName(id, content); };
+
+  @Override
+  public void changeSubDetail(int id, String content){ productDAO.changeSubDetail(id, content); };
+
+  @Override
+  public void changeDetail(int id, String content){ productDAO.changeDetail(id, content); };
 }

@@ -18,6 +18,16 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
   @Query(value = "UPDATE product SET position=:nextId WHERE position=:id", nativeQuery = true)
   void changePosition(int id,int nextId);
 
+  @Query(value = "UPDATE product SET name=:content WHERE id=:id", nativeQuery = true)
+  void changeName(int id,String content);
+
+  @Query(value = "UPDATE product SET sub_detail=:content WHERE id=:id", nativeQuery = true)
+  void changeSubDetail(int id,String content);
+
+  @Query(value = "UPDATE product SET detail=:content WHERE id=:id", nativeQuery = true)
+  void changeDetail(int id,String content);
+
+
   ProductEntity getById(int id);
 
   // 쿼리 결과 개수

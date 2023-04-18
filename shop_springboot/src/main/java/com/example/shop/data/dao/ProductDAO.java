@@ -10,4 +10,9 @@ public interface ProductDAO {
   List<ProductEntity> getProductList();
 
   void changePosition(int id, int nextId);
+
+  void changeName(int id, String content);
+
+  void changeSubDetail(int id, String content);
+  void changeDetail(int id, String content);
 }
