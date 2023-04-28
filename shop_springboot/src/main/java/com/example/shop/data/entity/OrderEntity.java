@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Table(name = "ordert")
-public class OrderEntity {
+public class OrderEntity extends BaseEntity{
   @Id
   int id;
 

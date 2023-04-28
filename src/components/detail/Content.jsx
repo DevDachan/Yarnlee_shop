@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams,useLocation } from "react-router-dom";
 import styled from "styled-components";
+import queryString from 'query-string';
 import axios from "axios";
 
 const Wrapper = styled.div`
@@ -16,9 +17,9 @@ const Wrapper = styled.div`
 
 function Content(props) {
   const navigate = useNavigate();
-  //const [productNum, setProductNum] = useState(1);
+  const { search } = useLocation();
+  const {productId} = queryString.parse(search);
   const numberRef = useRef(1);
-  const {productId} = useParams();
   const [product, setProduct] = useState();
 
   const productUpDown = (e, temp) => {

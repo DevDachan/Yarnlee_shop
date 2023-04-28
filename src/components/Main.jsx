@@ -48,7 +48,7 @@ function Main(props) {
           <span className="image">
             <img src={"images/product"+productList[i].imageId+".jpg"} alt="" />
           </span>
-          <a href={"content/"+productList[i].imageId}>
+          <a href={"content?productId="+productList[i].imageId}>
             <h2>{productList[i].name}</h2>
             <div className="content">
               <p>{productList[i].subDetail}.</p>

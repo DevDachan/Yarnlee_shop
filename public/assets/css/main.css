@@ -3324,7 +3324,7 @@ input, select, textarea {
 	#wrapper > * > .inner {
 		width: 100%;
 		max-width: 68em;
-		margin: 0 auto;
+		margin: 2em 1em 1em 2em;
 		padding: 0 2.5em;
 	}
 

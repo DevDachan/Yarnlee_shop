@@ -1,5 +1,6 @@
 package com.example.shop.data.dto;
 
+import com.example.shop.data.entity.BaseEntity;
 import com.example.shop.data.entity.UserEntity;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

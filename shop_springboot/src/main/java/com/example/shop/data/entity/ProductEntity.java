@@ -19,7 +19,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Table(name = "product")
-public class ProductEntity {
+public class ProductEntity{
   @Id
   int id;
 

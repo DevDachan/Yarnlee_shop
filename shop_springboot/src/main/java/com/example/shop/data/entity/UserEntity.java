@@ -20,7 +20,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity extends BaseEntity{
   @Id
   String id;
 

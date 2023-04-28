@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams ,useLocation} from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import EmojiPicker from 'emoji-picker-react';
 import Modal from 'react-bootstrap/Modal';
+import queryString from 'query-string';
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -17,9 +18,11 @@ const Wrapper = styled.div`
 
 
 function AdminContent(props) {
+  const location = useLocation();
   const navigate = useNavigate();
   const numberRef = useRef(1);
-  const {productId} = useParams();
+  const productId = location.productId;
+
   const [product, setProduct] = useState();
   const [show, setShow] = useState(false);
   const [relandering, setRelangering] = useState();

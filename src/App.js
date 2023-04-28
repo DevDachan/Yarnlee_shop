@@ -32,7 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/content/:productId" element={<Content />}></Route>
+        <Route path="/content" element={<Content />}></Route>
         <Route path="/order" element={<Order />}></Route>
         <Route path="/orderList" element={<OrderList />}></Route>
         <Route path="/orderHistory" element={<OrderHistory />}></Route>
@@ -42,7 +42,7 @@ function App() {
         <Route path="/adminOrderList" element={<AdminOrderList />}></Route>
         <Route path="/adminOrderHistory" element={<AdminOrderHistory />}></Route>
 
-        <Route path="/adminContent/:productId" element={<AdminContent />}></Route>
+        <Route path="/adminContent" element={<AdminContent />}></Route>
 
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

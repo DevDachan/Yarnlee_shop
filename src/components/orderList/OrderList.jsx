@@ -10,6 +10,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 8em;
+    margin:auto;
 `;
 
 function OrderList(props) {

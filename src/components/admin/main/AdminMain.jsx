@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation} from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import AdminItemList from "./list/AdminItemList";
 // 나중에 현재 전체 목록 itemList로 변경하기.
-
 
 
 const Wrapper = styled.div`
@@ -65,6 +64,15 @@ function AdminMain(props) {
     })
     .then(function(){
       // always executed
+    });
+  }
+
+  const goContent = (e) =>{
+    console.log(e.target.id);
+    navigate('/adminContent', {
+      state: {
+        productId: e.target.id
+      }
     });
   }
 
@@ -133,7 +141,7 @@ function AdminMain(props) {
             <button name="down" id={productList[i].position} onClick={changePosition} > v </button>
           </div>
           <div className="gr-3 ml3" >
-            <button > 관리 </button>
+            <button name="goContent" id={productList[i].productId} className="bt-productEdit" onClick={goContent} > 관리 </button>
           </div>
         </>
       );
