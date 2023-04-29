@@ -6,6 +6,13 @@ import EmojiPicker from 'emoji-picker-react';
 import Modal from 'react-bootstrap/Modal';
 import queryString from 'query-string';
 
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css' // Quill 에디터 스타일시트
+import ImageUploader from 'quill-image-uploader'
+import Quill from 'quill';
+
+Quill.register('modules/imageUploader', ImageUploader);
+
 const Wrapper = styled.div`
   padding: 16px;
   width: calc(100% - 32px);
@@ -21,29 +28,37 @@ function AdminContent(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const numberRef = useRef(1);
-  const productId = location.productId;
-
+  const productId = location.state.productId;
   const [product, setProduct] = useState();
   const [show, setShow] = useState(false);
   const [relandering, setRelangering] = useState();
 
-
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
-  const productUpDown = (e, temp) => {
-    if (temp === "up") {
-      numberRef.current.value = Number(numberRef.current.value) + 1;
-    } else {
-      if (numberRef.current.value > 1) {
-        numberRef.current.value = Number(numberRef.current.value) - 1;
-      }
-    }
-  };
+
+  useEffect(() => {
+      axios({
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
+      })
+      .then(function (response){
+        //handle success
+        setProduct(response.data);
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      });
+    },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
+
+
+
+
 
   const changeName = (e) =>{
     let content = e.target.value;
-    let id = e.target.id;
+    let id = productId;
 
     const formData = new FormData();
     formData.append("id", id);
@@ -67,8 +82,8 @@ function AdminContent(props) {
     });
   }
 
-  const changeDetail = (e) =>{
-    let content = document.getElementById("contentArea").innerHTML;
+  const changePrice = (e) =>{
+    let content = e.target.value;
     let id = productId;
 
     const formData = new FormData();
@@ -77,7 +92,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeDetail',
+      url: 'http://localhost:8090/shop-backend/product/changePrice',
       data: formData
     })
     .then(function (response){
@@ -93,20 +108,33 @@ function AdminContent(props) {
     });
   }
 
-  useEffect(() => {
-      axios({
-        method: "get",
-        url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
-      })
-      .then(function (response){
-        //handle success
-        setProduct(response.data);
-      })
-      .catch(function(error){
-        //handle error
-        console.log(error);
-      });
-    },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
+
+  const changeDetail = (e) =>{
+    let content = e;
+    let id = productId;
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/changeDetail',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setProduct(response.data);
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
 
   const pickEmo = (e) => {
     console.log(e.emoji);
@@ -114,17 +142,38 @@ function AdminContent(props) {
     handleClose();
   }
 
-  const insertImage = (e) => {
-    console.log(e);
-    document.getElementById("contentArea").innerHTML = document.getElementById("contentArea").innerHTML+ e.target.value;
-    handleClose();
+  const makeContent= (e) => {
+    e = e.replace(/&lt;/g, "<");
+    e = e.replace(/&gt;/g, ">");
+    e = e.replace(/<br>/g, "\n");
+    e = e.replace(/&nbsp;/g, " ");
+    return e;
   }
+
+
+   const quillModules = {
+     toolbar: {
+       container: [
+         [{ header: [1, 2, false] }],
+         ['bold', 'italic', 'underline'],
+         [{ 'color': [] }, { 'background': [] }],
+         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+         [{ 'align': [] }],
+         ['link', 'image']
+       ]
+     },
+     imageUploader: {
+
+     }
+   }
+
+
 
   return (
     <Wrapper>
       <div className="detail_main" id="main">
         <div className="inner">
-          <input type="text" className="ip-admin-content-head" defaultValue={product == undefined ? "":product.name}></input>
+          <input type="text" className="ip-admin-content-head" defaultValue={product == undefined ? "":product.name} onChange={changeName}></input>
           <div className="row detail_main_nav">
 
             <div className="col-12-medium" id="imgDiv">
@@ -135,14 +184,13 @@ function AdminContent(props) {
               <div className="gr-6 mt2">
                   <span>판매 가격: </span>
               </div>
-
               <div className="gr-6 mt2">
-                  <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.price}></input>
+                  <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.price} onChange={changePrice}></input>
               </div>
+
               <div className="gr-6 mt2">
                   <span>배송 예정일 : </span>
               </div>
-
               <div className="gr-6 mt2">
                   <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryTime}></input>
               </div>
@@ -156,51 +204,17 @@ function AdminContent(props) {
                 </select>
               </div>
 
-              <div className="gr-12 grid_t mg0 mb1" name="numberDiv">
-                <div className="gr-5 ralign pd0">
-                  <button className="bt_up_down" onClick={(e) => productUpDown(e,"down")}> {"<"} </button>
-                </div>
-                <div className="gr-2 calign pd0">
-                  <input type="number" className="number_input" id="product_num" min="1" max="10" ref={numberRef} defaultValue={numberRef.current} />
-                </div>
-                <div className="gr-5 lalign pd0">
-                  <button className="bt_up_down" onClick={(e) => productUpDown(e,"up")}> {">"} </button>
-                </div>
-              </div>
-
-              <div className="gr-12" id="alert_div">
-                <p id="alert_p"></p>
-              </div>
-
-              <div className="gr-12 calign">
-                <button className="bt_order" > Order </button>
-              </div>
-
             </div>
 
           </div>
-          <div className="grid_t">
-            <div className="gr-6">
-              <button onClick={handleOpen} variant="outline-primary">이모티콘</button>
-              <Modal show={show} onHide={handleClose}>
-                <Modal.Header>
-                  <Modal.Title></Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <EmojiPicker onEmojiClick={pickEmo}/>
-                </Modal.Body>
-                <Modal.Footer>
-                  <button onClick={handleClose}>닫기</button>
-                </Modal.Footer>
-              </Modal>
-            </div>
-            <div className="gr-6">
-              <input type="file" onChange={insertImage} />
-            </div>
-          </div>
-          <div style={{textAlign: "center"}} contenteditable="true" id="contentArea" onInput={(e) => changeDetail(e)}>
-            {product == undefined ? "":product.detail}
-          </div>
+          {product && <div style={{textAlign: "center"}} id="contentArea" dangerouslySetInnerHTML={{__html: product.detail}} />}
+
+          <ReactQuill
+            value={product?.detail || ''}
+            modules={quillModules}
+            onChange={(content, delta, source, editor) => changeDetail(editor.getHTML())}
+            theme="snow"
+          />
 
         </div>
       </div>

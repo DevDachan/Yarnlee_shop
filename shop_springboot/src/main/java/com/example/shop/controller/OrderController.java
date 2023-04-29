@@ -53,8 +53,6 @@ public class OrderController {
 
   @GetMapping(value = "/select/id/{orderId}")
   public OrderDTO getOrder(@PathVariable int orderId) {
-    long startTime = System.currentTimeMillis();
-
     OrderDTO orderDTO = orderService.getOrder(orderId);
 
     return orderDTO;

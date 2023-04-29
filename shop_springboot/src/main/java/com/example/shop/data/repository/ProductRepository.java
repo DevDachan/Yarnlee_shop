@@ -21,6 +21,9 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
   @Query(value = "UPDATE product SET name=:content WHERE id=:id", nativeQuery = true)
   void changeName(int id,String content);
 
+  @Query(value = "UPDATE product SET price=:content WHERE id=:id", nativeQuery = true)
+  void changePrice(int id,int content);
+
   @Query(value = "UPDATE product SET sub_detail=:content WHERE id=:id", nativeQuery = true)
   void changeSubDetail(int id,String content);
 

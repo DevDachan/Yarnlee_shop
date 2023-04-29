@@ -41,6 +41,10 @@ public class ProductDAOImpl implements ProductDAO {
   public void changeName(int id, String content){
     productRepository.changeName(id,content);
   }
+  @Override
+  public void changePrice(int id, int content){
+    productRepository.changePrice(id,content);
+  }
 
   @Override
   public void changeSubDetail(int id, String content){

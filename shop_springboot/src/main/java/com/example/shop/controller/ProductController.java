@@ -20,7 +20,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class ProductController {
   private ProductService productService;
-
   @Autowired
   public ProductController(ProductService productService) {
     this.productService = productService;
@@ -45,39 +44,43 @@ public class ProductController {
 
   @GetMapping(value = "/select/id/{productId}")
   public ProductDTO getProduct(@PathVariable int productId) {
-    long startTime = System.currentTimeMillis();
-
     ProductDTO productDTO = productService.getProduct(productId);
     return productDTO;
   }
 
   @PostMapping(value = "/changeName")
   public void changeName(@RequestParam("id") int productId,
-                                  @RequestParam("content") String content) {
-    long startTime = System.currentTimeMillis();
-
+      @RequestParam("content") String content) {
     productService.changeName(productId,content);
+  }
+
+  @PostMapping(value = "/changePrice")
+  public void changePrice(@RequestParam("id") int productId,
+      @RequestParam("content") int content) {
+
+    productService.changePrice(productId,content);
   }
 
   @PostMapping(value = "/changeSubDetail")
   public void changeSubDetail(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
-    long startTime = System.currentTimeMillis();
+
     productService.changeSubDetail(productId,content);
   }
 
   @PostMapping(value = "/changeDetail")
-  public void changeDetail(@RequestParam("id") int productId,
+  public ProductDTO changeDetail(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
-    long startTime = System.currentTimeMillis();
+
     productService.changeDetail(productId,content);
+
+    ProductDTO productDTO = productService.getProduct(productId);
+    return productDTO;
   }
 
   @GetMapping(value = "/productList")
   public HashMap<String,Object> getProductList() {
-    long startTime = System.currentTimeMillis();
     HashMap<String,Object> map = new HashMap<String,Object>();
-
     List<ProductDTO> productDTO = productService.getProductList();
 
     map.put("productContent", productDTO);
@@ -88,7 +91,6 @@ public class ProductController {
       @RequestParam String direction,
       @RequestParam int position
       ) {
-    long startTime = System.currentTimeMillis();
     HashMap<String,Object> map = new HashMap<String,Object>();
 
     var nextPosition = 0;

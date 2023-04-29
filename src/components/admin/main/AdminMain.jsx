@@ -68,7 +68,6 @@ function AdminMain(props) {
   }
 
   const goContent = (e) =>{
-    console.log(e.target.id);
     navigate('/adminContent', {
       state: {
         productId: e.target.id
@@ -141,7 +140,7 @@ function AdminMain(props) {
             <button name="down" id={productList[i].position} onClick={changePosition} > v </button>
           </div>
           <div className="gr-3 ml3" >
-            <button name="goContent" id={productList[i].productId} className="bt-productEdit" onClick={goContent} > 관리 </button>
+            <button name="goContent" id={productList[i].id} className="bt-productEdit" onClick={goContent} > 관리 </button>
           </div>
         </>
       );

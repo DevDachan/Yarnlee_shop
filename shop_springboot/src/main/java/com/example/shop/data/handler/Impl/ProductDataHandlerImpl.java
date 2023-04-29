@@ -38,6 +38,10 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   public void changeName(int id, String content){ productDAO.changeName(id, content); };
 
   @Override
+  public void changePrice(int id, int content){ productDAO.changePrice(id, content); };
+
+
+  @Override
   public void changeSubDetail(int id, String content){ productDAO.changeSubDetail(id, content); };
 
   @Override

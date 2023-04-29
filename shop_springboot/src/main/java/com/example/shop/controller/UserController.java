@@ -50,7 +50,6 @@ public class UserController {
 
   @PostMapping(value = "/login")
   public String loginUser(@RequestBody Map<String, String> postData) {
-    long startTime = System.currentTimeMillis();
 
     UserDTO userDTO = userService.getUser(postData.get("userId"));
     if(userDTO.getPassword() == postData.get("password")){
