@@ -17,22 +17,9 @@ public class ImageDTO {
   @NotNull
   private int id;
 
-  @NotNull
-  private String data;
-
-  @NotNull
-  private String mimetype;
-
-  @NotNull
-  private String size;
-
-
   public ImageEntity toEntity(){
     return ImageEntity.builder()
         .id(id)
-        .data(data)
-        .mimetype(mimetype)
-        .size(size)
         .build();
   }
 

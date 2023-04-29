@@ -2,9 +2,13 @@ package com.example.shop.controller;
 
 
 import com.example.shop.data.dto.ProductDTO;
-import com.example.shop.data.entity.ProductEntity;
+import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.ProductService;
 import jakarta.validation.Valid;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RestController
@@ -20,8 +25,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class ProductController {
   private ProductService productService;
+  private ImageService imageService;
+
   @Autowired
-  public ProductController(ProductService productService) {
+  public ProductController(ProductService productService,ImageService imageService) {
+    this.imageService = imageService;
     this.productService = productService;
   }
 
@@ -108,6 +116,32 @@ public class ProductController {
 
     map.put("productContent", productDTO);
     return map;
+  }
+
+  @PostMapping(value = "/insertImage")
+  public int uploadImage(
+      @RequestParam("file") MultipartFile file
+    ){
+    try {
+      // 파일 저장 디렉토리 경로
+      String uploadDir = "./public/";
+
+      int randomId = imageService.getRandomId();
+
+      // 파일 저장할 경로
+      String fileName = randomId + ".jpg";
+      Path filePath = Paths.get(uploadDir, fileName);
+
+      file.transferTo(filePath); // 파일 다운로드
+
+
+      // 성공적으로 저장되었을 때 반환할 응답
+      return randomId;
+    } catch (Exception e) {
+      // 저장 중 에러가 발생한 경우 반환할 응답
+      System.out.println(e);
+      return 0;
+    }
   }
 
 

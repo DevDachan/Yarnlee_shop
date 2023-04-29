@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams ,useLocation} from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import EmojiPicker from 'emoji-picker-react';
 import Modal from 'react-bootstrap/Modal';
 import queryString from 'query-string';
 
@@ -136,11 +135,6 @@ function AdminContent(props) {
     });
   }
 
-  const pickEmo = (e) => {
-    console.log(e.emoji);
-    document.getElementById("contentArea").innerHTML = document.getElementById("contentArea").innerHTML+ e.emoji;
-    handleClose();
-  }
 
   const makeContent= (e) => {
     e = e.replace(/&lt;/g, "<");
@@ -150,22 +144,62 @@ function AdminContent(props) {
     return e;
   }
 
+  const imageHandler = (e) => {
+    const input = document.createElement("input");
 
-   const quillModules = {
-     toolbar: {
-       container: [
-         [{ header: [1, 2, false] }],
-         ['bold', 'italic', 'underline'],
-         [{ 'color': [] }, { 'background': [] }],
-         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-         [{ 'align': [] }],
-         ['link', 'image']
-       ]
-     },
-     imageUploader: {
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
 
-     }
-   }
+    input.onchange = async() => {
+      if(input.files){
+        var file: any = input.files[0];
+        var formData = new FormData();
+
+        formData.append("file", file);
+        console.log();
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/product/insertImage',
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+        })
+        .then(function (response){
+          //handle success
+          console.log(response.data);
+          setRelangering("");
+        })
+        .catch(function(error){
+          //handle error
+          console.log(error);
+        })
+        .then(function(){
+          // always executed
+        });
+      }
+    }
+
+  }
+
+  const quillModules = React.useMemo(() => ({
+      toolbar: {
+        container: [
+          [{ header: [1, 2, false] }],
+          ['bold', 'italic', 'underline'],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          [{ 'align': [] }],
+          ['link', 'image']
+        ],
+
+        // custom 핸들러 설정
+        handlers: {
+            image: imageHandler, // 이미지 tool 사용에 대한 핸들러 설정
+        }
+      },
+    }), [])
 
 
 
@@ -207,14 +241,14 @@ function AdminContent(props) {
             </div>
 
           </div>
-          {product && <div style={{textAlign: "center"}} id="contentArea" dangerouslySetInnerHTML={{__html: product.detail}} />}
-
           <ReactQuill
             value={product?.detail || ''}
             modules={quillModules}
             onChange={(content, delta, source, editor) => changeDetail(editor.getHTML())}
             theme="snow"
           />
+
+          {product && <div id="contentArea_admin" dangerouslySetInnerHTML={{__html: product.detail}} />}
 
         </div>
       </div>

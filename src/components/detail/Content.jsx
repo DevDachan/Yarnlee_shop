@@ -118,9 +118,8 @@ function Content(props) {
 
           </div>
 
-          <div style={{textAlign: "center"}}>
-            <p>{product == undefined ? "":product.detail}</p>
-          </div>
+          {product && <div id="contentArea" dangerouslySetInnerHTML={{__html: product.detail}} />}
+
 
         </div>
       </div>

@@ -328,6 +328,11 @@ td{
 }
 
 #contentArea{
-  border: 4px solid black;
+  border: 0px;
+  padding : 10px;
+}
+
+#contentArea_admin{
+  border: 0px;
   padding : 10px;
 }
