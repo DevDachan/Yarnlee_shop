@@ -14,6 +14,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 800px;
 `;
 
 
@@ -110,7 +111,7 @@ function AdminMain(props) {
       arr.push(
         <article>
           <span className="image">
-            <img src={"images/product"+productList[i].imageId+".jpg"} alt="" />
+            <img src={"productImage/"+productList[i].imageId+".jpg"} alt="" />
           </span>
           <a>
             <input type="text" id={productList[i].id} onChange={ (e) => changeName(e)} defaultValue={productList[i].name} />

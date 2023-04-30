@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 750px;
 `;
 
 function Main(props) {
@@ -46,9 +47,9 @@ function Main(props) {
       arr.push(
         <article>
           <span className="image">
-            <img src={"images/product"+productList[i].imageId+".jpg"} alt="" />
+            <img src={"productImage/"+productList[i].imageId+".jpg"} alt="" />
           </span>
-          <a href={"content?productId="+productList[i].imageId}>
+          <a href={"content?productId="+productList[i].id}>
             <h2>{productList[i].name}</h2>
             <div className="content">
               <p>{productList[i].subDetail}.</p>

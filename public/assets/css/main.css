@@ -1180,7 +1180,7 @@ input, select, textarea {
 				.row > .off-11-medium {
 					margin-left: 91.66667%;
 				}
-
+/*
 				.row > .col-12-medium {
 					width: 100%;
 				}
@@ -1188,7 +1188,7 @@ input, select, textarea {
 				.row > .off-12-medium {
 					margin-left: 100%;
 				}
-
+*/
 				.row.gtr-0 {
 					margin-top: 0;
 					margin-left: 0em;
@@ -2788,7 +2788,7 @@ input, select, textarea {
 
 		}
 
-		@media screen and (max-width: 980px) {
+		/*@media screen and (max-width: 980px) {
 
 			.tiles {
 				margin: -2.5em 0 0 -2.5em;
@@ -2800,7 +2800,7 @@ input, select, textarea {
 				}
 
 		}
-
+*/
 		@media screen and (max-width: 736px) {
 
 			.tiles {
@@ -2820,7 +2820,7 @@ input, select, textarea {
 					}
 
 		}
-
+/*
 		@media screen and (max-width: 480px) {
 
 			.tiles {
@@ -2832,7 +2832,7 @@ input, select, textarea {
 					margin: 1.25em 0 0 0;
 				}
 
-		}
+		}*/
 
 /* Header */
 
