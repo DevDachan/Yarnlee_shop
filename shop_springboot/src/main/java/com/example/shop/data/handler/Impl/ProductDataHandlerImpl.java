@@ -40,7 +40,8 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   @Override
   public void changePrice(int id, int content){ productDAO.changePrice(id, content); };
 
-
+  @Override
+  public void changeImageId(int id, int imageId){ productDAO.changeImageId(id, imageId);}
   @Override
   public void changeSubDetail(int id, String content){ productDAO.changeSubDetail(id, content); };
 

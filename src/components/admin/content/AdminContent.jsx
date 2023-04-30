@@ -44,6 +44,7 @@ function AdminContent(props) {
       .then(function (response){
         //handle success
         setProduct(response.data);
+        console.log(response.data);
       })
       .catch(function(error){
         //handle error
@@ -157,7 +158,6 @@ function AdminContent(props) {
         var formData = new FormData();
 
         formData.append("file", file);
-        console.log();
         axios({
           method: "post",
           url: 'http://localhost:8090/shop-backend/product/insertImage',
@@ -167,8 +167,9 @@ function AdminContent(props) {
           },
         })
         .then(function (response){
-          //handle success
-          console.log(response.data);
+          const newComponent = document.createElement('img');
+          newComponent.src = "./productImage/"+response.data +".jpg";
+          document.querySelector(".ql-editor").appendChild(newComponent);
           setRelangering("");
         })
         .catch(function(error){
@@ -180,7 +181,40 @@ function AdminContent(props) {
         });
       }
     }
+  }
 
+  const changeImage = (e) =>{
+    var input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    input.onchange = async() => {
+      if(input.files){
+        var file: any = input.files[0];
+        var formData = new FormData();
+
+        formData.append("file", file);
+        formData.append("productId", productId);
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/product/insertMainImage',
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+        })
+        .then(function (response){
+          setProduct(response.data);
+        })
+        .catch(function(error){
+          //handle error
+          console.log(error);
+        })
+        .then(function(){
+          // always executed
+        });
+      }
+    }
   }
 
   const quillModules = React.useMemo(() => ({
@@ -201,8 +235,6 @@ function AdminContent(props) {
       },
     }), [])
 
-
-
   return (
     <Wrapper>
       <div className="detail_main" id="main">
@@ -211,7 +243,12 @@ function AdminContent(props) {
           <div className="row detail_main_nav">
 
             <div className="col-12-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="detail_img" src={"../images/product"+productId+".jpg"} alt="" /></span>
+              <span className="image main detail_span_img">
+                <img className="detail_img" src={product == undefined ? "" : product.imageId == "" ? "../images/example.jpg" : "../productImage/"+product.imageId+".jpg"}
+                alt=""
+                onClick={changeImage}
+                />
+              </span>
             </div>
 
             <div className="col-12-medium calign grid_t" name="selectDiv" style={{paddingTop: "10%"}}>

@@ -31,6 +31,9 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
   void changeDetail(int id,String content);
 
 
+  @Query(value = "UPDATE product SET image_id=:imageId WHERE id=:id", nativeQuery = true)
+  void changeImageId(int id, int imageId);
+
   ProductEntity getById(int id);
 
   // 쿼리 결과 개수

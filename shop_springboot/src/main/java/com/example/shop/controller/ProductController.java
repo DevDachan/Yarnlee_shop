@@ -124,7 +124,7 @@ public class ProductController {
     ){
     try {
       // 파일 저장 디렉토리 경로
-      String uploadDir = "./public/";
+      String uploadDir = "../Shop_project\\shop_project\\public\\productImage/";
 
       int randomId = imageService.getRandomId();
 
@@ -142,6 +142,34 @@ public class ProductController {
       System.out.println(e);
       return 0;
     }
+  }
+
+  @PostMapping(value = "/insertMainImage")
+  public ProductDTO uploadMainImage(
+      @RequestParam("file") MultipartFile file,
+      @RequestParam("productId") int productId
+  ){
+    try {
+      // 파일 저장 디렉토리 경로
+      String uploadDir = "../Shop_project\\shop_project\\public\\productImage/";
+
+      int randomId = imageService.getRandomId();
+
+      // 파일 저장할 경로
+      String fileName = randomId + ".jpg";
+      Path filePath = Paths.get(uploadDir, fileName);
+
+      file.transferTo(filePath); // 파일 다운로드
+
+      productService.changeImageId(productId, randomId);
+      // 성공적으로 저장되었을 때 반환할 응답
+    } catch (Exception e) {
+      // 저장 중 에러가 발생한 경우 반환할 응답
+      System.out.println(e);
+    }
+
+    ProductDTO productDTO = productService.getProduct(productId);
+    return productDTO;
   }
 
 

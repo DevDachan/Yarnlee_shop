@@ -70,6 +70,8 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public void changePrice(int id, int content){ productDataHandeler.changePrice(id,content); }
 
+  @Override
+  public void changeImageId(int id, int imageId){ productDataHandeler.changeImageId(id, imageId);}
 
   @Override
   public void changeSubDetail(int id, String content){ productDataHandeler.changeSubDetail(id,content); }
