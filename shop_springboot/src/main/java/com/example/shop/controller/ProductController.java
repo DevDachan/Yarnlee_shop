@@ -94,6 +94,18 @@ public class ProductController {
     map.put("productContent", productDTO);
     return map;
   }
+
+  @GetMapping(value = "/createProduct")
+  public HashMap<String,Object> createProduct() {
+    HashMap<String,Object> map = new HashMap<String,Object>();
+    productService.createProduct();
+    List<ProductDTO> productDTO = productService.getProductList();
+
+    map.put("productContent", productDTO);
+    return map;
+  }
+
+
   @PostMapping(value = "/changePosition")
   public HashMap<String,Object> changePosition(
       @RequestParam String direction,

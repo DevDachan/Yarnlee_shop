@@ -8,6 +8,7 @@ public interface ProductDAO {
   ProductEntity getProduct (int productId);
 
   List<ProductEntity> getProductList();
+  void createProduct();
 
   void changePosition(int id, int nextId);
 

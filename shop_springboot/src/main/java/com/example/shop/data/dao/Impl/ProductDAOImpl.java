@@ -58,5 +58,11 @@ public class ProductDAOImpl implements ProductDAO {
     productRepository.changeDetail(id,content);
   }
 
+  @Override
+  public void createProduct(){
+    int id = productRepository.maxId() +1;
+    productRepository.createProduct(id);
+  }
+
 }
 

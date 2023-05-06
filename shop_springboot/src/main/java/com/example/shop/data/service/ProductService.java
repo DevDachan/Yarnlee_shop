@@ -10,6 +10,8 @@ public interface ProductService {
 
   List<ProductDTO> getProductList();
 
+
+  void createProduct();
   void changeId(int id, int nextId);
   void changeName(int id, String content);
   void changePrice(int id, int content);

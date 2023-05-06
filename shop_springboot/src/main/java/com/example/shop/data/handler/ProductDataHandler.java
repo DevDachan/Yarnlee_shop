@@ -19,4 +19,6 @@ public interface ProductDataHandler {
 
   void changeSubDetail(int id, String content);
   void changeDetail(int id, String content);
+
+  void createProduct();
 }

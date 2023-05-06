@@ -47,4 +47,7 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
 
   @Override
   public void changeDetail(int id, String content){ productDAO.changeDetail(id, content); };
+
+  @Override
+  public void createProduct(){ productDAO.createProduct();}
 }

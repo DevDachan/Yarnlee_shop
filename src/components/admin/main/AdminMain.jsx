@@ -181,6 +181,24 @@ function AdminMain(props) {
     });
   }
 
+  const createProduct = (e) =>{
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/product/createProduct'
+    })
+    .then(function (response){
+      //handle success
+      setProductList(response.data.productContent);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
   return (
       <Wrapper>
           <div id="main">
@@ -206,7 +224,7 @@ function AdminMain(props) {
             productList == undefined ? "":makeChangePosition()
           }
           </div>
-
+          <button name="goContent" className="bt-productEdit" onClick={createProduct} >생성 </button>
       </Wrapper>
   );
 }

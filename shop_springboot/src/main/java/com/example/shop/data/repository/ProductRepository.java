@@ -34,6 +34,12 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
   @Query(value = "UPDATE product SET image_id=:imageId WHERE id=:id", nativeQuery = true)
   void changeImageId(int id, int imageId);
 
+  @Query(value = "INSERT INTO product VALUES(:id,0, '0일', 'detail', 'example','name',:id,0,'sub detail')", nativeQuery = true)
+  void createProduct(int id);
+
+  @Query(value = "SELECT MAX(id) FROM product", nativeQuery = true)
+  int maxId();
+
   ProductEntity getById(int id);
 
   // 쿼리 결과 개수
