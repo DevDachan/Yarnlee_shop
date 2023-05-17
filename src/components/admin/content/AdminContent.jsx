@@ -108,6 +108,32 @@ function AdminContent(props) {
     });
   }
 
+  const changeDeliveryTime = e =>{
+    let content = e.target.value;
+    let id = productId;
+
+    const formData = new FormData();
+    formData.append("id", id);
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/changeDeliveryTime',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
 
   const changeDetail = (e) =>{
     let content = e;
@@ -252,7 +278,7 @@ function AdminContent(props) {
                   <span>배송 예정일 : </span>
               </div>
               <div className="gr-6 mt2">
-                  <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryTime}></input>
+                  <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryTime} onChange={changeDeliveryTime}></input>
               </div>
 
               <div className="gr-12 mb1">
@@ -274,8 +300,6 @@ function AdminContent(props) {
             onChange={(content, delta, source, editor) => changeDetail(editor.getHTML())}
             theme="snow"
           />
-
-          {product && <div id="contentArea_admin" dangerouslySetInnerHTML={{__html: product.detail}} />}
 
         </div>
       </div>
