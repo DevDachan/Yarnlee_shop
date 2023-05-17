@@ -65,7 +65,14 @@ input::-webkit-inner-spin-button {
 #imgDiv{
   height: 100%;
   padding: 0px;
+
+  min-width: 400px !important;
 }
+
+#selectDiv{
+  min-width: 400px !important;
+}
+
 
 select option[value=""][disabled] {
 	display: none;

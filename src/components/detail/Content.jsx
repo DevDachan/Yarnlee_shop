@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-  min-width: 750px;
+  min-width: 920px;
 `;
 
 
@@ -76,10 +76,10 @@ function Content(props) {
           <div className="row detail_main_nav">
 
             <div className="col-12-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="detail_img" src={"../images/product"+productId+".jpg"} alt="" /></span>
+              <span className="image main detail_span_img"><img className="detail_img" src={product == undefined ? "":"../productImage/"+product.imageId+".jpg"} alt="" /></span>
             </div>
 
-            <div className="col-12-medium calign" name="selectDiv" style={{paddingTop: "10%"}}>
+            <div className="col-12-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>
 
               <div className="col-12-medium mt2">
                 <h2 className="calign">판매 가격: {product == undefined ? "":product.price}원</h2>
