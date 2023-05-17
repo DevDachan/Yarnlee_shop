@@ -31,7 +31,7 @@ function AdminContent(props) {
   const [product, setProduct] = useState();
   const [show, setShow] = useState(false);
   const [relandering, setRelangering] = useState();
-
+  const quillRef = useRef();
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
@@ -145,43 +145,32 @@ function AdminContent(props) {
     return e;
   }
 
-  const imageHandler = (e) => {
+  const imageHandler = () => {
     const input = document.createElement("input");
-
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.click();
 
-    input.onchange = async() => {
-      if(input.files){
-        var file: any = input.files[0];
-        var formData = new FormData();
+    input.onchange = async () => {
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
 
-        formData.append("file", file);
-        axios({
-          method: "post",
-          url: 'http://localhost:8090/shop-backend/product/insertImage',
-          data: formData,
+      try {
+        const response = await axios.post("http://localhost:8090/shop-backend/product/insertImage", formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data",
           },
-        })
-        .then(function (response){
-          const newComponent = document.createElement('img');
-          newComponent.src = "./productImage/"+response.data +".jpg";
-          document.querySelector(".ql-editor").appendChild(newComponent);
-          setRelangering("");
-        })
-        .catch(function(error){
-          //handle error
-          console.log(error);
-        })
-        .then(function(){
-          // always executed
         });
+        const imageUrl = response.data;
+        const editor = quillRef.current.getEditor();
+        const cursorPosition = editor.getSelection().index;
+        editor.insertEmbed(cursorPosition, "image", "../productImage/"+imageUrl+".jpg");
+        } catch (error) {
+        console.log(error);
       }
-    }
-  }
+    };
+  };
 
   const changeImage = (e) =>{
     var input = document.createElement("input");
@@ -279,6 +268,7 @@ function AdminContent(props) {
 
           </div>
           <ReactQuill
+            ref={quillRef}
             value={product?.detail || ''}
             modules={quillModules}
             onChange={(content, delta, source, editor) => changeDetail(editor.getHTML())}
