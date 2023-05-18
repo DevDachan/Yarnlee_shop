@@ -135,31 +135,34 @@ function AdminContent(props) {
   }
 
 
-  const changeDetail = (e) =>{
-    let content = e;
-    let id = productId;
+  const changeDetail = ()   =>{
+    if (quillRef.current) {
+      const editor = quillRef.current.getEditor();
+      const content = editor.root.innerHTML;
+      // 내용 추출 후 처리 로직 작성
+      let id = productId;
 
-    const formData = new FormData();
-    formData.append("id", id);
-    formData.append("content", content);
+      const formData = new FormData();
+      formData.append("id", id);
+      formData.append("content", content);
 
-    axios({
-      method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeDetail',
-      data: formData
-    })
-    .then(function (response){
-      //handle success
-      setProduct(response.data);
-      setRelangering("");
-    })
-    .catch(function(error){
-      //handle error
-      console.log(error);
-    })
-    .then(function(){
-      // always executed
-    });
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/product/changeDetail',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        setProduct(response.data);
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
   }
 
 
@@ -255,9 +258,10 @@ function AdminContent(props) {
       <div className="detail_main" id="main">
         <div className="inner">
           <input type="text" className="ip-admin-content-head" defaultValue={product == undefined ? "":product.name} onChange={changeName}></input>
-          <div className="row detail_main_nav">
 
-            <div className="col-12-medium" id="imgDiv">
+          <div className="row mt-2 detail_main_nav">
+
+            <div className="col-12-medium" id="admin-imgDiv">
               <span className="image main detail_span_img">
                 <img className="detail_img" src={product == undefined ? "" :"../productImage/"+product.imageId+".jpg"}
                 alt=""
@@ -266,7 +270,7 @@ function AdminContent(props) {
               </span>
             </div>
 
-            <div className="col-12-medium calign grid_t" name="selectDiv" style={{paddingTop: "10%"}}>
+            <div className="col-12-medium calign grid_t" id="admin-selectDiv" style={{paddingTop: "10%"}}>
               <div className="gr-6 mt2">
                   <span>판매 가격: </span>
               </div>
@@ -297,7 +301,7 @@ function AdminContent(props) {
             ref={quillRef}
             value={product?.detail || ''}
             modules={quillModules}
-            onChange={(content, delta, source, editor) => changeDetail(editor.getHTML())}
+            onBlur={changeDetail}
             theme="snow"
           />
 

@@ -84,9 +84,7 @@ function OrderHistroy(props) {
               </div>
 
               <div className="gr-12 mt3">
-                <Remittance
-                  remittanceImage = {remittanceImage}
-                />
+                
               </div>
 
               <div className="gr-12 calign pt3">

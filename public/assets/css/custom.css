@@ -6,6 +6,9 @@ footer{
 .detail_img{
   width :100% !important;
   height: 100% !important;
+  max-width: 40vw !important;
+  max-height: 40vw !important;
+
 }
 
 .detail_span_img{

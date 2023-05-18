@@ -171,6 +171,7 @@ function AdminMain(props) {
     .then(function (response){
       //handle success
       setProductList(response.data.productContent);
+      window.location.reload();
     })
     .catch(function(error){
       //handle error
