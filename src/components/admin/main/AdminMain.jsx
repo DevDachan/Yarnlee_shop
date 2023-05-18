@@ -114,9 +114,9 @@ function AdminMain(props) {
             <img src={"productImage/"+productList[i].imageId+".jpg"} alt="" />
           </span>
           <a>
-            <input type="text" id={productList[i].id} onChange={ (e) => changeName(e)} defaultValue={productList[i].name} />
+            <input type="text" className="ip-admin-product" id={productList[i].id} onChange={ (e) => changeName(e)} defaultValue={productList[i].name} />
             <div className="content">
-              <input type="text" id={productList[i].id} onChange={ (e) => changeSubDetail(e)}  defaultValue={productList[i].subDetail} />
+              <input type="text" className="ip-admin-product" id={productList[i].id} onChange={ (e) => changeSubDetail(e)}  defaultValue={productList[i].subDetail} />
             </div>
           </a>
         </article>

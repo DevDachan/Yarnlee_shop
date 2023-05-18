@@ -35,6 +35,12 @@ article{
   object-fit: cover;
 }
 
+.ip-admin-product:focus{
+  background-color: white;
+  color: black;
+  border-radius: 7px;
+}
+
 .option_select{
   font-weight: bold;
   text-align: center;
