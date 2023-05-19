@@ -12,9 +12,6 @@ article{
 .detail_img{
   width :100% !important;
   height: 100% !important;
-  max-width: 40vw !important;
-  max-height: 40vw !important;
-
 }
 
 .detail_span_img{
@@ -75,13 +72,13 @@ input::-webkit-inner-spin-button {
   margin: 2rem !important;
 }
 .detail_main_nav{
-  margin-bottom: 80px;
+  margin: 0 0 3rem 0 !important;
 }
 
 #imgDiv{
   height: 100%;
   padding: 0px;
-
+  width: 40%;
   min-width: 400px !important;
 }
 
@@ -148,6 +145,11 @@ input{
 
 
 /* order page*/
+
+.select-orderLogin{
+  color: black;
+}
+
 
 @media screen and (max-width: 480px) {
 
@@ -356,6 +358,11 @@ td{
 #contentArea{
   border: 0px;
   padding : 10px;
+}
+
+#contentArea > * >img{
+  width: 100%;
+  height: auto;
 }
 
 #contentArea_admin{
