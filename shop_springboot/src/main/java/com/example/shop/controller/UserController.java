@@ -6,6 +6,7 @@ import com.example.shop.data.service.UserService;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,13 +51,18 @@ public class UserController {
 
   @PostMapping(value = "/login")
   public String loginUser(@RequestBody Map<String, String> postData) {
+    System.out.println(postData.get("password"));
+    System.out.println(postData.get("userId"));
 
-    UserDTO userDTO = userService.getUser(postData.get("userId"));
-    if(userDTO.getPassword() == postData.get("password")){
-      return userDTO.getName();
-    }else{
-      return "false";
+    Optional<UserDTO> optionalUserDTO = userService.getUser(postData.get("userId"));
+
+    if (optionalUserDTO.isPresent()) {
+      UserDTO userDTO = new UserDTO();
+      if(userDTO.getPassword() == postData.get("password")) {
+        return userDTO.getName();
+      }
     }
+    return "false";
   }
 
 

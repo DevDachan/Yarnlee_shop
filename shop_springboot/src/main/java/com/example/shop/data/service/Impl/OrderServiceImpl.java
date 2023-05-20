@@ -79,6 +79,14 @@ public class OrderServiceImpl implements OrderService {
     int randomId = tempRandomId;
 
     return randomId;
+  }
 
+  @Override
+  public List<OrderDTO> getOrderUsingPhone(String phoneNum, String name){
+    return orderDataHandeler.getOrderUsingPhone(phoneNum, name);
+  }
+  @Override
+  public List<OrderDTO> getOrderUsingOrder(String orderNum){
+    return orderDataHandeler.getOrderUsingOrder(ordrNum);
   }
 }

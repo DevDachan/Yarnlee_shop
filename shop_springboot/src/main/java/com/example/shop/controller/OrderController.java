@@ -4,6 +4,10 @@ package com.example.shop.controller;
 import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.service.OrderService;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -57,6 +62,27 @@ public class OrderController {
 
     return orderDTO;
   }
+  @PostMapping(value = "/getOrderHistory")
+  public Map<String, Object> getOrderHistory(
+      @RequestParam String type,
+      @RequestParam String userId,
+      @RequestParam String content,
+      @RequestParam String name
+      ){
+    System.out.println(content);
+    System.out.println(name);
+    System.out.println(type);
+    System.out.println(userId);
+
+    if(type.equals("전화 번호")) {
+      List<OrderDTO> formData = orderService.getOrderUsingPhone();
+    }else{
+      List<OrderDTO> formData = orderService.getOrderUsingOrder();
+    }
+    return formData;
+  }
+
+
 
 
   @DeleteMapping(value = "/delete/id/{orderId}")

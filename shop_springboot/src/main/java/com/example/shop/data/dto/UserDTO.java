@@ -3,6 +3,7 @@ package com.example.shop.data.dto;
 import com.example.shop.data.entity.BaseEntity;
 import com.example.shop.data.entity.UserEntity;
 import jakarta.validation.constraints.NotNull;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -49,4 +50,7 @@ public class UserDTO {
         .build();
   }
 
+  public Optional<UserDTO> ofNullable(UserDTO userDTO) {
+    return null;
+  }
 }

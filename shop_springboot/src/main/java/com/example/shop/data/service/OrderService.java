@@ -1,6 +1,7 @@
 package com.example.shop.data.service;
 
 import com.example.shop.data.dto.OrderDTO;
+import java.util.List;
 
 public interface OrderService {
   OrderDTO saveOrder(
@@ -11,4 +12,9 @@ public interface OrderService {
 
   int getRandomId();
   OrderDTO getOrder(int productId);
+
+  List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name);
+
+  List<OrderDTO> getOrderUsingOrder(String orderNum);
+
 }

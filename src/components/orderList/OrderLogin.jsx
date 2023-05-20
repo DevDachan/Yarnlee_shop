@@ -2,6 +2,10 @@ import React, { useState , useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+
+import Phone from "../order/Phone";
+
+
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -16,19 +20,22 @@ function Login(props) {
     const navigate = useNavigate();
     const [id, setId] = useState();
     const [infoType, setInfoType] = useState("전화 번호");
+    const [phoneNum, setPhoneNum] = useState();
 
     const onClick = () =>{
       const formData = new FormData();
       formData.append("userId", id);
+      formData.append("type", infoType);
+
       if(infoType == "전화 번호"){
-        formData.append("name", document.getElementById("ip_name"));
-        formData.append("phoneNum", document.getElementById("ip_phone"));
+        formData.append("name", document.getElementById("ip_name").value);
+        formData.append("content", phoneNum);
       }else{
-        formData.append("orderNum", document.getElementById("ip_order"));
+        formData.append("content", document.getElementById("ip_order"));
       }
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/user/getOrderHistory',
+        url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
         data: formData
       })
       .then(function (response){
@@ -82,7 +89,7 @@ function Login(props) {
                   <h3 style={{paddingTop:"20px"}}> 전화 번호</h3>
                 </div>
                 <div className="gr-9">
-                  <input type="text" id="ip_phone" value={id} onChange={(e) =>setId(e.target.value)}/>
+                  <Phone setPhoneNum={setPhoneNum} phoneNum={phoneNum}/>
                 </div>
                 <div className="gr-3 calign">
                   <h3 style={{paddingTop:"20px"}}> 이 름 </h3>

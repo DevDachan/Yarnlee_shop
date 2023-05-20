@@ -4,6 +4,7 @@ import com.example.shop.data.dto.UserDTO;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserDataHandler;
 import com.example.shop.data.service.UserService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -30,12 +31,16 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserDTO getUser(String userId){
+  public Optional<UserDTO> getUser(String userId){
     UserEntity userEntity = userDataHandeler.getUserEntity(userId);
 
-    UserDTO userDTO = new UserDTO(userEntity.getId(), userEntity.getPassword(),
-        userEntity.getName(), userEntity.getPhone(), userEntity.getZoneCode(), userEntity.getAddress(), userEntity.getAddressDetail());
-    return userDTO;
+    if(userEntity == null){
+      return null;
+    }else{
+      UserDTO userDTO = new UserDTO(userEntity.getId(), userEntity.getPassword(),
+          userEntity.getName(), userEntity.getPhone(), userEntity.getZoneCode(), userEntity.getAddress(), userEntity.getAddressDetail());
+      return Optional.ofNullable(userDTO);
+    }
   }
 
 }
