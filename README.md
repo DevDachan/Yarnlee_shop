@@ -75,6 +75,26 @@
 - 서버-클라이언트 구조로 Spring Boot와 React를 사용함으로써 각각의 기능을 분리 시킨다.
 - 다양한 API를 사용해 고객으로부터 받는 데이터를 쉽게 관리한다
 
+
+## 서비스 기능
+
+### 사용자
+- 회원 가입 및 로그인
+- 주문
+- 주문 내역 확인
+
+### 관리자
+- 상품 등록
+- 메인 화면 수정
+- 전체 주문 내역 확인
+- 회원 정보 확인
+
+
+## 사용 API
+- 다음 주소API
+- 네이버 클라우드 문자 전송API
+
+
 [초기 기능 디자인 Figma](https://www.figma.com/file/ndJjGc6edEYel3tvo5ZsKr/Untitled?node-id=1%3A2&t=K6SYZlhiHiuidXpb-1)
 - 전체적인 디자인이 아닌 각각의 페이지에 어떤 기능들을 넣을지 구상한 내용입니다.
 
@@ -124,6 +144,7 @@ components
 |
 +---orderHistory
 |       OrderHistory.jsx
+|       OrderLogin.jsx
 |
 +---orderList
 |       OrderList.jsx
