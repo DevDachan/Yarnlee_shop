@@ -2,6 +2,7 @@ import React, { useState , useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import Modal from 'react-bootstrap/Modal';
 
 import Phone from "../order/Phone";
 
@@ -21,6 +22,12 @@ function Login(props) {
     const [id, setId] = useState();
     const [infoType, setInfoType] = useState("전화 번호");
     const [phoneNum, setPhoneNum] = useState();
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleOpen = () => setShow(true);
+
+
 
     const onClick = () =>{
       const formData = new FormData();
@@ -42,6 +49,7 @@ function Login(props) {
         //handle success
         if(response.data == ""){
             console.log(response.data);
+            setShow(true);
         }else{
           navigate('../orderList', {
             state: {
@@ -104,8 +112,19 @@ function Login(props) {
             <div className="gr-12 calign mt1 mr1">
               <button onClick={onClick}> 조회하기 </button>
             </div>
-
           </div>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header>
+              <Modal.Title>입력 오류</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              올바른 내용을 입력해주세요
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>닫기</button>
+            </Modal.Footer>
+          </Modal>
+
         </Wrapper>
     );
 }

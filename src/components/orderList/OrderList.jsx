@@ -1,7 +1,6 @@
 import React, { useState ,useEffect } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import styled from "styled-components";
-
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
