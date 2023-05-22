@@ -29,7 +29,9 @@ function Login(props) {
 
 
 
-    const onClick = () =>{
+    const onClick = (event) =>{
+      event.preventDefault();
+
       const formData = new FormData();
       formData.append("type", infoType);
 
@@ -74,44 +76,47 @@ function Login(props) {
     return (
         <Wrapper>
           <div className="grid_t" style={{margin: "30px"}}>
-            <div className="gr-12">
+            <div className="gr-12 mb-4">
               <select className="select-orderLogin" onChange={changeType}>
                 <option key="phoneNum" value="전화 번호" > 전화 번호</option>
                 <option key="orderNum" value="주문 번호"> 주문 번호</option>
               </select>
             </div>
+            <div className="gr-12">
+              <form className="row form-orderLogin" onSubmit={onClick}>
+              {
+                infoType == "주문 번호" ?
+                (<>
+                  <div className="gr-3 calign">
+                    <h3 style={{paddingTop:"20px"}}> 주문 번호 </h3>
+                  </div>
+                  <div className="gr-9">
+                    <input type="text" id="ip_order" required/>
+                  </div>
+                </>)
+                :
+                (<>
+                  <div className="gr-3 calign">
+                    <h3 style={{paddingTop:"20px"}}> 전화 번호</h3>
+                  </div>
+                  <div className="gr-9">
+                    <Phone setPhoneNum={setPhoneNum} phoneNum={phoneNum}/>
+                  </div>
+                  <div className="gr-3 calign">
+                    <h3 style={{paddingTop:"20px"}}> 이 름 </h3>
+                  </div>
+                  <div className="gr-9">
+                    <input type="text" id="ip_name" required/>
+                  </div>
+                </>)
+              }
+                <div className="gr-12 calign mt1 mr1">
+                  <input type="submit" value="조회하기" />
+                </div>
 
-            {
-              infoType == "주문 번호" ?
-              (<>
-                <div className="gr-3 calign">
-                  <h3 style={{paddingTop:"20px"}}> 주문 번호 </h3>
-                </div>
-                <div className="gr-9">
-                  <input type="text" id="ip_order"/>
-                </div>
-              </>)
-              :
-              (<>
-                <div className="gr-3 calign">
-                  <h3 style={{paddingTop:"20px"}}> 전화 번호</h3>
-                </div>
-                <div className="gr-9">
-                  <Phone setPhoneNum={setPhoneNum} phoneNum={phoneNum}/>
-                </div>
-                <div className="gr-3 calign">
-                  <h3 style={{paddingTop:"20px"}}> 이 름 </h3>
-                </div>
-                <div className="gr-9">
-                  <input type="text" id="ip_name"/>
-                </div>
-              </>)
-            }
-
-
-            <div className="gr-12 calign mt1 mr1">
-              <button onClick={onClick}> 조회하기 </button>
+              </form>
             </div>
+
           </div>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header>

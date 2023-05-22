@@ -44,6 +44,7 @@ function Phone(props) {
       ref={phoneRef}
       onChange={handlePhone}
       type="tel"
+      required
     />
   );
 };

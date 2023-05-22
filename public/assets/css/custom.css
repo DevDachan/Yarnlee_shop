@@ -150,6 +150,10 @@ input{
   color: black;
 }
 
+.form-orderLogin{
+  width: 60vw !important;
+}
+
 
 @media screen and (max-width: 480px) {
 
