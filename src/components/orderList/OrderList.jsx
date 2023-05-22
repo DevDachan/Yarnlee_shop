@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState ,useEffect } from "react";
+import { useNavigate,useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -15,11 +15,33 @@ const Wrapper = styled.div`
 
 function OrderList(props) {
     const navigate = useNavigate();
+    const location = useLocation();
+    const orderList = location.state.list;
 
     const viewOrder = () =>{
       navigate("../orderHistory")
     }
 
+    function makeList(){
+      var arr = [];
+      for(var i = 0; i < orderList.length; i++){
+        arr.push(
+          <tr>
+            <td>{orderList[i].orderDate}</td>
+            <td>{orderList[i].id}</td>
+            <td>{orderList[i].productId} 금액: {orderList[i].totalCost} </td>
+            <td>{orderList[i].orderName}</td>
+            <td>{orderList[i].orderPhone}</td>
+            <td>
+              <button onClick={viewOrder}>
+                View
+              </button>
+            </td>
+          </tr>
+        );
+      }
+      return arr;
+    }
 
     return (
         <Wrapper>
@@ -34,42 +56,7 @@ function OrderList(props) {
                 <th>주문서</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>2023.01.02</td>
-                  <td>2323131</td>
-                  <td>토트서클백 그린 1개 <br/> 토트서클백 그린 1개</td>
-                  <td>다찬</td>
-                  <td>010-0000-0000</td>
-                  <td>
-                    <button onClick={viewOrder}>
-                      View
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>2323131</td>
-                  <td>토트서클백 그린 1개 <br/> 토트서클백 그린 1개</td>
-                  <td>다찬</td>
-                  <td>010-0000-0000</td>
-                  <td>
-                    <button onClick={viewOrder}>
-                      View
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>2323131</td>
-                  <td>토트서클백 그린 1개 <br/> 토트서클백 그린 1개</td>
-                  <td>다찬</td>
-                  <td>010-0000-0000</td>
-                  <td>
-                    <button onClick={viewOrder}>
-                      View
-                    </button>
-                  </td>
-                </tr>
+                {makeList()}
               </tbody>
             </table>
           </div>

@@ -3,6 +3,7 @@ package com.example.shop.controller;
 
 import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.service.OrderService;
+import jakarta.persistence.criteria.Order;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,23 +64,23 @@ public class OrderController {
     return orderDTO;
   }
   @PostMapping(value = "/getOrderHistory")
-  public Map<String, Object> getOrderHistory(
+  public List<OrderDTO> getOrderHistory(
       @RequestParam String type,
-      @RequestParam String userId,
       @RequestParam String content,
       @RequestParam String name
       ){
     System.out.println(content);
     System.out.println(name);
     System.out.println(type);
-    System.out.println(userId);
+    List<OrderDTO> formData;
 
     if(type.equals("전화 번호")) {
-      List<OrderDTO> formData = orderService.getOrderUsingPhone();
+      formData = orderService.getOrderUsingPhone(content,name);
     }else{
-      List<OrderDTO> formData = orderService.getOrderUsingOrder();
+      formData = new ArrayList<>();
+      formData.add(orderService.getOrder(Integer.parseInt(content)));
     }
-    return formData;
+    return formData.size() == 0 ? null : formData;
   }
 
 

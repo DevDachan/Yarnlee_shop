@@ -24,14 +24,14 @@ function Login(props) {
 
     const onClick = () =>{
       const formData = new FormData();
-      formData.append("userId", id);
       formData.append("type", infoType);
 
       if(infoType == "전화 번호"){
         formData.append("name", document.getElementById("ip_name").value);
         formData.append("content", phoneNum);
       }else{
-        formData.append("content", document.getElementById("ip_order"));
+        formData.append("name", "none");
+        formData.append("content", document.getElementById("ip_order").value);
       }
       axios({
         method: "post",
@@ -40,10 +40,10 @@ function Login(props) {
       })
       .then(function (response){
         //handle success
-        if(response.data !== "false"){
-
+        if(response.data == ""){
+            console.log(response.data);
         }else{
-          navigate('./orderList', {
+          navigate('../orderList', {
             state: {
               list: response.data
             }
@@ -80,7 +80,7 @@ function Login(props) {
                   <h3 style={{paddingTop:"20px"}}> 주문 번호 </h3>
                 </div>
                 <div className="gr-9">
-                  <input type="text" id="ip_order" value={id} onChange={(e) =>setId(e.target.value)}/>
+                  <input type="text" id="ip_order"/>
                 </div>
               </>)
               :
@@ -95,7 +95,7 @@ function Login(props) {
                   <h3 style={{paddingTop:"20px"}}> 이 름 </h3>
                 </div>
                 <div className="gr-9">
-                  <input type="text" id="ip_name" value={id} onChange={(e) =>setId(e.target.value)}/>
+                  <input type="text" id="ip_name"/>
                 </div>
               </>)
             }

@@ -17,6 +17,7 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import Nav from "./components/Nav";
 import OrderLogin from "./components/orderList/OrderLogin";
+import OrderList from "./components/orderList/OrderList";
 import OrderHistory from "./components/orderHistory/OrderHistory";
 import AdminOrderList from "./components/admin/orderList/AdminOrderList";
 import AdminOrderHistory from "./components/admin/orderHistory/AdminOrderHistory";
@@ -35,6 +36,7 @@ function App() {
         <Route path="/content" element={<Content />}></Route>
         <Route path="/order" element={<Order />}></Route>
         <Route path="/orderLogin" element={<OrderLogin />}></Route>
+        <Route path="/orderList" element={<OrderList />}></Route>
         <Route path="/orderHistory" element={<OrderHistory />}></Route>
 
         <Route path="/register" element={<Register />}></Route>

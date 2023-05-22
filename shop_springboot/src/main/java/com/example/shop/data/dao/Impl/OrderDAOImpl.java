@@ -2,6 +2,7 @@ package com.example.shop.data.dao.Impl;
 
 
 import com.example.shop.data.dao.OrderDAO;
+import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.entity.OrderEntity;
 import com.example.shop.data.repository.OrderRepository;
 import java.util.List;
@@ -22,6 +23,7 @@ public class OrderDAOImpl implements OrderDAO {
   @Override
   public OrderEntity saveOrder(OrderEntity orderEntity){
     orderRepository.save(orderEntity);
+    System.out.println(orderEntity);
     return orderEntity;
   }
   @Override
@@ -35,6 +37,11 @@ public class OrderDAOImpl implements OrderDAO {
     List<Integer> distinctIdList = orderRepository.findDistinctId();
 
     return distinctIdList;
+  }
+
+  @Override
+  public List<OrderEntity> getOrderUsingPhone(String phoneNum, String name){
+    return orderRepository.getOrderUsingPhone(phoneNum,name);
   }
 }
 

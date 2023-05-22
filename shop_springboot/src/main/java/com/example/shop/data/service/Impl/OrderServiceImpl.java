@@ -49,6 +49,7 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public OrderDTO getOrder(int orderId){
     OrderEntity orderEntity = orderDataHandeler.getOrderEntity(orderId);
+    if(orderEntity == null) return null;
 
     OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), orderEntity.getOrderDate(),
         orderEntity.getUserId(), orderEntity.getProductId(), orderEntity.getColor(), orderEntity.getNum(),
@@ -84,9 +85,5 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public List<OrderDTO> getOrderUsingPhone(String phoneNum, String name){
     return orderDataHandeler.getOrderUsingPhone(phoneNum, name);
-  }
-  @Override
-  public List<OrderDTO> getOrderUsingOrder(String orderNum){
-    return orderDataHandeler.getOrderUsingOrder(ordrNum);
   }
 }

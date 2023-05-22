@@ -15,6 +15,4 @@ public interface OrderService {
 
   List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name);
 
-  List<OrderDTO> getOrderUsingOrder(String orderNum);
-
 }
