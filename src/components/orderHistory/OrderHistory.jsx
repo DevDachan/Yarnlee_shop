@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -10,9 +10,11 @@ import Remittance from "../order/Remittance";
 
 function OrderHistroy(props) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [address, setAddress] = useState();
   const [zoneCode, setZonecode] = useState();
   const remittanceImage = useRef();
+  const orderDetail = location.state.orderDetail;
 
   const Wrapper = styled.div`
       padding: 16px;
@@ -43,11 +45,10 @@ function OrderHistroy(props) {
                 <div className="gr-8 calign" style={{paddingTop: "20px"}}>
                   <div>
                     서클 토트백 | 그린 | 수량 1
-                    서클 토트백 | 그린 | 수량 1
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
-                  <h3> 총액 : 32000원 </h3>
+                  <h3> 총액 : {orderDetail.totalCost}원 </h3>
                 </div>
               </div>
             </div>
@@ -58,7 +59,7 @@ function OrderHistroy(props) {
                 <h2 className="mg0">주문자 이름</h2>
               </div>
               <div className="gr-8">
-                <input type="text" disabled className="prl1" id="ip_name" defaultValue="서다찬"></input>
+                <input type="text" disabled className="prl1" id="ip_name" defaultValue={orderDetail.orderName}></input>
               </div>
 
 
@@ -67,24 +68,24 @@ function OrderHistroy(props) {
                 <h2 className="mg0">전화번호</h2>
               </div>
               <div className="gr-8">
-                <input type="text" disabled className="prl1" id="ip_phone" defaultValue="010-6888-9999"></input>
+                <input type="text" disabled className="prl1" id="ip_phone" defaultValue={orderDetail.orderPhone}></input>
               </div>
 
               <div className="gr-4 calign mt3">
                 <h2 className="mg0">주소</h2>
               </div>
               <div className="gr-8 mt3">
-                <input type="text" className="prl1"  disabled id="zoneCode" defaultValue="313131" />
+                <input type="text" className="prl1"  disabled id="zoneCode" defaultValue={orderDetail.orderZonecode} />
               </div>
               <div className="gr-12">
-                <input type="text" className="prl1"  disabled id="address" defaultValue="경상북도 포항시 북구 흥해읍" />
+                <input type="text" className="prl1"  disabled id="address" defaultValue={orderDetail.orderAddress} />
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" disabled id="address_detail" placeholder="한동대학교"/>
+                <input type="text" required className="prl1" disabled id="address_detail" placeholder={orderDetail.addressDetail}/>
               </div>
 
               <div className="gr-12 mt3">
-                
+
               </div>
 
               <div className="gr-12 calign pt3">

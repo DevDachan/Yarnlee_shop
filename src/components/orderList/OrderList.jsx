@@ -17,8 +17,15 @@ function OrderList(props) {
     const location = useLocation();
     const orderList = location.state.list;
 
-    const viewOrder = () =>{
-      navigate("../orderHistory")
+    console.log(orderList);
+    const viewOrder = (e) =>{
+      var id= e.target.id;
+
+      navigate("../orderHistory", {
+      state: {
+        orderDetail: orderList[id]
+      }
+      });
     }
 
     function makeList(){
@@ -32,7 +39,7 @@ function OrderList(props) {
             <td>{orderList[i].orderName}</td>
             <td>{orderList[i].orderPhone}</td>
             <td>
-              <button onClick={viewOrder}>
+              <button onClick={viewOrder} id={i}>
                 View
               </button>
             </td>

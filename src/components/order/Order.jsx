@@ -41,7 +41,7 @@ function Order(props) {
   const goBack = (e) =>{
     navigate(-1);
   }
-
+  console.log(zoneCode);
   const order = (e) =>{
     const formData = new FormData();
     formData.append("id", 1);

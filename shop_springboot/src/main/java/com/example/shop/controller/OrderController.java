@@ -48,7 +48,7 @@ public class OrderController {
     String orderName = orderDto.getOrderName();
     String orderPhone = orderDto.getOrderPhone();
     int orderZoneCode = orderDto.getOrderZonecode();
-    String orderAddress = orderDto.getOrderName();
+    String orderAddress = orderDto.getOrderAddress();
     String addressDetail = orderDto.getAddressDetail();
     int imageId = orderDto.getImageId();
 
@@ -80,7 +80,7 @@ public class OrderController {
       formData = new ArrayList<>();
       formData.add(orderService.getOrder(Integer.parseInt(content)));
     }
-    return formData.size() == 0 ? null : formData;
+    return formData == null || formData.size() == 0 ? null : formData;
   }
 
 
