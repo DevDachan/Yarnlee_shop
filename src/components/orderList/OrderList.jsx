@@ -15,8 +15,21 @@ const Wrapper = styled.div`
 function OrderList(props) {
     const navigate = useNavigate();
     const location = useLocation();
+    // 만약 List 정보가 없을시에는 Login으로 이동처리
+    useEffect(() => {
+      if (location.state == null) {
+        navigate('../orderLogin');
+      }
+    }, [location, navigate]);
+
+    if (location.state == null) {
+       return null; // navigate 호출 후 컴포넌트의 렌더링을 중단
+    }
     const orderList = location.state.list.orderList;
     const productList = location.state.list.productList;
+
+
+
 
     const viewOrder = (e) =>{
       var id= e.target.id;
