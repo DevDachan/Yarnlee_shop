@@ -2,7 +2,9 @@ package com.example.shop.controller;
 
 
 import com.example.shop.data.dto.OrderDTO;
+import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.service.OrderService;
+import com.example.shop.data.service.ProductService;
 import jakarta.persistence.criteria.Order;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
@@ -28,10 +30,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class OrderController {
   private OrderService orderService;
-
+  private ProductService productService;
   @Autowired
-  public OrderController(OrderService orderService) {
+  public OrderController(OrderService orderService,ProductService productService) {
     this.orderService = orderService;
+    this.productService = productService;
   }
 
   @PostMapping(value="/insert")
@@ -64,23 +67,33 @@ public class OrderController {
     return orderDTO;
   }
   @PostMapping(value = "/getOrderHistory")
-  public List<OrderDTO> getOrderHistory(
+  public Map<String, Object> getOrderHistory(
       @RequestParam String type,
       @RequestParam String content,
       @RequestParam String name
       ){
-    System.out.println(content);
-    System.out.println(name);
-    System.out.println(type);
-    List<OrderDTO> formData;
+
+    HashMap<String, Object> formData = new HashMap<>();
+    List<OrderDTO> orderList;
 
     if(type.equals("전화 번호")) {
-      formData = orderService.getOrderUsingPhone(content,name);
+      orderList = orderService.getOrderUsingPhone(content,name);
     }else{
-      formData = new ArrayList<>();
-      formData.add(orderService.getOrder(Integer.parseInt(content)));
+      orderList = List.of(orderService.getOrder(Integer.parseInt(content)));
     }
-    return formData == null || formData.size() == 0 ? null : formData;
+
+    if(formData == null || formData.size() == 0){
+      return null;
+    }else {
+      ArrayList<ProductDTO> productList = new ArrayList<>();
+      for(OrderDTO temp : orderList){
+        productService.getProduct(temp.getProductId());
+      }
+
+      formData.put("orderList", orderList);
+      formData.put("productList", productList);
+      return formData;
+    }
   }
 
 

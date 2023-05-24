@@ -15,9 +15,9 @@ const Wrapper = styled.div`
 function OrderList(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    const orderList = location.state.list;
+    const orderList = location.state.list.orderList;
+    const productList = location.state.list.productList;
 
-    console.log(orderList);
     const viewOrder = (e) =>{
       var id= e.target.id;
 
@@ -35,7 +35,8 @@ function OrderList(props) {
           <tr>
             <td>{orderList[i].orderDate}</td>
             <td>{orderList[i].id}</td>
-            <td>{orderList[i].productId} 금액: {orderList[i].totalCost} </td>
+            <td>{productList[i].name}</td>
+            <td>{orderList[i].totalCost}원 </td>
             <td>{orderList[i].orderName}</td>
             <td>{orderList[i].orderPhone}</td>
             <td>
@@ -57,6 +58,7 @@ function OrderList(props) {
                 <th>주문 일자</th>
                 <th>주문 번호</th>
                 <th>상품 명</th>
+                <th>금액</th>
                 <th>주문자</th>
                 <th>전화번호</th>
                 <th>주문서</th>
