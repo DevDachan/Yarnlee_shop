@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import Modal from 'react-bootstrap/Modal';
 
 import Phone from "./Phone";
 import PostSelector from "./PostSelector";
-import Remittance from "./Remittance";
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -27,7 +27,11 @@ function Order(props) {
   const [zoneCode, setZonecode] = useState("");
   const [imageId, setImageId] = useState();
   const [addressDetail, setAddressDetail] = useState();
-  const remittanceImage = useRef();
+  const [uploadImage,setUploadImage] = useState();
+  const [show, setShow] = useState(false);
+  const [modalContent, setModalContent] = useState();
+  const handleClose = () => setShow(false);
+  const handleOpen = () => setShow(true);
 
   useEffect(() => {
     if (location.state.productId == null) {
@@ -51,50 +55,93 @@ function Order(props) {
   }
 
   const order = (e) =>{
-    const formData = new FormData();
-    formData.append("id", 1);
-    formData.append("orderDate", "2023-05-23");
-    formData.append("userId", "guest");
-    formData.append("productId", productId);
-    formData.append("color", productId);
-    formData.append("num", numberOfProduct);
-    formData.append("totalCost", totalCost);
-    formData.append("orderName", document.getElementById("ip_name").value);
-    formData.append("orderPhone", phoneNum);
-    formData.append("orderZonecode", zoneCode);
-    formData.append("orderAddress", address);
-    formData.append("addressDetail", addressDetail);
-    formData.append("imageId", 53);
-    console.log(formData);
-    axios({
-      method: "post",
-      url: 'http://localhost:8090/shop-backend/order/insert',
-      data: formData
-    })
-    .then(function (response){
-      //handle success
-      /*navigate('../', {
-        state: {
-          userName: "dachan"
-        }
-      });*/
-    })
-    .catch(function(error){
-      //handle error
-      console.log(error);
-        navigate('./', {
-        state: {
-          userName: "dachan"
-        }
+    e.preventDefault();
+    if(uploadImage == -1 || uploadImage == undefined){
+      setModalContent(<p> 입력되지 않은 정보가 존재합니다. </p>);
+      setShow(true);
+    }else{
+      const formData = new FormData();
+      formData.append("id", 1);
+      formData.append("orderDate", "2023-05-23");
+      formData.append("userId", "guest");
+      formData.append("productId", productId);
+      formData.append("color", productId);
+      formData.append("num", numberOfProduct);
+      formData.append("totalCost", totalCost);
+      formData.append("orderName", document.getElementById("ip_name").value);
+      formData.append("orderPhone", phoneNum);
+      formData.append("orderZonecode", zoneCode);
+      formData.append("orderAddress", address);
+      formData.append("addressDetail", addressDetail);
+      formData.append("imageId", uploadImage);
+      console.log(formData);
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/order/insert',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        /*navigate('../', {
+          state: {
+            userName: "dachan"
+          }
+        });*/
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+          navigate('./', {
+          state: {
+            userName: "dachan"
+          }
+        });
+      })
+      .then(function(){
+        // always executed
       });
-    })
-    .then(function(){
-      // always executed
-    });
+    }
   }
 
+  const changeImage = (e) =>{
+    var input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    input.onchange = async() => {
+      if(input.files){
+        var file: any = input.files[0];
+        var formData = new FormData();
+        formData.append("file", file);
 
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/order/insertUserImage',
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+        })
+        .then(function (response){
+          if(response.data != -1){
+            setUploadImage(response.data);
+          }
+        })
+        .catch(function(error){
+          //handle error
+          console.log(error);
+        })
+        .then(function(){
+          // always executed
+        });
+      }
+    }
+  }
 
+  const previewImage = (e) =>{
+    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"} alt=""></img>);
+    setShow(true);
+  }
 
 
   return (
@@ -162,10 +209,22 @@ function Order(props) {
                 </div>
 
                 <div className="gr-12 mt3">
-                  <Remittance
-                    remittanceImage = {remittanceImage}
-                    setImageId = {setImageId}
-                  />
+                  <span className="image main detail_span_img">
+                    <h2 > 송금 내역 </h2>
+                    {
+                      uploadImage == undefined ?
+                      <>
+                      <label id="lb_image" htmlFor="image_remittance" onClick={changeImage}>Upload</label>
+                      </>
+                      :
+                      <>
+                      <button className="mb-3 mr3" onClick={changeImage}> REUPLOAD</button>
+                      <button className="mb-3" onClick={previewImage}> PREVIEW</button>
+                      <img className="detail_img" src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}
+                      alt=""/>
+                      </>
+                    }
+                  </span>
                 </div>
 
                 <div className="gr-6 calign pt3">
@@ -179,7 +238,17 @@ function Order(props) {
             </form>
           </div>
         </div>
-
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header>
+            <Modal.Title>안내</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {modalContent}
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={handleClose}>닫기</button>
+          </Modal.Footer>
+        </Modal>
       </Wrapper>
   );
 }

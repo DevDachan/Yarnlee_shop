@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import Phone from "../order/Phone";
 import PostSelector from "../order/PostSelector";
-import Remittance from "../order/Remittance";
 
 
 function OrderHistroy(props) {
@@ -85,7 +84,9 @@ function OrderHistroy(props) {
               </div>
 
               <div className="gr-12 mt3">
-
+                <img className="detail_img" src={"../userImage/"+orderDetail.imageId+".jpg"}
+                alt=""
+                />
               </div>
 
               <div className="gr-12 calign pt3">

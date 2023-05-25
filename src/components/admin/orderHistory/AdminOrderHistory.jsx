@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import Phone from "../../order/Phone";
 import PostSelector from "../../order/PostSelector";
-import Remittance from "../../order/Remittance";
 
 
 function AdminOrderHistroy(props) {
@@ -84,8 +83,8 @@ function AdminOrderHistroy(props) {
               </div>
 
               <div className="gr-12 mt3">
-                <Remittance
-                  remittanceImage = {remittanceImage}
+                <img className="detail_img" src={"uploadImage" == undefined ? "" :"../userImage/"+"uploadImage"+".jpg"}
+                alt=""
                 />
               </div>
 
