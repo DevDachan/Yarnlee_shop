@@ -238,6 +238,7 @@ td{
 }
 .gr-12{
   grid-column: auto / span 12;
+  width: 100% !important;
 }
 
 
@@ -365,7 +366,7 @@ td{
 }
 
 #contentArea > * >img{
-  width: 100%;
+  width: 70%;
   height: auto;
 }
 

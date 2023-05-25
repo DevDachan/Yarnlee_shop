@@ -22,21 +22,29 @@ const Wrapper = styled.div`
 function Order(props) {
   const navigate = useNavigate();
   const location = useLocation();
-
-
   const [phoneNum, setPhoneNum] = useState();
   const [address, setAddress] = useState();
-  const [zoneCode, setZonecode] = useState();
+  const [zoneCode, setZonecode] = useState("");
   const [imageId, setImageId] = useState();
   const [addressDetail, setAddressDetail] = useState();
+  const remittanceImage = useRef();
+
+  useEffect(() => {
+    if (location.state.productId == null) {
+      navigate('../');
+    }
+  }, [location, navigate]);
+
+  if (location.state.productId == null) {
+     return null; // navigate 호출 후 컴포넌트의 렌더링을 중단
+  }
+
   const productId = location.state.productId;
   const productName = location.state.productName;
   const color = location.state.color;
   const numberOfProduct = location.state.productNum;
   const deliveryCost = location.state.deliveryCost;
   const totalCost = numberOfProduct * location.state.productPrice + deliveryCost;
-
-  const remittanceImage = useRef();
 
   const goBack = (e) =>{
     navigate(-1);
@@ -53,11 +61,11 @@ function Order(props) {
     formData.append("totalCost", totalCost);
     formData.append("orderName", document.getElementById("ip_name").value);
     formData.append("orderPhone", phoneNum);
-    formData.append("orderZoneCode", zoneCode);
+    formData.append("orderZonecode", zoneCode);
     formData.append("orderAddress", address);
     formData.append("addressDetail", addressDetail);
     formData.append("imageId", 53);
-
+    console.log(formData);
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/order/insert',
@@ -65,11 +73,11 @@ function Order(props) {
     })
     .then(function (response){
       //handle success
-      navigate('../', {
+      /*navigate('../', {
         state: {
           userName: "dachan"
         }
-      });
+      });*/
     })
     .catch(function(error){
       //handle error
@@ -117,58 +125,58 @@ function Order(props) {
               </div>
             </div>
 
-            <div className="grid_t" style={{padding: "30px", boxShadow: "3px 3px 3px 3px rgb(98 217 182)"}}>
+            <form onSubmit={order}>
+              <div className="grid_t" style={{padding: "30px", boxShadow: "3px 3px 3px 3px rgb(98 217 182)"}}>
+                <div className="gr-4 calign pt1">
+                  <h2 className="mg0">주문자 이름</h2>
+                </div>
+                <div className="gr-8">
+                  <input type="text" className="prl1" id="ip_name" required></input>
+                </div>
 
-              <div className="gr-4 calign pt1">
-                <h2 className="mg0">주문자 이름</h2>
-              </div>
-              <div className="gr-8">
-                <input type="text" className="prl1" id="ip_name"></input>
-              </div>
 
 
+                <div className="gr-4 calign pt1">
+                  <h2 className="mg0">전화번호</h2>
+                </div>
+                <div className="gr-8">
+                  <Phone phoneNum={phoneNum || ""} setPhoneNum={setPhoneNum}/ >
+                </div>
 
-              <div className="gr-4 calign pt1">
-                <h2 className="mg0">전화번호</h2>
-              </div>
-              <div className="gr-8">
-                <Phone phoneNum={phoneNum || ""} setPhoneNum={setPhoneNum}/ >
-              </div>
+                <div className="gr-4 calign mt3">
+                  <PostSelector
+                    setAddress = {setAddress || ""}
+                    setZonecode = {setZonecode || ""}
+                  />
+                </div>
+                <div className="gr-8 mt3">
+                  <input type="text" className="prl1"  disabled id="zoneCode" value={zoneCode} required />
+                </div>
+                <div className="gr-12">
+                  <input type="text" className="prl1"  disabled id="address" value={address} required />
+                </div>
+                <div className="gr-12">
+                  <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}
+                    onChange={(e) =>setAddressDetail(e.target.value)}
+                  />
+                </div>
 
-              <div className="gr-4 calign mt3">
-                <PostSelector
-                  setAddress = {setAddress || ""}
-                  setZonecode = {setZonecode || ""}
-                />
-              </div>
-              <div className="gr-8 mt3">
-                <input type="text" className="prl1"  disabled id="zoneCode" value={zoneCode} />
-              </div>
-              <div className="gr-12">
-                <input type="text" className="prl1"  disabled id="address" value={address} />
-              </div>
-              <div className="gr-12">
-                <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}
-                  onChange={(e) =>setAddressDetail(e.target.value)}
-                />
-              </div>
+                <div className="gr-12 mt3">
+                  <Remittance
+                    remittanceImage = {remittanceImage}
+                    setImageId = {setImageId}
+                  />
+                </div>
 
-              <div className="gr-12 mt3">
-                <Remittance
-                  remittanceImage = {remittanceImage}
-                  setImageId = {setImageId}
-                />
-              </div>
+                <div className="gr-6 calign pt3">
+                  <button className="bt_order" onClick={goBack}> Back </button>
+                </div>
 
-              <div className="gr-6 calign pt3">
-                <button className="bt_order" onClick={goBack}> Back </button>
+                <div className="gr-6 calign pt3">
+                  <input type="submit" value="Order" />
+                </div>
               </div>
-
-              <div className="gr-6 calign pt3">
-                <button className="bt_order" onClick={order}> Order </button>
-              </div>
-
-            </div>
+            </form>
           </div>
         </div>
 
