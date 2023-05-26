@@ -38,6 +38,15 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   public void changePosition(int id, int nextId){ productDAO.changePosition(id, nextId); };
 
   @Override
+  public void changeColor(int productId,String color,String content){ productDAO.changeColor(productId, color,content);}
+
+  @Override
+  public void deleteColor(int productId,String color){productDAO.deleteColor(productId, color);}
+
+  @Override
+  public void insertColor(int productId, String color){productDAO.insertColor(productId,color);}
+
+  @Override
   public void changeName(int id, String content){ productDAO.changeName(id, content); };
 
   @Override

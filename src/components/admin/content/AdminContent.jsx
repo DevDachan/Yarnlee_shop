@@ -235,13 +235,18 @@ function AdminContent(props) {
   }
 
   const insertColor =  (e) =>{
+    const formData = new FormData();
+    formData.append("productId", productId);
+    formData.append("colorId", color.length);
+
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/insertColor',
-      data: productId
+      data: formData
     })
     .then(function (response){
-      setProduct(response.data);
+      setProduct(response.data.product);
+      setColor(response.data.color);
     })
     .catch(function(error){
       //handle error
@@ -255,15 +260,17 @@ function AdminContent(props) {
   const chnageColor =  (e) =>{
     const formData = new FormData();
     formData.append("colorId", e.target.id);
+    formData.append("colorContent", e.target.value);
     formData.append("productId", productId);
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/insertColor',
+      url: 'http://localhost:8090/shop-backend/product/changeColor',
       data: formData
     })
     .then(function (response){
-      setProduct(response.data);
+      setProduct(response.data.product);
+      setColor(response.data.color);
     })
     .catch(function(error){
       //handle error
@@ -278,14 +285,14 @@ function AdminContent(props) {
     const formData = new FormData();
     formData.append("colorId", e.target.id);
     formData.append("productId", productId);
-    
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/deleteColor',
-      data: productId
+      data: formData
     })
     .then(function (response){
-      setProduct(response.data);
+      setProduct(response.data.product);
+      setColor(response.data.color);
     })
     .catch(function(error){
       //handle error
@@ -303,8 +310,8 @@ function AdminContent(props) {
     for(var i = 0; i < color.length; i++){
       arr.push(
         <div className="grid_t">
-          <input type="text" className="gr-6 mb-2" value={color[i]} />
-          <input type="button" className="gr-6 mb-2" value="DELETE" />
+          <input type="text" className="gr-6 mb-2" defaultValue={color[i]} id={color[i]} onChange={chnageColor}/>
+          <input type="button" className="gr-6 mb-2" value="DELETE" id={color[i]} onClick={deleteColor}/>
         </div>
       );
     }
@@ -360,12 +367,12 @@ function AdminContent(props) {
                   <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryTime} onChange={changeDeliveryTime}></input>
               </div>
 
-              <div className="gr-12 mt3 mb1">
-                <h3> Color </h3>
-                {color == undefined ? "" : makeColorList()}
-                <input type="button"  value="+" />
-              </div>
+            </div>
 
+            <div className="mt3 mb1">
+              <h3> Color </h3>
+                {color == undefined ? "" : makeColorList()}
+              <input type="button"  value="+" onClick={insertColor}/>
             </div>
 
           </div>

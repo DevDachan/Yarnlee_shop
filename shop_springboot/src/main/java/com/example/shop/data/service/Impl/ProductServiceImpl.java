@@ -49,6 +49,8 @@ public class ProductServiceImpl implements ProductService {
   public List<String> getColor(int productId){
     List<ProductColorEntity> colorDTOList = productDataHandeler.getColor(productId);
     List<String> colorList = new ArrayList();
+    System.out.println(colorDTOList);
+
     for(ProductColorEntity temp : colorDTOList){
       colorList.add(temp.getColor());
     }
@@ -71,6 +73,16 @@ public class ProductServiceImpl implements ProductService {
     }
     return productDTO;
   }
+
+  @Override
+  public void changeColor(int productId,String color,String content){productDataHandeler.changeColor(productId, color,content);}
+
+  @Override
+  public void deleteColor(int productId,String color){productDataHandeler.deleteColor(productId, color);}
+
+  @Override
+  public void insertColor(int productId,String color){productDataHandeler.insertColor(productId,color);}
+
   @Override
   public void changeId(int id, int nextId){
     productDataHandeler.changePosition(id,nextId);

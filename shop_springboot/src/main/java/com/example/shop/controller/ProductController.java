@@ -60,6 +60,46 @@ public class ProductController {
     return formData;
   }
 
+  @PostMapping(value = "/changeColor")
+  public Map<String, Object> changeColor(@RequestParam("productId") int productId,
+      @RequestParam("color") String color,
+      @RequestParam("colorContent") String content) {
+    Map<String, Object> formData = new HashMap<>();
+
+    productService.changeColor(productId,color,content);
+
+    formData.put("product" ,productService.getProduct(productId));
+    formData.put("color", productService.getColor(productId));
+    return formData;
+  }
+
+  @PostMapping(value = "/insertColor")
+  public Map<String, Object> insertColor(@RequestParam("productId") int productId,
+      @RequestParam("colorId") String color
+  ) {
+    Map<String, Object> formData = new HashMap<>();
+
+    productService.insertColor(productId, color);
+
+    formData.put("product" ,productService.getProduct(productId));
+    formData.put("color", productService.getColor(productId));
+    return formData;
+  }
+
+  @PostMapping(value = "/deleteColor")
+  public Map<String, Object> deleteColor(@RequestParam("productId") int productId,
+      @RequestParam("colorId") String color) {
+    Map<String, Object> formData = new HashMap<>();
+
+    productService.deleteColor(productId,color);
+
+    formData.put("product" ,productService.getProduct(productId));
+    formData.put("color", productService.getColor(productId));
+    return formData;
+  }
+
+
+
   @PostMapping(value = "/changeName")
   public void changeName(@RequestParam("id") int productId,
       @RequestParam("content") String content) {

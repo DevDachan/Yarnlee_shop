@@ -13,6 +13,13 @@ public interface ProductDataHandler {
 
   List<ProductEntity> getProductListEntity();
 
+
+  void changeColor(int productId,String color,String content);
+
+  void deleteColor(int productId,String color);
+
+  void insertColor(int productId, String color);
+
   void changePosition(int id, int nextId);
 
   void changeName(int id, String content);

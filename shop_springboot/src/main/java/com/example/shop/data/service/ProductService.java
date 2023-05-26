@@ -13,6 +13,9 @@ public interface ProductService {
   List<ProductDTO> getProductList();
   List<String>  getColor(int productId);
 
+  void changeColor(int productId,String color,String content);
+  void deleteColor(int productId,String color);
+  void insertColor(int productId, String color);
   void createProduct();
   void changeId(int id, int nextId);
   void changeName(int id, String content);

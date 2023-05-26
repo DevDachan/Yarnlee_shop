@@ -13,6 +13,12 @@ public interface ProductDAO {
   List<ProductEntity> getProductList();
   void createProduct();
 
+  void changeColor(int productId, String color, String content);
+
+  void deleteColor(int productId,String color);
+
+  void insertColor(int productId, String color);
+
   void changePosition(int id, int nextId);
 
   void changeName(int id, String content);

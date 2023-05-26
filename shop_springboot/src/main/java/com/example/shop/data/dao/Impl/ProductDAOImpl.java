@@ -24,7 +24,9 @@ public class ProductDAOImpl implements ProductDAO {
   }
 
   @Override
-  public List<ProductColorEntity> getColor(int productId){ return productColorRepository.findByProductId(productId);}
+  public List<ProductColorEntity> getColor(int productId){
+    return productColorRepository.getColor(productId);
+  }
 
   @Override
   public ProductEntity saveProduct(ProductEntity productEntity){
@@ -41,6 +43,18 @@ public class ProductDAOImpl implements ProductDAO {
     List<ProductEntity> productEntity = productRepository.getListAll();
     return productEntity;
   }
+
+  @Override
+  public void changeColor(int productId, String color, String content){
+    productColorRepository.changeColor(productId, color, content);
+  }
+
+  @Override
+  public void deleteColor(int productId,String color){productColorRepository.deleteColor(productId, color);}
+
+  @Override
+  public void insertColor(int productId, String color){productColorRepository.insertColor(productId, "color"+color);}
+
   @Override
   public void changePosition(int id, int nextId){
     productRepository.changePosition(id,nextId);

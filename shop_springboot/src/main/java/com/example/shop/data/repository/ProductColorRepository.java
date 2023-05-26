@@ -7,6 +7,15 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ProductColorRepository extends JpaRepository<ProductColorEntity, String> {
   // 조회
-  List<ProductColorEntity> findByProductId(int productId);
+  @Query(value = "SELECT * FROM product_color WHERE product_id=:productId " , nativeQuery = true)
+  List<ProductColorEntity> getColor(int productId);
 
+  @Query(value = "UPDATE product_color SET color=:content WHERE product_id=:productId AND color = :color" , nativeQuery = true)
+  void changeColor(int productId, String color, String content);
+
+  @Query(value = "DELETE FROM product_color WHERE product_id=:productId AND color = :color" , nativeQuery = true)
+  void deleteColor(int productId, String color);
+
+  @Query(value = "INSERT INTO product_color VALUES(:productId, :color)" , nativeQuery = true)
+  void insertColor(int productId, String color);
 }
