@@ -29,6 +29,7 @@ function AdminContent(props) {
   const numberRef = useRef(1);
   const productId = location.state.productId;
   const [product, setProduct] = useState();
+  const [color, setColor] = useState();
   const [show, setShow] = useState(false);
   const [relandering, setRelangering] = useState();
   const quillRef = useRef();
@@ -37,22 +38,20 @@ function AdminContent(props) {
 
 
   useEffect(() => {
-      axios({
-        method: "get",
-        url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
-      })
-      .then(function (response){
-        //handle success
-        setProduct(response.data);
-        console.log(response.data);
-      })
-      .catch(function(error){
-        //handle error
-        console.log(error);
-      });
-    },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
-
-
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
+    })
+    .then(function (response){
+      //handle success
+      setProduct(response.data.product);
+      setColor(response.data.color);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    });
+  },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
 
 
 
@@ -235,23 +234,99 @@ function AdminContent(props) {
     }
   }
 
-  const quillModules = React.useMemo(() => ({
-      toolbar: {
-        container: [
-          [{ header: [1, 2, false] }],
-          ['bold', 'italic', 'underline'],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-          [{ 'align': [] }],
-          ['link', 'image']
-        ],
+  const insertColor =  (e) =>{
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/insertColor',
+      data: productId
+    })
+    .then(function (response){
+      setProduct(response.data);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
 
+  const chnageColor =  (e) =>{
+    const formData = new FormData();
+    formData.append("colorId", e.target.id);
+    formData.append("productId", productId);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/insertColor',
+      data: formData
+    })
+    .then(function (response){
+      setProduct(response.data);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
+  const deleteColor =  (e) =>{
+    const formData = new FormData();
+    formData.append("colorId", e.target.id);
+    formData.append("productId", productId);
+    
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/deleteColor',
+      data: productId
+    })
+    .then(function (response){
+      setProduct(response.data);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
+
+  function makeColorList(){
+    var arr = [];
+
+    for(var i = 0; i < color.length; i++){
+      arr.push(
+        <div className="grid_t">
+          <input type="text" className="gr-6 mb-2" value={color[i]} />
+          <input type="button" className="gr-6 mb-2" value="DELETE" />
+        </div>
+      );
+    }
+    return arr;
+  }
+
+  const quillModules = React.useMemo(() => ({
+    toolbar: {
+      container: [
+        [{ header: [1, 2, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'align': [] }],
+        ['link', 'image']
+      ],
         // custom 핸들러 설정
-        handlers: {
-            image: imageHandler, // 이미지 tool 사용에 대한 핸들러 설정
-        }
-      },
-    }), [])
+      handlers: {
+          image: imageHandler, // 이미지 tool 사용에 대한 핸들러 설정
+      }
+    },
+  }), []);
 
   return (
     <Wrapper>
@@ -285,13 +360,10 @@ function AdminContent(props) {
                   <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryTime} onChange={changeDeliveryTime}></input>
               </div>
 
-              <div className="gr-12 mb1">
-                <select id="select_color" defaultValue="">
-                  <option value="" disabled className="option_select">Color</option>
-                  <option value="Green" className="option_select">Green</option>
-                  <option value="Blue" className="option_select">Blue</option>
-                  <option value="Yellow" className="option_select">Yellow</option>
-                </select>
+              <div className="gr-12 mt3 mb1">
+                <h3> Color </h3>
+                {color == undefined ? "" : makeColorList()}
+                <input type="button"  value="+" />
               </div>
 
             </div>
