@@ -263,7 +263,7 @@ function AdminContent(props) {
 
             <div className="col-12-medium" id="admin-imgDiv">
               <span className="image main detail_span_img">
-                <img className="detail_img" src={product == undefined ? "" :"../productImage/"+product.imageId+".jpg"}
+                <img className="main_img" src={product == undefined ? "" :"../productImage/"+product.imageId+".jpg"}
                 alt=""
                 onClick={changeImage}
                 />

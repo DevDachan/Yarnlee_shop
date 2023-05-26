@@ -1,22 +1,30 @@
 package com.example.shop.data.dao.Impl;
 
 import com.example.shop.data.dao.ProductDAO;
+import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
+import com.example.shop.data.repository.ProductColorRepository;
 import com.example.shop.data.repository.ProductRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Service
 public class ProductDAOImpl implements ProductDAO {
 
   ProductRepository productRepository;
 
+  ProductColorRepository productColorRepository;
+
   @Autowired
-  public ProductDAOImpl(ProductRepository productRepository){
+  public ProductDAOImpl(ProductRepository productRepository,ProductColorRepository productColorRepository){
     this.productRepository = productRepository;
+    this.productColorRepository = productColorRepository;
   }
 
+  @Override
+  public List<ProductColorEntity> getColor(int productId){ return productColorRepository.findByProductId(productId);}
 
   @Override
   public ProductEntity saveProduct(ProductEntity productEntity){

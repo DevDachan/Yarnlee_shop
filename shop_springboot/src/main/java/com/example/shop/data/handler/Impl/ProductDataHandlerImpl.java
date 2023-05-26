@@ -1,6 +1,7 @@
 package com.example.shop.data.handler.Impl;
 
 import com.example.shop.data.dao.ProductDAO;
+import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.handler.ProductDataHandler;
 import jakarta.transaction.Transactional;
@@ -29,6 +30,8 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
     return productDAO.getProduct(productId);
   }
 
+  @Override
+  public List<ProductColorEntity> getColor(int productId){return productDAO.getColor(productId);}
   @Override
   public List<ProductEntity> getProductListEntity(){ return productDAO.getProductList();}
   @Override

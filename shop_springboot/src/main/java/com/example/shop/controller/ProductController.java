@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,9 +52,12 @@ public class ProductController {
   }
 
   @GetMapping(value = "/select/id/{productId}")
-  public ProductDTO getProduct(@PathVariable int productId) {
-    ProductDTO productDTO = productService.getProduct(productId);
-    return productDTO;
+  public Map<String, Object> getProduct(@PathVariable int productId) {
+    Map<String, Object> formData = new HashMap<>();
+
+    formData.put("product" ,productService.getProduct(productId));
+    formData.put("color", productService.getColor(productId));
+    return formData;
   }
 
   @PostMapping(value = "/changeName")

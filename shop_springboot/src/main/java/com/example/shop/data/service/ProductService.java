@@ -1,6 +1,8 @@
 package com.example.shop.data.service;
 
+import com.example.shop.data.dto.ProductColorDTO;
 import com.example.shop.data.dto.ProductDTO;
+import com.example.shop.data.repository.ProductColorRepository;
 import java.util.List;
 
 public interface ProductService {
@@ -9,7 +11,7 @@ public interface ProductService {
   ProductDTO getProduct(int productId);
 
   List<ProductDTO> getProductList();
-
+  List<String>  getColor(int productId);
 
   void createProduct();
   void changeId(int id, int nextId);

@@ -1,6 +1,8 @@
 package com.example.shop.data.service.Impl;
 
+import com.example.shop.data.dto.ProductColorDTO;
 import com.example.shop.data.dto.ProductDTO;
+import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.handler.ProductDataHandler;
 import com.example.shop.data.service.ProductService;
@@ -43,6 +45,16 @@ public class ProductServiceImpl implements ProductService {
         productEntity.getImageId(), productEntity.getPosition());
     return productDTO;
   }
+  @Override
+  public List<String> getColor(int productId){
+    List<ProductColorEntity> colorDTOList = productDataHandeler.getColor(productId);
+    List<String> colorList = new ArrayList();
+    for(ProductColorEntity temp : colorDTOList){
+      colorList.add(temp.getColor());
+    }
+    return colorList;
+  }
+
   @Override
   public List<ProductDTO> getProductList(){
     List<ProductEntity> productListEntity = productDataHandeler.getProductListEntity();

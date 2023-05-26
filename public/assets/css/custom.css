@@ -9,8 +9,16 @@ article{
 }
 
 
+.ql-editor > p > img{
+  width: 70%;
+}
+
 .detail_img{
   width : 50% !important;
+}
+.main_img{
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .detail_span_img{

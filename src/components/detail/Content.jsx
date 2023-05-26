@@ -22,6 +22,7 @@ function Content(props) {
   const {productId} = queryString.parse(search);
   const numberRef = useRef(1);
   const [product, setProduct] = useState();
+  const [colorList, setColorList] = useState();
 
   const productUpDown = (e, temp) => {
     if (temp === "up") {
@@ -51,22 +52,36 @@ function Content(props) {
   };
 
   useEffect(() => {
-      axios({
-        method: "get",
-        url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
-      })
-      .then(function (response){
-        //handle success
-        setProduct(response.data);
-      })
-      .catch(function(error){
-        //handle error
-        console.log(error);
-      })
-      .then(function(){
-        // always executed
-      });
-    },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
+    })
+    .then(function (response){
+      //handle success
+      setProduct(response.data.product);
+      setColorList(response.data.color);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+
+  },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
+
+
+  function makeColorList(){
+    var arr = [];
+
+    for(var i = 0; i < colorList.length; i++){
+      arr.push(
+        <option value={colorList[i]} key={i} className="option_select">{colorList[i]}</option>
+      );
+    }
+    return arr;
+  }
 
   return (
     <Wrapper>
@@ -76,7 +91,7 @@ function Content(props) {
           <div className="row detail_main_nav">
 
             <div className="col-12-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="detail_img" src={product == undefined ? "":"../productImage/"+product.imageId+".jpg"} alt="" /></span>
+              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"../productImage/"+product.imageId+".jpg"} alt="" /></span>
             </div>
 
             <div className="col-12-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>
@@ -89,9 +104,7 @@ function Content(props) {
               <div className="col-12-medium mb1">
                 <select id="select_color" defaultValue="">
                   <option value="" disabled className="option_select">Color</option>
-                  <option value="Green" className="option_select">Green</option>
-                  <option value="Blue" className="option_select">Blue</option>
-                  <option value="Yellow" className="option_select">Yellow</option>
+                  {colorList == undefined? "" : makeColorList()}
                 </select>
               </div>
 
