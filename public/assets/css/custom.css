@@ -1,4 +1,5 @@
 footer{
+  width: 100vw;
   min-width: 750px;
 }
 
@@ -179,8 +180,9 @@ td{
   margin: 30px;
   border: 3px solid grey;
   border-radius: 20px;
-  width: 100% ;
+  width: 100%;
   padding: 5px;
+  min-width: 750px;
 }
 
 

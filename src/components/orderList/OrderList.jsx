@@ -1,5 +1,6 @@
 import React, { useState ,useEffect } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
 const Wrapper = styled.div`
     padding: 16px;
@@ -10,24 +11,61 @@ const Wrapper = styled.div`
     justify-content: center;
     margin-bottom: 8em;
     margin:auto;
+    min-width: 750px;
 `;
 
 function OrderList(props) {
     const navigate = useNavigate();
     const location = useLocation();
     // 만약 List 정보가 없을시에는 Login으로 이동처리
+    const [orderList, setOrderList] = useState();
+    const [productList, setProductList] = useState();
+
     useEffect(() => {
-      if (location.state == null) {
+      if(location.state == null && sessionStorage.getItem("phoneNum") == null && sessionStorage.getItem("orderNum") == null){
         navigate('../orderLogin');
+      }else if(location.state != null){
+        setOrderList(location.state.list.orderList);
+        setProductList(location.state.list.productList);
+      }else{
+        const formData = new FormData();
+        if(sessionStorage.getItem("phoneNum") != null){
+          formData.append("type", "전화 번호");
+          formData.append("name", sessionStorage.getItem("name") );
+          formData.append("content", sessionStorage.getItem("phoneNum") );
+        }else{
+          formData.append("type", "주문 번호");
+          formData.append("name", "none");
+          formData.append("content", document.getElementById("ip_order").value);
+        }
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
+          data: formData
+        })
+        .then(function (response){
+          //handle success
+          if(response.data == ""){
+            navigate('../orderLogin');
+          }else{
+            setOrderList(response.data.orderList);
+            setProductList(response.data.productList);
+          }
+
+        })
+        .catch(function(error){
+          //handle error
+        })
+        .then(function(){
+          // always executed
+        });
       }
+
     }, [location, navigate]);
 
-    if (location.state == null) {
+    if (location.state == null && sessionStorage.getItem("phoneNum") == null && sessionStorage.getItem("orderNum") == null ) {
        return null; // navigate 호출 후 컴포넌트의 렌더링을 중단
     }
-    const orderList = location.state.list.orderList;
-    const productList = location.state.list.productList;
-
 
     const viewOrder = (e) =>{
       var id= e.target.id;
@@ -75,7 +113,7 @@ function OrderList(props) {
                 <th>주문서</th>
               </thead>
               <tbody>
-                {makeList()}
+                {orderList == null ? "" :makeList()}
               </tbody>
             </table>
           </div>

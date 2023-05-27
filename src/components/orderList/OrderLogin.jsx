@@ -28,7 +28,6 @@ function Login(props) {
     const handleOpen = () => setShow(true);
 
 
-
     const onClick = (event) =>{
       event.preventDefault();
 
@@ -52,6 +51,13 @@ function Login(props) {
         if(response.data == ""){
             setShow(true);
         }else{
+          if(infoType == "전화 번호"){
+            sessionStorage.setItem('phoneNum', phoneNum);
+            sessionStorage.setItem('name', document.getElementById("ip_name").value);
+          }else{
+            sessionStorage.setItem('name', document.getElementById("ip_order").value);
+          }
+
           navigate('../orderList', {
             state: {
               list: response.data
