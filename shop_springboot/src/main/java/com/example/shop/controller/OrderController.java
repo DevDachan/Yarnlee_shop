@@ -90,12 +90,12 @@ public class OrderController {
       orderList = List.of(orderService.getOrder(Integer.parseInt(content)));
     }
 
-    if(formData == null || formData.size() == 0){
+    if(orderList == null || orderList.size() == 0){
       return null;
     }else {
       ArrayList<ProductDTO> productList = new ArrayList<>();
       for(OrderDTO temp : orderList){
-        productService.getProduct(temp.getProductId());
+        productList.add(productService.getProduct(temp.getProductId()));
       }
 
       formData.put("orderList", orderList);

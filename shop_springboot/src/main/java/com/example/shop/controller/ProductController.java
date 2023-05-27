@@ -62,7 +62,7 @@ public class ProductController {
 
   @PostMapping(value = "/changeColor")
   public Map<String, Object> changeColor(@RequestParam("productId") int productId,
-      @RequestParam("color") String color,
+      @RequestParam("colorId") String color,
       @RequestParam("colorContent") String content) {
     Map<String, Object> formData = new HashMap<>();
 

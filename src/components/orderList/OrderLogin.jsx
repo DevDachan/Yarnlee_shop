@@ -50,7 +50,6 @@ function Login(props) {
       .then(function (response){
         //handle success
         if(response.data == ""){
-            console.log(response.data);
             setShow(true);
         }else{
           navigate('../orderList', {

@@ -29,8 +29,6 @@ function OrderList(props) {
     const productList = location.state.list.productList;
 
 
-
-
     const viewOrder = (e) =>{
       var id= e.target.id;
 
