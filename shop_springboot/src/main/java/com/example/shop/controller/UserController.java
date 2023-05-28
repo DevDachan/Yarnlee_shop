@@ -65,15 +65,15 @@ public class UserController {
 
 
   @PostMapping(value = "/idCheck")
-  public String checkIdDup(@RequestParam("id") String id) {
-
-    Optional<UserDTO> optionalUserDTO = userService.getUser(id);
-    if (optionalUserDTO.isPresent()) {
-      return "false";
-    }else{
-      return "true";
-    }
+  public boolean checkIdDup(@RequestParam("id") String id) {
+    return userService.idDupCheck(id);
   }
+
+  @PostMapping(value = "/phoneCheck")
+  public boolean checkPhoneDup(@RequestParam("phone") String phone) {
+    return userService.phoneDupCheck(phone);
+  }
+
 
   @DeleteMapping(value = "/delete/id/{userId}")
   public UserDTO deleteProduct(@PathVariable String userId) {

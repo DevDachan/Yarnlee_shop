@@ -29,7 +29,6 @@ function Login(props) {
     }
 
     const onClick = () =>{
-
       if(document.getElementById("ip_id").value == ""){
         setModalContent("아이디를 입력해주세요.");
         setShow(true);
@@ -64,7 +63,6 @@ function Login(props) {
             }
           });
         }
-
       })
       .catch(function(error){
         //handle error
@@ -79,6 +77,8 @@ function Login(props) {
       });
     }
 
+
+    
 
     return (
         <Wrapper>

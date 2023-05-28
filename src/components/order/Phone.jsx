@@ -6,11 +6,15 @@ function Phone(props) {
   const phoneNum = props.phoneNum;
   const setPhoneNum = props.setPhoneNum;
 
+  const onBlur = props.onBlur;
+
   // 휴대폰 번호 입력 함수
   const handlePhone = (e) => {
     // replace D: not Digit, g: 전 영역
     const value = phoneRef.current.value.replace(/\D+/g, "");
     const numberLength = 11;
+
+    const onBlur = () => {}
 
     let result;
     result = "";
@@ -44,6 +48,7 @@ function Phone(props) {
       ref={phoneRef}
       onChange={handlePhone}
       type="tel"
+      onBlur={props.onBlur ? props.onBlur:onBlur}
       required
     />
   );

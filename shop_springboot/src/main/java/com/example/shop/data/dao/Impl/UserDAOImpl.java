@@ -35,5 +35,14 @@ public class UserDAOImpl implements UserDAO {
     }
   }
 
+  @Override
+  public boolean phoneDupCheck(String phone){
+    return userRepository.existsByPhone(phone);
+  }
+
+  @Override
+  public boolean idDupCheck(String id){
+    return userRepository.existsById(id);
+  }
 }
 

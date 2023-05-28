@@ -42,5 +42,14 @@ public class UserServiceImpl implements UserService {
       return Optional.empty();
     }
   }
+  @Override
+  public boolean phoneDupCheck(String phone){
+    return userDataHandeler.phoneDupCheck(phone);
+  }
+
+  @Override
+  public boolean idDupCheck(String id){
+    return userDataHandeler.idDupCheck(id);
+  }
 
 }

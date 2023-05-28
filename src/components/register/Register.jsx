@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Phone from "../order/Phone";
 import PostSelector from "../order/PostSelector";
-
+import Modal from 'react-bootstrap/Modal';
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -27,12 +27,24 @@ function Register(props) {
     const [phoneNum, setPhoneNum] = useState();
     const [addressDetail, setAddressDetail] = useState();
 
-    const [idDup, setIdDup] = useState(true);
-    const [pwdDup, setPwdDup] = useState(true);
-    const [phoneDup, setPhoneDup] = useState(true);
+    const [idDup, setIdDup] = useState(false);
+    const [pwdDup, setPwdDup] = useState(false);
+    const [phoneDup, setPhoneDup] = useState(false);
+
+    const [show, setShow] = useState(false);
+    const [modalContent, setModalContent] = useState();
+    const handleClose = () => setShow(false);
+    const handleOpen = () => setShow(true);
+
 
 
     const onClick = () =>{
+
+      if(idDup || pwdDup || phoneDup){
+        setModalContent("올바르지 않은 내용이 존재합니다.");
+        setShow(true);
+        return null;
+      }
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/user/register',
@@ -60,11 +72,6 @@ function Register(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-          navigate('./', {
-          state: {
-            userName: "dachan"
-          }
-        });
       })
       .then(function(){
         // always executed
@@ -82,13 +89,12 @@ function Register(props) {
       })
       .then(function (response){
         //handle success
-        console.log(response.data);
-        if(response.data == false){
+        if(response.data == true){
           document.getElementById("p-dupId").style.display = "block";
-          setIdDup(false);
+          setIdDup(true);
         }else{
           document.getElementById("p-dupId").style.display = "none";
-          setIdDup(true);
+          setIdDup(false);
         }
       })
       .catch(function(error){
@@ -98,6 +104,45 @@ function Register(props) {
       .then(function(){
         // always executed
       });
+    }
+
+    const phoneCheck = (e) =>{
+      var formData = new FormData();
+      formData.append("phone", e.target.value);
+
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/user/phoneCheck',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        if(response.data == true){
+          document.getElementById("p-dupPhone").style.display = "block";
+          setPhoneDup(true);
+        }else{
+          document.getElementById("p-dupPhone").style.display = "none";
+          setPhoneDup(false);
+        }
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+
+
+    const pwdCheck = (e) =>{
+      if(pwd != e.target.value){
+        document.getElementById("p-dupPwd").style.display = "block";
+        setPwdDup(true);
+      }else{
+        document.getElementById("p-dupPwd").style.display = "none";
+        setPwdDup(false);
+      }
     }
 
 
@@ -119,7 +164,7 @@ function Register(props) {
               <h3> 이름 </h3>
             </div>
             <div className="gr-9">
-              <input type="text" id="ip_name" value={userName} onBlur={setIdDup}/>
+              <input type="text" id="ip_name" value={userName}/>
             </div>
 
             <div className="gr-3">
@@ -133,7 +178,7 @@ function Register(props) {
               <h3> 비밀번호 확인 </h3>
             </div>
             <div className="gr-9">
-              <input type="password" id="ip_pwd" value={pwd2}/>
+              <input type="password" id="ip_pwd" value={pwd2} onBlur={pwdCheck}/>
             </div>
             <div className="gr-12">
               <p id="p-dupPwd" className="register-alert"> 비밀번호가 일치하지 않습니다. </p>
@@ -144,8 +189,9 @@ function Register(props) {
             </div>
             <div className="gr-9">
               <Phone
-                phoneNum ={phoneNum}
+                phoneNum={phoneNum || ""}
                 setPhoneNum = {setPhoneNum}
+                onBlur= {phoneCheck}
               />
             </div>
             <div className="gr-12">
@@ -169,12 +215,22 @@ function Register(props) {
               <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail} onChange={(e) =>setAddressDetail(e.target.value)}/>
             </div>
 
-
-
             <div className="gr-12 calign mt2 mr1">
               <button onClick={onClick}> 회원 가입</button>
             </div>
           </div>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header>
+              <Modal.Title>안내</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {modalContent}
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>닫기</button>
+            </Modal.Footer>
+          </Modal>
         </Wrapper>
     );
 }

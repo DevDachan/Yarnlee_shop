@@ -32,5 +32,13 @@ public class UserDataHandlerImpl implements UserDataHandler {
       return Optional.empty();
     }
   }
+  @Override
+  public boolean phoneDupCheck(String phone){
+    return userDAO.phoneDupCheck(phone);
+  }
 
+  @Override
+  public boolean idDupCheck(String id){
+    return userDAO.idDupCheck(id);
+  }
 }
