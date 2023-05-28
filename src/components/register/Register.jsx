@@ -60,6 +60,7 @@ function Register(props) {
       })
       .then(function (response){
         //handle success
+        sessionStorage.setItem("id", id);
         sessionStorage.setItem("name", userName);
         sessionStorage.setItem("phoneNum", phoneNum);
 
@@ -95,6 +96,7 @@ function Register(props) {
         }else{
           document.getElementById("p-dupId").style.display = "none";
           setIdDup(false);
+          setId(e.target.value);
         }
       })
       .catch(function(error){
@@ -164,7 +166,7 @@ function Register(props) {
               <h3> 이름 </h3>
             </div>
             <div className="gr-9">
-              <input type="text" id="ip_name" value={userName}/>
+              <input type="text" id="ip_name" value={userName} onChange={ (e) => setUserName(e.target.value)}/>
             </div>
 
             <div className="gr-3">

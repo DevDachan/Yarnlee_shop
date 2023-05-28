@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 function Order(props) {
   const navigate = useNavigate();
   const location = useLocation();
+  const [name, setName] = useState();
   const [phoneNum, setPhoneNum] = useState();
   const [address, setAddress] = useState();
   const [zoneCode, setZonecode] = useState("");
@@ -39,9 +40,38 @@ function Order(props) {
     }
   }, [location, navigate]);
 
+  useEffect(() => {
+    if(sessionStorage.getItem("id") != null && sessionStorage.id != undefined ){
+      const formData = new FormData();
+      formData.append("id", sessionStorage.getItem("id"));
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/user/info',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        setPhoneNum(response.data.phone);
+        setAddress(response.data.address);
+        setZonecode(response.data.zoneCode);
+        setAddressDetail(response.data.addressDetail);
+        setName(response.data.name);
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+  },[])
+
   if (location.state.productId == null) {
      return null; // navigate 호출 후 컴포넌트의 렌더링을 중단
   }
+
+
 
   const productId = location.state.productId;
   const productName = location.state.productName;
@@ -49,6 +79,7 @@ function Order(props) {
   const numberOfProduct = location.state.productNum;
   const deliveryCost = location.state.deliveryCost;
   const totalCost = numberOfProduct * location.state.productPrice + deliveryCost;
+  const productImageId = location.state.productImageId;
 
   const goBack = (e) =>{
     navigate(-1);
@@ -87,11 +118,6 @@ function Order(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-          navigate('./', {
-          state: {
-            userName: "dachan"
-          }
-        });
       })
       .then(function(){
         // always executed
@@ -135,7 +161,7 @@ function Order(props) {
   }
 
   const previewImage = (e) =>{
-    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"} alt=""></img>);
+    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}></img>);
     setShow(true);
   }
 
@@ -146,7 +172,7 @@ function Order(props) {
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-1" >
-                <span className="image main order_span_img"><img className="order_img" src={"images/product"+productId+".jpg"} alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={"../productImage/"+productImageId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-11 calign">
                 <h1>{productName}</h1>
@@ -174,7 +200,7 @@ function Order(props) {
                   <h2 className="mg0">주문자 이름</h2>
                 </div>
                 <div className="gr-8">
-                  <input type="text" className="prl1" id="ip_name" required></input>
+                  <input type="text" className="prl1" id="ip_name" value={name} required></input>
                 </div>
 
 
@@ -214,8 +240,10 @@ function Order(props) {
                       </>
                       :
                       <>
-                      <button className="mb-3 mr3" onClick={changeImage}> REUPLOAD</button>
-                      <button className="mb-3" onClick={previewImage}> PREVIEW</button>
+                      <div style={{"white-space": "nowrap"}}>
+                        <input type="button" className="mb-3 mr3 imagebtn" onClick={changeImage} value="REUPLOAD" />
+                        <input type="button" className="mb-3 imagebtn" onClick={previewImage} value="PREVIEW" />
+                      </div>
                       <img className="detail_img" src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}
                       alt=""/>
                       </>

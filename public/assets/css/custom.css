@@ -11,6 +11,9 @@ footer{
   display: none;
 }
 
+.imagebtn{
+  width: 40% !important; 
+}
 
 /* content page*/
 article{

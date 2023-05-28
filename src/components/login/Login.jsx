@@ -49,14 +49,13 @@ function Login(props) {
       })
       .then(function (response){
         //handle success
-        if(response.data == "id"){
-          setModalContent("아이디가 잘못되었습니다.");
-          setShow(true);
-        }else if(response.data == "pwd"){
-          setModalContent("비밀번호가 잘못되었습니다.");
+        if(response.data == ""){
+          setModalContent("아이디 혹은 비밀번호가 잘못되었습니다.");
           setShow(true);
         }else{
-          sessionStorage.setItem("name", response.data);
+          sessionStorage.setItem("id", response.data.id);
+          sessionStorage.setItem("name", response.data.name);
+          sessionStorage.setItem("phone", response.data.phone);
           navigate('../', {
             state: {
               userName: "dachan"
@@ -78,7 +77,7 @@ function Login(props) {
     }
 
 
-    
+
 
     return (
         <Wrapper>

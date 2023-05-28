@@ -43,6 +43,7 @@ function Content(props) {
           productPrice: product.price,
           productName: product.name,
           deliveryCost: product.deliveryCost,
+          productImageId: product.imageId,
           color: document.getElementById("select_color").value,
         },
       });

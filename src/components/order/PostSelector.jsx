@@ -19,7 +19,7 @@ function PostSelector(props) {
 
   return (
     <div>
-      <button onClick={handleOpen} variant="outline-primary">주소 찾기</button>
+      <input type="button" onClick={handleOpen} variant="outline-primary" value="주소 찾기" />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
           <Modal.Title>주소 찾기</Modal.Title>
