@@ -51,13 +51,10 @@ public class UserController {
 
   @PostMapping(value = "/login")
   public String loginUser(@RequestBody Map<String, String> postData) {
-    System.out.println(postData.get("password"));
-    System.out.println(postData.get("userId"));
-
     Optional<UserDTO> optionalUserDTO = userService.getUser(postData.get("userId"));
 
     if (optionalUserDTO.isPresent()) {
-      UserDTO userDTO = new UserDTO();
+      UserDTO userDTO = optionalUserDTO.get();
       if(userDTO.getPassword() == postData.get("password")) {
         return userDTO.getName();
       }
@@ -65,6 +62,17 @@ public class UserController {
     return "false";
   }
 
+
+  @PostMapping(value = "/idCheck")
+  public String checkIdDup(@RequestParam("id") String id) {
+
+    Optional<UserDTO> optionalUserDTO = userService.getUser(id);
+    if (optionalUserDTO.isPresent()) {
+      return "false";
+    }else{
+      return "true";
+    }
+  }
 
   @DeleteMapping(value = "/delete/id/{userId}")
   public UserDTO deleteProduct(@PathVariable String userId) {

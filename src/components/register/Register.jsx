@@ -27,6 +27,11 @@ function Register(props) {
     const [phoneNum, setPhoneNum] = useState();
     const [addressDetail, setAddressDetail] = useState();
 
+    const [idDup, setIdDup] = useState(true);
+    const [pwdDup, setPwdDup] = useState(true);
+    const [phoneDup, setPhoneDup] = useState(true);
+
+
     const onClick = () =>{
       axios({
         method: "post",
@@ -43,7 +48,9 @@ function Register(props) {
       })
       .then(function (response){
         //handle success
-        window.sessionStorage.setItem("name", response.data.id);
+        sessionStorage.setItem("name", userName);
+        sessionStorage.setItem("phoneNum", phoneNum);
+
         navigate('../', {
           state: {
             userName: "dachan"
@@ -64,6 +71,36 @@ function Register(props) {
       });
     }
 
+    const idCheck = (e) => {
+      var formData = new FormData();
+      formData.append("id", e.target.value);
+
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/user/idCheck',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        console.log(response.data);
+        if(response.data == false){
+          document.getElementById("p-dupId").style.display = "block";
+          setIdDup(false);
+        }else{
+          document.getElementById("p-dupId").style.display = "none";
+          setIdDup(true);
+        }
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+
+
     return (
         <Wrapper>
           <div className="grid_t" style={{margin: "30px"}}>
@@ -72,14 +109,17 @@ function Register(props) {
               <h3> 아이디 </h3>
             </div>
             <div className="gr-9">
-              <input type="text" id="ip_id" value={id} onChange={(e) =>setId(e.target.value)}/>
+              <input type="text" id="ip_id" value={id} onBlur={idCheck}/>
+            </div>
+            <div className="gr-12">
+              <p id="p-dupId" className="register-alert"> 이미 존재하는 아이디 입니다. </p>
             </div>
 
             <div className="gr-3">
               <h3> 이름 </h3>
             </div>
             <div className="gr-9">
-              <input type="text" id="ip_name" value={userName} onChange={(e) =>setUserName(e.target.value)}/>
+              <input type="text" id="ip_name" value={userName} onBlur={setIdDup}/>
             </div>
 
             <div className="gr-3">
@@ -95,6 +135,9 @@ function Register(props) {
             <div className="gr-9">
               <input type="password" id="ip_pwd" value={pwd2}/>
             </div>
+            <div className="gr-12">
+              <p id="p-dupPwd" className="register-alert"> 비밀번호가 일치하지 않습니다. </p>
+            </div>
 
             <div className="gr-3">
               <h3>전화번호</h3>
@@ -104,6 +147,9 @@ function Register(props) {
                 phoneNum ={phoneNum}
                 setPhoneNum = {setPhoneNum}
               />
+            </div>
+            <div className="gr-12">
+              <p id="p-dupPhone" className="register-alert"> 이미 가입된 전화번호 입니다. </p>
             </div>
 
 

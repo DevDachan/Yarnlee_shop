@@ -4,6 +4,7 @@ import com.example.shop.data.dao.UserDAO;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserDataHandler;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,13 @@ public class UserDataHandlerImpl implements UserDataHandler {
     }
 
   @Override
-  public UserEntity getUserEntity(String userId){
-    return userDAO.getUser(userId);
+  public Optional<UserEntity> getUserEntity(String userId){
+    Optional<UserEntity> optionalUserEntity = userDAO.getUser(userId);
+    if (optionalUserEntity.isPresent()) {
+      return optionalUserEntity;
+    } else {
+      return Optional.empty();
+    }
   }
 
 }

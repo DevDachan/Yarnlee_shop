@@ -90,11 +90,11 @@ function Content(props) {
           <h1>{product == undefined ? "":product.name}</h1>
           <div className="row detail_main_nav">
 
-            <div className="col-12-medium" id="imgDiv">
+            <div className="col-6-medium" id="imgDiv">
               <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"../productImage/"+product.imageId+".jpg"} alt="" /></span>
             </div>
 
-            <div className="col-12-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>
+            <div className="col-6-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>
 
               <div className="col-12-medium mt2">
                 <h2 className="calign">판매 가격: {product == undefined ? "":product.price}원</h2>

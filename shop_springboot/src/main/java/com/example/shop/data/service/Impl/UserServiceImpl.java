@@ -32,14 +32,14 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Optional<UserDTO> getUser(String userId){
-    UserEntity userEntity = userDataHandeler.getUserEntity(userId);
-
-    if(userEntity == null){
-      return null;
-    }else{
+    Optional<UserEntity> optionalUserEntity = userDataHandeler.getUserEntity(userId);
+    if(optionalUserEntity.isPresent()){
+      UserEntity userEntity = optionalUserEntity.get();
       UserDTO userDTO = new UserDTO(userEntity.getId(), userEntity.getPassword(),
           userEntity.getName(), userEntity.getPhone(), userEntity.getZoneCode(), userEntity.getAddress(), userEntity.getAddressDetail());
       return Optional.ofNullable(userDTO);
+    }else{
+      return Optional.empty();
     }
   }
 

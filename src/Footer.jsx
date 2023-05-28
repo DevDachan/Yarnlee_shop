@@ -7,25 +7,6 @@ function Footer(props){
   <footer id="footer">
     <div className="inner">
       <section>
-        <h2>Get in touch</h2>
-        <form method="post" action="#">
-          <div className="fields">
-            <div className="field half">
-              <input type="text" name="name" id="name" placeholder="Name" />
-            </div>
-            <div className="field half">
-              <input type="email" name="email" id="email" placeholder="Email" />
-            </div>
-            <div className="field">
-              <textarea name="message" id="message" placeholder="Message"></textarea>
-            </div>
-          </div>
-          <ul className="actions send">
-            <li className="send"><input type="submit" className="send" value="Send" className="primary" /></li>
-          </ul>
-        </form>
-      </section>
-      <section>
         <h2>Follow</h2>
         <ul className="icons">
           <li><a href="https://instagram.com/yarnlee__?igshid=YmMyMTA2M2Y=" className="icon brands style2 fa-instagram"><span className="label">Instagram</span></a></li>
@@ -41,4 +22,27 @@ function Footer(props){
   );
 
 }
+
+/*
+<section>
+  <h2>Get in touch</h2>
+  <form method="post" action="#">
+    <div className="fields">
+      <div className="field half">
+        <input type="text" name="name" id="name" placeholder="Name" />
+      </div>
+      <div className="field half">
+        <input type="email" name="email" id="email" placeholder="Email" />
+      </div>
+      <div className="field">
+        <textarea name="message" id="message" placeholder="Message"></textarea>
+      </div>
+    </div>
+    <ul className="actions send">
+      <li className="send"><input type="submit" className="send" value="Send" className="primary" /></li>
+    </ul>
+  </form>
+</section>
+
+*/
 export default Footer;

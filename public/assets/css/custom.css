@@ -3,11 +3,21 @@ footer{
   min-width: 750px;
 }
 
+
+.register-alert{
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  display: none;
+}
+
+
 /* content page*/
 article{
   width: 25vw !important;
   height: 25vw !important;
 }
+
 
 
 .ql-editor > p > img{

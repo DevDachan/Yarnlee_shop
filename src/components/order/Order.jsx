@@ -74,7 +74,7 @@ function Order(props) {
       formData.append("orderAddress", address);
       formData.append("addressDetail", addressDetail);
       formData.append("imageId", uploadImage);
-    
+
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/order/insert',
@@ -82,11 +82,7 @@ function Order(props) {
       })
       .then(function (response){
         //handle success
-        /*navigate('../', {
-          state: {
-            userName: "dachan"
-          }
-        });*/
+        navigate('../');
       })
       .catch(function(error){
         //handle error
@@ -149,10 +145,10 @@ function Order(props) {
         <div className="order_main" id="main">
           <div className="inner mg0">
             <div className="grid_t">
-              <div className="gr-2" id="imgDiv">
+              <div className="gr-1" >
                 <span className="image main order_span_img"><img className="order_img" src={"images/product"+productId+".jpg"} alt="" /></span>
               </div>
-              <div className="gr-10 calign">
+              <div className="gr-11 calign">
                 <h1>{productName}</h1>
               </div>
 

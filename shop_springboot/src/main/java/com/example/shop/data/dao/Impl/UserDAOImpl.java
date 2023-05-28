@@ -4,6 +4,8 @@ package com.example.shop.data.dao.Impl;
 import com.example.shop.data.dao.UserDAO;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +26,13 @@ public class UserDAOImpl implements UserDAO {
     return userEntity;
   }
   @Override
-  public UserEntity getUser(String userId){
-    UserEntity userEntity = userRepository.getById(userId);
-    System.out.println(userEntity.getId());
-    System.out.println(userEntity == null);
-
-    System.out.println(userEntity);
-    return userEntity;
+  public Optional<UserEntity> getUser(String userId){
+    Optional<UserEntity> optionalUserEntity = userRepository.findById(userId);
+    if (optionalUserEntity.isPresent()) {
+      return optionalUserEntity;
+    } else {
+      return Optional.empty();
+    }
   }
 
 }
