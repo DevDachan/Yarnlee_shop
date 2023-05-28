@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import Modal from 'react-bootstrap/Modal';
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -16,6 +17,11 @@ function Login(props) {
     const navigate = useNavigate();
     const [id, setId] = useState();
     const [pwd, setPwd] = useState();
+    const [show, setShow] = useState(false);
+    const [modalContent, setModalContent] = useState();
+    const handleClose = () => setShow(false);
+    const handleOpen = () => setShow(true);
+
 
 
     const goRegister = () =>{
@@ -23,7 +29,17 @@ function Login(props) {
     }
 
     const onClick = () =>{
-      console.log(id);
+
+      if(document.getElementById("ip_id").value == ""){
+        setModalContent("아이디를 입력해주세요.");
+        setShow(true);
+        return null;
+      }else if(document.getElementById("ip_pwd").value == ""){
+        setModalContent("비밀번호를 입력해주세요.");
+        setShow(true);
+        return null;
+      }
+
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/user/login',
@@ -34,8 +50,14 @@ function Login(props) {
       })
       .then(function (response){
         //handle success
-        if(response.data !== "false"){
-          window.sessionStorage.setItem("name", response.data);
+        if(response.data == "id"){
+          setModalContent("아이디가 잘못되었습니다.");
+          setShow(true);
+        }else if(response.data == "pwd"){
+          setModalContent("비밀번호가 잘못되었습니다.");
+          setShow(true);
+        }else{
+          sessionStorage.setItem("name", response.data);
           navigate('../', {
             state: {
               userName: "dachan"
@@ -46,7 +68,6 @@ function Login(props) {
       })
       .catch(function(error){
         //handle error
-        console.log(error);
           navigate('./', {
           state: {
             userName: "dachan"
@@ -81,6 +102,17 @@ function Login(props) {
               <button onClick={goRegister}> 회원 가입</button>
             </div>
           </div>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header>
+              <Modal.Title>안내</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {modalContent}
+            </Modal.Body>
+            <Modal.Footer>
+              <button onClick={handleClose}>닫기</button>
+            </Modal.Footer>
+          </Modal>
         </Wrapper>
     );
 }

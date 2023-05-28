@@ -58,8 +58,9 @@ public class UserController {
       if(userDTO.getPassword() == postData.get("password")) {
         return userDTO.getName();
       }
+      return "pwd";
     }
-    return "false";
+    return "id";
   }
 
 
