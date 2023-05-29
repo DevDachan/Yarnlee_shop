@@ -21,19 +21,23 @@ function AdminOrderList(props) {
     const [orderList, setOrderList] = useState();
     const [productList, setProductList] = useState();
 
+    console.log(sessionStorage.getItem("adminHash"));
+
     useEffect(() => {
       if(sessionStorage.getItem("admin") != "yes"){
         navigate('../adminLogin');
       }else{
-
         axios({
           method: "get",
-          url: 'http://localhost:8090/shop-backend/order/getAdminOrderHistory'
+          url: 'http://localhost:8090/shop-backend/order/getAdminOrderHistory',
+          params:{
+            hashKey: sessionStorage.getItem("adminHash")
+          }
         })
         .then(function (response){
           //handle success
           if(response.data == ""){
-            navigate('../orderLogin');
+            navigate('../AdminLogin');
           }else{
             setOrderList(response.data.orderList);
             setProductList(response.data.productList);

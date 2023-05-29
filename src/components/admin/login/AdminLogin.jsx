@@ -45,6 +45,8 @@ function AdminLogin(props) {
         //handle success
         if(response.data.id =="admin"){
           sessionStorage.setItem("admin", "yes");
+          sessionStorage.setItem("adminHash", response.data.address);
+
           navigate('../adminMain');
         }else{
           setModalContent("아이디 혹은 비밀번호가 잘못되었습니다.");

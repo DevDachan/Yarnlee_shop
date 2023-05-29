@@ -1,4 +1,4 @@
-import React, { useState , useRef} from "react";
+import React, { useState , useRef,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
@@ -27,6 +27,12 @@ function Login(props) {
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
 
+
+    useEffect( () => {
+      if(sessionStorage.getItem("admin") == "yes"){
+        navigate("../adminOrderList");
+      }
+    })
 
     const onClick = (event) =>{
       event.preventDefault();
