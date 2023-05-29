@@ -38,6 +38,9 @@ function AdminContent(props) {
 
 
   useEffect(() => {
+    if(sessionStorage.getItem("admin") != "yes"){
+      navigate('../adminLogin');
+    }
     axios({
       method: "get",
       url: 'http://localhost:8090/shop-backend/product/select/id/'+productId

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState ,useEffect } from "react";
+import { useNavigate,useLocation } from "react-router-dom";
+import axios from "axios";
 import styled from "styled-components";
-
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -10,15 +10,77 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 8em;
+    margin:auto;
+    min-width: 750px;
 `;
 
 function AdminOrderList(props) {
     const navigate = useNavigate();
+    const location = useLocation();
+    // 만약 List 정보가 없을시에는 Login으로 이동처리
+    const [orderList, setOrderList] = useState();
+    const [productList, setProductList] = useState();
 
-    const viewOrder = () =>{
-      navigate("../adminOrderHistory");
+    useEffect(() => {
+      if(sessionStorage.getItem("admin") != "yes"){
+        navigate('../adminLogin');
+      }else{
+
+        axios({
+          method: "get",
+          url: 'http://localhost:8090/shop-backend/order/getAdminOrderHistory'
+        })
+        .then(function (response){
+          //handle success
+          if(response.data == ""){
+            navigate('../orderLogin');
+          }else{
+            setOrderList(response.data.orderList);
+            setProductList(response.data.productList);
+          }
+
+        })
+        .catch(function(error){
+          //handle error
+        })
+        .then(function(){
+          // always executed
+        });
+      }
+
+    }, []);
+
+    const viewOrder = (e) =>{
+      var id= e.target.id;
+
+      navigate("../orderHistory", {
+      state: {
+        orderDetail: orderList[id]
+      }
+      });
     }
 
+    function makeList(){
+      var arr = [];
+      for(var i = 0; i < orderList.length; i++){
+        arr.push(
+          <tr>
+            <td>{orderList[i].orderDate}</td>
+            <td>{orderList[i].id}</td>
+            <td>{productList[i].name}</td>
+            <td>{orderList[i].totalCost}원 </td>
+            <td>{orderList[i].orderName}</td>
+            <td>{orderList[i].orderPhone}</td>
+            <td>
+              <button onClick={viewOrder} id={i}>
+                View
+              </button>
+            </td>
+          </tr>
+        );
+      }
+      return arr;
+    }
 
     return (
         <Wrapper>
@@ -28,47 +90,13 @@ function AdminOrderList(props) {
                 <th>주문 일자</th>
                 <th>주문 번호</th>
                 <th>상품 명</th>
+                <th>금액</th>
                 <th>주문자</th>
                 <th>전화번호</th>
                 <th>주문서</th>
               </thead>
               <tbody>
-                <tr>
-                  <td>2023.01.02</td>
-                  <td>2323131</td>
-                  <td>토트서클백 그린 1개 <br/> 토트서클백 그린 1개</td>
-                  <td>다찬</td>
-                  <td>010-0000-0000</td>
-                  <td>
-                    <button onClick={viewOrder}>
-                      View
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>2323131</td>
-                  <td>토트서클백 그린 1개 <br/> 토트서클백 그린 1개</td>
-                  <td>다찬</td>
-                  <td>010-0000-0000</td>
-                  <td>
-                    <button onClick={viewOrder}>
-                      View
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>2323131</td>
-                  <td>토트서클백 그린 1개 <br/> 토트서클백 그린 1개</td>
-                  <td>다찬</td>
-                  <td>010-0000-0000</td>
-                  <td>
-                    <button onClick={viewOrder}>
-                      View
-                    </button>
-                  </td>
-                </tr>
+                {orderList == null ? "" :makeList()}
               </tbody>
             </table>
           </div>

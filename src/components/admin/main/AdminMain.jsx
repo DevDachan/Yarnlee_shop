@@ -24,6 +24,10 @@ function AdminMain(props) {
   const [relandering, setRelangering] = useState();
 
   useEffect(() => {
+    if(sessionStorage.getItem("admin") != "yes"){
+      navigate('../adminLogin');
+    }
+
     axios({
       method: "get",
       url: 'http://localhost:8090/shop-backend/product/productList'
