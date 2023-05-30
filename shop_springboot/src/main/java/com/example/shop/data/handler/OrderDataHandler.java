@@ -10,7 +10,7 @@ public interface OrderDataHandler {
       int num, int totalCost, String orderName, String orderPhone, int orderZoneCode, String orderAddress,
       String addressDetail, int imageId
   );
-
+  void deleteOrder(String orderId);
   OrderDTO getOrder(int orderId);
   List<OrderDTO> getOrderAll();
   List<Integer> findDistinctId();

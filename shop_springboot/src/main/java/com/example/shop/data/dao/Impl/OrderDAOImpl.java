@@ -33,6 +33,11 @@ public class OrderDAOImpl implements OrderDAO {
   }
 
   @Override
+  public void deleteOrder(String orderId){
+    orderRepository.deleteById(orderId);
+  }
+
+  @Override
   public List<Integer> findDistinctId(){
     List<Integer> distinctIdList = orderRepository.findDistinctId();
 

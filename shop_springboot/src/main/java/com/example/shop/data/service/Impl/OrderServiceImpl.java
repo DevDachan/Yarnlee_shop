@@ -47,6 +47,12 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
+  public void deleteOrder(String orderId){
+     orderDataHandeler.deleteOrder(orderId);
+  }
+
+
+  @Override
   public OrderDTO getOrder(int orderId){
     return orderDataHandeler.getOrder(orderId);
   }

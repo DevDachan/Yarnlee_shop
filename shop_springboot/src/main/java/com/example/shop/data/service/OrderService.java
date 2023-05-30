@@ -12,6 +12,7 @@ public interface OrderService {
 
   int getRandomId();
 
+  void deleteOrder(String orderId);
   List<OrderDTO> getOrderAll();
 
   OrderDTO getOrder(int productId);

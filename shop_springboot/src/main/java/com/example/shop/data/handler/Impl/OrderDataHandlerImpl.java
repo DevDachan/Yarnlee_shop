@@ -48,6 +48,11 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
   }
 
   @Override
+  public void deleteOrder(String orderId){
+      orderDAO.deleteOrder(orderId);
+  }
+
+  @Override
   public List<Integer> findDistinctId(){ return orderDAO.findDistinctId(); }
 
   @Override

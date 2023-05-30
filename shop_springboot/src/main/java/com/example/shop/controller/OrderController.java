@@ -160,8 +160,8 @@ public class OrderController {
 
 
   @DeleteMapping(value = "/delete/id/{orderId}")
-  public OrderDTO deleteOrder(@PathVariable String orderId) {
-    return null;
+  public void deleteOrder(@PathVariable String orderId) {
+     orderService.deleteOrder(orderId);
   }
 
 }

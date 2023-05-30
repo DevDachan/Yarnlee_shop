@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import styled from "styled-components";
-
-
+import axios from "axios";
+import Modal from 'react-bootstrap/Modal';
 import Phone from "../../order/Phone";
 import PostSelector from "../../order/PostSelector";
 
@@ -15,7 +15,10 @@ function AdminOrderHistroy(props) {
   const remittanceImage = useRef();
   const [orderDetail, setOrderDetail] = useState(location.state.orderDetail);
   const [productDetail, setProductDetail] = useState(location.state.productDetail);
-
+  const [show, setShow] = useState(false);
+  const [modalContent, setModalContent] = useState();
+  const handleClose = () => setShow(false);
+  const handleOpen = () => setShow(true);
 
   const Wrapper = styled.div`
       padding: 16px;
@@ -26,6 +29,29 @@ function AdminOrderHistroy(props) {
       justify-content: center;
       margin: auto;
   `;
+
+  const deleteOrder = (e) =>{
+    setModalContent("해당 주문을 삭제하시겠습니까?")
+    setShow(true);
+  }
+
+  const yesDelete = (e) =>{
+    axios({
+      method: "delete",
+      url: 'http://localhost:8090/shop-backend/order/delete/id/'+orderDetail.id
+    })
+    .then(function (response){
+      //handle success
+      navigate('../adminOrderList');
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
 
   return (
       <Wrapper>
@@ -91,15 +117,36 @@ function AdminOrderHistroy(props) {
                 />
               </div>
 
-              <div className="gr-12 calign pt3">
-                <button className="bt_order" onClick={(e) => {navigate("../AdminOrderList")}}> 목록으로 </button>
+              <div className="gr-4 calign pt3">
+                <button className="bt_back" onClick={(e) => {navigate("../AdminOrderList")}}> 목록으로 </button>
               </div>
-
-
+              <div className="gr-6 calign pt3">
+                <button className="bt_edit"> 수정하기 </button>
+              </div>
+              <div className="gr-2 calign pt3">
+                <button className="bt_delete" onClick={deleteOrder}> 삭제 </button>
+              </div>
             </div>
           </div>
         </div>
-
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header>
+            <Modal.Title>안내</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {modalContent}
+          </Modal.Body>
+          <Modal.Footer>
+            <div className="grid_t" style={{width: "100%"}}>
+              <div className="gr-6 lalign">
+                <button onClick={handleClose}>아니오</button>
+              </div>
+              <div className="gr-6 ralign">
+                <button onClick={yesDelete}>네</button>
+              </div>
+            </div>
+          </Modal.Footer>
+        </Modal>
       </Wrapper>
   );
 }
