@@ -37,7 +37,7 @@ function AdminOrderList(props) {
         .then(function (response){
           //handle success
           if(response.data == ""){
-            navigate('../AdminLogin');
+            navigate('../adminLogin');
           }else{
             setOrderList(response.data.orderList);
             setProductList(response.data.productList);
@@ -57,9 +57,10 @@ function AdminOrderList(props) {
     const viewOrder = (e) =>{
       var id= e.target.id;
 
-      navigate("../orderHistory", {
+      navigate("../adminOrderHistory", {
       state: {
-        orderDetail: orderList[id]
+        orderDetail: orderList[id],
+        productDetail: productList[id]
       }
       });
     }

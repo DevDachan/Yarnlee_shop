@@ -48,17 +48,14 @@ public class OrderServiceImpl implements OrderService {
 
   @Override
   public OrderDTO getOrder(int orderId){
-    OrderEntity orderEntity = orderDataHandeler.getOrderEntity(orderId);
-    if(orderEntity == null) return null;
-
-    OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), orderEntity.getOrderDate(),
-        orderEntity.getUserId(), orderEntity.getProductId(), orderEntity.getColor(), orderEntity.getNum(),
-        orderEntity.getTotalCost(), orderEntity.getOrderName(), orderEntity.getOrderPhone(), orderEntity.getOrderZonecode(),
-        orderEntity.getOrderAddress(),orderEntity.getAddressDetail(), orderEntity.getImageId()
-    );
-
-    return orderDTO;
+    return orderDataHandeler.getOrder(orderId);
   }
+
+  @Override
+  public List<OrderDTO> getOrderAll(){
+    return orderDataHandeler.getOrderAll();
+  }
+
 
   @Override
   public int getRandomId(){

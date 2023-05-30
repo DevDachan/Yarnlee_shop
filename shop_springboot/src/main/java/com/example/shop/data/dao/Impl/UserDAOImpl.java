@@ -44,5 +44,10 @@ public class UserDAOImpl implements UserDAO {
   public boolean idDupCheck(String id){
     return userRepository.existsById(id);
   }
+
+  @Override
+  public boolean checkAdmin(String hashKey){
+    return userRepository.checkAdmin(hashKey) > 0 ? true : false;
+  }
 }
 

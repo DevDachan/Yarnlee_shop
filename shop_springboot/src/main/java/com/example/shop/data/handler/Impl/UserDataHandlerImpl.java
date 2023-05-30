@@ -41,4 +41,7 @@ public class UserDataHandlerImpl implements UserDataHandler {
   public boolean idDupCheck(String id){
     return userDAO.idDupCheck(id);
   }
+
+  @Override
+  public boolean checkAdmin(String hashKey){return userDAO.checkAdmin(hashKey);}
 }

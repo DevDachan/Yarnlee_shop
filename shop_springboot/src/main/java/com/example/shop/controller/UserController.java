@@ -50,19 +50,30 @@ public class UserController {
   }
 
   @PostMapping(value = "/login")
-  public String loginUser(@RequestBody Map<String, String> postData) {
+  public UserDTO loginUser(@RequestBody Map<String, String> postData) {
     Optional<UserDTO> optionalUserDTO = userService.getUser(postData.get("userId"));
 
     if (optionalUserDTO.isPresent()) {
       UserDTO userDTO = optionalUserDTO.get();
-      if(userDTO.getPassword() == postData.get("password")) {
-        return userDTO.getName();
+      if(userDTO.getPassword().equals(postData.get("password"))) {
+        return userDTO;
       }
-      return "pwd";
     }
-    return "id";
+    return null;
   }
 
+
+  @PostMapping(value = "/info")
+  public UserDTO infoUser(@RequestParam("id") String id) {
+    Optional<UserDTO> optionalUserDTO = userService.getUser(id);
+
+    if (optionalUserDTO.isPresent()) {
+      UserDTO userDTO = optionalUserDTO.get();
+      userDTO.setPassword("");
+      return userDTO;
+    }
+    return null;
+  }
 
   @PostMapping(value = "/idCheck")
   public boolean checkIdDup(@RequestParam("id") String id) {

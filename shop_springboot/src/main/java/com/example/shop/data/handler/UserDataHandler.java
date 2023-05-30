@@ -12,4 +12,6 @@ public interface UserDataHandler {
   boolean phoneDupCheck(String phone);
 
   boolean idDupCheck(String phone);
+
+  boolean checkAdmin(String hashKey);
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 
@@ -9,9 +9,13 @@ import PostSelector from "../../order/PostSelector";
 
 function AdminOrderHistroy(props) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [address, setAddress] = useState();
   const [zoneCode, setZonecode] = useState();
   const remittanceImage = useRef();
+  const [orderDetail, setOrderDetail] = useState(location.state.orderDetail);
+  const [productDetail, setProductDetail] = useState(location.state.productDetail);
+
 
   const Wrapper = styled.div`
       padding: 16px;
@@ -28,11 +32,11 @@ function AdminOrderHistroy(props) {
         <div className="order_main" id="main">
           <div className="inner mg0">
             <div className="grid_t">
-              <div className="gr-2" id="imgDiv">
+              <div className="gr-2" id="">
                 <span className="image main order_span_img"><img className="order_img" src="images/pic13.jpg" alt="" /></span>
               </div>
               <div className="gr-10 calign">
-                <h1>Circle Tote Bag</h1>
+                <h1>{productDetail.name}</h1>
               </div>
 
               <div className="gr-12 mb2 grid_t" style={{boxShadow: "3px 3px 3px 3px rgb(98 217 182)", borderRadius:"20px"}}>
@@ -41,12 +45,11 @@ function AdminOrderHistroy(props) {
                 </div>
                 <div className="gr-8 calign" style={{paddingTop: "20px"}}>
                   <div>
-                    서클 토트백 | 그린 | 수량 1
-                    서클 토트백 | 그린 | 수량 1
+                    {productDetail.name}  | {orderDetail.color}  |  {orderDetail.num}개
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
-                  <h3> 총액 : 32000원 </h3>
+                  <h3> 총액 : {orderDetail.totalCost}원 </h3>
                 </div>
               </div>
             </div>
@@ -57,7 +60,7 @@ function AdminOrderHistroy(props) {
                 <h2 className="mg0">주문자 이름</h2>
               </div>
               <div className="gr-8">
-                <input type="text" disabled className="prl1" id="ip_name" defaultValue="서다찬"></input>
+                <input type="text" disabled className="prl1" id="ip_name" defaultValue={orderDetail.orderName}></input>
               </div>
 
 
@@ -66,24 +69,24 @@ function AdminOrderHistroy(props) {
                 <h2 className="mg0">전화번호</h2>
               </div>
               <div className="gr-8">
-                <input type="text" disabled className="prl1" id="ip_phone" defaultValue="010-6888-9999"></input>
+                <input type="text" disabled className="prl1" id="ip_phone" defaultValue={orderDetail.orderPhone}></input>
               </div>
 
               <div className="gr-4 calign mt3">
                 <h2 className="mg0">주소</h2>
               </div>
               <div className="gr-8 mt3">
-                <input type="text" className="prl1"  disabled id="zoneCode" defaultValue="313131" />
+                <input type="text" className="prl1"  disabled id="zoneCode" defaultValue={orderDetail.orderZonecode} />
               </div>
               <div className="gr-12">
-                <input type="text" className="prl1"  disabled id="address" defaultValue="경상북도 포항시 북구 흥해읍" />
+                <input type="text" className="prl1"  disabled id="address" defaultValue={orderDetail.orderAddress} />
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" disabled id="address_detail" placeholder="한동대학교"/>
+                <input type="text" required className="prl1" disabled id="address_detail" defaultValue={orderDetail.addressDetail}/>
               </div>
 
               <div className="gr-12 mt3">
-                <img className="detail_img" src={"uploadImage" == undefined ? "" :"../userImage/"+"uploadImage"+".jpg"}
+                <img className="detail_img" src={"uploadImage" == undefined ? "" :"../userImage/"+orderDetail.imageId+".jpg"}
                 alt=""
                 />
               </div>

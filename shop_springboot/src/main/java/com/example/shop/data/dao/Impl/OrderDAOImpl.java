@@ -43,5 +43,10 @@ public class OrderDAOImpl implements OrderDAO {
   public List<OrderEntity> getOrderUsingPhone(String phoneNum, String name){
     return orderRepository.getOrderUsingPhone(phoneNum,name);
   }
+
+  @Override
+  public List<OrderEntity> getOrderAll(){
+    return orderRepository.findAll();
+  }
 }
 

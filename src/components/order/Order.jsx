@@ -96,7 +96,7 @@ function Order(props) {
       formData.append("orderDate", "2023-05-23");
       formData.append("userId", "guest");
       formData.append("productId", productId);
-      formData.append("color", productId);
+      formData.append("color", color);
       formData.append("num", numberOfProduct);
       formData.append("totalCost", totalCost);
       formData.append("orderName", document.getElementById("ip_name").value);

@@ -12,4 +12,6 @@ public interface UserDAO {
   boolean phoneDupCheck(String phone);
 
   boolean idDupCheck(String phone);
+  boolean checkAdmin(String hashKey);
+
 }

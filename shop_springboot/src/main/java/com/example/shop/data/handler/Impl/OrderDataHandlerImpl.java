@@ -34,8 +34,17 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
     }
 
   @Override
-  public OrderEntity getOrderEntity(int orderId){
-    return orderDAO.getOrder(orderId);
+  public OrderDTO getOrder(int orderId){
+    OrderEntity orderEntity = orderDAO.getOrder(orderId);
+    if(orderEntity == null) return null;
+
+    OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), orderEntity.getOrderDate(),
+        orderEntity.getUserId(), orderEntity.getProductId(), orderEntity.getColor(), orderEntity.getNum(),
+        orderEntity.getTotalCost(), orderEntity.getOrderName(), orderEntity.getOrderPhone(), orderEntity.getOrderZonecode(),
+        orderEntity.getOrderAddress(),orderEntity.getAddressDetail(), orderEntity.getImageId()
+    );
+
+    return orderDTO;
   }
 
   @Override
@@ -57,4 +66,21 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
 
       return orderDTO;
   }
+  @Override
+  public List<OrderDTO> getOrderAll(){
+    List<OrderEntity> orderEntity = orderDAO.getOrderAll();
+    List<OrderDTO> orderDTO = new ArrayList<>();
+    if(orderEntity.size() == 0) return null;
+
+    for(OrderEntity temp : orderEntity){
+      OrderDTO orderTemp = new OrderDTO(temp.getId(), temp.getOrderDate(),
+          temp.getUserId(), temp.getProductId(), temp.getColor(), temp.getNum(),
+          temp.getTotalCost(), temp.getOrderName(), temp.getOrderPhone(), temp.getOrderZonecode(),
+          temp.getOrderAddress(),temp.getAddressDetail(), temp.getImageId());
+      orderDTO.add(orderTemp);
+    }
+
+    return orderDTO;
+  }
+
 }

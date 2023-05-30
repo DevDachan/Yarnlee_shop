@@ -45,7 +45,7 @@ function App() {
         <Route path="/adminMain" element={<AdminMain />}></Route>
         <Route path="/adminOrderList" element={<AdminOrderList />}></Route>
         <Route path="/adminOrderHistory" element={<AdminOrderHistory />}></Route>
-        <Route path="/AdminLogin" element={<AdminLogin />}> </Route>
+        <Route path="/adminLogin" element={<AdminLogin />}> </Route>
         <Route path="/adminContent" element={<AdminContent />}></Route>
 
         <Route path="*" element={<NotFound />}></Route>

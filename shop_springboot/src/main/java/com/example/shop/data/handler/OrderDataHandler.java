@@ -11,8 +11,8 @@ public interface OrderDataHandler {
       String addressDetail, int imageId
   );
 
-  OrderEntity getOrderEntity(int orderId);
-
+  OrderDTO getOrder(int orderId);
+  List<OrderDTO> getOrderAll();
   List<Integer> findDistinctId();
 
   List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name);

@@ -11,6 +11,9 @@ public interface OrderService {
     );
 
   int getRandomId();
+
+  List<OrderDTO> getOrderAll();
+
   OrderDTO getOrder(int productId);
 
   List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name);

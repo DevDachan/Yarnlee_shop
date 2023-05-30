@@ -12,4 +12,5 @@ public interface UserService {
 
   boolean idDupCheck(String phone);
 
+  boolean checkAdmin(String HashKey);
 }

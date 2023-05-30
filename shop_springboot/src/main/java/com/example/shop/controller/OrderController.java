@@ -6,7 +6,7 @@ import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.OrderService;
 import com.example.shop.data.service.ProductService;
-import jakarta.persistence.criteria.Order;
+import com.example.shop.data.service.UserService;
 import jakarta.validation.Valid;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,13 +36,16 @@ public class OrderController {
   private OrderService orderService;
   private ProductService productService;
 
+  private UserService userService;
+
   private ImageService imageService;
   @Autowired
   public OrderController(OrderService orderService,ProductService productService,
-      ImageService imageService) {
+      ImageService imageService, UserService userService) {
     this.orderService = orderService;
     this.productService = productService;
     this.imageService = imageService;
+    this.userService = userService;
   }
 
   @PostMapping(value="/insert")
@@ -128,6 +131,31 @@ public class OrderController {
     }
 
     return randomId;
+  }
+
+  @GetMapping(value = "/getAdminOrderHistory")
+  public Map<String, Object> getAdminOrderHistory(
+      @RequestParam String hashKey
+  ){
+    if(!userService.checkAdmin(hashKey)){
+      return null;
+    }
+
+    HashMap<String, Object> formData = new HashMap<>();
+    List<OrderDTO> orderList = orderService.getOrderAll();
+
+    if(orderList == null || orderList.size() == 0){
+      return null;
+    }else {
+      ArrayList<ProductDTO> productList = new ArrayList<>();
+      for(OrderDTO temp : orderList){
+        productList.add(productService.getProduct(temp.getProductId()));
+      }
+
+      formData.put("orderList", orderList);
+      formData.put("productList", productList);
+      return formData;
+    }
   }
 
 

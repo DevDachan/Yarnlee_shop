@@ -52,4 +52,6 @@ public class UserServiceImpl implements UserService {
     return userDataHandeler.idDupCheck(id);
   }
 
+  @Override
+  public boolean checkAdmin(String hashKey){return userDataHandeler.checkAdmin(hashKey);}
 }
