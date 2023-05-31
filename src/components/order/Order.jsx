@@ -92,7 +92,7 @@ function Order(props) {
       setShow(true);
     }else{
       const formData = new FormData();
-      formData.append("id", 1);
+      formData.append("id", 1); //default for DTO
       formData.append("orderDate", "2023-05-23");
       formData.append("userId", "guest");
       formData.append("productId", productId);

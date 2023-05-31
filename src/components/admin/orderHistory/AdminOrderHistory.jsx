@@ -10,11 +10,20 @@ import PostSelector from "../../order/PostSelector";
 function AdminOrderHistroy(props) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [address, setAddress] = useState();
-  const [zoneCode, setZonecode] = useState();
   const remittanceImage = useRef();
   const [orderDetail, setOrderDetail] = useState(location.state.orderDetail);
   const [productDetail, setProductDetail] = useState(location.state.productDetail);
+
+  const [name, setName] = useState(location.state.orderDetail.name);
+  const [phoneNum, setPhoneNum] = useState(location.state.orderDetail.phoneNum);
+  const [address, setAddress] = useState(location.state.orderDetail.address);
+  const [zoneCode, setZonecode] = useState(location.state.orderDetail.zoneCode);
+  const [addressDetail, setAddressDetail] = useState(location.state.orderDetail.addressDetail);
+  const [imageId, setImageId] = useState(location.state.orderDetail.imageId);
+  const totalCost = location.state.orderDetail.totalCost;
+  const [uploadImage,setUploadImage] = useState();
+
+
   const [show, setShow] = useState(false);
   const [modalContent, setModalContent] = useState();
   const handleClose = () => setShow(false);
@@ -53,6 +62,41 @@ function AdminOrderHistroy(props) {
     });
   }
 
+  const editOrder = (e) => {
+    const formData = new FormData();
+    formData.append("id", 1); //default for DTO
+    formData.append("orderDate", "2023-05-23");
+    formData.append("userId", "guest");
+    formData.append("productId", productDetail.productId);
+    formData.append("color", orderDetail.color);
+    formData.append("num", orderDetail.number);
+    formData.append("totalCost", totalCost);
+    formData.append("orderName", document.getElementById("ip_name").value);
+    formData.append("orderPhone", phoneNum);
+    formData.append("orderZonecode", zoneCode);
+    formData.append("orderAddress", address);
+    formData.append("addressDetail", addressDetail);
+    formData.append("imageId", uploadImage);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/order/edit',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setModalContent("수정되었습니다");
+      setShow(true);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
   return (
       <Wrapper>
         <div className="order_main" id="main">
@@ -75,7 +119,7 @@ function AdminOrderHistroy(props) {
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
-                  <h3> 총액 : {orderDetail.totalCost}원 </h3>
+                  <h3> 총액 : {totalCost}원 </h3>
                 </div>
               </div>
             </div>
@@ -86,7 +130,7 @@ function AdminOrderHistroy(props) {
                 <h2 className="mg0">주문자 이름</h2>
               </div>
               <div className="gr-8">
-                <input type="text" disabled className="prl1" id="ip_name" defaultValue={orderDetail.orderName}></input>
+                <input type="text" className="prl1" id="ip_name" defaultValue={orderDetail.orderName}></input>
               </div>
 
 
@@ -95,20 +139,23 @@ function AdminOrderHistroy(props) {
                 <h2 className="mg0">전화번호</h2>
               </div>
               <div className="gr-8">
-                <input type="text" disabled className="prl1" id="ip_phone" defaultValue={orderDetail.orderPhone}></input>
+                <input type="text" className="prl1" id="ip_phone" defaultValue={orderDetail.orderPhone}></input>
               </div>
 
               <div className="gr-4 calign mt3">
-                <h2 className="mg0">주소</h2>
+                <PostSelector
+                  setAddress = {setAddress || ""}
+                  setZonecode = {setZonecode || ""}
+                />
               </div>
               <div className="gr-8 mt3">
-                <input type="text" className="prl1"  disabled id="zoneCode" defaultValue={orderDetail.orderZonecode} />
+                <input type="text" className="prl1"  disabled id="zoneCode" value={zoneCode} required />
               </div>
               <div className="gr-12">
-                <input type="text" className="prl1"  disabled id="address" defaultValue={orderDetail.orderAddress} />
+                <input type="text" className="prl1"  disabled id="address" value={address} required />
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" disabled id="address_detail" defaultValue={orderDetail.addressDetail}/>
+                <input type="text" required className="prl1" id="address_detail" defaultValue={orderDetail.addressDetail}/>
               </div>
 
               <div className="gr-12 mt3">
@@ -121,7 +168,7 @@ function AdminOrderHistroy(props) {
                 <button className="bt_back" onClick={(e) => {navigate("../AdminOrderList")}}> 목록으로 </button>
               </div>
               <div className="gr-6 calign pt3">
-                <button className="bt_edit"> 수정하기 </button>
+                <button className="bt_edit" onClick={editOrder}> 수정하기 </button>
               </div>
               <div className="gr-2 calign pt3">
                 <button className="bt_delete" onClick={deleteOrder}> 삭제 </button>
