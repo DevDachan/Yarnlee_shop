@@ -6,41 +6,44 @@ import Modal from 'react-bootstrap/Modal';
 import Phone from "../../order/Phone";
 import PostSelector from "../../order/PostSelector";
 
+const Wrapper = styled.div`
+    padding: 16px;
+    width: calc(100% - 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+`;
 
 function AdminOrderHistroy(props) {
   const navigate = useNavigate();
   const location = useLocation();
-  const remittanceImage = useRef();
   const [orderDetail, setOrderDetail] = useState(location.state.orderDetail);
   const [productDetail, setProductDetail] = useState(location.state.productDetail);
 
-  const [name, setName] = useState(location.state.orderDetail.name);
-  const [phoneNum, setPhoneNum] = useState(location.state.orderDetail.phoneNum);
-  const [address, setAddress] = useState(location.state.orderDetail.address);
-  const [zoneCode, setZonecode] = useState(location.state.orderDetail.zoneCode);
+  const [name, setName] = useState(location.state.orderDetail.orderName);
+  const [phoneNum, setPhoneNum] = useState(location.state.orderDetail.orderPhone);
+  const [address, setAddress] = useState(location.state.orderDetail.orderAddress);
+  const [zoneCode, setZonecode] = useState(location.state.orderDetail.orderZonecode);
   const [addressDetail, setAddressDetail] = useState(location.state.orderDetail.addressDetail);
   const [imageId, setImageId] = useState(location.state.orderDetail.imageId);
   const totalCost = location.state.orderDetail.totalCost;
-  const [uploadImage,setUploadImage] = useState();
+  const [uploadImage,setUploadImage] = useState(location.state.orderDetail.imageId);
 
+  const [modealYesNo, setModealYesNo] = useState(false);
 
   const [show, setShow] = useState(false);
   const [modalContent, setModalContent] = useState();
+  const [modalFunction, setModalFunction] = useState();
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
-  const Wrapper = styled.div`
-      padding: 16px;
-      width: calc(100% - 32px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-  `;
 
   const deleteOrder = (e) =>{
-    setModalContent("해당 주문을 삭제하시겠습니까?")
+    setModalContent("해당 주문을 삭제하시겠습니까?");
+    setModealYesNo(true);
+    setModalFunction(() => yesDelete);
     setShow(true);
   }
 
@@ -62,14 +65,24 @@ function AdminOrderHistroy(props) {
     });
   }
 
-  const editOrder = (e) => {
+
+  const editOrder = (e) =>{
+    setModalFunction(() => yseEdit);
+    setModealYesNo(true);
+    setModalContent("수정하시겠습니까?");
+    setShow(true);
+  }
+
+  const yseEdit = (e) => {
+    console.log(document.getElementById("ip_name").value);
+
     const formData = new FormData();
-    formData.append("id", 1); //default for DTO
+    formData.append("id", orderDetail.id); //default for DTO
     formData.append("orderDate", "2023-05-23");
     formData.append("userId", "guest");
-    formData.append("productId", productDetail.productId);
+    formData.append("productId", productDetail.id);
     formData.append("color", orderDetail.color);
-    formData.append("num", orderDetail.number);
+    formData.append("num", orderDetail.num);
     formData.append("totalCost", totalCost);
     formData.append("orderName", document.getElementById("ip_name").value);
     formData.append("orderPhone", phoneNum);
@@ -85,8 +98,7 @@ function AdminOrderHistroy(props) {
     })
     .then(function (response){
       //handle success
-      setModalContent("수정되었습니다");
-      setShow(true);
+      setShow(false);
     })
     .catch(function(error){
       //handle error
@@ -96,6 +108,47 @@ function AdminOrderHistroy(props) {
       // always executed
     });
   }
+
+  const changeImage = (e) =>{
+    var input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+    input.onchange = async() => {
+      if(input.files){
+        var file: any = input.files[0];
+        var formData = new FormData();
+        formData.append("file", file);
+
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/order/insertUserImage',
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+        })
+        .then(function (response){
+          if(response.data != -1){
+            setUploadImage(response.data);
+          }
+        })
+        .catch(function(error){
+          //handle error
+          console.log(error);
+        })
+        .then(function(){
+          // always executed
+        });
+      }
+    }
+  }
+  const previewImage = (e) =>{
+    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}></img>);
+    setModealYesNo(false);
+    setShow(true);
+  }
+
 
   return (
       <Wrapper>
@@ -130,7 +183,7 @@ function AdminOrderHistroy(props) {
                 <h2 className="mg0">주문자 이름</h2>
               </div>
               <div className="gr-8">
-                <input type="text" className="prl1" id="ip_name" defaultValue={orderDetail.orderName}></input>
+                <input type="text" className="prl1" id="ip_name" defaultValue={name}></input>
               </div>
 
 
@@ -139,7 +192,7 @@ function AdminOrderHistroy(props) {
                 <h2 className="mg0">전화번호</h2>
               </div>
               <div className="gr-8">
-                <input type="text" className="prl1" id="ip_phone" defaultValue={orderDetail.orderPhone}></input>
+                  <Phone phoneNum={phoneNum || ""} setPhoneNum={setPhoneNum}/ >
               </div>
 
               <div className="gr-4 calign mt3">
@@ -159,9 +212,21 @@ function AdminOrderHistroy(props) {
               </div>
 
               <div className="gr-12 mt3">
-                <img className="detail_img" src={"uploadImage" == undefined ? "" :"../userImage/"+orderDetail.imageId+".jpg"}
-                alt=""
-                />
+              {
+                uploadImage == undefined ?
+                <>
+                <label id="lb_image" htmlFor="image_remittance" onClick={changeImage}>Upload</label>
+                </>
+                :
+                <>
+                <div style={{"white-space": "nowrap"}}>
+                  <input type="button" className="mb-3 mr3 imagebtn" onClick={changeImage} value="REUPLOAD" />
+                  <input type="button" className="mb-3 imagebtn" onClick={previewImage} value="PREVIEW" />
+                </div>
+                <img className="detail_img" src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}
+                alt=""/>
+                </>
+              }
               </div>
 
               <div className="gr-4 calign pt3">
@@ -184,14 +249,18 @@ function AdminOrderHistroy(props) {
             {modalContent}
           </Modal.Body>
           <Modal.Footer>
-            <div className="grid_t" style={{width: "100%"}}>
-              <div className="gr-6 lalign">
-                <button onClick={handleClose}>아니오</button>
-              </div>
-              <div className="gr-6 ralign">
-                <button onClick={yesDelete}>네</button>
-              </div>
-            </div>
+            {
+              modealYesNo?
+              <div className="grid_t" style={{width: "100%"}}>
+                <div className="gr-6 lalign">
+                  <button onClick={handleClose}>아니오</button>
+                </div>
+                <div className="gr-6 ralign">
+                  <button onClick={modalFunction}>네</button>
+                </div>
+              </div>:
+              <button onClick={handleClose}>닫기</button>
+            }
           </Modal.Footer>
         </Modal>
       </Wrapper>
