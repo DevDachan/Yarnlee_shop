@@ -91,9 +91,19 @@ function Order(props) {
       setModalContent(<p> 입력되지 않은 정보가 존재합니다. </p>);
       setShow(true);
     }else{
+
+      const currentTime = new Date();
+      const year = currentTime.getFullYear();
+      const month = currentTime.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
+      const day = currentTime.getDate();
+      const hours = currentTime.getHours();
+      const minutes = currentTime.getMinutes();
+      const seconds = currentTime.getSeconds();
+      var timeFormat = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
       const formData = new FormData();
       formData.append("id", 1); //default for DTO
-      formData.append("orderDate", "2023-05-23");
+      formData.append("orderDate", timeFormat);
       formData.append("userId", "guest");
       formData.append("productId", productId);
       formData.append("color", color);
