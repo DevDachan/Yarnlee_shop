@@ -29,10 +29,10 @@ function Login(props) {
 
 
     useEffect( () => {
-      if(sessionStorage.getItem("admin") == "yes"){
+      if(sessionStorage.getItem("admin") != null && sessionStorage.getItem("admin") != undefined){
         navigate("../adminOrderList");
       }
-    })
+    },[])
 
     const onClick = (event) =>{
       event.preventDefault();

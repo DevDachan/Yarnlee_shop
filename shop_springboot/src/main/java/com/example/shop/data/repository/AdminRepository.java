@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface AdminRepository extends JpaRepository<AdminEntity, String> {
-  @Query(value = "SELECT COUNT(*) FROM user WHERE id=:id AND address=:hashKey", nativeQuery = true)
+  @Query(value = "SELECT COUNT(*) FROM admin WHERE id=:id AND hash_Key=:hashKey", nativeQuery = true)
   int checkAdmin(String hashKey, String id);
 }

@@ -130,10 +130,10 @@ public class OrderController {
       @RequestParam String hashKey,
       @RequestParam String id
   ){
-    System.out.println(hashKey);
-    System.out.println(id);
-
     if(!userService.checkAdmin(hashKey,id)){
+      System.out.println(id);
+      System.out.println(hashKey);
+
       return null;
     }
 

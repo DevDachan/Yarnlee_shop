@@ -21,10 +21,8 @@ function AdminOrderList(props) {
     const [orderList, setOrderList] = useState();
     const [productList, setProductList] = useState();
 
-    console.log(sessionStorage.getItem("adminHash"));
-
     useEffect(() => {
-      if(sessionStorage.getItem("admin") != "yes"){
+      if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
         navigate('../adminLogin');
       }else{
         axios({
@@ -38,7 +36,7 @@ function AdminOrderList(props) {
         .then(function (response){
           //handle success
           if(response.data == ""){
-            navigate('../adminLogin');
+            //navigate('../adminLogin');
           }else{
             setOrderList(response.data.orderList);
             setProductList(response.data.productList);
