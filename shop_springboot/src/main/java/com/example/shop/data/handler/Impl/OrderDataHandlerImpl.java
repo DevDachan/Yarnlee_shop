@@ -20,16 +20,9 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
     public OrderDataHandlerImpl(OrderDAO orderDAO) {this.orderDAO = orderDAO;}
 
     @Override
-    public OrderEntity saveOrderEntity(
-        int orderId, String orderDate, String orderUserId, int orderProductId, String orderColor,
-        int num, int totalCost, String orderName, String orderPhone, int orderZoneCode, String orderAddress,
-        String addressDetail, int imageId
-    ){
-      OrderEntity orderEntity = new OrderEntity(
-          orderId, orderDate, orderUserId, orderProductId, orderColor,
-          num, totalCost, orderName, orderPhone, orderZoneCode, orderAddress,
-          addressDetail, imageId
-      );
+    public OrderEntity saveOrder(OrderDTO orderDTO){
+      OrderEntity orderEntity = orderDTO.toEntity();
+
       return orderDAO.saveOrder(orderEntity);
     }
 
@@ -38,11 +31,7 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
     OrderEntity orderEntity = orderDAO.getOrder(orderId);
     if(orderEntity == null) return null;
 
-    OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), orderEntity.getOrderDate(),
-        orderEntity.getUserId(), orderEntity.getProductId(), orderEntity.getColor(), orderEntity.getNum(),
-        orderEntity.getTotalCost(), orderEntity.getOrderName(), orderEntity.getOrderPhone(), orderEntity.getOrderZonecode(),
-        orderEntity.getOrderAddress(),orderEntity.getAddressDetail(), orderEntity.getImageId()
-    );
+    OrderDTO orderDTO = orderEntity.toDto();
 
     return orderDTO;
   }
@@ -62,10 +51,7 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
       if(orderEntity.size() == 0) return null;
 
       for(OrderEntity temp : orderEntity){
-        OrderDTO orderTemp = new OrderDTO(temp.getId(), temp.getOrderDate(),
-            temp.getUserId(), temp.getProductId(), temp.getColor(), temp.getNum(),
-            temp.getTotalCost(), temp.getOrderName(), temp.getOrderPhone(), temp.getOrderZonecode(),
-            temp.getOrderAddress(),temp.getAddressDetail(), temp.getImageId());
+        OrderDTO orderTemp = temp.toDto();
         orderDTO.add(orderTemp);
       }
 
@@ -78,10 +64,7 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
     if(orderEntity.size() == 0) return null;
 
     for(OrderEntity temp : orderEntity){
-      OrderDTO orderTemp = new OrderDTO(temp.getId(), temp.getOrderDate(),
-          temp.getUserId(), temp.getProductId(), temp.getColor(), temp.getNum(),
-          temp.getTotalCost(), temp.getOrderName(), temp.getOrderPhone(), temp.getOrderZonecode(),
-          temp.getOrderAddress(),temp.getAddressDetail(), temp.getImageId());
+      OrderDTO orderTemp = temp.toDto();
       orderDTO.add(orderTemp);
     }
 

@@ -52,22 +52,14 @@ public class OrderController {
   public ResponseEntity<OrderDTO> createProduct(@Valid OrderDTO orderDto) {
     System.out.println(orderDto);
 
-    int orderId = orderService.getRandomId();
-    String orderDate = orderDto.getOrderDate();
-    String orderUserId = orderDto.getUserId();
-    int orderProductId = orderDto.getProductId();
-    String orderColor = orderDto.getColor();
-    int num = orderDto.getNum();
-    int totalCost = orderDto.getTotalCost();
-    String orderName = orderDto.getOrderName();
-    String orderPhone = orderDto.getOrderPhone();
-    int orderZoneCode = orderDto.getOrderZonecode();
-    String orderAddress = orderDto.getOrderAddress();
-    String addressDetail = orderDto.getAddressDetail();
-    int imageId = orderDto.getImageId();
+    orderDto.setId(orderService.getRandomId());
+    OrderDTO response = orderService.saveOrder(orderDto);
+    return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+  }
 
-
-    OrderDTO response = orderService.saveOrder(orderId, orderDate, orderUserId, orderProductId, orderColor, num, totalCost, orderName, orderPhone, orderZoneCode, orderAddress, addressDetail, imageId);
+  @PostMapping(value="/edit")
+  public ResponseEntity<OrderDTO> editProduct(@Valid OrderDTO orderDTO) {
+    OrderDTO response = orderService.saveOrder(orderDTO);
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 
@@ -135,9 +127,13 @@ public class OrderController {
 
   @GetMapping(value = "/getAdminOrderHistory")
   public Map<String, Object> getAdminOrderHistory(
-      @RequestParam String hashKey
+      @RequestParam String hashKey,
+      @RequestParam String id
   ){
-    if(!userService.checkAdmin(hashKey)){
+    System.out.println(hashKey);
+    System.out.println(id);
+
+    if(!userService.checkAdmin(hashKey,id)){
       return null;
     }
 

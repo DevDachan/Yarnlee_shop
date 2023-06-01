@@ -4,6 +4,7 @@ import com.example.shop.data.dto.AdminDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,11 +26,13 @@ public class AdminEntity {
 
   String password;
 
+  String hashKey;
 
   public AdminDTO toDto(){
     return AdminDTO.builder()
         .id(id)
         .password(password)
+        .hashKey(hashKey)
         .build();
   }
 }

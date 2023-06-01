@@ -24,7 +24,7 @@ function AdminMain(props) {
   const [relandering, setRelangering] = useState();
 
   useEffect(() => {
-    if(sessionStorage.getItem("admin") != "yes"){
+    if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
       navigate('../adminLogin');
     }
 

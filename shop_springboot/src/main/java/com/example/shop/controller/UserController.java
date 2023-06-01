@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 
+import com.example.shop.data.dto.AdminDTO;
 import com.example.shop.data.dto.UserDTO;
 import com.example.shop.data.service.UserService;
 import jakarta.validation.Valid;
@@ -62,7 +63,19 @@ public class UserController {
     return null;
   }
 
+  @PostMapping(value = "/adminLogin")
+  public String adminLogin(@RequestBody Map<String, String> postData) {
+    Optional<AdminDTO> optionalAdminDTO = userService.getAdmin(postData.get("id"));
 
+    if (optionalAdminDTO.isPresent()) {
+      AdminDTO adminDTO = optionalAdminDTO.get();
+      if(adminDTO.getPassword().equals(postData.get("password"))) {
+        return adminDTO.getHashKey();
+      }
+      return "password";
+    }
+    return "id";
+  }
   @PostMapping(value = "/info")
   public UserDTO infoUser(@RequestParam("id") String id) {
     Optional<UserDTO> optionalUserDTO = userService.getUser(id);

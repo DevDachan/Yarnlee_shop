@@ -10,6 +10,4 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
   UserEntity getById(String id);
   boolean existsByPhone(String Phone);
 
-  @Query(value = "SELECT COUNT(*) FROM user WHERE id='admin' AND address=:hashKey", nativeQuery = true)
-  int checkAdmin(String hashKey);
 }

@@ -1,6 +1,8 @@
 package com.example.shop.data.handler.Impl;
 
 import com.example.shop.data.dao.UserDAO;
+import com.example.shop.data.dto.AdminDTO;
+import com.example.shop.data.entity.AdminEntity;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserDataHandler;
 import jakarta.transaction.Transactional;
@@ -32,6 +34,18 @@ public class UserDataHandlerImpl implements UserDataHandler {
       return Optional.empty();
     }
   }
+
+  @Override
+  public Optional<AdminEntity> getAdminDTO(String id){
+    Optional<AdminEntity> optionalUserEntity = userDAO.getAdmin(id);
+    if (optionalUserEntity.isPresent()) {
+      return optionalUserEntity;
+    } else {
+      return Optional.empty();
+    }
+  }
+
+
   @Override
   public boolean phoneDupCheck(String phone){
     return userDAO.phoneDupCheck(phone);
@@ -43,5 +57,5 @@ public class UserDataHandlerImpl implements UserDataHandler {
   }
 
   @Override
-  public boolean checkAdmin(String hashKey){return userDAO.checkAdmin(hashKey);}
+  public boolean checkAdmin(String hashKey,String id){return userDAO.checkAdmin(hashKey,id);}
 }

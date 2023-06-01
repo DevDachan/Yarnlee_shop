@@ -35,22 +35,25 @@ function AdminLogin(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/user/login',
+        url: 'http://localhost:8090/shop-backend/user/adminLogin',
         data: {
-          userId: id,
+          id: id,
           password: pwd
         }
       })
       .then(function (response){
         //handle success
-        if(response.data.id =="admin"){
-          sessionStorage.setItem("admin", "yes");
-          sessionStorage.setItem("adminHash", response.data.address);
+        if(response.data == "id"){
+          setModalContent("아이디가 잘못되었습니다.");
+          setShow(true);
+        }else if(response.data == "password"){
+          setModalContent("비밀번호가 잘못되었습니다.");
+          setShow(true);
+        }else{
+          sessionStorage.setItem("admin", id);
+          sessionStorage.setItem("adminHash", response.data);
 
           navigate('../adminMain');
-        }else{
-          setModalContent("아이디 혹은 비밀번호가 잘못되었습니다.");
-          setShow(true);
         }
       })
       .catch(function(error){

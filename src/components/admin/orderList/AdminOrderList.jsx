@@ -31,7 +31,8 @@ function AdminOrderList(props) {
           method: "get",
           url: 'http://localhost:8090/shop-backend/order/getAdminOrderHistory',
           params:{
-            hashKey: sessionStorage.getItem("adminHash")
+            hashKey: sessionStorage.getItem("adminHash"),
+            id: sessionStorage.getItem("admin")
           }
         })
         .then(function (response){

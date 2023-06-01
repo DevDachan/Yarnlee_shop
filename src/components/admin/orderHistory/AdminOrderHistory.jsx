@@ -74,8 +74,6 @@ function AdminOrderHistroy(props) {
   }
 
   const yseEdit = (e) => {
-    console.log(document.getElementById("ip_name").value);
-
     const formData = new FormData();
     formData.append("id", orderDetail.id); //default for DTO
     formData.append("orderDate", "2023-05-23");

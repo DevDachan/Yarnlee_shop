@@ -29,21 +29,12 @@ public class OrderServiceImpl implements OrderService {
   // Service(Client) <-> Controller : DTO
   // Service <-> DAO(DB) : Entity
   @Override
-  public OrderDTO saveOrder(
-        int orderId, String orderDate, String orderUserId, int orderProductId, String orderColor,
-        int num, int totalCost, String orderName, String orderPhone, int orderZoneCode, String orderAddress,
-        String addressDetail, int imageId
-    ){
+  public OrderDTO saveOrder(OrderDTO orderDTO ){
 
-    OrderEntity orderEntity = orderDataHandeler.saveOrderEntity( orderId,  orderDate,  orderUserId,  orderProductId,  orderColor,
-     num,  totalCost,  orderName,  orderPhone,  orderZoneCode,  orderAddress, addressDetail,  imageId);
+    OrderEntity orderEntity = orderDataHandeler.saveOrder(orderDTO);
 
-    OrderDTO orderDTO = new OrderDTO(orderEntity.getId(), orderEntity.getOrderDate(),
-        orderEntity.getUserId(), orderEntity.getProductId(), orderEntity.getColor(), orderEntity.getNum(),
-        orderEntity.getTotalCost(), orderEntity.getOrderName(), orderEntity.getOrderPhone(), orderEntity.getOrderZonecode(),
-        orderEntity.getOrderAddress(),orderEntity.getAddressDetail(), orderEntity.getImageId()
-    );
-    return orderDTO;
+    OrderDTO resultOrderDTO = orderEntity.toDto();
+    return resultOrderDTO;
   }
 
   @Override

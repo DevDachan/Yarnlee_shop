@@ -20,11 +20,16 @@ public class AdminDTO {
   @NotNull
   private String password;
 
+  @NotNull
+  private String hashKey;
+
+
 
   public AdminEntity toEntity(){
     return AdminEntity.builder()
         .id(id)
         .password(password)
+        .hashKey(hashKey)
         .build();
   }
 
