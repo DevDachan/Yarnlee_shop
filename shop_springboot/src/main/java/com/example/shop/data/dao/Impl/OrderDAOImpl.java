@@ -7,6 +7,7 @@ import com.example.shop.data.entity.OrderEntity;
 import com.example.shop.data.repository.OrderRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,7 +24,6 @@ public class OrderDAOImpl implements OrderDAO {
   @Override
   public OrderEntity saveOrder(OrderEntity orderEntity){
     orderRepository.save(orderEntity);
-    System.out.println(orderEntity);
     return orderEntity;
   }
   @Override
@@ -51,7 +51,8 @@ public class OrderDAOImpl implements OrderDAO {
 
   @Override
   public List<OrderEntity> getOrderAll(){
-    return orderRepository.findAll();
+    Sort sort = Sort.by(Sort.Direction.DESC, "orderDate");
+    return orderRepository.findAll(sort);
   }
 }
 

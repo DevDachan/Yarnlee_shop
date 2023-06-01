@@ -15,7 +15,7 @@ public interface OrderRepository extends JpaRepository<OrderEntity, String> {
   List<Integer> findDistinctId();
 
 
-  @Query(value = "SELECT * FROM ordert WHERE order_phone LIKE(:phoneNum) AND order_name LIKE(:name)", nativeQuery = true)
+  @Query(value = "SELECT * FROM ordert WHERE order_phone LIKE(:phoneNum) AND order_name LIKE(:name) ORDER BY order_date", nativeQuery = true)
   List<OrderEntity> getOrderUsingPhone(String phoneNum,String name);
 
 }
