@@ -4,6 +4,7 @@ package com.example.shop.controller;
 import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.ProductService;
+import com.example.shop.data.service.UserService;
 import jakarta.validation.Valid;
 import java.io.File;
 import java.nio.file.Files;
@@ -28,10 +29,14 @@ public class ProductController {
   private ProductService productService;
   private ImageService imageService;
 
+  private UserService userService;
+
   @Autowired
-  public ProductController(ProductService productService,ImageService imageService) {
+  public ProductController(ProductService productService,ImageService imageService,
+      UserService userService) {
     this.imageService = imageService;
     this.productService = productService;
+    this.userService = userService;
   }
 
 
@@ -96,6 +101,23 @@ public class ProductController {
     formData.put("product" ,productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
+  }
+
+  @GetMapping(value = "/deleteProduct")
+  public String deleteProduct(
+      @RequestParam String hashKey,
+      @RequestParam int id,
+      @RequestParam String adminId
+      ) {
+    if(!userService.checkAdmin(hashKey,adminId)){
+      System.out.println(id);
+      System.out.println(hashKey);
+
+      return "AuthFail";
+    }
+
+    productService.deleteProduct(id) ;
+    return "delete";
   }
 
 

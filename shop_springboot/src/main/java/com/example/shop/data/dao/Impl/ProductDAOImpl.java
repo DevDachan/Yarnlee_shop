@@ -53,6 +53,10 @@ public class ProductDAOImpl implements ProductDAO {
   public void deleteColor(int productId,String color){productColorRepository.deleteColor(productId, color);}
 
   @Override
+  public void deleteProduct(int productId){ productRepository.deleteById(String.valueOf(productId));}
+
+
+  @Override
   public void insertColor(int productId, String color){productColorRepository.insertColor(productId, "color"+color);}
 
   @Override

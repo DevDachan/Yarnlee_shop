@@ -49,12 +49,17 @@ public class ProductServiceImpl implements ProductService {
   public List<String> getColor(int productId){
     List<ProductColorEntity> colorDTOList = productDataHandeler.getColor(productId);
     List<String> colorList = new ArrayList();
-    System.out.println(colorDTOList);
 
     for(ProductColorEntity temp : colorDTOList){
       colorList.add(temp.getColor());
     }
     return colorList;
+  }
+
+
+  @Override
+  public void deleteProduct(int productId){
+    productDataHandeler.deleteProduct(productId);
   }
 
   @Override

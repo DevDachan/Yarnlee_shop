@@ -18,6 +18,9 @@ public interface ProductDataHandler {
 
   void deleteColor(int productId,String color);
 
+  void deleteProduct(int productId);
+
+
   void insertColor(int productId, String color);
 
   void changePosition(int id, int nextId);

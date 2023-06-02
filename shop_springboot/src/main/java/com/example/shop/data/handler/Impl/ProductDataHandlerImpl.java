@@ -44,6 +44,10 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   public void deleteColor(int productId,String color){productDAO.deleteColor(productId, color);}
 
   @Override
+  public void deleteProduct(int productId){ productDAO.deleteProduct(productId);}
+
+
+  @Override
   public void insertColor(int productId, String color){productDAO.insertColor(productId,color);}
 
   @Override
