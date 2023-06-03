@@ -145,8 +145,33 @@ function AdminOrderHistroy(props) {
     setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}></img>);
     setModealYesNo(false);
     setShow(true);
+    sendSMS();
   }
 
+ const sendSMS = (e) =>{
+   var formData = new FormData();
+   formData.append("to", "01068189524");
+   formData.append("content", "test");
+
+   axios({
+     method: "post",
+     url: 'http://localhost:8090/shop-backend/order/sms/send',
+     data: formData,
+     headers: {
+       'Content-Type': 'multipart/form-data'
+     },
+   })
+   .then(function (response){
+     console.log("suc");
+   })
+   .catch(function(error){
+     //handle error
+     console.log(error);
+   })
+   .then(function(){
+     // always executed
+   });
+ }
 
 
   return (
