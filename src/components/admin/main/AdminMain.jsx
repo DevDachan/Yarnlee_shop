@@ -247,8 +247,7 @@ function AdminMain(props) {
           <div id="main">
             <div className="inner mg0">
               <header>
-                <textarea placeholder="메인 화면에서 나타날 내용 입력" defaultValue="<h1>안녕하십니까!!<br />
-                예제 쇼핑몰 페이지입니다!</h1>">
+                <textarea placeholder="메인 화면에서 나타날 내용 입력" defaultValue="">
                 </textarea>
               </header>
               <section className="tiles mt2">

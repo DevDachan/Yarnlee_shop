@@ -1,15 +1,23 @@
 package com.example.shop.controller;
 
 
+import com.example.shop.data.dto.MessageDTO;
 import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.dto.ProductDTO;
+import com.example.shop.data.dto.SmsResponseDTO;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.OrderService;
 import com.example.shop.data.service.ProductService;
+import com.example.shop.data.service.SMSService;
 import com.example.shop.data.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +25,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -39,13 +49,17 @@ public class OrderController {
   private UserService userService;
 
   private ImageService imageService;
+
+  private SMSService smsService;
+
   @Autowired
   public OrderController(OrderService orderService,ProductService productService,
-      ImageService imageService, UserService userService) {
+      ImageService imageService, UserService userService,SMSService smsService) {
     this.orderService = orderService;
     this.productService = productService;
     this.imageService = imageService;
     this.userService = userService;
+    this.smsService = smsService;
   }
 
   @PostMapping(value="/insert")
@@ -154,6 +168,18 @@ public class OrderController {
     }
   }
 
+
+  @GetMapping("/send")
+  public String getSmsPage() {
+    return "sendSms";
+  }
+
+  @PostMapping("/sms/send")
+  public String sendSms(MessageDTO messageDto, Model model) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+    SmsResponseDTO response = smsService.sendSms(messageDto);
+    model.addAttribute("response", response);
+    return "result";
+  }
 
   @DeleteMapping(value = "/delete/id/{orderId}")
   public void deleteOrder(@PathVariable String orderId) {
