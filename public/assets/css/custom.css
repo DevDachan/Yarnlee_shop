@@ -12,7 +12,7 @@ footer{
 }
 
 .imagebtn{
-  width: 40% !important; 
+  width: 40% !important;
 }
 
 /* content page*/
@@ -21,6 +21,9 @@ article{
   height: 25vw !important;
 }
 
+.changeState{
+  width: 100%;
+}
 
 
 .ql-editor > p > img{

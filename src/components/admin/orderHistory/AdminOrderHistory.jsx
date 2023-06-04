@@ -265,6 +265,35 @@ function AdminOrderHistroy(props) {
             </div>
           </div>
         </div>
+        <div className="order_main" style={{padding: "30px", boxShadow: "3px 3px 3px 3px rgb(98 217 182)"}}>
+          <div className="grid_t">
+            <div className="gr-12 calign mt3 mb3">
+              <h2 > 배송 상태 관리 </h2>
+            </div>
+            <div className="gr-6 calign">
+              <h3> 주문 상태 </h3>
+            </div>
+            <div className="gr-6">
+              <select className="changeState">
+                <option value="주문 완료" className="option_select">주문 완료</option>
+                <option value="결재 완료" className="option_select">결재 완료</option>
+                <option value="제작 중" className="option_select">제작 중</option>
+                <option value="발송 완료" className="option_select">발송 완료</option>
+                <option value="배송 완료" className="option_select">배송 완료</option>
+              </select>
+            </div>
+            <div className="gr-12 mt3 calign">
+              <h3> 문자 전송 </h3>
+            </div>
+            <div className="gr-12 mt-3 calign">
+              <textarea />
+            </div>
+            <div className="gr-12 ralign mt2">
+              <button className="" value=""> 전송 </button>
+            </div>
+          </div>
+        </div>
+
         <Modal show={show} onHide={handleClose}>
           <Modal.Header>
             <Modal.Title>안내</Modal.Title>
