@@ -63,11 +63,16 @@ public class OrderController {
   }
 
   @PostMapping(value="/insert")
-  public ResponseEntity<OrderDTO> createProduct(@Valid OrderDTO orderDto) {
+  public ResponseEntity<OrderDTO> insertOrder(@Valid OrderDTO orderDto)
+      throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException, InvalidKeyException, JsonProcessingException {
     System.out.println(orderDto);
 
     orderDto.setId(orderService.getRandomId());
     OrderDTO response = orderService.saveOrder(orderDto);
+    MessageDTO messageDto = new MessageDTO(orderDto.getOrderPhone().replace("-","")
+        ,"상품 주문이 완료 되었습니다!");
+    SmsResponseDTO sendResult = smsService.sendSms(messageDto);
+
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 
@@ -145,9 +150,6 @@ public class OrderController {
       @RequestParam String id
   ){
     if(!userService.checkAdmin(hashKey,id)){
-      System.out.println(id);
-      System.out.println(hashKey);
-
       return null;
     }
 
