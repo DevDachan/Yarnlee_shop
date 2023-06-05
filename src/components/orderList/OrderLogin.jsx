@@ -28,15 +28,8 @@ function Login(props) {
     const handleOpen = () => setShow(true);
 
 
-    useEffect( () => {
-      if(sessionStorage.getItem("admin") != null && sessionStorage.getItem("admin") != undefined){
-        navigate("../adminOrderList");
-      }
-    },[])
-
     const onClick = (event) =>{
       event.preventDefault();
-
       const formData = new FormData();
       formData.append("type", infoType);
 
@@ -70,7 +63,6 @@ function Login(props) {
             }
           });
         }
-
       })
       .catch(function(error){
         //handle error
@@ -79,6 +71,43 @@ function Login(props) {
         // always executed
       });
     }
+
+
+    useEffect( () => {
+      if(sessionStorage.getItem("admin") != null && sessionStorage.getItem("admin") != undefined){
+        navigate("../adminOrderList");
+      }else if(sessionStorage.getItem("name") != null && sessionStorage.getItem("phone") != null
+        && sessionStorage.getItem("name") != undefined && sessionStorage.getItem("phone") != undefined
+      ){
+        const formData = new FormData();
+        formData.append("type", "전화 번호");
+        formData.append("name", sessionStorage.getItem("name"));
+        formData.append("content", sessionStorage.getItem("phone"));
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
+          data: formData
+        })
+        .then(function (response){
+          //handle success
+          if(response.data == ""){
+              setShow(true);
+          }else{
+            navigate('../orderList', {
+              state: {
+                list: response.data
+              }
+            });
+          }
+        })
+        .catch(function(error){
+          //handle error
+        })
+        .then(function(){
+          // always executed
+        });
+      }
+    },[]);
 
     const changeType = (e) =>{
       setInfoType(e.target.value);
