@@ -20,6 +20,7 @@ function Login(props) {
       setShow(false);
       sessionStorage.clear();
       navigate("../");
+      window.location.reload();
     };
     const handleOpen = () => setShow(true);
 

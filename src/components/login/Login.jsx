@@ -61,6 +61,7 @@ function Login(props) {
               userName: "dachan"
             }
           });
+          window.location.reload();
         }
       })
       .catch(function(error){
