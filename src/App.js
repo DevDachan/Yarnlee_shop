@@ -14,6 +14,7 @@ import Main from "./components/Main";
 import Content from "./components/detail/Content";
 import Order from "./components/order/Order";
 import Login from "./components/login/Login";
+import Logout from "./components/login/Logout";
 import Register from "./components/register/Register";
 import Nav from "./components/Nav";
 import OrderLogin from "./components/orderList/OrderLogin";
@@ -35,6 +36,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/logout" element={<Logout />}></Route>
         <Route path="/content" element={<Content />}></Route>
         <Route path="/order" element={<Order />}></Route>
         <Route path="/orderLogin" element={<OrderLogin />}></Route>
