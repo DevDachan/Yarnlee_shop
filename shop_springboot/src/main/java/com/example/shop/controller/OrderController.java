@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -52,6 +53,9 @@ public class OrderController {
 
   private SMSService smsService;
 
+  @Value("${naver-cloud-sms.senderPhone}")
+  private String adminPhone;
+
   @Autowired
   public OrderController(OrderService orderService,ProductService productService,
       ImageService imageService, UserService userService,SMSService smsService) {
@@ -65,13 +69,23 @@ public class OrderController {
   @PostMapping(value="/insert")
   public ResponseEntity<OrderDTO> insertOrder(@Valid OrderDTO orderDto)
       throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException, InvalidKeyException, JsonProcessingException {
-    System.out.println(orderDto);
 
     orderDto.setId(orderService.getRandomId());
     OrderDTO response = orderService.saveOrder(orderDto);
+
+    String content = "<YarnLee> \n"+ "주문자 : "+orderDto.getOrderName()+ "\n" +
+        "주문번호: "+ orderDto.getId() + "\n"
+        + "송금내역이 확인되는대로 연락드리겠습니다";
     MessageDTO messageDto = new MessageDTO(orderDto.getOrderPhone().replace("-","")
-        ,"상품 주문이 완료 되었습니다!");
+        ,content);
     SmsResponseDTO sendResult = smsService.sendSms(messageDto);
+
+    content = "<YarnLee> \n"+ "주문자 : "+orderDto.getOrderName()+ "\n" +
+        "주문번호: "+ orderDto.getId() + "\n"
+        + "새로운 주문이 들어왔습니다.";
+    MessageDTO adminMessageDto = new MessageDTO(adminPhone,content);
+    smsService.sendSms(adminMessageDto);
+
 
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
