@@ -83,7 +83,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/admin/changeMainContent',
+      url: 'http://localhost:8090/shop-backend/admin/editMainContent',
       data: formData
     })
     .then(function (response){

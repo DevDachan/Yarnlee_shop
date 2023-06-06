@@ -18,6 +18,7 @@ const Wrapper = styled.div`
 
 function Main(props) {
   const [productList, setProductList] = useState();
+  const [mainContent,setMainContent] = useState("");
   const navigate = useNavigate();
 
   var product_content = '';
@@ -38,6 +39,23 @@ function Main(props) {
     .then(function(){
       // always executed
     });
+
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/admin/getMainContent'
+    })
+    .then(function (response){
+      //handle success
+      setMainContent(response.data);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+
   },[]);
 
   function makeProductContent(){
@@ -68,6 +86,7 @@ function Main(props) {
             <div className="inner mg0">
               <header>
                 <h1>Only Handmade</h1>
+                <h2 style={{whiteSpace: "pre"}}>{mainContent}</h2>
               </header>
               <section className="tiles">
                 {
