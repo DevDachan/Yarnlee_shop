@@ -9,11 +9,8 @@ public interface UserService {
 
   Optional<UserDTO> getUser(String userId);
 
-  Optional<AdminDTO> getAdmin(String id);
-
   boolean phoneDupCheck(String phone);
 
   boolean idDupCheck(String phone);
 
-  boolean checkAdmin(String HashKey,String id);
 }

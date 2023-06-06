@@ -9,7 +9,7 @@ import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.OrderService;
 import com.example.shop.data.service.ProductService;
 import com.example.shop.data.service.SMSService;
-import com.example.shop.data.service.UserService;
+import com.example.shop.data.service.AdminService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import java.io.UnsupportedEncodingException;
@@ -47,7 +47,7 @@ public class OrderController {
   private OrderService orderService;
   private ProductService productService;
 
-  private UserService userService;
+  private AdminService adminService;
 
   private ImageService imageService;
 
@@ -58,11 +58,11 @@ public class OrderController {
 
   @Autowired
   public OrderController(OrderService orderService,ProductService productService,
-      ImageService imageService, UserService userService,SMSService smsService) {
+      ImageService imageService, AdminService adminService,SMSService smsService) {
     this.orderService = orderService;
     this.productService = productService;
     this.imageService = imageService;
-    this.userService = userService;
+    this.adminService = adminService;
     this.smsService = smsService;
   }
 
@@ -163,7 +163,7 @@ public class OrderController {
       @RequestParam String hashKey,
       @RequestParam String id
   ){
-    if(!userService.checkAdmin(hashKey,id)){
+    if(!adminService.checkAdmin(hashKey,id)){
       return null;
     }
 

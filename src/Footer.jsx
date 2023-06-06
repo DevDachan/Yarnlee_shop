@@ -9,9 +9,9 @@ function Footer(props){
       <section>
         <h2>Follow</h2>
         <ul className="icons">
-          <li><a href="https://instagram.com/yarnlee__?igshid=YmMyMTA2M2Y=" className="icon brands style2 fa-instagram"><span className="label">Instagram</span></a></li>
-          <li><a href="tel:010-6818-9524" className="icon solid style2 fa-phone"><span className="label">Phone</span></a></li>
-          <li><a href="mailto:chn7894@handong.ac.kr" className="icon solid style2 fa-envelope"><span className="label">Email</span></a></li>
+          <li><a href="https://instagram.com/yarnlee__?igshid=YmMyMTA2M2Y=" target="_blank" className="icon brands style2 fa-instagram"><span className="label">Instagram</span></a></li>
+          <li><a href="tel:010-6818-9524" target="_blank" className="icon solid style2 fa-phone"><span className="label">Phone</span></a></li>
+          <li><a href="mailto:chn7894@handong.ac.kr" target="_blank" className="icon solid style2 fa-envelope"><span className="label">Email</span></a></li>
         </ul>
       </section>
       <ul className="copyright">

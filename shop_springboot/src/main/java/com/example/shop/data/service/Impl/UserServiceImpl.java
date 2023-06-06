@@ -44,18 +44,6 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public Optional<AdminDTO>  getAdmin(String id){
-    Optional<AdminEntity> optionalAdminEntity = userDataHandeler.getAdminDTO(id);;
-    if(optionalAdminEntity.isPresent()){
-      AdminEntity adminEntity = optionalAdminEntity.get();
-      AdminDTO adminDTO = adminEntity.toDto();
-      return Optional.ofNullable(adminDTO);
-    }else{
-      return Optional.empty();
-    }
-  }
-
-  @Override
   public boolean phoneDupCheck(String phone){
     return userDataHandeler.phoneDupCheck(phone);
   }
@@ -65,6 +53,4 @@ public class UserServiceImpl implements UserService {
     return userDataHandeler.idDupCheck(id);
   }
 
-  @Override
-  public boolean checkAdmin(String hashKey, String id){return userDataHandeler.checkAdmin(hashKey, id);}
 }

@@ -2,7 +2,6 @@ package com.example.shop.data.dao.Impl;
 
 
 import com.example.shop.data.dao.UserDAO;
-import com.example.shop.data.entity.AdminEntity;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.repository.AdminRepository;
 import com.example.shop.data.repository.UserRepository;
@@ -38,16 +37,6 @@ public class UserDAOImpl implements UserDAO {
       return Optional.empty();
     }
   }
-  @Override
-  public Optional<AdminEntity> getAdmin(String id){
-    Optional<AdminEntity> optionalAdminEntity = adminRepository.findById(id);
-    if (optionalAdminEntity.isPresent()) {
-      return optionalAdminEntity;
-    } else {
-      return Optional.empty();
-    }
-  }
-
 
   @Override
   public boolean phoneDupCheck(String phone){
@@ -59,9 +48,5 @@ public class UserDAOImpl implements UserDAO {
     return userRepository.existsById(id);
   }
 
-  @Override
-  public boolean checkAdmin(String hashKey,String id){
-    return adminRepository.checkAdmin(hashKey,id) > 0 ? true : false;
-  }
 }
 

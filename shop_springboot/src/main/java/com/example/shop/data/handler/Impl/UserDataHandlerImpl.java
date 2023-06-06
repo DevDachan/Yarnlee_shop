@@ -25,37 +25,23 @@ public class UserDataHandlerImpl implements UserDataHandler {
       return userDAO.saveUser(userEntity);
     }
 
-  @Override
-  public Optional<UserEntity> getUserEntity(String userId){
-    Optional<UserEntity> optionalUserEntity = userDAO.getUser(userId);
-    if (optionalUserEntity.isPresent()) {
-      return optionalUserEntity;
-    } else {
-      return Optional.empty();
+    @Override
+    public Optional<UserEntity> getUserEntity(String userId){
+      Optional<UserEntity> optionalUserEntity = userDAO.getUser(userId);
+      if (optionalUserEntity.isPresent()) {
+        return optionalUserEntity;
+      } else {
+        return Optional.empty();
+      }
     }
-  }
 
-  @Override
-  public Optional<AdminEntity> getAdminDTO(String id){
-    Optional<AdminEntity> optionalUserEntity = userDAO.getAdmin(id);
-    if (optionalUserEntity.isPresent()) {
-      return optionalUserEntity;
-    } else {
-      return Optional.empty();
+    @Override
+    public boolean phoneDupCheck(String phone){
+      return userDAO.phoneDupCheck(phone);
     }
-  }
 
-
-  @Override
-  public boolean phoneDupCheck(String phone){
-    return userDAO.phoneDupCheck(phone);
-  }
-
-  @Override
-  public boolean idDupCheck(String id){
-    return userDAO.idDupCheck(id);
-  }
-
-  @Override
-  public boolean checkAdmin(String hashKey,String id){return userDAO.checkAdmin(hashKey,id);}
+    @Override
+    public boolean idDupCheck(String id){
+      return userDAO.idDupCheck(id);
+    }
 }
