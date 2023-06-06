@@ -3,13 +3,17 @@ package com.example.shop.controller;
 
 import com.example.shop.data.dto.AdminDTO;
 import com.example.shop.data.service.AdminService;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -37,6 +41,14 @@ public class AdminController {
       return "password";
     }
     return "id";
+  }
+
+  @GetMapping(value = "/getMainContent")
+  public String getMainContent(){
+    Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin("main");
+    AdminDTO main = optionalAdminDTO.get();
+
+    return main.getHashKey();
   }
 
 }

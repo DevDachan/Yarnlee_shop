@@ -4,10 +4,8 @@ package com.example.shop.controller;
 import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.ProductService;
-import com.example.shop.data.service.UserService;
+import com.example.shop.data.service.AdminService;
 import jakarta.validation.Valid;
-import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -29,14 +27,14 @@ public class ProductController {
   private ProductService productService;
   private ImageService imageService;
 
-  private UserService userService;
+  private AdminService adminService;
 
   @Autowired
   public ProductController(ProductService productService,ImageService imageService,
-      UserService userService) {
+      AdminService adminService) {
     this.imageService = imageService;
     this.productService = productService;
-    this.userService = userService;
+    this.adminService = adminService;
   }
 
 
@@ -109,10 +107,7 @@ public class ProductController {
       @RequestParam int id,
       @RequestParam String adminId
       ) {
-    if(!userService.checkAdmin(hashKey,adminId)){
-      System.out.println(id);
-      System.out.println(hashKey);
-
+    if(!adminService.checkAdmin(hashKey,adminId)){
       return "AuthFail";
     }
 

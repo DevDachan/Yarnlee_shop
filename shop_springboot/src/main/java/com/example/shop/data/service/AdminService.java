@@ -7,5 +7,6 @@ import java.util.Optional;
 public interface AdminService {
   Optional<AdminDTO> getAdmin(String id);
 
+
   boolean checkAdmin(String HashKey,String id);
 }

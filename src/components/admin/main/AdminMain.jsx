@@ -21,7 +21,7 @@ function AdminMain(props) {
   const [productList, setProductList] = useState();
   const [relandering, setRelangering] = useState();
   const [deleteId, setDeleteId] = useState(0);
-
+  const [mainContent,setMainContent] = useState("");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -48,6 +48,23 @@ function AdminMain(props) {
     .then(function(){
       // always executed
     });
+
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/admin/getMainContent'
+    })
+    .then(function (response){
+      //handle success
+      setMainContent(response.data);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+
   },[]);
 
   const goContent = (e) =>{
@@ -55,6 +72,30 @@ function AdminMain(props) {
       state: {
         productId: e.target.id
       }
+    });
+  }
+
+  const changeMainContent = (e) =>{
+    let content = e.target.value;
+
+    const formData = new FormData();
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/admin/changeMainContent',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
     });
   }
 
@@ -247,7 +288,7 @@ function AdminMain(props) {
           <div id="main">
             <div className="inner mg0">
               <header>
-                <textarea placeholder="메인 화면에서 나타날 내용 입력" defaultValue="">
+                <textarea placeholder="메인 화면에서 나타날 내용 입력" onChange={ (e) => changeMainContent(e)} defaultValue={mainContent} >
                 </textarea>
               </header>
               <section className="tiles mt2">
