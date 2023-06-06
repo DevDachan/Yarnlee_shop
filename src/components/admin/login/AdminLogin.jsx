@@ -35,7 +35,7 @@ function AdminLogin(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/user/adminLogin',
+        url: 'http://localhost:8090/shop-backend/admin/adminLogin',
         data: {
           id: id,
           password: pwd
