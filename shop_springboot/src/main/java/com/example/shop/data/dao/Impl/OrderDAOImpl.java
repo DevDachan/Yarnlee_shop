@@ -45,6 +45,8 @@ public class OrderDAOImpl implements OrderDAO {
   }
 
   @Override
+  public void changeState(String id,String state){orderRepository.changeState(id,state);}
+  @Override
   public List<OrderEntity> getOrderUsingPhone(String phoneNum, String name){
     return orderRepository.getOrderUsingPhone(phoneNum,name);
   }

@@ -115,7 +115,7 @@ function Order(props) {
       formData.append("orderAddress", address);
       formData.append("addressDetail", addressDetail);
       formData.append("imageId", uploadImage);
-
+      formData.append("state", "주문 완료");
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/order/insert',

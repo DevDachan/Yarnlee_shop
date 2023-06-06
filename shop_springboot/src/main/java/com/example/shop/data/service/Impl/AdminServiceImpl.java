@@ -32,5 +32,10 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
+  public void editMainContent(String content){
+    adminDataHandeler.editMainContent(content);
+  }
+
+  @Override
   public boolean checkAdmin(String hashKey, String id){return adminDataHandeler.checkAdmin(hashKey, id);}
 }

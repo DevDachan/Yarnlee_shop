@@ -87,7 +87,7 @@ function OrderList(props) {
             <td>{productList[i].name}</td>
             <td>{orderList[i].totalCost}원 </td>
             <td>{orderList[i].orderName}</td>
-            <td>{orderList[i].orderPhone}</td>
+            <td>{orderList[i].state}</td>
             <td>
               <button onClick={viewOrder} id={i}>
                 View
@@ -109,7 +109,7 @@ function OrderList(props) {
                 <th>상품 명</th>
                 <th>금액</th>
                 <th>주문자</th>
-                <th>전화번호</th>
+                <th>주문 상태</th>
                 <th>주문서</th>
               </thead>
               <tbody>

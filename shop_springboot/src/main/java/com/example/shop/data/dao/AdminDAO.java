@@ -8,6 +8,8 @@ public interface AdminDAO {
 
   Optional<AdminEntity> getAdmin(String id);
 
+  void editMainContent(String content);
+
   boolean checkAdmin(String hashKey, String id);
 
 }

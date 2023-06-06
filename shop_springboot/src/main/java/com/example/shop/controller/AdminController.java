@@ -51,4 +51,11 @@ public class AdminController {
     return main.getHashKey();
   }
 
+
+  @PostMapping(value = "/editMainContent")
+  public void editMainContent(@RequestParam("content") String content) {
+    adminService.editMainContent(content);
+  }
+
+
 }

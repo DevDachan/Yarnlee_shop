@@ -9,4 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 public interface AdminRepository extends JpaRepository<AdminEntity, String> {
   @Query(value = "SELECT COUNT(*) FROM admin WHERE id=:id AND hash_Key=:hashKey", nativeQuery = true)
   int checkAdmin(String hashKey, String id);
+
+
+  @Query(value="UPDATE admin SET hash_key=:content WHERE id = 'main'",nativeQuery = true)
+  void editMainContent(String content);
+
 }

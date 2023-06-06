@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -158,8 +159,8 @@ public class OrderController {
     return randomId;
   }
 
-  @GetMapping(value = "/getAdminOrderHistory")
-  public Map<String, Object> getAdminOrderHistory(
+  @GetMapping(value = "/getAdminOrderList")
+  public Map<String, Object> getAdminOrderList(
       @RequestParam String hashKey,
       @RequestParam String id
   ){
@@ -182,6 +183,31 @@ public class OrderController {
       formData.put("productList", productList);
       return formData;
     }
+  }
+
+  @GetMapping(value = "/getAdminOrderHistory")
+  public Map<String, Object> getAdminOrderList(
+      @RequestParam String hashKey,
+      @RequestParam String id,
+      @RequestParam int orderId
+      ){
+    if(!adminService.checkAdmin(hashKey,id)){
+      return null;
+    }
+
+    HashMap<String, Object> formData = new HashMap<>();
+    OrderDTO order = orderService.getOrder(orderId);
+    ProductDTO product = productService.getProduct(order.getProductId());
+
+    formData.put("order", order);
+    formData.put("product", product);
+
+    return formData;
+  }
+
+  @GetMapping("/changeOrderState")
+  public void changeOrderState(@RequestParam String id, @RequestParam String state){
+    orderService.changeState(id,state);
   }
 
 

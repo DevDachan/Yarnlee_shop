@@ -7,6 +7,7 @@ import java.util.List;
 public interface OrderDataHandler {
   OrderEntity saveOrder(OrderDTO orderDTO );
   void deleteOrder(String orderId);
+  void changeState(String id,String state);
   OrderDTO getOrder(int orderId);
   List<OrderDTO> getOrderAll();
   List<Integer> findDistinctId();

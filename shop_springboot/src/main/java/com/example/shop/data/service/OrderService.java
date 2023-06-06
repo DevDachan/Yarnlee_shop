@@ -8,6 +8,8 @@ public interface OrderService {
 
   int getRandomId();
 
+  void changeState(String id,String state);
+
   void deleteOrder(String orderId);
   List<OrderDTO> getOrderAll();
 

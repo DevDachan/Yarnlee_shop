@@ -47,6 +47,8 @@ public class OrderEntity extends BaseEntity{
 
   int imageId;
 
+  String state;
+
   public OrderDTO toDto(){
     return OrderDTO.builder()
         .id(id)
@@ -62,6 +64,7 @@ public class OrderEntity extends BaseEntity{
         .orderAddress(orderAddress)
         .addressDetail(addressDetail)
         .imageId(imageId)
+        .state(state)
         .build();
   }
 }

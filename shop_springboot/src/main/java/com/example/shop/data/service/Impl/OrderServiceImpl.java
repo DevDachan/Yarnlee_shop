@@ -38,6 +38,9 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
+  public void changeState(String id,String state){orderDataHandeler.changeState(id,state);}
+
+  @Override
   public void deleteOrder(String orderId){
      orderDataHandeler.deleteOrder(orderId);
   }

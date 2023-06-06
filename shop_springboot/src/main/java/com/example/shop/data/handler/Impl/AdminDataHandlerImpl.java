@@ -25,6 +25,10 @@ public class AdminDataHandlerImpl implements AdminDataHandler {
         return Optional.empty();
       }
     }
+    @Override
+    public void editMainContent(String content){
+      adminDAO.editMainContent(content);
+    }
 
     @Override
     public boolean checkAdmin(String hashKey,String id){return adminDAO.checkAdmin(hashKey,id);}

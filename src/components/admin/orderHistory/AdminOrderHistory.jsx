@@ -19,18 +19,18 @@ const Wrapper = styled.div`
 function AdminOrderHistroy(props) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [orderDetail, setOrderDetail] = useState(location.state.orderDetail);
-  const [productDetail, setProductDetail] = useState(location.state.productDetail);
+  const [orderDetail, setOrderDetail] = useState();
+  const [productDetail, setProductDetail] = useState();
 
-  const [name, setName] = useState(location.state.orderDetail.orderName);
-  const [phoneNum, setPhoneNum] = useState(location.state.orderDetail.orderPhone);
-  const [address, setAddress] = useState(location.state.orderDetail.orderAddress);
-  const [zoneCode, setZonecode] = useState(location.state.orderDetail.orderZonecode);
-  const [addressDetail, setAddressDetail] = useState(location.state.orderDetail.addressDetail);
-  const [imageId, setImageId] = useState(location.state.orderDetail.imageId);
-  const totalCost = location.state.orderDetail.totalCost;
-  const [uploadImage,setUploadImage] = useState(location.state.orderDetail.imageId);
-
+  const [name, setName] = useState();
+  const [phoneNum, setPhoneNum] = useState();
+  const [address, setAddress] = useState();
+  const [zoneCode, setZonecode] = useState();
+  const [addressDetail, setAddressDetail] = useState();
+  const [imageId, setImageId] = useState();
+  const [totalCost,setTotalCost] = useState("");
+  const [uploadImage,setUploadImage] = useState();
+  const [orderState, setOrderState] = useState();
   const [modealYesNo, setModealYesNo] = useState(false);
 
   const [show, setShow] = useState(false);
@@ -39,6 +39,43 @@ function AdminOrderHistroy(props) {
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
+
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/order/getAdminOrderHistory',
+      params:{
+        hashKey: sessionStorage.getItem("adminHash"),
+        id: sessionStorage.getItem("admin"),
+        orderId: location.state.orderId,
+      }
+    })
+    .then(function (response){
+      //handle success
+      if(response.data == ""){
+        navigate('../adminLogin');
+      }else{
+        setProductDetail(response.data.product);
+        setOrderDetail(response.data.order);
+        setName(response.data.order.orderName);
+        setPhoneNum(response.data.order.orderPhone);
+        setAddress(response.data.order.orderAddress);
+        setZonecode(response.data.order.orderZonecode);
+        setAddressDetail(response.data.order.addressDetail);
+        setImageId(response.data.order.imageId);
+        setTotalCost(response.data.order.totalCost);
+        setUploadImage(response.data.order.imageId);
+        setOrderState(response.data.order.state);
+      }
+
+    })
+    .catch(function(error){
+      //handle error
+    })
+    .then(function(){
+      // always executed
+    });
+  },[]);
 
   const deleteOrder = (e) =>{
     setModalContent("해당 주문을 삭제하시겠습니까?");
@@ -88,6 +125,7 @@ function AdminOrderHistroy(props) {
     formData.append("orderAddress", address);
     formData.append("addressDetail", addressDetail);
     formData.append("imageId", uploadImage);
+    formData.append("state", orderState);
 
     axios({
       method: "post",
@@ -173,6 +211,28 @@ function AdminOrderHistroy(props) {
    });
  }
 
+ const handleOrderStateChange = (e) =>{
+   axios({
+     method: "get",
+     url: 'http://localhost:8090/shop-backend/order/changeOrderState',
+     params: {
+      id: orderDetail.id,
+      state: e.target.value
+     }
+   })
+   .then(function (response){
+     window.location.reload();
+     console.log("suc");
+   })
+   .catch(function(error){
+     //handle error
+     console.log(error);
+   })
+   .then(function(){
+     // always executed
+   });
+ }
+
 
   return (
       <Wrapper>
@@ -183,7 +243,7 @@ function AdminOrderHistroy(props) {
                 <span className="image main order_span_img"><img className="order_img" src="images/pic13.jpg" alt="" /></span>
               </div>
               <div className="gr-10 calign">
-                <h1>{productDetail.name}</h1>
+                <h1>{productDetail == undefined? "" : productDetail.name}</h1>
               </div>
 
               <div className="gr-12 mb2 grid_t" style={{boxShadow: "3px 3px 3px 3px rgb(98 217 182)", borderRadius:"20px"}}>
@@ -192,7 +252,7 @@ function AdminOrderHistroy(props) {
                 </div>
                 <div className="gr-8 calign" style={{paddingTop: "20px"}}>
                   <div>
-                    {productDetail.name}  | {orderDetail.color}  |  {orderDetail.num}개
+                    {productDetail == undefined? "" : productDetail.name}  | {productDetail == undefined? "": orderDetail.color}  |  {productDetail == undefined? "" :orderDetail.num}개
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
@@ -232,7 +292,7 @@ function AdminOrderHistroy(props) {
                 <input type="text" className="prl1"  disabled id="address" value={address} required />
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" id="address_detail" defaultValue={orderDetail.addressDetail}/>
+                <input type="text" required className="prl1" id="address_detail" defaultValue={orderDetail == undefined? "": orderDetail.addressDetail}/>
               </div>
 
               <div className="gr-12 mt3">
@@ -274,7 +334,7 @@ function AdminOrderHistroy(props) {
               <h3> 주문 상태 </h3>
             </div>
             <div className="gr-6">
-              <select className="changeState">
+              <select className="changeState" value={orderState} onChange={handleOrderStateChange}>
                 <option value="주문 완료" className="option_select">주문 완료</option>
                 <option value="결재 완료" className="option_select">결재 완료</option>
                 <option value="제작 중" className="option_select">제작 중</option>

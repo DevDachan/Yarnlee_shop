@@ -54,7 +54,8 @@ public class OrderDTO {
   @NotNull
   private int imageId;
 
-
+  @NotNull
+  private String state;
 
 
   public OrderEntity toEntity(){
@@ -72,6 +73,7 @@ public class OrderDTO {
         .orderAddress(orderAddress)
         .addressDetail(addressDetail)
         .imageId(imageId)
+        .state(state)
         .build();
   }
 

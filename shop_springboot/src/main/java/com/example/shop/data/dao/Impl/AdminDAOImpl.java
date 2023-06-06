@@ -29,7 +29,10 @@ public class AdminDAOImpl implements AdminDAO {
       return Optional.empty();
     }
   }
-
+  @Override
+  public void editMainContent(String content){
+    adminRepository.editMainContent(content);
+  }
 
   @Override
   public boolean checkAdmin(String hashKey,String id){

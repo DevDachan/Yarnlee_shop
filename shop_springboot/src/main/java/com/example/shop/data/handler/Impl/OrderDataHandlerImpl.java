@@ -14,17 +14,19 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class OrderDataHandlerImpl implements OrderDataHandler {
 
-    OrderDAO orderDAO;
+  OrderDAO orderDAO;
 
-    @Autowired
-    public OrderDataHandlerImpl(OrderDAO orderDAO) {this.orderDAO = orderDAO;}
+  @Autowired
+  public OrderDataHandlerImpl(OrderDAO orderDAO) {this.orderDAO = orderDAO;}
 
-    @Override
-    public OrderEntity saveOrder(OrderDTO orderDTO){
-      OrderEntity orderEntity = orderDTO.toEntity();
+  @Override
+  public OrderEntity saveOrder(OrderDTO orderDTO){
+    OrderEntity orderEntity = orderDTO.toEntity();
+    return orderDAO.saveOrder(orderEntity);
+  }
 
-      return orderDAO.saveOrder(orderEntity);
-    }
+  @Override
+  public void changeState(String id,String state){orderDAO.changeState(id,state);}
 
   @Override
   public OrderDTO getOrder(int orderId){
