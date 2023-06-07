@@ -266,7 +266,7 @@ function Order(props) {
                   <input type="text" className="prl1"  disabled id="address" value={address} required />
                 </div>
                 <div className="gr-12">
-                  <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}
+                  <input type="text" maxLength={255} required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}
                     onChange={(e) =>setAddressDetail(e.target.value)}
                   />
                 </div>

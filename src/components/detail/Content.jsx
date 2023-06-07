@@ -108,8 +108,8 @@ function Content(props) {
               <div className="col-12-medium mb1">
                 <select id="select_parcel" defaultValue="">
                   <option value="" disabled className="option_select">배송 유형</option>
-                  <option value="일반 택배" className="option_select">일반 택배(3400원)</option>
-                  <option value="반값 택배" className="option_select">반값 택배(1800원)</option>
+                  <option value="일반 택배" className="option_select">일반 택배({product == undefined ? "":product.deliveryCostGeneral}원)</option>
+                  <option value="반값 택배" className="option_select">반값 택배({product == undefined ? "":product.deliveryCostHalf}원)</option>
                 </select>
               </div>
 

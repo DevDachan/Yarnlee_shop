@@ -127,6 +127,19 @@ public class ProductController {
     productService.changeDeliveryTime(productId,content);
   }
 
+  @PostMapping(value = "/changeDeliveryCostHalf")
+  public void changeDeliveryCostHalf(@RequestParam("id") int productId,
+      @RequestParam("content") String content) {
+
+    productService.changeDeliveryCostHalf(productId,content);
+  }
+
+  @PostMapping(value = "/changeDeliveryCostGeneral")
+  public void changeDeliveryCostGeneral(@RequestParam("id") int productId,
+      @RequestParam("content") String content) {
+    productService.changeDeliveryCostGeneral(productId,content);
+  }
+
   @PostMapping(value = "/changeSubDetail")
   public void changeSubDetail(@RequestParam("id") int productId,
       @RequestParam("content") String content) {

@@ -58,7 +58,10 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
 
   @Override
   public void changeDeliveryTime(int id, String content){ productDAO.changeDeliveryTime(id, content); };
-
+  @Override
+  public void changeDeliveryCostHalf(int id, String content){ productDAO.changeDeliveryCostHalf(id,content); }
+  @Override
+  public void changeDeliveryCostGeneral(int id, String content){ productDAO.changeDeliveryCostGeneral(id,content); }
   @Override
   public void changeImageId(int id, int imageId){ productDAO.changeImageId(id, imageId);}
   @Override

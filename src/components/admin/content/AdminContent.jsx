@@ -136,6 +136,61 @@ function AdminContent(props) {
     });
   }
 
+  const changeDeliveryCostHalf = e =>{
+    let content = e.target.value.replace(/[^0-9]/g, "");
+    let id = productId;
+    console.log(content);
+    if(content != ""){
+      const formData = new FormData();
+      formData.append("id", id);
+      formData.append("content", content);
+
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostHalf',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        setRelangering("");
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+  }
+
+  const changeDeliveryCostGeneral = e =>{
+    let content = e.target.value.replace(/[^0-9]/g, "");
+    let id = productId;
+    if(content != ""){
+      const formData = new FormData();
+      formData.append("id", id);
+      formData.append("content", content);
+
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostGeneral',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        setRelangering("");
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+  }
+
 
   const changeDetail = ()   =>{
     if (quillRef.current) {
@@ -356,6 +411,9 @@ function AdminContent(props) {
             </div>
 
             <div className="col-12-medium calign grid_t" id="admin-selectDiv" style={{paddingTop: "10%"}}>
+              <div className="gr-12">
+                <h3>가격의 경우 원을 빼고 입력</h3>
+              </div>
               <div className="gr-6 mt2">
                   <span>판매 가격: </span>
               </div>
@@ -368,6 +426,19 @@ function AdminContent(props) {
               </div>
               <div className="gr-6 mt2">
                   <input type="text" className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryTime} onChange={changeDeliveryTime}></input>
+              </div>
+
+              <div className="gr-6 mt2">
+                  <span>반값 택배 가격 : </span>
+              </div>
+              <div className="gr-6 mt2">
+                <input type="text" maxLength={8} className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryCostHalf} onChange={changeDeliveryCostHalf}></input>
+              </div>
+              <div className="gr-6 mt2">
+                  <span>일반 택배 가격 : </span>
+              </div>
+              <div className="gr-6 mt2">
+                <input type="text" maxLength={8} className="ip-admin-content-info" defaultValue={product == undefined ? "":product.deliveryCostGeneral} onChange={changeDeliveryCostGeneral}></input>
               </div>
 
             </div>

@@ -90,6 +90,10 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public void changeDeliveryTime(int id, String content){ productDataHandeler.changeDeliveryTime(id,content); }
+  @Override
+  public void changeDeliveryCostHalf(int id, String content){ productDataHandeler.changeDeliveryCostHalf(id,content); }
+  @Override
+  public void changeDeliveryCostGeneral(int id, String content){ productDataHandeler.changeDeliveryCostGeneral(id,content); }
 
   @Override
   public void changeImageId(int id, int imageId){ productDataHandeler.changeImageId(id, imageId);}

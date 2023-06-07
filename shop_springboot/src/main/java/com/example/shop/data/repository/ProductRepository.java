@@ -6,14 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, String> {
-  // 조회
-  List<ProductEntity> findByName(String name);
-
   @Query(value = "SELECT * FROM product ORDER BY position", nativeQuery = true)
   List<ProductEntity> getListAll();
-
-  // 존재 유무
-  boolean existsByName(String name);
 
   @Query(value = "UPDATE product SET position=:nextId WHERE position=:id", nativeQuery = true)
   void changePosition(int id,int nextId);
@@ -26,6 +20,10 @@ public interface ProductRepository extends JpaRepository<ProductEntity, String> 
 
   @Query(value = "UPDATE product SET delivery_time=:content WHERE id=:id", nativeQuery = true)
   void changeDeliveryTime(int id,String content);
+  @Query(value = "UPDATE product SET delivery_cost_half=:content WHERE id=:id", nativeQuery = true)
+  void changeDeliveryCostHalf(int id,String content);
+  @Query(value = "UPDATE product SET delivery_cost_general=:content WHERE id=:id", nativeQuery = true)
+  void changeDeliveryCostGeneral(int id,String content);
 
   @Query(value = "UPDATE product SET sub_detail=:content WHERE id=:id", nativeQuery = true)
   void changeSubDetail(int id,String content);

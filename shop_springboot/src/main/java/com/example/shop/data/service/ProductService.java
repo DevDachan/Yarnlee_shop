@@ -26,6 +26,10 @@ public interface ProductService {
 
   void changeDeliveryTime(int id, String content);
 
+  void changeDeliveryCostHalf(int id, String content);
+
+  void changeDeliveryCostGeneral(int id, String content);
+
   void changeImageId(int id, int imageId);
 
   void changeSubDetail(int id, String content);

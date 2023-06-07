@@ -76,6 +76,10 @@ public class ProductDAOImpl implements ProductDAO {
     productRepository.changeDeliveryTime(id,content);
   }
   @Override
+  public void changeDeliveryCostHalf(int id, String content){ productRepository.changeDeliveryCostHalf(id,content); }
+  @Override
+  public void changeDeliveryCostGeneral(int id, String content){ productRepository.changeDeliveryCostGeneral(id,content); }
+  @Override
   public void changeImageId(int id, int imageId){ productRepository.changeImageId(id, imageId);};
   @Override
   public void changeSubDetail(int id, String content){
