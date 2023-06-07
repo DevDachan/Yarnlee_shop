@@ -32,8 +32,8 @@ public class AdminServiceImpl implements AdminService {
   }
 
   @Override
-  public void editMainContent(String content){
-    adminDataHandeler.editMainContent(content);
+  public void editContent(String id, String content){
+    adminDataHandeler.editContent(id,content);
   }
 
   @Override

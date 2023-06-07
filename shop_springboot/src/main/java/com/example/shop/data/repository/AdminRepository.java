@@ -11,7 +11,7 @@ public interface AdminRepository extends JpaRepository<AdminEntity, String> {
   int checkAdmin(String hashKey, String id);
 
 
-  @Query(value="UPDATE admin SET hash_key=:content WHERE id = 'main'",nativeQuery = true)
-  void editMainContent(String content);
+  @Query(value="UPDATE admin SET hash_key=:content WHERE id =:id",nativeQuery = true)
+  void editContent(String id, String content);
 
 }

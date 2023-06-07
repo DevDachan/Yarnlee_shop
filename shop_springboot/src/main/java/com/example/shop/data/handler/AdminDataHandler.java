@@ -6,6 +6,7 @@ import java.util.Optional;
 public interface AdminDataHandler {
   Optional<AdminEntity> getAdminDTO(String id);
 
-  void editMainContent(String content);
+  void editContent(String id, String content);
+
   boolean checkAdmin(String hashKey, String id);
 }

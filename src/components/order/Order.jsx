@@ -29,8 +29,10 @@ function Order(props) {
   const [imageId, setImageId] = useState();
   const [addressDetail, setAddressDetail] = useState();
   const [uploadImage,setUploadImage] = useState();
+  const [orderContent,setOrderContent] = useState("");
   const [show, setShow] = useState(false);
   const [modalContent, setModalContent] = useState();
+
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
@@ -65,6 +67,23 @@ function Order(props) {
         // always executed
       });
     }
+
+    axios({
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/admin/getOrderContent'
+    })
+    .then(function (response){
+      //handle success
+      console.log(response.data);
+      setOrderContent(response.data);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
   },[])
 
   if (location.state.productId == null) {
@@ -202,6 +221,12 @@ function Order(props) {
                   <h3> 총액 : {totalCost}원 </h3>
                 </div>
               </div>
+            </div>
+            <div style={{boxShadow: "3px 3px 3px 3px rgb(98 217 182)", borderRadius:"20px", padding: "2rem"}}>
+              <h2 className="calign"> 안내 사항 </h2>
+              <h3 className="order-content">
+                {orderContent}
+              </h3>
             </div>
 
             <form onSubmit={order}>

@@ -83,7 +83,7 @@ function AdminLogin(props) {
               <input type="password" id="ip_pwd" value={pwd} onChange={(e) =>setPwd(e.target.value)}/>
             </div>
             <div className="gr-12 mt1 mr1">
-              <input type="button" onClick={onClick} value="로그인" />
+              <input type="button" className="bt-login" onClick={onClick} value="로그인" />
             </div>
           </div>
           <Modal show={show} onHide={handleClose}>

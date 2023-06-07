@@ -80,27 +80,74 @@ function OrderList(props) {
     function makeList(){
       var arr = [];
       for(var i = 0; i < orderList.length; i++){
-        arr.push(
-          <tr>
-            <td>{orderList[i].orderDate}</td>
-            <td>{orderList[i].id}</td>
-            <td>{productList[i].name}</td>
-            <td>{orderList[i].totalCost}원 </td>
-            <td>{orderList[i].orderName}</td>
-            <td>{orderList[i].state}</td>
-            <td>
-              <button onClick={viewOrder} id={i}>
-                View
-              </button>
-            </td>
-          </tr>
-        );
+        if(orderList[i].state == "발송 완료"){
+          arr.push(
+            <tr>
+              <td className="color-grey">{orderList[i].orderDate}</td>
+              <td className="color-grey">{orderList[i].id}</td>
+              <td className="color-grey">{productList[i].name}</td>
+              <td className="color-grey">{orderList[i].totalCost}원 </td>
+              <td className="color-grey">{orderList[i].orderName}</td>
+              <td className="color-grey">{orderList[i].state}</td>
+              <td>
+                <button onClick={viewOrder} id={i}>
+                  View
+                </button>
+              </td>
+            </tr>
+          );
+        }else{
+          arr.push(
+            <tr>
+              <td>{orderList[i].orderDate}</td>
+              <td>{orderList[i].id}</td>
+              <td>{productList[i].name}</td>
+              <td>{orderList[i].totalCost}원 </td>
+              <td>{orderList[i].orderName}</td>
+              <td>{orderList[i].state}</td>
+              <td>
+                <button onClick={viewOrder} id={i}>
+                  View
+                </button>
+              </td>
+            </tr>
+          );
+        }
       }
       return arr;
     }
 
     return (
         <Wrapper>
+          <div className="orderList">
+            <div className="grid_t" style={{padding: "2rem"}}>
+              <div className="gr-12">
+                <h2> 주문 과정</h2>
+              </div>
+              <div className="gr-2">
+                <h3> 주문 완료</h3>
+              </div>
+              <div className="gr-1">
+                <h3> > </h3>
+              </div>
+              <div className="gr-2">
+                <h3> 결재 완료</h3>
+              </div>
+              <div className="gr-1">
+                <h3> > </h3>
+              </div>
+              <div className="gr-2">
+                <h3> 제작 중</h3>
+              </div>
+              <div className="gr-1">
+                <h3> > </h3>
+              </div>
+              <div className="gr-2">
+                <h3> 발송 완료</h3>
+              </div>
+
+            </div>
+          </div>
           <div className="orderList">
             <table>
               <thead>

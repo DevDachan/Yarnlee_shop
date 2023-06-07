@@ -43,6 +43,19 @@ public class AdminController {
     return "id";
   }
 
+  @GetMapping(value = "/getAllContent")
+  public Map<String,String> getAllContent(){
+    Map<String, String> formData = new HashMap<>();
+    Optional<AdminDTO> optionalMainDTO = adminService.getAdmin("main");
+    AdminDTO main = optionalMainDTO.get();
+    Optional<AdminDTO> optionalOrderDTO = adminService.getAdmin("order");
+    AdminDTO order = optionalOrderDTO.get();
+
+    formData.put("main", main.getHashKey());
+    formData.put("order", order.getHashKey());
+    return formData;
+  }
+
   @GetMapping(value = "/getMainContent")
   public String getMainContent(){
     Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin("main");
@@ -51,10 +64,23 @@ public class AdminController {
     return main.getHashKey();
   }
 
+  @GetMapping(value = "/getOrderContent")
+  public String getOrderContent(){
+    Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin("order");
+    AdminDTO main = optionalAdminDTO.get();
+
+    return main.getHashKey();
+  }
+
 
   @PostMapping(value = "/editMainContent")
   public void editMainContent(@RequestParam("content") String content) {
-    adminService.editMainContent(content);
+    adminService.editContent("main", content);
+  }
+
+  @PostMapping(value = "/editOrderContent")
+  public void editOrderContent(@RequestParam("content") String content) {
+    adminService.editContent("order", content);
   }
 
 

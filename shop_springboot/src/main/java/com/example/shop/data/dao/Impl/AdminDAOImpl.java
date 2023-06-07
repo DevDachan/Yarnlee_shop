@@ -30,8 +30,8 @@ public class AdminDAOImpl implements AdminDAO {
     }
   }
   @Override
-  public void editMainContent(String content){
-    adminRepository.editMainContent(content);
+  public void editContent(String id, String content){
+    adminRepository.editContent(id,content);
   }
 
   @Override

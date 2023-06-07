@@ -26,10 +26,9 @@ public class AdminDataHandlerImpl implements AdminDataHandler {
       }
     }
     @Override
-    public void editMainContent(String content){
-      adminDAO.editMainContent(content);
+    public void editContent(String id, String content){
+      adminDAO.editContent(id,content);
     }
-
     @Override
     public boolean checkAdmin(String hashKey,String id){return adminDAO.checkAdmin(hashKey,id);}
 }

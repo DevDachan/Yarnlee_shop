@@ -111,12 +111,15 @@ public class OrderController {
       ){
 
     HashMap<String, Object> formData = new HashMap<>();
-    List<OrderDTO> orderList;
+    List<OrderDTO> orderList = null;
 
     if(type.equals("전화 번호")) {
       orderList = orderService.getOrderUsingPhone(content,name);
     }else{
-      orderList = List.of(orderService.getOrder(Integer.parseInt(content)));
+      OrderDTO temp = orderService.getOrder(Integer.parseInt(content));
+      if(temp != null){
+        orderList = List.of(orderService.getOrder(Integer.parseInt(content)));
+      }
     }
 
     if(orderList == null || orderList.size() == 0){

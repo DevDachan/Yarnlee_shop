@@ -8,16 +8,17 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface OrderRepository extends JpaRepository<OrderEntity, String> {
   // 조회
+  @Query(value="SELECT * FROM ordert WHERE id=:id ORDER BY order_date DESC", nativeQuery = true)
   OrderEntity getById(int id);
 
 
-  @Query(value = "SELECT DISTINCT id FROM ordert", nativeQuery = true)
+  @Query(value = "SELECT DISTINCT id FROM ordert ORDER BY order_date DESC", nativeQuery = true)
   List<Integer> findDistinctId();
 
   @Query(value = "UPDATE ordert SET state=:state WHERE id=:id", nativeQuery = true)
   void changeState(String id, String state);
 
-  @Query(value = "SELECT * FROM ordert WHERE order_phone LIKE(:phoneNum) AND order_name LIKE(:name) ORDER BY order_date", nativeQuery = true)
+  @Query(value = "SELECT * FROM ordert WHERE order_phone LIKE(:phoneNum) AND order_name LIKE(:name) ORDER BY order_date DESC", nativeQuery = true)
   List<OrderEntity> getOrderUsingPhone(String phoneNum,String name);
 
 }

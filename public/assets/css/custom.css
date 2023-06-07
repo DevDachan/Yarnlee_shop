@@ -15,6 +15,21 @@ footer{
   width: 40% !important;
 }
 
+.color-grey{
+  color: grey;
+}
+
+
+.order-content{
+  font-family: sans-serif;
+  white-space: pre;
+}
+
+
+.bt-login{
+  width: 100% !important;
+}
+
 /* content page*/
 article{
   width: 25vw !important;
@@ -398,4 +413,13 @@ td{
 #contentArea_admin{
   border: 0px;
   padding : 10px;
+}
+
+
+.div-adminMain-editOrder{
+  box-shadow: 3px 3px 3px 3px rgb(98 217 182);
+  border-radius: 20px;
+  padding:2rem;
+  width: 100%;
+  margin-top: 4rem;
 }

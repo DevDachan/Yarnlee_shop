@@ -339,7 +339,6 @@ function AdminOrderHistroy(props) {
                 <option value="결재 완료" className="option_select">결재 완료</option>
                 <option value="제작 중" className="option_select">제작 중</option>
                 <option value="발송 완료" className="option_select">발송 완료</option>
-                <option value="배송 완료" className="option_select">배송 완료</option>
               </select>
             </div>
             <div className="gr-12 mt3 calign">

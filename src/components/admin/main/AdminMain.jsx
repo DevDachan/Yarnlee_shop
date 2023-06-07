@@ -22,7 +22,7 @@ function AdminMain(props) {
   const [relandering, setRelangering] = useState();
   const [deleteId, setDeleteId] = useState(0);
   const [mainContent,setMainContent] = useState("");
-
+  const [orderContent, setOrderContent] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
@@ -51,11 +51,12 @@ function AdminMain(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/admin/getMainContent'
+      url: 'http://localhost:8090/shop-backend/admin/getAllContent'
     })
     .then(function (response){
       //handle success
-      setMainContent(response.data);
+      setMainContent(response.data.main);
+      setOrderContent(response.data.order);
     })
     .catch(function(error){
       //handle error
@@ -64,6 +65,8 @@ function AdminMain(props) {
     .then(function(){
       // always executed
     });
+
+
 
   },[]);
 
@@ -84,6 +87,30 @@ function AdminMain(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/admin/editMainContent',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setRelangering("");
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
+  const changeOrderContent = (e) =>{
+    let content = e.target.value;
+
+    const formData = new FormData();
+    formData.append("content", content);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/admin/editOrderContent',
       data: formData
     })
     .then(function (response){
@@ -308,6 +335,13 @@ function AdminMain(props) {
           }
           </div>
           <button name="goContent" className="bt-productEdit" onClick={createProduct} >생성 </button>
+
+          <div className="div-adminMain-editOrder">
+            <h2> 주문서 안내 문구</h2>
+            <textarea placeholder="주문서 안내 문구 내용 입력" onChange={ (e) => changeOrderContent(e)} defaultValue={orderContent} >
+            </textarea>
+          </div>
+
           <Modal show={show} onHide={handleClose}>
             <Modal.Header>
               <Modal.Title>안내</Modal.Title>
