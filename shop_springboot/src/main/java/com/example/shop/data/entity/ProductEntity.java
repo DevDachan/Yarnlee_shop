@@ -31,8 +31,9 @@ public class ProductEntity{
 
   String subDetail;
 
+  int deliveryCostGeneral;
 
-  int deliveryCost;
+  int deliveryCostHalf;
 
   String deliveryTime;
 
@@ -47,7 +48,8 @@ public class ProductEntity{
         .detail(detail)
         .subDetail(subDetail)
         .deliveryTime(deliveryTime)
-        .deliveryCost(deliveryCost)
+        .deliveryCostGeneral(deliveryCostGeneral)
+        .deliveryCostHalf(deliveryCostHalf)
         .imageId(imageId)
         .position(position)
         .build();

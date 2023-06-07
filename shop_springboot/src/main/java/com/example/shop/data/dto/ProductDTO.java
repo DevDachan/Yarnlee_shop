@@ -29,7 +29,11 @@ public class ProductDTO {
   String subDetail;
 
   @NotNull
-  private int deliveryCost;
+  private int deliveryCostGeneral;
+
+  @NotNull
+  private int deliveryCostHalf;
+
 
   @NotNull
   private String deliveryTime;
@@ -46,7 +50,8 @@ public class ProductDTO {
         .detail(detail)
         .subDetail(subDetail)
         .deliveryTime(deliveryTime)
-        .deliveryCost(deliveryCost)
+        .deliveryCostGeneral(deliveryCostGeneral)
+        .deliveryCostHalf(deliveryCostHalf)
         .imageId(imageId)
         .position(position)
         .build();

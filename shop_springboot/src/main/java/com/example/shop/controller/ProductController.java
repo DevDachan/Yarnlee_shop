@@ -40,17 +40,7 @@ public class ProductController {
 
   @PostMapping(value="/insert")
   public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDto) {
-    int productId = productDto.getId();
-    String productName = productDto.getName();
-    int productPrice = productDto.getPrice();
-    String productDetail = productDto.getDetail();
-    String productSubDetail = productDto.getSubDetail();
-    int deliveryCost = productDto.getDeliveryCost();
-    String deliveryTime = productDto.getDeliveryTime();
-    String imageId = productDto.getImageId();
-    int position = productDto.getPosition();
-
-    ProductDTO response = productService.saveProduct(productId,productName,productPrice,productDetail,productSubDetail,deliveryCost,deliveryTime,imageId,position);
+    ProductDTO response = productService.saveProduct(productDto);
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 

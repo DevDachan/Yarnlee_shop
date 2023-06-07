@@ -1,6 +1,7 @@
 package com.example.shop.data.handler.Impl;
 
 import com.example.shop.data.dao.ProductDAO;
+import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.handler.ProductDataHandler;
@@ -19,9 +20,8 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
     public ProductDataHandlerImpl(ProductDAO productDAO) {this.productDAO = productDAO;}
 
     @Override
-    public ProductEntity saveProductEntity(int productId, String productName, int productPrice, String productDetail,String productSubDetail, int deliveryCost, String deliveryTime, String imageId, int position){
-
-      ProductEntity productEntity = new ProductEntity(productId, productName, productPrice, productDetail,productSubDetail, deliveryCost, deliveryTime,imageId,position);
+    public ProductEntity saveProductEntity(ProductDTO productDto){
+      ProductEntity productEntity = productDto.toEntity();
       return productDAO.saveProduct(productEntity);
     }
 

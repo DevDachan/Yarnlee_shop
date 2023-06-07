@@ -6,7 +6,7 @@ import com.example.shop.data.repository.ProductColorRepository;
 import java.util.List;
 
 public interface ProductService {
-  ProductDTO saveProduct(int productId, String productName, int productPrice, String productDetail,String productSubDetail ,int deliveryCost, String deliveryTime, String imageId,int position);
+  ProductDTO saveProduct(ProductDTO productDto);
 
   ProductDTO getProduct(int productId);
 

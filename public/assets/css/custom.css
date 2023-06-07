@@ -130,7 +130,7 @@ select option[value=""][disabled] {
 	display: none;
 }
 
-#select_color{
+#select_color, #select_parcel{
   width: 50%;
   margin: auto;
   font-weight: bold;
@@ -422,4 +422,10 @@ td{
   padding:2rem;
   width: 100%;
   margin-top: 4rem;
+}
+
+.bt-parcelType{
+  width: 100% !important;
+  appearance: auto !important;
+  opacity: inherit !important;
 }

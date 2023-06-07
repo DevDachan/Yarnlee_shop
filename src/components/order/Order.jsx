@@ -74,7 +74,6 @@ function Order(props) {
     })
     .then(function (response){
       //handle success
-      console.log(response.data);
       setOrderContent(response.data);
     })
     .catch(function(error){
@@ -96,9 +95,12 @@ function Order(props) {
   const productName = location.state.productName;
   const color = location.state.color;
   const numberOfProduct = location.state.productNum;
+
   const deliveryCost = location.state.deliveryCost;
+  const parcelType = location.state.parcelType;
   const totalCost = numberOfProduct * location.state.productPrice + deliveryCost;
   const productImageId = location.state.productImageId;
+
 
   const goBack = (e) =>{
     navigate(-1);
@@ -123,7 +125,11 @@ function Order(props) {
       const formData = new FormData();
       formData.append("id", 1); //default for DTO
       formData.append("orderDate", timeFormat);
-      formData.append("userId", "guest");
+      if(sessionStorage.getItem("id") != null && sessionStorage.getItem("id") != undefined){
+        formData.append("userId", sessionStorage.getItem("id"));
+      }else{
+        formData.append("userId", "guest");
+      }
       formData.append("productId", productId);
       formData.append("color", color);
       formData.append("num", numberOfProduct);

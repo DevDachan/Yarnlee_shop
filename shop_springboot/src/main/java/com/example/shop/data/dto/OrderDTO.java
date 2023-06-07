@@ -57,6 +57,9 @@ public class OrderDTO {
   @NotNull
   private String state;
 
+  @NotNull
+  private String parcelType;
+
 
   public OrderEntity toEntity(){
     return OrderEntity.builder()
@@ -74,6 +77,7 @@ public class OrderDTO {
         .addressDetail(addressDetail)
         .imageId(imageId)
         .state(state)
+        .parcelType(parcelType)
         .build();
   }
 

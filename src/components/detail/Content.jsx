@@ -35,19 +35,22 @@ function Content(props) {
   };
 
   const orderClick = () => {
-    if (document.getElementById("select_color").value !== "") {
+    if (document.getElementById("select_color").value !== "" && document.getElementById("select_parcel").value !== "") {
       navigate("/order", {
         state: {
           productId: 1,
           productNum: numberRef.current.value,
           productPrice: product.price,
           productName: product.name,
-          deliveryCost: product.deliveryCost,
+          deliveryCost: document.getElementById("select_parcel").value == "반값 택배" ? product.deliveryCostHalf : product.deliveryCostGeneral,
+          parcelType: document.getElementById("select_parcel").value,
           productImageId: product.imageId,
           color: document.getElementById("select_color").value,
         },
       });
-    } else {
+    } else if(document.getElementById("select_parcel").value == ""){
+      document.getElementById("alert_p").innerText = "배송 유형을 선택해주세요!";
+    }else{
       document.getElementById("alert_p").innerText = "색상을 선택해주세요!";
     }
   };
@@ -103,8 +106,16 @@ function Content(props) {
               </div>
 
               <div className="col-12-medium mb1">
+                <select id="select_parcel" defaultValue="">
+                  <option value="" disabled className="option_select">배송 유형</option>
+                  <option value="일반 택배" className="option_select">일반 택배(3400원)</option>
+                  <option value="반값 택배" className="option_select">반값 택배(1800원)</option>
+                </select>
+              </div>
+
+              <div className="col-12-medium mb1">
                 <select id="select_color" defaultValue="">
-                  <option value="" disabled className="option_select">Color</option>
+                  <option value="" disabled className="option_select">색상</option>
                   {colorList == undefined? "" : makeColorList()}
                 </select>
               </div>
