@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound";
 import Main from "./components/Main";
 import Content from "./components/detail/Content";
 import Order from "./components/order/Order";
+import SuccessOrder from "./components/order/SuccessOrder";
 import Login from "./components/login/Login";
 import Logout from "./components/login/Logout";
 import Register from "./components/register/Register";
@@ -39,6 +40,7 @@ function App() {
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/content" element={<Content />}></Route>
         <Route path="/order" element={<Order />}></Route>
+        <Route path="/successOrder" element={<SuccessOrder />}></Route>
         <Route path="/orderLogin" element={<OrderLogin />}></Route>
         <Route path="/orderList" element={<OrderList />}></Route>
         <Route path="/orderHistory" element={<OrderHistory />}></Route>

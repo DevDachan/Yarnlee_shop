@@ -141,6 +141,7 @@ function Order(props) {
       formData.append("addressDetail", addressDetail);
       formData.append("imageId", uploadImage);
       formData.append("state", "주문 완료");
+      formData.append("parcelType", parcelType);
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/order/insert',
@@ -148,7 +149,12 @@ function Order(props) {
       })
       .then(function (response){
         //handle success
-        navigate('../');
+        navigate('../successOrder',
+          {
+            state: {
+              content: response.data
+          }
+        });
       })
       .catch(function(error){
         //handle error
@@ -243,6 +249,7 @@ function Order(props) {
                     반값 택배는 GS편의점 택배를 이용합니다.<br/>
                     POSTBOX가 설치된 점포를 위 링크에서 확인 후
                     해당 점포 주소를 입력해주시기 바랍니다.
+                    (만약 근처 지점이 없다면 일반 택배를 이용해주시기 바랍니다)
                   </p>
                 </>
                 :""}
