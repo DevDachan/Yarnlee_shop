@@ -15,7 +15,7 @@ function Footer(props){
         </ul>
       </section>
       <ul className="copyright">
-        <li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        <li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></li>
       </ul>
     </div>
   </footer>

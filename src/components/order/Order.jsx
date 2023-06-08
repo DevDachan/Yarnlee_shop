@@ -230,9 +230,22 @@ function Order(props) {
             </div>
             <div style={{boxShadow: "3px 3px 3px 3px rgb(98 217 182)", borderRadius:"20px", padding: "2rem"}}>
               <h2 className="calign"> 안내 사항 </h2>
-              <h3 className="order-content">
+              <p className="order-content">
                 {orderContent}
-              </h3>
+              </p>
+                {parcelType == "반값 택배"?
+                <>
+                  <h2 className="calign"> 반값 택배 사항 </h2>
+                  <a href="https://www.cvsnet.co.kr/service/search-store/index.do" target="_blank" style={{color: "blue"}}>
+                    편의점 위치 확인
+                  </a>
+                  <p className="mt-3">
+                    반값 택배는 GS편의점 택배를 이용합니다.<br/>
+                    POSTBOX가 설치된 점포를 위 링크에서 확인 후
+                    해당 점포 주소를 입력해주시기 바랍니다.
+                  </p>
+                </>
+                :""}
             </div>
 
             <form onSubmit={order}>
@@ -266,7 +279,7 @@ function Order(props) {
                   <input type="text" className="prl1"  disabled id="address" value={address} required />
                 </div>
                 <div className="gr-12">
-                  <input type="text" maxLength={255} required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail}
+                  <input type="text" maxLength={255} required className="prl1" id="address_detail" placeholder={parcelType == "반값 택배"? "지점 명":"상세주소"} value={addressDetail}
                     onChange={(e) =>setAddressDetail(e.target.value)}
                   />
                 </div>
