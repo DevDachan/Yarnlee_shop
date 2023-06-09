@@ -72,7 +72,9 @@ function OrderList(props) {
 
       navigate("../orderHistory", {
       state: {
-        orderDetail: orderList[id]
+        orderDetail: orderList[id],
+        productDetail: productList[id]
+
       }
       });
     }
@@ -145,7 +147,6 @@ function OrderList(props) {
               <div className="gr-2">
                 <h3> 발송 완료</h3>
               </div>
-
             </div>
           </div>
           <div className="orderList">

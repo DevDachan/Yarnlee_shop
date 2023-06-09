@@ -13,7 +13,20 @@ function OrderHistroy(props) {
   const [address, setAddress] = useState();
   const [zoneCode, setZonecode] = useState();
   const remittanceImage = useRef();
+
+  useEffect(() => {
+    if (location.state == null) {
+      navigate('../');
+    }
+  }, [location, navigate]);
+
+  if (location.state == null) {
+     return null; // navigate 호출 후 컴포넌트의 렌더링을 중단
+  }
+
+
   const orderDetail = location.state.orderDetail;
+  const productDetail = location.state.productDetail;
 
   const Wrapper = styled.div`
       padding: 16px;
@@ -30,11 +43,11 @@ function OrderHistroy(props) {
         <div className="order_main" id="main">
           <div className="inner mg0">
             <div className="grid_t">
-              <div className="gr-2" id="imgDiv">
+              <div className="gr-2" id="">
                 <span className="image main order_span_img"><img className="order_img" src="images/pic13.jpg" alt="" /></span>
               </div>
               <div className="gr-10 calign">
-                <h1>Circle Tote Bag</h1>
+                <h1>{orderDetail.name}</h1>
               </div>
 
               <div className="gr-12 mb2 grid_t" style={{boxShadow: "3px 3px 3px 3px rgb(98 217 182)", borderRadius:"20px"}}>
@@ -88,17 +101,52 @@ function OrderHistroy(props) {
                 alt=""
                 />
               </div>
+            </div>
+            <div className="order_main" style={{padding: "30px", boxShadow: "3px 3px 3px 3px rgb(98 217 182)"}}>
+              <div className="grid_t">
+                <div className="gr-12 calign mt3 mb3">
+                  <h2 > 주문 상태 </h2>
+                </div>
+                <div className="gr-12 mb3">
+                  <h3>
+                    <a href="https://www.cvsnet.co.kr/reservation-inquiry/delivery/index.do"
+                    style={{color: "blue"}} target="_blank">
+                    배송 조회
+                    </a>
+                  </h3>
+                  <p>
+                    기본 배송은 GS 편의점 택배를 이용해 배송이 됩니다. <br />
+                    배송 관련 문의사항은 인스타그램 DM을 이용해주시기 바랍니다.
+                  </p>
 
-              <div className="gr-12 calign pt3">
-                <button className="bt_order" onClick={(e) => {navigate("../orderList")}}> 목록으로 </button>
+                </div>
+                <div className="gr-6 calign">
+                  <h3> 현재 상태 </h3>
+                </div>
+                <div className="gr-6">
+                  <input type="text" value={orderDetail.state} disabled />
+                </div>
+                  {
+                    orderDetail.parcelNum == null?
+                    ""
+                    :
+                    <>
+                    <div className="gr-6 mt3 calign">
+                      <h3> 송장 번호 </h3>
+                    </div>
+                    <div className="gr-6 mt3 calign">
+                      <input type="text" id="parcelNum" value={orderDetail.parcelNum} disabled/>
+                    </div>
+                    </>
+                  }
               </div>
-
-
+            </div>
+            <div className="gr-12 calign pt3">
+              <button className="bt_order" onClick={(e) => {navigate("../orderList")}}> 목록으로 </button>
             </div>
           </div>
         </div>
-
-      </Wrapper>
+    </Wrapper>
   );
 }
 

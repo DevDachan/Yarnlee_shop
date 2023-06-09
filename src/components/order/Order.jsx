@@ -37,7 +37,7 @@ function Order(props) {
   const handleOpen = () => setShow(true);
 
   useEffect(() => {
-    if (location.state.productId == null) {
+    if (location.state == null) {
       navigate('../');
     }
   }, [location, navigate]);
@@ -85,7 +85,7 @@ function Order(props) {
     });
   },[])
 
-  if (location.state.productId == null) {
+  if (location.state == null) {
      return null; // navigate 호출 후 컴포넌트의 렌더링을 중단
   }
 

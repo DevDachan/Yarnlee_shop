@@ -369,19 +369,16 @@ function AdminOrderHistroy(props) {
                 <option value="발송 완료" className="option_select">발송 완료</option>
               </select>
             </div>
-            <div className="gr-12 mt3 calign">
+            <div className="gr-6 mt3 calign">
               <h3> 송장 번호 </h3>
             </div>
-            <div className="gr-12 mt-3 calign">
+            <div className="gr-6 mt3 calign">
               {
                 parcelNum == ""?
                 <input type="text" id="parcelNum" placeholder="송장 번호를 입력해주세요" onChange={changeParcelNum} />
                 :
                 <input type="text" id="parcelNum" value={parcelNum} onChange={changeParcelNum} />
               }
-            </div>
-            <div className="gr-12 ralign mt2">
-              <button className="" value=""> 전송 </button>
             </div>
           </div>
         </div>

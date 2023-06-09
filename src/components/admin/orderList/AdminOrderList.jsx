@@ -106,6 +106,34 @@ function AdminOrderList(props) {
     return (
         <Wrapper>
           <div className="orderList">
+            <div className="grid_t" style={{padding: "2rem"}}>
+              <div className="gr-12">
+                <h2> 주문 과정</h2>
+              </div>
+              <div className="gr-2">
+                <h3> 주문 완료</h3>
+              </div>
+              <div className="gr-1">
+                <h3> > </h3>
+              </div>
+              <div className="gr-2">
+                <h3> 결재 완료</h3>
+              </div>
+              <div className="gr-1">
+                <h3> > </h3>
+              </div>
+              <div className="gr-2">
+                <h3> 제작 중</h3>
+              </div>
+              <div className="gr-1">
+                <h3> > </h3>
+              </div>
+              <div className="gr-2">
+                <h3> 발송 완료</h3>
+              </div>
+            </div>
+          </div>
+          <div className="orderList">
             <table>
               <thead>
                 <th>주문 일자</th>
