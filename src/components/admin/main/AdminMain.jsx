@@ -247,7 +247,7 @@ function AdminMain(props) {
           <div className="gr-1">
             <button name="down" id={productList[i].position} onClick={changePosition} > v </button>
           </div>
-          <div className="gr-2 ml3" >
+          <div className="gr-2 ml2" >
             <button name="goContent" id={productList[i].id} className="bt-productEdit" onClick={goContent} > 관리 </button>
           </div>
           <div className="gr-2" >
@@ -309,13 +309,20 @@ function AdminMain(props) {
       // always executed
     });
   }
+  function resize(e) {
+    e.target.style.height = "auto";
+    e.target.style.height = (e.target.scrollHeight)+"px";
+    e.target.style.width = "100%";
+  }
 
   return (
       <Wrapper>
           <div id="main">
             <div className="inner mg0">
               <header>
-                <textarea placeholder="메인 화면에서 나타날 내용 입력" onChange={ (e) => changeMainContent(e)} defaultValue={mainContent} >
+                <textarea placeholder="메인 화면에서 나타날 내용 입력"
+                  onKeyDown={resize} onKeyUp={resize} onFocus={resize}
+                  onChange={ (e) => changeMainContent(e)} defaultValue={mainContent} >
                 </textarea>
               </header>
               <section className="tiles mt2">
@@ -338,7 +345,9 @@ function AdminMain(props) {
 
           <div className="div-adminMain-editOrder">
             <h2> 주문서 안내 문구</h2>
-            <textarea placeholder="주문서 안내 문구 내용 입력" onChange={ (e) => changeOrderContent(e)} defaultValue={orderContent} >
+            <textarea placeholder="주문서 안내 문구 내용 입력"
+              onKeyDown={resize} onKeyUp={resize} onFocus={resize}
+              onChange={ (e) => changeOrderContent(e)} defaultValue={orderContent} >
             </textarea>
           </div>
 

@@ -8,6 +8,7 @@ public interface OrderDataHandler {
   OrderEntity saveOrder(OrderDTO orderDTO );
   void deleteOrder(String orderId);
   void changeState(String id,String state);
+  void changeParcelType(String id, String data);
   OrderDTO getOrder(int orderId);
   List<OrderDTO> getOrderAll();
   List<Integer> findDistinctId();

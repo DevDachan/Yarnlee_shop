@@ -60,6 +60,7 @@ public class OrderDTO {
   @NotNull
   private String parcelType;
 
+  private String parcelNum;
 
   public OrderEntity toEntity(){
     return OrderEntity.builder()
@@ -78,6 +79,7 @@ public class OrderDTO {
         .imageId(imageId)
         .state(state)
         .parcelType(parcelType)
+        .parcelNum(parcelNum)
         .build();
   }
 

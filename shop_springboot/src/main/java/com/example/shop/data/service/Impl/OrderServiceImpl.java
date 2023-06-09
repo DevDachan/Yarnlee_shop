@@ -41,6 +41,9 @@ public class OrderServiceImpl implements OrderService {
   public void changeState(String id,String state){orderDataHandeler.changeState(id,state);}
 
   @Override
+  public void changeParcelType(String id,String data){orderDataHandeler.changeParcelType(id,data);}
+
+  @Override
   public void deleteOrder(String orderId){
      orderDataHandeler.deleteOrder(orderId);
   }

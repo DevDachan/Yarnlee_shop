@@ -10,6 +10,8 @@ public interface OrderService {
 
   void changeState(String id,String state);
 
+  void changeParcelType(String id, String data);
+
   void deleteOrder(String orderId);
   List<OrderDTO> getOrderAll();
 

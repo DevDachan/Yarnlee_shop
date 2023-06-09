@@ -66,21 +66,39 @@ function AdminOrderList(props) {
     function makeList(){
       var arr = [];
       for(var i = 0; i < orderList.length; i++){
-        arr.push(
-          <tr>
-            <td>{orderList[i].orderDate}</td>
-            <td>{orderList[i].id}</td>
-            <td>{productList[i].name}</td>
-            <td>{orderList[i].totalCost}원 </td>
-            <td>{orderList[i].orderName}</td>
-            <td>{orderList[i].state}</td>
-            <td>
-              <button onClick={viewOrder} id={i}>
-                View
-              </button>
-            </td>
-          </tr>
-        );
+        if(orderList[i].state == "발송 완료"){
+          arr.push(
+            <tr>
+              <td className="order-end">{orderList[i].orderDate}</td>
+              <td className="order-end">{orderList[i].id}</td>
+              <td className="order-end">{productList[i].name}</td>
+              <td className="order-end">{orderList[i].totalCost}원 </td>
+              <td className="order-end">{orderList[i].orderName}</td>
+              <td className="order-end">{orderList[i].state}</td>
+              <td>
+                <button onClick={viewOrder} id={i}>
+                  View
+                </button>
+              </td>
+            </tr>
+          );
+        }else{
+          arr.push(
+            <tr>
+              <td>{orderList[i].orderDate}</td>
+              <td>{orderList[i].id}</td>
+              <td>{productList[i].name}</td>
+              <td>{orderList[i].totalCost}원 </td>
+              <td>{orderList[i].orderName}</td>
+              <td>{orderList[i].state}</td>
+              <td>
+                <button onClick={viewOrder} id={i}>
+                  View
+                </button>
+              </td>
+            </tr>
+          );
+        }
       }
       return arr;
     }

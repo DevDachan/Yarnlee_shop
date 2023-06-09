@@ -29,6 +29,10 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
   public void changeState(String id,String state){orderDAO.changeState(id,state);}
 
   @Override
+  public void changeParcelType(String id,String data){orderDAO.changeParcelType(id,data);}
+
+
+  @Override
   public OrderDTO getOrder(int orderId){
     OrderEntity orderEntity = orderDAO.getOrder(orderId);
     if(orderEntity == null) return null;

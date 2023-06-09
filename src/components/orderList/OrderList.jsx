@@ -83,12 +83,12 @@ function OrderList(props) {
         if(orderList[i].state == "발송 완료"){
           arr.push(
             <tr>
-              <td className="color-grey">{orderList[i].orderDate}</td>
-              <td className="color-grey">{orderList[i].id}</td>
-              <td className="color-grey">{productList[i].name}</td>
-              <td className="color-grey">{orderList[i].totalCost}원 </td>
-              <td className="color-grey">{orderList[i].orderName}</td>
-              <td className="color-grey">{orderList[i].state}</td>
+              <td className="order-end">{orderList[i].orderDate}</td>
+              <td className="order-end">{orderList[i].id}</td>
+              <td className="order-end">{productList[i].name}</td>
+              <td className="order-end">{orderList[i].totalCost}원 </td>
+              <td className="order-end">{orderList[i].orderName}</td>
+              <td className="order-end">{orderList[i].state}</td>
               <td>
                 <button onClick={viewOrder} id={i}>
                   View

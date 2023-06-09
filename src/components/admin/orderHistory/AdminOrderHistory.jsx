@@ -32,6 +32,7 @@ function AdminOrderHistroy(props) {
   const [uploadImage,setUploadImage] = useState();
   const [orderState, setOrderState] = useState();
   const [modealYesNo, setModealYesNo] = useState(false);
+  const [parcelNum, setParcelNum] = useState();
 
   const [show, setShow] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -66,6 +67,11 @@ function AdminOrderHistroy(props) {
         setTotalCost(response.data.order.totalCost);
         setUploadImage(response.data.order.imageId);
         setOrderState(response.data.order.state);
+        if(response.data.order.parcelNum == undefined){
+          setParcelNum("");
+        }else{
+          setParcelNum(response.data.order.parcelNum);
+        }
       }
 
     })
@@ -233,6 +239,28 @@ function AdminOrderHistroy(props) {
    });
  }
 
+ const changeParcelNum = (e) =>{
+  setParcelNum(e.target.value);
+   axios({
+     method: "get",
+     url: 'http://localhost:8090/shop-backend/order/changeParcelNum',
+     params: {
+      id: orderDetail.id,
+      data: e.target.value
+     }
+   })
+   .then(function (response){
+     console.log("suc");
+   })
+   .catch(function(error){
+     //handle error
+     console.log(error);
+   })
+   .then(function(){
+     // always executed
+   });
+ }
+
 
   return (
       <Wrapper>
@@ -342,10 +370,15 @@ function AdminOrderHistroy(props) {
               </select>
             </div>
             <div className="gr-12 mt3 calign">
-              <h3> 문자 전송 </h3>
+              <h3> 송장 번호 </h3>
             </div>
             <div className="gr-12 mt-3 calign">
-              <textarea />
+              {
+                parcelNum == ""?
+                <input type="text" id="parcelNum" placeholder="송장 번호를 입력해주세요" onChange={changeParcelNum} />
+                :
+                <input type="text" id="parcelNum" value={parcelNum} onChange={changeParcelNum} />
+              }
             </div>
             <div className="gr-12 ralign mt2">
               <button className="" value=""> 전송 </button>

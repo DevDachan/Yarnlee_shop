@@ -97,6 +97,14 @@ public class OrderController {
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 
+  @GetMapping(value = "/changeParcelNum")
+  public void changeParcelNum(
+      @RequestParam String id,
+      @RequestParam String data
+    ) {
+    orderService.changeParcelType(id, data);
+  }
+
   @GetMapping(value = "/select/id/{orderId}")
   public OrderDTO getOrder(@PathVariable int orderId) {
     OrderDTO orderDTO = orderService.getOrder(orderId);

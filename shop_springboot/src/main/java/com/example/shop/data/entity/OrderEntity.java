@@ -51,6 +51,8 @@ public class OrderEntity extends BaseEntity{
 
   String parcelType;
 
+  String parcelNum;
+
   public OrderDTO toDto(){
     return OrderDTO.builder()
         .id(id)
@@ -68,6 +70,7 @@ public class OrderEntity extends BaseEntity{
         .imageId(imageId)
         .state(state)
         .parcelType(parcelType)
+        .parcelNum(parcelNum)
         .build();
   }
 }
