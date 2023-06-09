@@ -68,7 +68,7 @@ public class OrderController {
   }
 
   @PostMapping(value="/insert")
-  public ResponseEntity<OrderDTO> insertOrder(@Valid OrderDTO orderDto)
+  public int insertOrder(@Valid OrderDTO orderDto)
       throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException, InvalidKeyException, JsonProcessingException {
 
     orderDto.setId(orderService.getRandomId());
@@ -88,7 +88,7 @@ public class OrderController {
     smsService.sendSms(adminMessageDto);
 
 
-    return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    return orderDto.getId();
   }
 
   @PostMapping(value="/edit")
