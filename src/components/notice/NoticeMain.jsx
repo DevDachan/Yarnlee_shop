@@ -48,7 +48,7 @@ function NoticeMain(props) {
               <tbody>
               <tr>
                 <td>1</td>
-                <td><a href=""> 안녕하세요!</a></td>
+                <td><a href="../noticeContent"> 안녕하세요!</a></td>
                 <td>2023.06.10</td>
                 <td> 3</td>
               </tr>

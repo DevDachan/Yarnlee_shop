@@ -221,6 +221,21 @@ td{
   padding: 5px;
 }
 
+.noticeContent{
+  width: 80%;
+  border: 2px solid black;
+  padding: 2rem;
+}
+
+.noticeContent-content{
+  white-space: pre;
+  padding: 20px;
+  font-weight: 200;
+}
+
+.font400{
+  font-weight: 400 !important;
+}
 
 #message{
   width: 90%;
