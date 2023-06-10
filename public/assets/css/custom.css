@@ -216,6 +216,10 @@ td{
   min-width: 750px;
 }
 
+.noticeList{
+  width: 100%;
+  padding: 5px;
+}
 
 
 #message{

@@ -25,6 +25,9 @@ import AdminOrderList from "./components/admin/orderList/AdminOrderList";
 import AdminOrderHistory from "./components/admin/orderHistory/AdminOrderHistory";
 import AdminMain from "./components/admin/main/AdminMain";
 import AdminLogin from "./components/admin/login/AdminLogin";
+import NoticeMain from "./components/notice/NoticeMain";
+
+
 
 
 import AdminContent from "./components/admin/content/AdminContent";
@@ -44,6 +47,7 @@ function App() {
         <Route path="/orderLogin" element={<OrderLogin />}></Route>
         <Route path="/orderList" element={<OrderList />}></Route>
         <Route path="/orderHistory" element={<OrderHistory />}></Route>
+        <Route path="/noticeMain" element={<NoticeMain />}></Route>
 
         <Route path="/register" element={<Register />}></Route>
         <Route path="/adminMain" element={<AdminMain />}></Route>
