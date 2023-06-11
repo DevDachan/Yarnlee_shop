@@ -42,6 +42,10 @@ function AdminOrderHistroy(props) {
 
 
   useEffect(() => {
+    if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
+      navigate('../adminLogin');
+    }
+
     axios({
       method: "get",
       url: 'http://localhost:8090/shop-backend/order/getAdminOrderHistory',

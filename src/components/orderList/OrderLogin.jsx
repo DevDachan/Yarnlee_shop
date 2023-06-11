@@ -74,9 +74,7 @@ function Login(props) {
 
 
     useEffect( () => {
-      if(sessionStorage.getItem("admin") != null && sessionStorage.getItem("admin") != undefined){
-        navigate("../adminOrderList");
-      }else if(sessionStorage.getItem("name") != null && sessionStorage.getItem("phone") != null
+      if(sessionStorage.getItem("name") != null && sessionStorage.getItem("phone") != null
         && sessionStorage.getItem("name") != undefined && sessionStorage.getItem("phone") != undefined
       ){
         const formData = new FormData();

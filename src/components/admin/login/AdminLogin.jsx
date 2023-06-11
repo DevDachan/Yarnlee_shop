@@ -52,8 +52,8 @@ function AdminLogin(props) {
         }else{
           sessionStorage.setItem("admin", id);
           sessionStorage.setItem("adminHash", response.data);
-
           navigate('../adminMain');
+          window.location.reload();
         }
       })
       .catch(function(error){

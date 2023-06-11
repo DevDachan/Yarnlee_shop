@@ -10,6 +10,7 @@ import {
 import styled from "styled-components";
 
 import NotFound from "./components/NotFound";
+import Nav from "./components/Nav";
 import Main from "./components/Main";
 import Content from "./components/detail/Content";
 import Order from "./components/order/Order";
@@ -17,16 +18,18 @@ import SuccessOrder from "./components/order/SuccessOrder";
 import Login from "./components/login/Login";
 import Logout from "./components/login/Logout";
 import Register from "./components/register/Register";
-import Nav from "./components/Nav";
 import OrderLogin from "./components/orderList/OrderLogin";
 import OrderList from "./components/orderList/OrderList";
 import OrderHistory from "./components/orderHistory/OrderHistory";
+import NoticeMain from "./components/notice/NoticeMain";
+import NoticeContent from "./components/notice/NoticeContent";
+
 import AdminOrderList from "./components/admin/orderList/AdminOrderList";
 import AdminOrderHistory from "./components/admin/orderHistory/AdminOrderHistory";
 import AdminMain from "./components/admin/main/AdminMain";
 import AdminLogin from "./components/admin/login/AdminLogin";
-import NoticeMain from "./components/notice/NoticeMain";
-import NoticeContent from "./components/notice/NoticeContent";
+import AdminNoticeMain from "./components/admin/notice/AdminNoticeMain";
+import AdminNoticeContent from "./components/admin/notice/AdminNoticeContent";
 
 
 
@@ -56,6 +59,8 @@ function App() {
         <Route path="/adminOrderHistory" element={<AdminOrderHistory />}></Route>
         <Route path="/adminLogin" element={<AdminLogin />}> </Route>
         <Route path="/adminContent" element={<AdminContent />}></Route>
+        <Route path="/adminNoticeMain" element={<AdminNoticeMain />}></Route>
+        <Route path="/adminNoticeContent" element={<AdminNoticeContent />}></Route>
 
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

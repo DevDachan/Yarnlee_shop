@@ -448,3 +448,15 @@ td{
   appearance: auto !important;
   opacity: inherit !important;
 }
+
+.bt-delete{
+  box-shadow: inset 0 0 0 2px red !important;
+  background-color: red;
+  color: white !important;
+}
+
+.bt-delete:hover{
+  box-shadow: inset 0 0 0 2px #f97070 !important;
+  background-color: #f97070;
+  color: white !important;
+}

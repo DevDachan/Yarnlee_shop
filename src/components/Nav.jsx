@@ -20,12 +20,20 @@ function Nav(props) {
     adminMainA.textContent = '관리자 메인';
     adminMain.appendChild(adminMainA);
 
+    const notice = document.createElement('li');
+    const noticeA = document.createElement('a');
+    noticeA.href = 'adminNoticeMain';
+    noticeA.className = 'ft_bold';
+    noticeA.textContent = '공지 사항';
+    notice.appendChild(noticeA);
+
     const order = document.createElement('li');
     const orderA = document.createElement('a');
-    orderA.href = 'orderLogin';
+    orderA.href = 'adminOrderList';
     orderA.className = 'ft_bold';
     orderA.textContent = '주문 조회';
     order.appendChild(orderA);
+
 
     const logout = document.createElement('li');
     const logoutA = document.createElement('a');
@@ -38,6 +46,7 @@ function Nav(props) {
     nav.innerHTML = "";
     nav.appendChild(adminMain);
     nav.appendChild(main);
+    nav.appendChild(notice);
     nav.appendChild(order);
     nav.appendChild(logout);
   }
