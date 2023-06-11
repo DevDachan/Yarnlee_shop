@@ -22,22 +22,33 @@ function AdminNoticeContent(props) {
     const location = useLocation();
     const { search } = useLocation();
     const {noticeId} = queryString.parse(search);
+
     const [show, setShow] = useState(false);
     const [modalContent, setModalContent] = useState();
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
-    const [noteiceList, setNoticeList] = useState();
+    const [notice, setNotice] = useState();
 
     useEffect(() => {
       if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
         navigate('../adminLogin');
+      }else if(noticeId == null){
+        navigate("../adminNoticeMain");
       }
       axios({
-        method: "post",
-        url: 'http://localhost:8090/shop-backend/noteice/getNoticeList'
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
+        params:{
+          id: noticeId
+        }
       })
       .then(function (response){
         //handle success
+        if(response.data == null || response.data == undefined){
+          navigate("../adminNoticeMain");
+        }
+        setNotice(response.data);
+        console.log(response.data);
       })
       .catch(function(error){
         //handle error
@@ -63,27 +74,20 @@ function AdminNoticeContent(props) {
             <tbody>
             <tr>
               <td className="lalign pl3" style={{width: "160px"}}>제목</td>
-              <td className="lalign font400" >안녕하세요!</td>
+              <td className="lalign font400" >{notice == undefined? "": notice.title}</td>
             </tr>
             <tr>
               <td className="lalign pl3">작성 일</td>
               <td className="lalign font400">2023.06.10</td>
             </tr>
             <tr>
+              <td className="lalign pl3">조회 수</td>
+              <td className="lalign font400">{notice == undefined? "": notice.hits}</td>
+            </tr>
+            <tr>
               <td colSpan="2" style={{backgroundColor: "white"}}>
                 <div className="noticeContent-content">
-                본문본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문<br />
-                setAddressDetail
+                  {notice == undefined? "": notice.content}
                 </div>
               </td>
             </tr>

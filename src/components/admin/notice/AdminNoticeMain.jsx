@@ -29,7 +29,6 @@ function AdminNoticeMain(props) {
       })
       .then(function (response){
         setNoticeList(response.data);
-        console.log(response.data);
         //handle success
       })
       .catch(function(error){
@@ -46,7 +45,7 @@ function AdminNoticeMain(props) {
         arr.push(
           <tr>
             <td>{noticeList[i].id}</td>
-            <td><a href="../AdminNoticeContent"> {noticeList[i].title}</a></td>
+            <td><a href={"../AdminNoticeContent?noticeId="+noticeList[i].id}> {noticeList[i].title}</a></td>
             <td>{noticeList[i].id}</td>
             <td> {noticeList[i].hits}</td>
           </tr>

@@ -43,7 +43,7 @@ function NoticeMain(props) {
         arr.push(
           <tr>
             <td>{noticeList[i].id}</td>
-            <td><a href="../noticeContent"> {noticeList[i].title}</a></td>
+            <td><a href={"../noticeContent?noticeId="+noticeList[i].id}> {noticeList[i].title}</a></td>
             <td>{noticeList[i].id}</td>
             <td> {noticeList[i].hits}</td>
           </tr>

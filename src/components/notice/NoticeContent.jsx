@@ -1,6 +1,7 @@
 import React, { useState ,useEffect } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
+import queryString from 'query-string';
 import styled from "styled-components";
 const Wrapper = styled.div`
     padding: 16px;
@@ -18,21 +19,35 @@ function NoticeContent(props) {
     const navigate = useNavigate();
     const location = useLocation();
     // 만약 List 정보가 없을시에는 Login으로 이동처리
+    const { search } = useLocation();
+    const {noticeId} = queryString.parse(search);
+
+    const [notice, setNotice] = useState();
 
     useEffect(() => {
-        axios({
-          method: "post",
-          url: 'http://localhost:8090/shop-backend/order/getOrderHistory'
-        })
-        .then(function (response){
-          //handle success
-        })
-        .catch(function(error){
-          //handle error
-        })
-        .then(function(){
-          // always executed
-        });
+      if(noticeId == null){
+        navigate("../noticeMain");
+      }
+      axios({
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
+        params:{
+          id: noticeId
+        }
+      })
+      .then(function (response){
+        //handle success
+        if(response.data == null || response.data == undefined){
+          navigate("../noticeMain");
+        }
+        setNotice(response.data);
+      })
+      .catch(function(error){
+        //handle error
+      })
+      .then(function(){
+        // always executed
+      });
     }, []);
 
     return (
@@ -42,27 +57,20 @@ function NoticeContent(props) {
             <tbody>
             <tr>
               <td className="lalign pl3" style={{width: "160px"}}>제목</td>
-              <td className="lalign font400" >안녕하세요!</td>
+              <td className="lalign font400" >{notice == undefined? "": notice.title}</td>
             </tr>
             <tr>
               <td className="lalign pl3">작성 일</td>
               <td className="lalign font400">2023.06.10</td>
             </tr>
             <tr>
+              <td className="lalign pl3">조회 수</td>
+              <td className="lalign font400">{notice == undefined? "": notice.hits}</td>
+            </tr>
+            <tr>
               <td colSpan="2" style={{backgroundColor: "white"}}>
                 <div className="noticeContent-content">
-                본문본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문
-                본문<br />
-                setAddressDetail
+                  {notice == undefined? "": notice.content}
                 </div>
               </td>
             </tr>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import ItemList from "./list/ItemList";
 // 나중에 현재 전체 목록 itemList로 변경하기.
 
 const Wrapper = styled.div`
