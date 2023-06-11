@@ -35,15 +35,7 @@ public class UserController {
   @PostMapping(value="/register")
   public ResponseEntity<UserDTO> createProduct(@Valid @RequestBody UserDTO userDto) {
 
-    String userId = userDto.getId();
-    String password = userDto.getPassword();
-    String userName= userDto.getName();
-    String phone= userDto.getPhone();
-    String zoneCode = userDto.getZoneCode();
-    String address = userDto.getAddress();
-    String addressDetail = userDto.getAddressDetail();
-
-    UserDTO response = userService.saveUser(userId,  password , userName,  phone,  zoneCode,  address,  addressDetail);
+    UserDTO response = userService.saveUser(userDto);
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
   }
 

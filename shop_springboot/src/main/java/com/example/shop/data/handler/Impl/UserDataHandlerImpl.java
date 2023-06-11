@@ -2,6 +2,7 @@ package com.example.shop.data.handler.Impl;
 
 import com.example.shop.data.dao.UserDAO;
 import com.example.shop.data.dto.AdminDTO;
+import com.example.shop.data.dto.UserDTO;
 import com.example.shop.data.entity.AdminEntity;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserDataHandler;
@@ -20,9 +21,8 @@ public class UserDataHandlerImpl implements UserDataHandler {
     public UserDataHandlerImpl(UserDAO userDAO) {this.userDAO = userDAO;}
 
     @Override
-    public UserEntity saveUserEntity(String userId, String password ,String userName, String phone, String zoneCode, String address, String addressDetail){
-      UserEntity userEntity = new UserEntity( userId,  password , userName,  phone,  zoneCode,  address,  addressDetail);
-      return userDAO.saveUser(userEntity);
+    public UserEntity saveUserEntity(UserDTO userDTO){
+      return userDAO.saveUser(userDTO.toEntity());
     }
 
     @Override

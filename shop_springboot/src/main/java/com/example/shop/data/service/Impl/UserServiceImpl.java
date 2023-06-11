@@ -24,11 +24,11 @@ public class UserServiceImpl implements UserService {
   // Service(Client) <-> Controller : DTO
   // Service <-> DAO(DB) : Entity
   @Override
-  public UserDTO saveUser(String userId, String password ,String userName, String phone, String zoneCode, String address, String addressDetail){
-    UserEntity userEntity = userDataHandeler.saveUserEntity( userId,  password , userName,  phone,  zoneCode,  address,  addressDetail);
+  public UserDTO saveUser(UserDTO userDTO){
+    UserEntity userEntity = userDataHandeler.saveUserEntity(userDTO);
 
-    UserDTO userDTO = userEntity.toDto();
-    return userDTO;
+    UserDTO resultDTO = userEntity.toDto();
+    return resultDTO;
   }
 
   @Override
