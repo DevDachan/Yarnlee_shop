@@ -7,5 +7,6 @@ import java.util.Optional;
 public interface NoticeService {
 
   List<NoticeDTO> getNoticeAll();
-
+  Optional<NoticeDTO> getNotice(int id);
+  void deleteNotice(int id);
 }

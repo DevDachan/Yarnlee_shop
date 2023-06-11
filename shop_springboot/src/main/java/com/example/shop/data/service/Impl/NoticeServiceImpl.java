@@ -23,5 +23,13 @@ public class NoticeServiceImpl implements NoticeService {
   public List<NoticeDTO> getNoticeAll(){
     return noticeDataHandeler.getNoticeAll();
   }
+  @Override
+  public Optional<NoticeDTO> getNotice(int id){
+    return noticeDataHandeler.getNotice(id);
+  }
 
+  @Override
+  public void deleteNotice(int id){
+    noticeDataHandeler.deleteNotice(id);
+  }
 }

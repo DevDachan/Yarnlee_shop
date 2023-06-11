@@ -74,10 +74,4 @@ public class UserController {
     return userService.phoneDupCheck(phone);
   }
 
-
-  @DeleteMapping(value = "/delete/id/{userId}")
-  public UserDTO deleteProduct(@PathVariable String userId) {
-    return null;
-  }
-
 }

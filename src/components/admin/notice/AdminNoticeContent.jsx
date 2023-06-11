@@ -65,7 +65,25 @@ function AdminNoticeContent(props) {
     }
 
     const deleteNotice = e =>{
-
+      axios({
+        method: "delete",
+        url: 'http://localhost:8090/shop-backend/notice/deleteNotice',
+        params:{
+          noticeId: noticeId,
+          hashKey: sessionStorage.getItem("adminHash"),
+          id: sessionStorage.getItem("admin")
+        }
+      })
+      .then(function (response){
+        //handle success
+        navigate("../adminNoticeMain");
+      })
+      .catch(function(error){
+        //handle error
+      })
+      .then(function(){
+        // always executed
+      });
     }
     return (
         <Wrapper>

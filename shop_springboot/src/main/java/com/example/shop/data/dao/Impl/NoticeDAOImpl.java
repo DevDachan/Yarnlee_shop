@@ -26,5 +26,13 @@ public class NoticeDAOImpl implements NoticeDAO {
     return noticeRepository.findAll(sort);
   }
 
+  @Override
+  public Optional<NoticeEntity> getNotice(int id){
+    return noticeRepository.findById(id);
+  }
+  @Override
+  public void deleteNotice(int id){
+    noticeRepository.deleteById(id);
+  }
 }
 

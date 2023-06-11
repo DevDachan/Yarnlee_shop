@@ -21,16 +21,18 @@ public class UserDataHandlerImpl implements UserDataHandler {
     public UserDataHandlerImpl(UserDAO userDAO) {this.userDAO = userDAO;}
 
     @Override
-    public UserEntity saveUserEntity(UserDTO userDTO){
+    public UserEntity saveUser(UserDTO userDTO){
       return userDAO.saveUser(userDTO.toEntity());
     }
 
     @Override
-    public Optional<UserEntity> getUserEntity(String userId){
+    public Optional<UserDTO> getUserDTO(String userId){
       Optional<UserEntity> optionalUserEntity = userDAO.getUser(userId);
-      if (optionalUserEntity.isPresent()) {
-        return optionalUserEntity;
-      } else {
+      if(optionalUserEntity.isPresent()){
+        UserEntity userEntity = optionalUserEntity.get();
+        UserDTO userDTO = userEntity.toDto();
+        return Optional.ofNullable(userDTO);
+      }else{
         return Optional.empty();
       }
     }

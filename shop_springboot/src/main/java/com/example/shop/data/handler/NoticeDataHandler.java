@@ -6,4 +6,7 @@ import java.util.Optional;
 
 public interface NoticeDataHandler {
   List<NoticeDTO> getNoticeAll();
+  Optional<NoticeDTO> getNotice(int id);
+
+  void deleteNotice(int id);
 }

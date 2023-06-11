@@ -1,6 +1,5 @@
 package com.example.shop.data.handler.Impl;
 
-
 import com.example.shop.data.dao.NoticeDAO;
 import com.example.shop.data.dto.NoticeDTO;
 import com.example.shop.data.entity.NoticeEntity;
@@ -29,5 +28,22 @@ public class NoticeDataHandlerImpl implements NoticeDataHandler {
       noticeDTOList.add(temp.toDto());
     }
     return noticeDTOList;
+  }
+
+  @Override
+  public Optional<NoticeDTO> getNotice(int id){
+    Optional<NoticeEntity> optionalNoticeEntity = noticeDAO.getNotice(id);
+    if(optionalNoticeEntity.isPresent()){
+      NoticeEntity userEntity = optionalNoticeEntity.get();
+      NoticeDTO userDTO = userEntity.toDto();
+      return Optional.ofNullable(userDTO);
+    }else{
+      return Optional.empty();
+    }
+  }
+
+  @Override
+  public void deleteNotice(int id){
+    noticeDAO.deleteNotice(id);
   }
 }

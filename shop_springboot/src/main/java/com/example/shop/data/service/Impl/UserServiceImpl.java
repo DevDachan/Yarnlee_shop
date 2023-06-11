@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
   // Service <-> DAO(DB) : Entity
   @Override
   public UserDTO saveUser(UserDTO userDTO){
-    UserEntity userEntity = userDataHandeler.saveUserEntity(userDTO);
+    UserEntity userEntity = userDataHandeler.saveUser(userDTO);
 
     UserDTO resultDTO = userEntity.toDto();
     return resultDTO;
@@ -33,14 +33,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public Optional<UserDTO> getUser(String userId){
-    Optional<UserEntity> optionalUserEntity = userDataHandeler.getUserEntity(userId);
-    if(optionalUserEntity.isPresent()){
-      UserEntity userEntity = optionalUserEntity.get();
-      UserDTO userDTO = userEntity.toDto();
-      return Optional.ofNullable(userDTO);
-    }else{
-      return Optional.empty();
-    }
+    return userDataHandeler.getUserDTO(userId);
   }
 
   @Override

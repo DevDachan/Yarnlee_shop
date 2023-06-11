@@ -5,9 +5,9 @@ import com.example.shop.data.entity.UserEntity;
 import java.util.Optional;
 
 public interface UserDataHandler {
-  UserEntity saveUserEntity(UserDTO userDTO);
+  UserEntity saveUser(UserDTO userDTO);
 
-  Optional<UserEntity> getUserEntity(String userId);
+  Optional<UserDTO> getUserDTO(String userId);
 
   boolean phoneDupCheck(String phone);
 
