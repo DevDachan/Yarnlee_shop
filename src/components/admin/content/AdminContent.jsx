@@ -20,6 +20,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
+  min-width: 920px;
 `;
 
 
@@ -27,7 +28,8 @@ function AdminContent(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const numberRef = useRef(1);
-  const productId = location.state.productId;
+  const { search } = useLocation();
+  const {productId} = queryString.parse(search);
   const [product, setProduct] = useState();
   const [color, setColor] = useState();
   const [show, setShow] = useState(false);
@@ -38,9 +40,12 @@ function AdminContent(props) {
 
 
   useEffect(() => {
-    if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined ){
+    if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
       navigate('../adminLogin');
+    }else if( productId == undefined){
+      navigate('../adminMain');
     }
+
     axios({
       method: "get",
       url: 'http://localhost:8090/shop-backend/product/select/id/'+productId

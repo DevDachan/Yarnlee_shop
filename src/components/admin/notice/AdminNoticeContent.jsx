@@ -2,6 +2,7 @@ import React, { useState ,useEffect } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import queryString from 'query-string';
 import Modal from 'react-bootstrap/Modal';
 
 const Wrapper = styled.div`
@@ -19,6 +20,8 @@ const Wrapper = styled.div`
 function AdminNoticeContent(props) {
     const navigate = useNavigate();
     const location = useLocation();
+    const { search } = useLocation();
+    const {noticeId} = queryString.parse(search);
     const [show, setShow] = useState(false);
     const [modalContent, setModalContent] = useState();
     const handleClose = () => setShow(false);

@@ -30,6 +30,7 @@ import AdminMain from "./components/admin/main/AdminMain";
 import AdminLogin from "./components/admin/login/AdminLogin";
 import AdminNoticeMain from "./components/admin/notice/AdminNoticeMain";
 import AdminNoticeContent from "./components/admin/notice/AdminNoticeContent";
+import AdminNoticeEdit from "./components/admin/notice/AdminNoticeEdit";
 
 
 
@@ -61,6 +62,7 @@ function App() {
         <Route path="/adminContent" element={<AdminContent />}></Route>
         <Route path="/adminNoticeMain" element={<AdminNoticeMain />}></Route>
         <Route path="/adminNoticeContent" element={<AdminNoticeContent />}></Route>
+        <Route path="/adminNoticeEdit" element={<AdminNoticeEdit />}></Route>
 
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

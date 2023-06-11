@@ -71,11 +71,7 @@ function AdminMain(props) {
   },[]);
 
   const goContent = (e) =>{
-    navigate('/adminContent', {
-      state: {
-        productId: e.target.id
-      }
-    });
+    navigate('/adminContent?productId='+e.target.id);
   }
 
   const changeMainContent = (e) =>{

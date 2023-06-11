@@ -56,6 +56,9 @@ function Content(props) {
   };
 
   useEffect(() => {
+    if(productId == undefined){
+      navigate("../");
+    }
     axios({
       method: "get",
       url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
