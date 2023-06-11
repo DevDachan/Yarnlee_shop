@@ -234,9 +234,14 @@ public class OrderController {
     return "result";
   }
 
-  @DeleteMapping(value = "/delete/id/{orderId}")
-  public void deleteOrder(@PathVariable String orderId) {
-     orderService.deleteOrder(orderId);
+  @DeleteMapping(value = "/delete")
+  public void deleteOrder(
+      @RequestParam String orderId,
+      @RequestParam String hashKey,
+      @RequestParam String id) {
+    if(adminService.checkAdmin(hashKey,id)) {
+      orderService.deleteOrder(orderId);
+    }
   }
 
 }

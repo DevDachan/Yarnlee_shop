@@ -97,7 +97,12 @@ function AdminOrderHistroy(props) {
   const yesDelete = (e) =>{
     axios({
       method: "delete",
-      url: 'http://localhost:8090/shop-backend/order/delete/id/'+orderDetail.id
+      url: 'http://localhost:8090/shop-backend/order/delete',
+      params:{
+        hashKey: sessionStorage.getItem("adminHash"),
+        id: sessionStorage.getItem("admin"),
+        orderId: orderDetail.id
+      }
     })
     .then(function (response){
       //handle success

@@ -255,10 +255,4 @@ public class ProductController {
     return productDTO;
   }
 
-
-  @DeleteMapping(value = "/delete/id/{productId}")
-  public ProductDTO deleteProduct(@PathVariable String productId) {
-    return null;
-  }
-
 }
