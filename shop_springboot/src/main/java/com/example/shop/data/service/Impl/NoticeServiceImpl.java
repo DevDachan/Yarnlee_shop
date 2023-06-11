@@ -1,7 +1,9 @@
 package com.example.shop.data.service.Impl;
 
+import com.example.shop.data.dto.NoticeDTO;
 import com.example.shop.data.handler.NoticeDataHandler;
 import com.example.shop.data.service.NoticeService;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,5 +19,9 @@ public class NoticeServiceImpl implements NoticeService {
     this.noticeDataHandeler = noticeDataHandeler;
   }
 
+  @Override
+  public List<NoticeDTO> getNoticeAll(){
+    return noticeDataHandeler.getNoticeAll();
+  }
 
 }

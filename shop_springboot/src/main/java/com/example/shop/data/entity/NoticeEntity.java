@@ -23,7 +23,7 @@ public class NoticeEntity extends BaseEntity{
   @Id
   int id;
 
-  int title;
+  String title;
 
   String content;
 

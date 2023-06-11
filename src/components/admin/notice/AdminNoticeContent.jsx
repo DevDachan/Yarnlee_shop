@@ -19,11 +19,11 @@ const Wrapper = styled.div`
 function AdminNoticeContent(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    // 만약 List 정보가 없을시에는 Login으로 이동처리
     const [show, setShow] = useState(false);
     const [modalContent, setModalContent] = useState();
     const handleClose = () => setShow(false);
     const handleOpen = () => setShow(true);
+    const [noteiceList, setNoticeList] = useState();
 
     useEffect(() => {
       if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
@@ -31,7 +31,7 @@ function AdminNoticeContent(props) {
       }
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/order/getNoticeList'
+        url: 'http://localhost:8090/shop-backend/noteice/getNoticeList'
       })
       .then(function (response){
         //handle success

@@ -18,7 +18,7 @@ public class NoticeDTO {
   private int id;
 
   @NotNull
-  private int title;
+  private String title;
 
   private String content;
 

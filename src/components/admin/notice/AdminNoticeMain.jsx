@@ -17,17 +17,19 @@ const Wrapper = styled.div`
 function AdminNoticeMain(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    // 만약 List 정보가 없을시에는 Login으로 이동처리
+    const [noticeList, setNoticeList] = useState();
 
     useEffect(() => {
       if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
         navigate('../adminLogin');
       }
       axios({
-        method: "post",
-        url: 'http://localhost:8090/shop-backend/order/getOrderHistory'
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeList'
       })
       .then(function (response){
+        setNoticeList(response.data);
+        console.log(response.data);
         //handle success
       })
       .catch(function(error){
@@ -38,6 +40,20 @@ function AdminNoticeMain(props) {
       });
     }, []);
 
+    function makeNotice(){
+      var arr = [];
+      for(var i = 0; i < noticeList.length; i++){
+        arr.push(
+          <tr>
+            <td>{noticeList[i].id}</td>
+            <td><a href="../AdminNoticeContent"> {noticeList[i].title}</a></td>
+            <td>{noticeList[i].id}</td>
+            <td> {noticeList[i].hits}</td>
+          </tr>
+        );
+      }
+      return arr;
+    }
     return (
         <Wrapper>
         <div className="ralign pt3 mb3" style={{width: "80%"}}>
@@ -52,12 +68,7 @@ function AdminNoticeMain(props) {
                 <th className="calign" style={{width:"10%"}}>조회수</th>
               </thead>
               <tbody>
-              <tr>
-                <td>1</td>
-                <td><a href="../AdminNoticeContent"> 안녕하세요!</a></td>
-                <td>2023.06.10</td>
-                <td> 3</td>
-              </tr>
+              {noticeList == undefined? "" : makeNotice()}
               </tbody>
             </table>
           </div>

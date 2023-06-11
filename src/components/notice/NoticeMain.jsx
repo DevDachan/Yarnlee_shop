@@ -17,24 +17,40 @@ const Wrapper = styled.div`
 function NoticeMain(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    // 만약 List 정보가 없을시에는 Login으로 이동처리
+    const [noticeList, setNoticeList] = useState();
 
     useEffect(() => {
-        axios({
-          method: "post",
-          url: 'http://localhost:8090/shop-backend/order/getOrderHistory'
-        })
-        .then(function (response){
-          //handle success
-        })
-        .catch(function(error){
-          //handle error
-        })
-        .then(function(){
-          // always executed
-        });
+      axios({
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeList'
+      })
+      .then(function (response){
+        setNoticeList(response.data);
+        console.log(response.data);
+        //handle success
+      })
+      .catch(function(error){
+        //handle error
+      })
+      .then(function(){
+        // always executed
+      });
     }, []);
 
+    function makeNotice(){
+      var arr = [];
+      for(var i = 0; i < noticeList.length; i++){
+        arr.push(
+          <tr>
+            <td>{noticeList[i].id}</td>
+            <td><a href="../noticeContent"> {noticeList[i].title}</a></td>
+            <td>{noticeList[i].id}</td>
+            <td> {noticeList[i].hits}</td>
+          </tr>
+        );
+      }
+      return arr;
+    }
     return (
         <Wrapper>
           <div className="noticeList">
@@ -46,12 +62,7 @@ function NoticeMain(props) {
                 <th className="calign" style={{width:"10%"}}>조회수</th>
               </thead>
               <tbody>
-              <tr>
-                <td>1</td>
-                <td><a href="../noticeContent"> 안녕하세요!</a></td>
-                <td>2023.06.10</td>
-                <td> 3</td>
-              </tr>
+              {noticeList == undefined? "" : makeNotice()}
               </tbody>
             </table>
           </div>

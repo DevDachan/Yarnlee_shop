@@ -58,6 +58,14 @@ function Nav(props) {
     mainA.textContent = '메인';
     main.appendChild(mainA);
 
+
+    const notice = document.createElement('li');
+    const noticeA = document.createElement('a');
+    noticeA.href = 'noticeMain';
+    noticeA.className = 'ft_bold';
+    noticeA.textContent = '공지 사항';
+    notice.appendChild(noticeA);
+
     const order = document.createElement('li');
     const orderA = document.createElement('a');
     orderA.href = 'orderLogin';
@@ -75,6 +83,7 @@ function Nav(props) {
 
     nav.innerHTML = "";
     nav.appendChild(main);
+    nav.appendChild(notice);
     nav.appendChild(order);
     nav.appendChild(logout);
 
@@ -85,6 +94,14 @@ function Nav(props) {
     mainA.className = 'ft_bold';
     mainA.textContent = '메인';
     main.appendChild(mainA);
+
+
+    const notice = document.createElement('li');
+    const noticeA = document.createElement('a');
+    noticeA.href = 'noticeMain';
+    noticeA.className = 'ft_bold';
+    noticeA.textContent = '공지 사항';
+    notice.appendChild(noticeA);
 
     const order = document.createElement('li');
     const orderA = document.createElement('a');
@@ -103,6 +120,7 @@ function Nav(props) {
 
     nav.innerHTML = "";
     nav.appendChild(main);
+    nav.appendChild(notice);
     nav.appendChild(order);
     nav.appendChild(login);
   }
