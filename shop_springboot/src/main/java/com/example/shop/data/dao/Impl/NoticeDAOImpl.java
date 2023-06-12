@@ -44,6 +44,16 @@ public class NoticeDAOImpl implements NoticeDAO {
   public void changeTitle(int id, String content){ noticeRepository.changeTitle(id,content); }
 
   @Override
+  public void upHits(int id){
+    Optional<NoticeEntity> optionalNotice = this.getNotice(id);
+    if(optionalNotice.isPresent()){
+      NoticeEntity notice = optionalNotice.get();
+      notice.setHits(notice.getHits()+1);
+      noticeRepository.save(notice);
+    }
+  }
+
+  @Override
   public void deleteNotice(int id){
     noticeRepository.deleteById(id);
   }

@@ -49,7 +49,7 @@ public class NoticeController {
   @GetMapping(value = "/getNoticeContent")
   public Optional<NoticeDTO> getNotice(@RequestParam int id){
     Optional<NoticeDTO> noticeList = noticeService.getNotice(id);
-
+    noticeService.upHits(id);
     return noticeList;
   }
 
@@ -107,6 +107,10 @@ public class NoticeController {
     noticeService.changeTitle(id,content);
   }
 
+  @GetMapping(value = "/upHits")
+  public void upHits(@RequestParam("id") int id){
+    noticeService.upHits(id);
+  }
   @DeleteMapping(value = "/deleteNotice")
   public void deleteNotice(
       @RequestParam String hashKey,

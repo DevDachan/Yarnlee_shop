@@ -7,31 +7,21 @@ import java.util.List;
 
 public interface ProductService {
   ProductDTO saveProduct(ProductDTO productDto);
-
   ProductDTO getProduct(int productId);
-
   List<ProductDTO> getProductList();
   List<String>  getColor(int productId);
-
   void changeColor(int productId,String color,String content);
   void deleteColor(int productId,String color);
-
   void deleteProduct(int productId);
-
   void insertColor(int productId, String color);
   void createProduct();
   void changeId(int id, int nextId);
   void changeName(int id, String content);
   void changePrice(int id, int content);
-
   void changeDeliveryTime(int id, String content);
-
   void changeDeliveryCostHalf(int id, String content);
-
   void changeDeliveryCostGeneral(int id, String content);
-
   void changeImageId(int id, int imageId);
-
   void changeSubDetail(int id, String content);
   void changeDetail(int id, String content);
 }

@@ -5,8 +5,6 @@ import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.entity.OrderEntity;
 import com.example.shop.data.handler.OrderDataHandler;
 import com.example.shop.data.service.OrderService;
-import com.example.shop.data.repository.OrderRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -48,7 +46,6 @@ public class OrderServiceImpl implements OrderService {
      orderDataHandeler.deleteOrder(orderId);
   }
 
-
   @Override
   public OrderDTO getOrder(int orderId){
     return orderDataHandeler.getOrder(orderId);
@@ -58,7 +55,6 @@ public class OrderServiceImpl implements OrderService {
   public List<OrderDTO> getOrderAll(){
     return orderDataHandeler.getOrderAll();
   }
-
 
   @Override
   public int getRandomId(){
