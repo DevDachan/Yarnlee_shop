@@ -20,9 +20,15 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
+  public void createNotice(String currentTime){
+    noticeDataHandeler.createNotice(currentTime);
+  }
+
+  @Override
   public List<NoticeDTO> getNoticeAll(){
     return noticeDataHandeler.getNoticeAll();
   }
+
   @Override
   public Optional<NoticeDTO> getNotice(int id){
     return noticeDataHandeler.getNotice(id);

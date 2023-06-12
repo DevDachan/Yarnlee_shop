@@ -61,7 +61,7 @@ function NoticeContent(props) {
             </tr>
             <tr>
               <td className="lalign pl3">작성 일</td>
-              <td className="lalign font400">2023.06.10</td>
+              <td className="lalign font400">{notice == undefined? "": notice.createTime}</td>
             </tr>
             <tr>
               <td className="lalign pl3">조회 수</td>

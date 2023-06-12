@@ -39,6 +39,27 @@ function AdminNoticeMain(props) {
       });
     }, []);
 
+    const createNotice = (e) =>{
+      axios({
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/notice/createNotice',
+        params:{
+          id: sessionStorage.getItem("admin"),
+          hashKey: sessionStorage.getItem("adminHash")
+        }
+      })
+      .then(function (response){
+        setNoticeList(response.data);
+        //handle success
+      })
+      .catch(function(error){
+        //handle error
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+
     function makeNotice(){
       var arr = [];
       for(var i = 0; i < noticeList.length; i++){
@@ -46,7 +67,7 @@ function AdminNoticeMain(props) {
           <tr>
             <td>{noticeList[i].id}</td>
             <td><a href={"../AdminNoticeContent?noticeId="+noticeList[i].id}> {noticeList[i].title}</a></td>
-            <td>{noticeList[i].id}</td>
+            <td>{noticeList[i].createTime}</td>
             <td> {noticeList[i].hits}</td>
           </tr>
         );
@@ -56,14 +77,14 @@ function AdminNoticeMain(props) {
     return (
         <Wrapper>
         <div className="ralign pt3 mb3" style={{width: "80%"}}>
-          <button className="bt_order" onClick={(e) => {navigate("../noticeMain")}}> 공지 추가 </button>
+          <button className="bt_order" onClick={createNotice}> 공지 추가 </button>
         </div>
           <div className="noticeList">
             <table className="calign">
               <thead>
                 <th className="calign" style={{width:"10%"}}>번호</th>
                 <th className="calign" style={{width:"50%"}}>제목</th>
-                <th className="calign" style={{width:"10%"}}>작성일</th>
+                <th className="calign" style={{width:"20%"}}>작성일</th>
                 <th className="calign" style={{width:"10%"}}>조회수</th>
               </thead>
               <tbody>

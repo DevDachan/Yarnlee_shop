@@ -4,6 +4,7 @@ package com.example.shop.data.dao.Impl;
 import com.example.shop.data.dao.NoticeDAO;
 import com.example.shop.data.entity.NoticeEntity;
 import com.example.shop.data.repository.NoticeRepository;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class NoticeDAOImpl implements NoticeDAO {
     this.noticeRepository = noticeRepository;
   }
 
+  @Override
+  public void createNotice(String currentTime){
+    int id = noticeRepository.getMaxNoticeId() + 1;
+    NoticeEntity notice = new NoticeEntity(id,"Title","",0,currentTime);
+    noticeRepository.save(notice);
+  }
   @Override
   public List<NoticeEntity> getNoticeAll(){
     Sort sort = Sort.by(Sort.Direction.DESC, "id");

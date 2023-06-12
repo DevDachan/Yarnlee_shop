@@ -1,16 +1,12 @@
 package com.example.shop.controller;
 
 import com.example.shop.data.dto.NoticeDTO;
-import com.example.shop.data.dto.OrderDTO;
-import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.service.AdminService;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.NoticeService;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/shop-backend/notice")
@@ -53,6 +51,23 @@ public class NoticeController {
 
     return noticeList;
   }
+
+  @GetMapping(value = "/createNotice")
+  public List<NoticeDTO> createNotice(
+      @RequestParam String hashKey,
+      @RequestParam String id
+  ){
+    if(adminService.checkAdmin(hashKey,id)){
+      LocalDateTime currentTime = LocalDateTime.now();
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+      String formattedTime = currentTime.format(formatter);
+      noticeService.createNotice(formattedTime);
+    }
+
+    return this.getNoticeList();
+  }
+
+
 
   @PostMapping(value = "/insertImage")
   public int uploadImage(

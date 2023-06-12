@@ -29,12 +29,15 @@ public class NoticeEntity extends BaseEntity{
 
   int hits;
 
+  String createTime;
+
   public NoticeDTO toDto(){
     return NoticeDTO.builder()
         .id(id)
         .title(title)
         .content(content)
         .hits(hits)
+        .createTime(createTime)
         .build();
   }
 }

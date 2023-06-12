@@ -25,12 +25,16 @@ public class NoticeDTO {
   @NotNull
   private int hits;
 
+  @NotNull
+  private String createTime;
+
   public NoticeEntity toEntity(){
     return NoticeEntity.builder()
         .id(id)
         .title(title)
         .content(content)
         .hits(hits)
+        .createTime(createTime)
         .build();
   }
 

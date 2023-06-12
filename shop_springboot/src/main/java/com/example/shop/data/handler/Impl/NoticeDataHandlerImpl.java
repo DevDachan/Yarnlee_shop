@@ -21,6 +21,11 @@ public class NoticeDataHandlerImpl implements NoticeDataHandler {
     public NoticeDataHandlerImpl(NoticeDAO noticeDAO) {this.noticeDAO = noticeDAO;}
 
   @Override
+  public void createNotice(String currentTime){
+    noticeDAO.createNotice(currentTime);
+  }
+
+  @Override
   public List<NoticeDTO> getNoticeAll() {
     List<NoticeEntity> noticeEntityList = noticeDAO.getNoticeAll();
     List<NoticeDTO> noticeDTOList = new ArrayList<>();

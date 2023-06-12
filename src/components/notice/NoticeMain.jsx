@@ -44,7 +44,7 @@ function NoticeMain(props) {
           <tr>
             <td>{noticeList[i].id}</td>
             <td><a href={"../noticeContent?noticeId="+noticeList[i].id}> {noticeList[i].title}</a></td>
-            <td>{noticeList[i].id}</td>
+            <td>{noticeList[i].createTime}</td>
             <td> {noticeList[i].hits}</td>
           </tr>
         );
@@ -58,7 +58,7 @@ function NoticeMain(props) {
               <thead>
                 <th className="calign" style={{width:"10%"}}>번호</th>
                 <th className="calign" style={{width:"50%"}}>제목</th>
-                <th className="calign" style={{width:"10%"}}>작성일</th>
+                <th className="calign" style={{width:"20%"}}>작성일</th>
                 <th className="calign" style={{width:"10%"}}>조회수</th>
               </thead>
               <tbody>
