@@ -26,7 +26,6 @@ function NoticeMain(props) {
       })
       .then(function (response){
         setNoticeList(response.data);
-        console.log(response.data);
         //handle success
       })
       .catch(function(error){

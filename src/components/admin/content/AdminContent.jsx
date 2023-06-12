@@ -144,7 +144,6 @@ function AdminContent(props) {
   const changeDeliveryCostHalf = e =>{
     let content = e.target.value.replace(/[^0-9]/g, "");
     let id = productId;
-    console.log(content);
     if(content != ""){
       const formData = new FormData();
       formData.append("id", id);

@@ -215,7 +215,6 @@ function AdminOrderHistroy(props) {
      },
    })
    .then(function (response){
-     console.log("suc");
    })
    .catch(function(error){
      //handle error
@@ -237,7 +236,6 @@ function AdminOrderHistroy(props) {
    })
    .then(function (response){
      window.location.reload();
-     console.log("suc");
    })
    .catch(function(error){
      //handle error
@@ -259,7 +257,6 @@ function AdminOrderHistroy(props) {
      }
    })
    .then(function (response){
-     console.log("suc");
    })
    .catch(function(error){
      //handle error

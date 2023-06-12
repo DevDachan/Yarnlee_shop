@@ -48,7 +48,6 @@ function AdminNoticeContent(props) {
           navigate("../adminNoticeMain");
         }
         setNotice(response.data);
-        console.log(response.data);
       })
       .catch(function(error){
         //handle error
