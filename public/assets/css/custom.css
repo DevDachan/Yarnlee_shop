@@ -228,9 +228,9 @@ td{
 }
 
 .noticeContent-content{
-  white-space: pre;
-  padding: 20px;
-  font-weight: 200;
+  white-space: pre !important;
+  padding: 20px !important;
+  font-weight: 200 !important;
 }
 
 .font400{

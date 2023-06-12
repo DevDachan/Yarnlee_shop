@@ -69,9 +69,7 @@ function NoticeContent(props) {
             </tr>
             <tr>
               <td colSpan="2" style={{backgroundColor: "white"}}>
-                <div className="noticeContent-content">
-                  {notice == undefined? "": notice.content}
-                </div>
+                {notice && <div className="noticeContent-content" dangerouslySetInnerHTML={{__html: notice.content}} />}
               </td>
             </tr>
             </tbody>
