@@ -1,6 +1,7 @@
 package com.example.shop.controller;
 
 import com.example.shop.data.dto.NoticeDTO;
+import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.service.AdminService;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.NoticeService;
@@ -63,9 +64,10 @@ public class NoticeController {
       String formattedTime = currentTime.format(formatter);
       noticeService.createNotice(formattedTime);
     }
-
     return this.getNoticeList();
   }
+
+
 
 
 
@@ -93,6 +95,16 @@ public class NoticeController {
       System.out.println(e);
       return 0;
     }
+  }
+  @PostMapping(value = "/changeContent")
+  public void changeContent(@RequestParam("id") int id,
+      @RequestParam("content") String content) {
+    noticeService.changeContent(id,content);
+  }
+  @PostMapping(value = "/changeTitle")
+  public void changeTitle(@RequestParam("id") int id,
+      @RequestParam("content") String content) {
+    noticeService.changeTitle(id,content);
   }
 
   @DeleteMapping(value = "/deleteNotice")

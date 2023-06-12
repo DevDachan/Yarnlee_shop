@@ -48,6 +48,13 @@ public class NoticeDataHandlerImpl implements NoticeDataHandler {
   }
 
   @Override
+  public void changeContent(int id, String content){ noticeDAO.changeContent(id,content); }
+
+  @Override
+  public void changeTitle(int id, String content){ noticeDAO.changeTitle(id,content); }
+
+
+  @Override
   public void deleteNotice(int id){
     noticeDAO.deleteNotice(id);
   }

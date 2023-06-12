@@ -118,7 +118,7 @@ function AdminNoticeContent(props) {
               <button className="bt_order" onClick={(e) => {navigate("../adminNoticeMain")}}> 목록으로 </button>
             </div>
             <div className="gr-2">
-              <button className="bt_order" onClick={(e) => {navigate("../adminNoticeEdit")}}> 수정하기 </button>
+              <button className="bt_order" onClick={(e) => {navigate("../adminNoticeEdit?noticeId="+noticeId)}}> 수정하기 </button>
             </div>
             <div className="gr-2">
               <button className="bt_order" onClick={deleteNoticeAlert}> 삭제하기 </button>

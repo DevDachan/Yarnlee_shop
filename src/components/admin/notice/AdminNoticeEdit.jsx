@@ -3,7 +3,7 @@ import { useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import queryString from 'query-string';
-
+import Modal from 'react-bootstrap/Modal';
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css' // Quill 에디터 스타일시트
 import ImageUploader from 'quill-image-uploader'
@@ -30,17 +30,30 @@ function AdminNoticeEdit(props) {
   const { search } = useLocation();
   const {noticeId} = queryString.parse(search);
 
+  const [show, setShow] = useState(false);
+  const [modalContent, setModalContent] = useState();
+  const handleClose = () => setShow(false);
+  const handleOpen = () => setShow(true);
+
+  const [notice, setNotice] = useState();
   useEffect(() => {
     if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
       navigate('../adminLogin');
     }
 
     axios({
-      method: "post",
-      url: 'http://localhost:8090/shop-backend/order/getOrderHistory'
+      method: "get",
+      url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
+      params:{
+        id: noticeId
+      }
     })
     .then(function (response){
       //handle success
+      if(response.data == null || response.data == undefined){
+        navigate("../noticeMain");
+      }
+      setNotice(response.data);
     })
     .catch(function(error){
       //handle error
@@ -98,18 +111,46 @@ function AdminNoticeEdit(props) {
     },
   }), []);
 
-  const changeNotice = ()   =>{
+  const deleteNoticeAlert = (e) =>{
+    setModalContent("해당 공지사항을 삭제하시겠습니까?");
+    setShow(true);
+  }
+
+  const deleteNotice = e =>{
+    axios({
+      method: "delete",
+      url: 'http://localhost:8090/shop-backend/notice/deleteNotice',
+      params:{
+        noticeId: noticeId,
+        hashKey: sessionStorage.getItem("adminHash"),
+        id: sessionStorage.getItem("admin")
+      }
+    })
+    .then(function (response){
+      //handle success
+      navigate("../adminNoticeMain");
+    })
+    .catch(function(error){
+      //handle error
+    })
+    .then(function(){
+      // always executed
+    });
+  }
+
+  const changeContent = ()   =>{
     if (quillRef.current) {
       const editor = quillRef.current.getEditor();
       const content = editor.root.innerHTML;
       // 내용 추출 후 처리 로직 작성
 
       const formData = new FormData();
+      formData.append("id", noticeId);
       formData.append("content", content);
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/product/',
+        url: 'http://localhost:8090/shop-backend/notice/changeContent',
         data: formData
       })
       .then(function (response){
@@ -125,14 +166,48 @@ function AdminNoticeEdit(props) {
     }
   }
 
+
+  const changeTitle = (e)   =>{
+    const formData = new FormData();
+    formData.append("id", noticeId);
+    formData.append("content", e.target.value);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/notice/changeTitle',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+
+  }
+
   return (
     <Wrapper>
       <div className="noticeList">
+        <div className="grid_t mb3">
+          <div className="gr-4 calign">
+            <h2> 제목 </h2>
+          </div>
+          <div className="gr-8">
+            <input type="text" defaultValue={notice == undefined? "": notice.title} onChange={changeTitle}/>
+          </div>
+        </div>
+
         <ReactQuill
           ref={quillRef}
-          value={''}
+          value={notice == undefined? "":notice.content}
           modules={quillModules}
-          onBlur={changeNotice}
+          onBlur={changeContent}
+          onChange={changeContent}
           theme="snow"
         />
 
@@ -141,18 +216,33 @@ function AdminNoticeEdit(props) {
           <div className="gr-3">
           </div>
           <div className="gr-2">
-            <button className="bt_order" onClick={(e) => {navigate("../noticeMain")}}> 목록으로 </button>
+            <button className="bt_order" onClick={(e) => {navigate("../adminNoticeContent?noticeId="+noticeId)}}> 뒤로가기 </button>
           </div>
           <div className="gr-2">
-            <button className="bt_order" onClick={(e) => {navigate("../noticeMain")}}> 수정하기 </button>
-          </div>
-          <div className="gr-2">
-            <button className="bt_order" onClick={(e) => {navigate("../noticeMain")}}> 삭제하기 </button>
+            <button className="bt_order" onClick={deleteNoticeAlert}> 삭제하기 </button>
           </div>
           <div className="gr-3">
           </div>
         </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>안내</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {modalContent}
+        </Modal.Body>
+        <Modal.Footer>
+          <div className="grid_t" style={{width: "100%"}}>
+            <div className="gr-6 lalign">
+              <button onClick={handleClose}>취소</button>
+            </div>
+            <div className="gr-6 ralign">
+              <button className="bt-delete" onClick={deleteNotice}>삭제</button>
+            </div>
+          </div>
+        </Modal.Footer>
+      </Modal>
     </Wrapper>
   );
 }

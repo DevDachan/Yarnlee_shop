@@ -35,6 +35,12 @@ public class NoticeServiceImpl implements NoticeService {
   }
 
   @Override
+  public void changeContent(int id, String content){ noticeDataHandeler.changeContent(id,content); }
+
+  @Override
+  public void changeTitle(int id, String content){ noticeDataHandeler.changeTitle(id,content); }
+
+  @Override
   public void deleteNotice(int id){
     noticeDataHandeler.deleteNotice(id);
   }

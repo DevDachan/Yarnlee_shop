@@ -9,5 +9,7 @@ public interface NoticeDAO {
   void createNotice(String currentTime);
   List<NoticeEntity> getNoticeAll();
   Optional<NoticeEntity> getNotice(int id);
+  void changeContent(int id,String content);
+  void changeTitle(int id,String content);
   void deleteNotice(int id);
 }

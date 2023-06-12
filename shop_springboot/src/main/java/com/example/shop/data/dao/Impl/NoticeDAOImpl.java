@@ -38,6 +38,12 @@ public class NoticeDAOImpl implements NoticeDAO {
     return noticeRepository.findById(id);
   }
   @Override
+  public void changeContent(int id, String content){ noticeRepository.changeContent(id,content); }
+
+  @Override
+  public void changeTitle(int id, String content){ noticeRepository.changeTitle(id,content); }
+
+  @Override
   public void deleteNotice(int id){
     noticeRepository.deleteById(id);
   }
