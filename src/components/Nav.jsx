@@ -73,6 +73,13 @@ function Nav(props) {
     orderA.textContent = '주문 조회';
     order.appendChild(orderA);
 
+    const info = document.createElement('li');
+    const infoA = document.createElement('a');
+    infoA.href = 'userInfo';
+    infoA.className = 'ft_bold';
+    infoA.textContent = '회원 정보';
+    info.appendChild(infoA);
+
     const logout = document.createElement('li');
     const logoutA = document.createElement('a');
     logoutA.href = 'logout';
@@ -85,6 +92,7 @@ function Nav(props) {
     nav.appendChild(main);
     nav.appendChild(notice);
     nav.appendChild(order);
+    nav.appendChild(info);
     nav.appendChild(logout);
 
   }else{

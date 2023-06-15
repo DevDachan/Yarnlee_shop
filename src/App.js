@@ -19,6 +19,7 @@ import Login from "./components/login/Login";
 import Logout from "./components/login/Logout";
 import Register from "./components/register/Register";
 import SuccessRegister from "./components/register/SuccessRegister";
+import UserInfo from "./components/register/UserInfo";
 
 import OrderLogin from "./components/orderList/OrderLogin";
 import OrderList from "./components/orderList/OrderList";
@@ -33,9 +34,6 @@ import AdminLogin from "./components/admin/login/AdminLogin";
 import AdminNoticeMain from "./components/admin/notice/AdminNoticeMain";
 import AdminNoticeContent from "./components/admin/notice/AdminNoticeContent";
 import AdminNoticeEdit from "./components/admin/notice/AdminNoticeEdit";
-
-
-
 import AdminContent from "./components/admin/content/AdminContent";
 
 // 사용자 정의 태그 생성하기
@@ -58,6 +56,7 @@ function App() {
 
         <Route path="/register" element={<Register />}></Route>
         <Route path="/successRegister" element={<SuccessRegister />}></Route>
+        <Route path="/userInfo" element={<UserInfo />}></Route>
 
 
         <Route path="/adminMain" element={<AdminMain />}></Route>
