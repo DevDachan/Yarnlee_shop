@@ -14,6 +14,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 8em;
+    min-width: 720px;
 `;
 
 function Register(props) {
@@ -27,6 +28,7 @@ function Register(props) {
     const [phoneNum, setPhoneNum] = useState();
     const [addressDetail, setAddressDetail] = useState();
 
+    const [phoneAuth, setPhoneAuth] = useState(false);
     const [idDup, setIdDup] = useState(false);
     const [pwdDup, setPwdDup] = useState(false);
     const [phoneDup, setPhoneDup] = useState(false);
@@ -37,46 +39,61 @@ function Register(props) {
     const handleOpen = () => setShow(true);
 
 
-
     const onClick = () =>{
+      console.log(id);
+      console.log(pwd);
+      console.log(pwd2);
+      console.log(userName);
 
-      if(idDup || pwdDup || phoneDup){
-        setModalContent("올바르지 않은 내용이 존재합니다.");
+      if(id == undefined || pwd == undefined || pwd2 == undefined || userName == undefined || address == undefined || zoneCode == undefined ||
+        phoneNum == undefined || addressDetail == undefined
+      ){
+        setModalContent("입력되지 않은 내용이 존재합니다.");
         setShow(true);
         return null;
       }
-      axios({
-        method: "post",
-        url: 'http://localhost:8090/shop-backend/user/register',
-        data: {
-          id: id,
-          password: pwd,
-          name: userName,
-          phone: phoneNum,
-          zoneCode: zoneCode,
-          address: address,
-          addressDetail: addressDetail
-        }
-      })
-      .then(function (response){
-        //handle success
-        sessionStorage.setItem("id", id);
-        sessionStorage.setItem("name", userName);
-        sessionStorage.setItem("phoneNum", phoneNum);
-
-        navigate('../', {
-          state: {
-            userName: "dachan"
+      else if(idDup || pwdDup || phoneDup){
+        setModalContent("올바르지 않은 내용이 존재합니다.");
+        setShow(true);
+        return null;
+      }else if(phoneAuth == false){
+        setModalContent("핸드폰 인증을 해주세요");
+        setShow(true);
+        return null;
+      }else{
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/user/register',
+          data: {
+            id: id,
+            password: pwd,
+            name: userName,
+            phone: phoneNum,
+            zoneCode: zoneCode,
+            address: address,
+            addressDetail: addressDetail
           }
+        })
+        .then(function (response){
+          //handle success
+          sessionStorage.setItem("id", id);
+          sessionStorage.setItem("name", userName);
+          sessionStorage.setItem("phoneNum", phoneNum);
+
+          navigate('../', {
+            state: {
+              userName: "dachan"
+            }
+          });
+        })
+        .catch(function(error){
+          //handle error
+          console.log(error);
+        })
+        .then(function(){
+          // always executed
         });
-      })
-      .catch(function(error){
-        //handle error
-        console.log(error);
-      })
-      .then(function(){
-        // always executed
-      });
+      }
     }
 
     const idCheck = (e) => {
@@ -96,7 +113,6 @@ function Register(props) {
         }else{
           document.getElementById("p-dupId").style.display = "none";
           setIdDup(false);
-          setId(e.target.value);
         }
       })
       .catch(function(error){
@@ -108,7 +124,87 @@ function Register(props) {
       });
     }
 
+
+    const sendSecretKey = (e) =>{
+      if(!phoneDup && phoneNum != undefined && phoneNum.split("-").length -1 == 2){
+        var formData = new FormData();
+        formData.append("phoneNum",phoneNum);
+        formData.append("checkAuth","No");
+        formData.append("secretKey","");
+
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/phone/register',
+          data: formData
+        })
+        .then(function (response){
+          setModalContent("인증번호가 전송되었습니다.");
+          setShow(true);
+          document.getElementById("bt-sendSecretKey").innerHTML = "재전송";
+          document.getElementById('h3-SecretKey').style.display = "block";
+          document.getElementById('ip-SecretKey').style.display = "block";
+          document.getElementById('bt-OkSecretKey').style.display = "block";
+        });
+      }
+    }
+
+    const checkSecretKey = (e) =>{
+      axios({
+        method: "get",
+        url: 'http://localhost:8090/shop-backend/phone/checkKey',
+        params:{
+          phoneNum: phoneNum,
+          secretKey : document.getElementById("ip-SecretKey").value
+        }
+      })
+      .then(function (response){
+        if(response.data == "Success"){
+          setPhoneAuth(true);
+          document.getElementById("bt-sendSecretKey").innerHTML = "인증완료";
+          document.getElementById('h3-SecretKey').style.display = "none";
+          document.getElementById('ip-SecretKey').style.display = "none";
+          document.getElementById('bt-OkSecretKey').style.display = "none";
+        }else{
+          setModalContent("인증번호가 일치하지 않습니다.");
+          setShow(true);
+        }
+      });
+    }
+
     const phoneCheck = (e) =>{
+      var formData = new FormData();
+      formData.append("phone", e.target.value);
+
+      axios({
+        method: "post",
+        url: 'http://localhost:8090/shop-backend/user/phoneCheck',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        if(response.data == true){
+          document.getElementById("p-dupPhone").style.display = "block";
+          setPhoneDup(true);
+        }else{
+          document.getElementById("p-dupPhone").style.display = "none";
+          setPhoneDup(false);
+        }
+        document.getElementById("bt-sendSecretKey").innerHTML = "인증하기";
+        document.getElementById('h3-SecretKey').style.display = "none";
+        document.getElementById('ip-SecretKey').style.display = "none";
+        document.getElementById('bt-OkSecretKey').style.display = "none";
+        setPhoneAuth(false);
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+
+    const checkPhoneDup = (e) =>{
       var formData = new FormData();
       formData.append("phone", e.target.value);
 
@@ -138,7 +234,7 @@ function Register(props) {
 
 
     const pwdCheck = (e) =>{
-      if(pwd != e.target.value){
+      if(pwd != e.target.value && pwd != undefined){
         document.getElementById("p-dupPwd").style.display = "block";
         setPwdDup(true);
       }else{
@@ -156,7 +252,7 @@ function Register(props) {
               <h3> 아이디 </h3>
             </div>
             <div className="gr-9">
-              <input type="text" id="ip_id" value={id} onBlur={idCheck}/>
+              <input type="text" id="ip_id" maxLength="20" value={id} onChange={ (e) => setId(e.target.value)} onBlur={idCheck}/>
             </div>
             <div className="gr-12">
               <p id="p-dupId" className="register-alert"> 이미 존재하는 아이디 입니다. </p>
@@ -166,36 +262,51 @@ function Register(props) {
               <h3> 이름 </h3>
             </div>
             <div className="gr-9">
-              <input type="text" id="ip_name" value={userName} onChange={ (e) => setUserName(e.target.value)}/>
+              <input type="text" id="ip_name" maxLength="10" value={userName} onChange={ (e) => setUserName(e.target.value)}/>
             </div>
 
             <div className="gr-3">
               <h3> 비밀번호 </h3>
             </div>
             <div className="gr-9">
-              <input type="password" id="ip_pwd" value={pwd} onChange={(e) =>setPwd(e.target.value)}/>
+              <input type="password" id="ip_pwd" maxLength="20" value={pwd} onChange={(e) =>setPwd(e.target.value)}/>
             </div>
 
             <div className="gr-3">
               <h3> 비밀번호 확인 </h3>
             </div>
             <div className="gr-9">
-              <input type="password" id="ip_pwd" value={pwd2} onBlur={pwdCheck}/>
+              <input type="password" id="ip_pwd" maxLength="20" value={pwd2} onChange={(e) =>setPwd2(e.target.value)} onBlur={pwdCheck}/>
             </div>
             <div className="gr-12">
               <p id="p-dupPwd" className="register-alert"> 비밀번호가 일치하지 않습니다. </p>
             </div>
 
-            <div className="gr-3">
+            <div className="gr-3 mt2">
               <h3>전화번호</h3>
             </div>
-            <div className="gr-9">
+            <div className="gr-6 mt2">
               <Phone
                 phoneNum={phoneNum || ""}
                 setPhoneNum = {setPhoneNum}
-                onBlur= {phoneCheck}
+                onBlur= {checkPhoneDup}
               />
             </div>
+            <div className="gr-3 mt2">
+              <button id="bt-sendSecretKey" onClick={sendSecretKey}> 인증하기 </button>
+            </div>
+
+            <div className="gr-3 mt2">
+              <h3 id="h3-SecretKey">인증번호</h3>
+            </div>
+            <div className="gr-6 mt2">
+              <input id="ip-SecretKey" type="text" maxLength="6" />
+            </div>
+            <div className="gr-3 mt2">
+              <button id="bt-OkSecretKey" onClick={checkSecretKey}> 확인 </button>
+            </div>
+
+
             <div className="gr-12">
               <p id="p-dupPhone" className="register-alert"> 이미 가입된 전화번호 입니다. </p>
             </div>
@@ -214,7 +325,7 @@ function Register(props) {
               <input type="text" className="prl1"  disabled id="address" value={address} />
             </div>
             <div className="gr-12">
-              <input type="text" required className="prl1" id="address_detail" placeholder="상세주소" value={addressDetail} onChange={(e) =>setAddressDetail(e.target.value)}/>
+              <input type="text" required className="prl1" id="address_detail" maxLength="50" placeholder="상세주소" value={addressDetail} onChange={(e) =>setAddressDetail(e.target.value)}/>
             </div>
 
             <div className="gr-12 calign mt2 mr1">

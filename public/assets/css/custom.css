@@ -4,6 +4,11 @@ footer{
 }
 
 
+
+#h3-SecretKey, #ip-SecretKey, #bt-OkSecretKey{
+  display: none;
+}
+
 .register-alert{
   color: red;
   font-weight: bold;
