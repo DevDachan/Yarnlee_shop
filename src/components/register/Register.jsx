@@ -71,13 +71,14 @@ function Register(props) {
         })
         .then(function (response){
           //handle success
+
           sessionStorage.setItem("id", id);
           sessionStorage.setItem("name", userName);
           sessionStorage.setItem("phoneNum", phoneNum);
 
-          navigate('../', {
+          navigate('../successRegister', {
             state: {
-              userName: "dachan"
+              userName: userName
             }
           });
         })

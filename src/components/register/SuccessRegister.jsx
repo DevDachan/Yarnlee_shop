@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
@@ -13,12 +13,14 @@ const Wrapper = styled.div`
     margin-bottom: 8em;
 `;
 
-function Logout(props) {
+function SuccessRegister(props) {
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [show, setShow] = useState(true);
+
     const handleClose = () => {
       setShow(false);
-      sessionStorage.clear();
       navigate("../");
       window.location.reload();
     };
@@ -28,10 +30,11 @@ function Logout(props) {
         <Wrapper>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header>
-              <Modal.Title>로그아웃</Modal.Title>
+              <Modal.Title>회원 가입</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              정상적으로 로그아웃됐습니다.
+              축하합니다 {location.state.userName}님!! <br />
+              Yarnlee Mall에 회원가입이 되었습니다.
             </Modal.Body>
             <Modal.Footer>
               <button onClick={handleClose}>닫기</button>
@@ -41,4 +44,4 @@ function Logout(props) {
     );
 }
 
-export default Logout;
+export default SuccessRegister;

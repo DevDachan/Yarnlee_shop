@@ -18,6 +18,8 @@ import SuccessOrder from "./components/order/SuccessOrder";
 import Login from "./components/login/Login";
 import Logout from "./components/login/Logout";
 import Register from "./components/register/Register";
+import SuccessRegister from "./components/register/SuccessRegister";
+
 import OrderLogin from "./components/orderList/OrderLogin";
 import OrderList from "./components/orderList/OrderList";
 import OrderHistory from "./components/orderHistory/OrderHistory";
@@ -55,6 +57,9 @@ function App() {
         <Route path="/noticeContent" element={<NoticeContent />}></Route>
 
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/successRegister" element={<SuccessRegister />}></Route>
+
+
         <Route path="/adminMain" element={<AdminMain />}></Route>
         <Route path="/adminOrderList" element={<AdminOrderList />}></Route>
         <Route path="/adminOrderHistory" element={<AdminOrderHistory />}></Route>
