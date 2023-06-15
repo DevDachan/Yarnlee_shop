@@ -40,11 +40,6 @@ function Register(props) {
 
 
     const onClick = () =>{
-      console.log(id);
-      console.log(pwd);
-      console.log(pwd2);
-      console.log(userName);
-
       if(id == undefined || pwd == undefined || pwd2 == undefined || userName == undefined || address == undefined || zoneCode == undefined ||
         phoneNum == undefined || addressDetail == undefined
       ){
@@ -127,23 +122,41 @@ function Register(props) {
 
     const sendSecretKey = (e) =>{
       if(!phoneDup && phoneNum != undefined && phoneNum.split("-").length -1 == 2){
-        var formData = new FormData();
-        formData.append("phoneNum",phoneNum);
-        formData.append("checkAuth","No");
-        formData.append("secretKey","");
-
         axios({
-          method: "post",
-          url: 'http://localhost:8090/shop-backend/phone/register',
-          data: formData
+          method: "get",
+          url: 'http://localhost:8090/shop-backend/phone/checkAuth',
+          params: {
+            phoneNum:phoneNum
+          }
         })
         .then(function (response){
-          setModalContent("인증번호가 전송되었습니다.");
-          setShow(true);
-          document.getElementById("bt-sendSecretKey").innerHTML = "재전송";
-          document.getElementById('h3-SecretKey').style.display = "block";
-          document.getElementById('ip-SecretKey').style.display = "block";
-          document.getElementById('bt-OkSecretKey').style.display = "block";
+          if(response.data == "Yes"){
+            setPhoneAuth(true);
+            document.getElementById("bt-sendSecretKey").innerHTML = "인증 완료";
+            document.getElementById('h3-SecretKey').style.display = "none";
+            document.getElementById('ip-SecretKey').style.display = "none";
+            document.getElementById('bt-OkSecretKey').style.display = "none";
+
+          }else{
+            var formData = new FormData();
+            formData.append("phoneNum",phoneNum);
+            formData.append("checkAuth","No");
+            formData.append("secretKey","");
+
+            axios({
+              method: "post",
+              url: 'http://localhost:8090/shop-backend/phone/register',
+              data: formData
+            })
+            .then(function (response){
+              setModalContent("인증번호가 전송되었습니다.");
+              setShow(true);
+              document.getElementById("bt-sendSecretKey").innerHTML = "재전송";
+              document.getElementById('h3-SecretKey').style.display = "block";
+              document.getElementById('ip-SecretKey').style.display = "block";
+              document.getElementById('bt-OkSecretKey').style.display = "block";
+            });
+          }
         });
       }
     }
@@ -171,7 +184,7 @@ function Register(props) {
       });
     }
 
-    const phoneCheck = (e) =>{
+    const checkPhoneDup = (e) =>{
       var formData = new FormData();
       formData.append("phone", e.target.value);
 
@@ -194,34 +207,6 @@ function Register(props) {
         document.getElementById('ip-SecretKey').style.display = "none";
         document.getElementById('bt-OkSecretKey').style.display = "none";
         setPhoneAuth(false);
-      })
-      .catch(function(error){
-        //handle error
-        console.log(error);
-      })
-      .then(function(){
-        // always executed
-      });
-    }
-
-    const checkPhoneDup = (e) =>{
-      var formData = new FormData();
-      formData.append("phone", e.target.value);
-
-      axios({
-        method: "post",
-        url: 'http://localhost:8090/shop-backend/user/phoneCheck',
-        data: formData
-      })
-      .then(function (response){
-        //handle success
-        if(response.data == true){
-          document.getElementById("p-dupPhone").style.display = "block";
-          setPhoneDup(true);
-        }else{
-          document.getElementById("p-dupPhone").style.display = "none";
-          setPhoneDup(false);
-        }
       })
       .catch(function(error){
         //handle error
