@@ -21,7 +21,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RestController
 @RequestMapping("/shop-backend/product")
-@CrossOrigin(origins = "http://localhost:3000")
 @EnableWebMvc
 public class ProductController {
   private ProductService productService;

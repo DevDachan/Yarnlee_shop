@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 @RestController
 @RequestMapping("/shop-backend/notice")
 @EnableWebMvc
-@CrossOrigin(origins = "http://localhost:3000")
 public class NoticeController {
   private NoticeService noticeService;
   private AdminService adminService;

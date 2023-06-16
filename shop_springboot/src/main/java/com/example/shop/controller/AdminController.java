@@ -20,7 +20,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/admin")
 @EnableWebMvc
-@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
   private AdminService adminService;
 

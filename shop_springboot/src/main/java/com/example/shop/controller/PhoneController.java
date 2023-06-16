@@ -29,7 +29,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/phone")
 @EnableWebMvc
-@CrossOrigin(origins = "http://localhost:3000")
 public class PhoneController {
   private PhoneService phoneService;
   private SMSService smsService;

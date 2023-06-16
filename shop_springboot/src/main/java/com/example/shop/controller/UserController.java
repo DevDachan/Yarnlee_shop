@@ -20,7 +20,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/user")
 @EnableWebMvc
-@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
   private UserService userService;
 
