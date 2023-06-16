@@ -87,9 +87,29 @@ public class PhoneController {
     Optional<PhoneDTO> optionalPhoneDTO = phoneService.getPhone(phoneNum);
     if(optionalPhoneDTO.isPresent()){
       PhoneDTO phone = optionalPhoneDTO.get();
-      return phone.getSecretKey().equals(secretKey) ? "Success": "Fail";
+      if(phone.getSecretKey().equals(secretKey)){
+        phone.setCheckAuth("Yes");
+        phoneService.savePhone(phone);
+        return "Success";
+      }else{
+        return "Fail";
+      }
+
     }else{
       return "Fail";
+    }
+  }
+
+  @GetMapping("/checkAuth")
+  public String checkAuth(
+      @RequestParam String phoneNum
+  ){
+    Optional<PhoneDTO> optionalPhoneDTO = phoneService.getPhone(phoneNum);
+    if(optionalPhoneDTO.isPresent()){
+      PhoneDTO phone = optionalPhoneDTO.get();
+      return phone.getCheckAuth();
+    }else{
+      return "No";
     }
   }
 
