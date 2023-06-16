@@ -40,8 +40,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/shop-backend/order")
 @EnableWebMvc
 public class OrderController {
