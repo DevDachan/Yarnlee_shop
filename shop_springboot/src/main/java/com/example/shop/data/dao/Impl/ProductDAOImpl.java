@@ -3,6 +3,7 @@ package com.example.shop.data.dao.Impl;
 import com.example.shop.data.dao.ProductDAO;
 import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
+import com.example.shop.data.repository.HitsRepository;
 import com.example.shop.data.repository.ProductColorRepository;
 import com.example.shop.data.repository.ProductRepository;
 import java.util.List;
@@ -17,10 +18,14 @@ public class ProductDAOImpl implements ProductDAO {
 
   ProductColorRepository productColorRepository;
 
+  HitsRepository hitsRepository;
+
   @Autowired
-  public ProductDAOImpl(ProductRepository productRepository,ProductColorRepository productColorRepository){
+  public ProductDAOImpl(ProductRepository productRepository,ProductColorRepository productColorRepository,
+      HitsRepository hitsRepository){
     this.productRepository = productRepository;
     this.productColorRepository = productColorRepository;
+    this.hitsRepository = hitsRepository;
   }
 
   @Override
