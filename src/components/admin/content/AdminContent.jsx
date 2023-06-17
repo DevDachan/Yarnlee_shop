@@ -48,7 +48,7 @@ function AdminContent(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
+      url: 'http://104.198.11.59:8090/shop-backend/product/select/id/'+productId
     })
     .then(function (response){
       //handle success
@@ -73,7 +73,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeName',
+      url: 'http://104.198.11.59:8090/shop-backend/product/changeName',
       data: formData
     })
     .then(function (response){
@@ -99,7 +99,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changePrice',
+      url: 'http://104.198.11.59:8090/shop-backend/product/changePrice',
       data: formData
     })
     .then(function (response){
@@ -125,7 +125,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeDeliveryTime',
+      url: 'http://104.198.11.59:8090/shop-backend/product/changeDeliveryTime',
       data: formData
     })
     .then(function (response){
@@ -151,7 +151,7 @@ function AdminContent(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostHalf',
+        url: 'http://104.198.11.59:8090/shop-backend/product/changeDeliveryCostHalf',
         data: formData
       })
       .then(function (response){
@@ -178,7 +178,7 @@ function AdminContent(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostGeneral',
+        url: 'http://104.198.11.59:8090/shop-backend/product/changeDeliveryCostGeneral',
         data: formData
       })
       .then(function (response){
@@ -209,7 +209,7 @@ function AdminContent(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/product/changeDetail',
+        url: 'http://104.198.11.59:8090/shop-backend/product/changeDetail',
         data: formData
       })
       .then(function (response){
@@ -247,7 +247,7 @@ function AdminContent(props) {
       formData.append("file", file);
 
       try {
-        const response = await axios.post("http://localhost:8090/shop-backend/product/insertImage", formData, {
+        const response = await axios.post("http://104.198.11.59:8090/shop-backend/product/insertImage", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -276,7 +276,7 @@ function AdminContent(props) {
         formData.append("productId", productId);
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/product/insertMainImage',
+          url: 'http://104.198.11.59:8090/shop-backend/product/insertMainImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -303,7 +303,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/insertColor',
+      url: 'http://104.198.11.59:8090/shop-backend/product/insertColor',
       data: formData
     })
     .then(function (response){
@@ -327,7 +327,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeColor',
+      url: 'http://104.198.11.59:8090/shop-backend/product/changeColor',
       data: formData
     })
     .then(function (response){
@@ -349,7 +349,7 @@ function AdminContent(props) {
     formData.append("productId", productId);
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/deleteColor',
+      url: 'http://104.198.11.59:8090/shop-backend/product/deleteColor',
       data: formData
     })
     .then(function (response){

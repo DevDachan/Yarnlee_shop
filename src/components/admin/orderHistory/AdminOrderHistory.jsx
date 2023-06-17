@@ -48,7 +48,7 @@ function AdminOrderHistroy(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/order/getAdminOrderHistory',
+      url: 'http://104.198.11.59:8090/shop-backend/order/getAdminOrderHistory',
       params:{
         hashKey: sessionStorage.getItem("adminHash"),
         id: sessionStorage.getItem("admin"),
@@ -97,7 +97,7 @@ function AdminOrderHistroy(props) {
   const yesDelete = (e) =>{
     axios({
       method: "delete",
-      url: 'http://localhost:8090/shop-backend/order/delete',
+      url: 'http://104.198.11.59:8090/shop-backend/order/delete',
       params:{
         hashKey: sessionStorage.getItem("adminHash"),
         id: sessionStorage.getItem("admin"),
@@ -144,7 +144,7 @@ function AdminOrderHistroy(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/order/edit',
+      url: 'http://104.198.11.59:8090/shop-backend/order/edit',
       data: formData
     })
     .then(function (response){
@@ -173,7 +173,7 @@ function AdminOrderHistroy(props) {
 
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/order/insertUserImage',
+          url: 'http://104.198.11.59:8090/shop-backend/order/insertUserImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -208,7 +208,7 @@ function AdminOrderHistroy(props) {
 
    axios({
      method: "post",
-     url: 'http://localhost:8090/shop-backend/order/sms/send',
+     url: 'http://104.198.11.59:8090/shop-backend/order/sms/send',
      data: formData,
      headers: {
        'Content-Type': 'multipart/form-data'
@@ -228,7 +228,7 @@ function AdminOrderHistroy(props) {
  const handleOrderStateChange = (e) =>{
    axios({
      method: "get",
-     url: 'http://localhost:8090/shop-backend/order/changeOrderState',
+     url: 'http://104.198.11.59:8090/shop-backend/order/changeOrderState',
      params: {
       id: orderDetail.id,
       state: e.target.value
@@ -250,7 +250,7 @@ function AdminOrderHistroy(props) {
   setParcelNum(e.target.value);
    axios({
      method: "get",
-     url: 'http://localhost:8090/shop-backend/order/changeParcelNum',
+     url: 'http://104.198.11.59:8090/shop-backend/order/changeParcelNum',
      params: {
       id: orderDetail.id,
       data: e.target.value
