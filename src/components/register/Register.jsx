@@ -74,7 +74,7 @@ function Register(props) {
 
           sessionStorage.setItem("id", id);
           sessionStorage.setItem("name", userName);
-          sessionStorage.setItem("phoneNum", phoneNum);
+          sessionStorage.setItem("phone", phoneNum);
 
           navigate('../successRegister', {
             state: {

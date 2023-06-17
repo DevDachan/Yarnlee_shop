@@ -43,7 +43,7 @@ function AdminNoticeEdit(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/notice/getNoticeContent',
+      url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
       params:{
         id: noticeId
       }
@@ -76,7 +76,7 @@ function AdminNoticeEdit(props) {
       formData.append("file", file);
 
       try {
-        const response = await axios.post("http://104.198.11.59:8090/shop-backend/notice/insertImage", formData, {
+        const response = await axios.post("http://localhost:8090/shop-backend/notice/insertImage", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -119,7 +119,7 @@ function AdminNoticeEdit(props) {
   const deleteNotice = e =>{
     axios({
       method: "delete",
-      url: 'http://104.198.11.59:8090/shop-backend/notice/deleteNotice',
+      url: 'http://localhost:8090/shop-backend/notice/deleteNotice',
       params:{
         noticeId: noticeId,
         hashKey: sessionStorage.getItem("adminHash"),
@@ -150,7 +150,7 @@ function AdminNoticeEdit(props) {
 
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/notice/changeContent',
+        url: 'http://localhost:8090/shop-backend/notice/changeContent',
         data: formData
       })
       .then(function (response){
@@ -174,7 +174,7 @@ function AdminNoticeEdit(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/notice/changeTitle',
+      url: 'http://localhost:8090/shop-backend/notice/changeTitle',
       data: formData
     })
     .then(function (response){
