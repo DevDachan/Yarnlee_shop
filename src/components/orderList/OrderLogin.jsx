@@ -74,8 +74,6 @@ function Login(props) {
 
 
     useEffect( () => {
-      console.log(sessionStorage.getItem("name"));
-      console.log(sessionStorage.getItem("phone"));
 
       if(sessionStorage.getItem("name") != null && sessionStorage.getItem("phone") != null
         && sessionStorage.getItem("name") != undefined && sessionStorage.getItem("phone") != undefined
