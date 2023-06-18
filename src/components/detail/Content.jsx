@@ -61,7 +61,7 @@ function Content(props) {
     }
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
+      url: 'http://104.198.11.59:8090/shop-backend/product/select/id/'+productId
     })
     .then(function (response){
       //handle success

@@ -48,7 +48,7 @@ function Order(props) {
       formData.append("id", sessionStorage.getItem("id"));
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/user/info',
+        url: 'http://104.198.11.59:8090/shop-backend/user/info',
         data: formData
       })
       .then(function (response){
@@ -70,7 +70,7 @@ function Order(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/admin/getOrderContent'
+      url: 'http://104.198.11.59:8090/shop-backend/admin/getOrderContent'
     })
     .then(function (response){
       //handle success
@@ -144,7 +144,7 @@ function Order(props) {
       formData.append("parcelType", parcelType);
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/order/insert',
+        url: 'http://104.198.11.59:8090/shop-backend/order/insert',
         data: formData
       })
       .then(function (response){
@@ -179,7 +179,7 @@ function Order(props) {
 
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/order/insertUserImage',
+          url: 'http://104.198.11.59:8090/shop-backend/order/insertUserImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data'

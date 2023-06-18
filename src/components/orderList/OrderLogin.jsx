@@ -42,7 +42,7 @@ function Login(props) {
       }
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
+        url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
         data: formData
       })
       .then(function (response){
@@ -84,7 +84,7 @@ function Login(props) {
         formData.append("content", sessionStorage.getItem("phone"));
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
+          url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
           data: formData
         })
         .then(function (response){
