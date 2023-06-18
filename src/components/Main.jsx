@@ -25,7 +25,7 @@ function Main(props) {
   useEffect(() => {
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/productList'
+      url: 'http://104.198.11.59:8090/shop-backend/product/productList'
     })
     .then(function (response){
       //handle success
@@ -41,7 +41,7 @@ function Main(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/admin/getMainContent'
+      url: 'http://104.198.11.59:8090/shop-backend/admin/getMainContent'
     })
     .then(function (response){
       //handle success

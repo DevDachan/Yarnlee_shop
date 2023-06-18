@@ -22,7 +22,7 @@ function NoticeMain(props) {
     useEffect(() => {
       axios({
         method: "get",
-        url: 'http://localhost:8090/shop-backend/notice/getNoticeList'
+        url: 'http://104.198.11.59:8090/shop-backend/notice/getNoticeList'
       })
       .then(function (response){
         setNoticeList(response.data);
