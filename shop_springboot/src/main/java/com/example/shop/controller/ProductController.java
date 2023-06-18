@@ -206,7 +206,7 @@ public class ProductController {
     ){
     try {
       // 파일 저장 디렉토리 경로
-      String uploadDir = "../Shop_project\\shop_project\\public\\productImage/";
+      String uploadDir = "../build\\productImage/";
 
       int randomId = imageService.getRandomId();
 
@@ -233,7 +233,7 @@ public class ProductController {
   ){
     try {
       // 파일 저장 디렉토리 경로
-      String uploadDir = "../Shop_project\\shop_project\\public\\productImage/";
+      String uploadDir = "../build\\productImage/";
 
       int randomId = imageService.getRandomId();
 
