@@ -84,7 +84,7 @@ function Content(props) {
 
     for(var i = 0; i < colorList.length; i++){
       arr.push(
-        <option value={colorList[i]} key={i} className="option_select">{colorList[i]}</option>
+        <option value={colorList[i].color} key={i} className="option_select">{colorList[i].color}</option>
       );
     }
     return arr;
