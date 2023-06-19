@@ -69,7 +69,7 @@ function Main(props) {
           <a href={"content?productId="+productList[i].id}>
             <h2>{productList[i].name}</h2>
             <div className="content">
-              <p>{productList[i].subDetail}.</p>
+              <p>{productList[i].subDetail}</p>
             </div>
           </a>
         </article>);
