@@ -5,14 +5,14 @@ import axios from "axios";
 // 나중에 현재 전체 목록 itemList로 변경하기.
 
 const Wrapper = styled.div`
-    padding: 0 2.5em;
+    padding: 4em 2.5em 0 2.5em;
     margin: 0 auto;
     width: calc(100% - 32px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     min-width: 750px;
+    min-height: 80vh;
 `;
 
 function Main(props) {
