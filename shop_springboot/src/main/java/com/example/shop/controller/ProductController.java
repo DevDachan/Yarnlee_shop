@@ -54,11 +54,11 @@ public class ProductController {
 
   @PostMapping(value = "/changeColor")
   public Map<String, Object> changeColor(@RequestParam("productId") int productId,
-      @RequestParam("colorId") String color,
-      @RequestParam("colorContent") String content) {
+      @RequestParam("colorId") int colorId,
+      @RequestParam("colorContent") String color) {
     Map<String, Object> formData = new HashMap<>();
 
-    productService.changeColor(productId,color,content);
+    productService.changeColor(productId,colorId,color);
 
     formData.put("product" ,productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
@@ -67,11 +67,11 @@ public class ProductController {
 
   @PostMapping(value = "/insertColor")
   public Map<String, Object> insertColor(@RequestParam("productId") int productId,
-      @RequestParam("colorId") String color
+      @RequestParam("colorId") int colorId
   ) {
     Map<String, Object> formData = new HashMap<>();
 
-    productService.insertColor(productId, color);
+    productService.insertColor(productId, colorId);
 
     formData.put("product" ,productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
@@ -80,10 +80,10 @@ public class ProductController {
 
   @PostMapping(value = "/deleteColor")
   public Map<String, Object> deleteColor(@RequestParam("productId") int productId,
-      @RequestParam("colorId") String color) {
+      @RequestParam("colorId") int colorId) {
     Map<String, Object> formData = new HashMap<>();
 
-    productService.deleteColor(productId,color);
+    productService.deleteColor(productId,colorId);
 
     formData.put("product" ,productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
@@ -206,7 +206,7 @@ public class ProductController {
     ){
     try {
       // 파일 저장 디렉토리 경로
-      String uploadDir = "../build\\productImage/";
+      String uploadDir = "../build/productImage/";
 
       int randomId = imageService.getRandomId();
 
@@ -233,7 +233,7 @@ public class ProductController {
   ){
     try {
       // 파일 저장 디렉토리 경로
-      String uploadDir = "../build\\productImage/";
+      String uploadDir = "../build/productImage/";
 
       int randomId = imageService.getRandomId();
 

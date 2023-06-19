@@ -1,11 +1,13 @@
 package com.example.shop.data.handler.Impl;
 
 import com.example.shop.data.dao.ProductDAO;
+import com.example.shop.data.dto.ProductColorDTO;
 import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.handler.ProductDataHandler;
 import jakarta.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,24 +33,36 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   }
 
   @Override
-  public List<ProductColorEntity> getColor(int productId){return productDAO.getColor(productId);}
+  public List<ProductColorDTO> getColor(int productId){
+    List<ProductColorEntity> productColorEntityList =productDAO.getColor(productId);
+    if(productColorEntityList.size() != 0){
+      List<ProductColorDTO> productColorDTOList = new ArrayList<>();
+      for(ProductColorEntity i : productColorEntityList ){
+        productColorDTOList.add(i.toDto());
+      }
+      return productColorDTOList;
+    }else{
+      return null;
+    }
+
+  }
   @Override
   public List<ProductEntity> getProductListEntity(){ return productDAO.getProductList();}
   @Override
   public void changePosition(int id, int nextId){ productDAO.changePosition(id, nextId); };
 
   @Override
-  public void changeColor(int productId,String color,String content){ productDAO.changeColor(productId, color,content);}
+  public void changeColor(int productId,int colorId,String content){ productDAO.changeColor(productId, colorId,content);}
 
   @Override
-  public void deleteColor(int productId,String color){productDAO.deleteColor(productId, color);}
+  public void deleteColor(int productId,int colorId){productDAO.deleteColor(productId, colorId);}
 
   @Override
   public void deleteProduct(int productId){ productDAO.deleteProduct(productId);}
 
 
   @Override
-  public void insertColor(int productId, String color){productDAO.insertColor(productId,color);}
+  public void insertColor(int productId, int colorId){productDAO.insertColor(productId,colorId);}
 
   @Override
   public void changeName(int id, String content){ productDAO.changeName(id, content); };

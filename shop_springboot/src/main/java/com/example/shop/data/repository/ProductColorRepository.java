@@ -10,12 +10,12 @@ public interface ProductColorRepository extends JpaRepository<ProductColorEntity
   @Query(value = "SELECT * FROM product_color WHERE product_id=:productId " , nativeQuery = true)
   List<ProductColorEntity> getColor(int productId);
   @Modifying
-  @Query(value = "UPDATE product_color SET color=:content WHERE product_id=:productId AND color = :color" , nativeQuery = true)
-  void changeColor(int productId, String color, String content);
+  @Query(value = "UPDATE product_color SET color=:content WHERE product_id=:productId AND color_id = :colorId" , nativeQuery = true)
+  void changeColor(int productId, int colorId, String content);
 
-  @Query(value = "DELETE FROM product_color WHERE product_id=:productId AND color = :color" , nativeQuery = true)
-  void deleteColor(int productId, String color);
+  @Query(value = "DELETE FROM product_color WHERE product_id=:productId AND color_id = :colorId" , nativeQuery = true)
+  void deleteColor(int productId, int colorId);
 
-  @Query(value = "INSERT INTO product_color VALUES(:productId, :color)" , nativeQuery = true)
-  void insertColor(int productId, String color);
+  @Query(value = "INSERT INTO product_color VALUES(:productId, :colorId, 'color')" , nativeQuery = true)
+  void insertColor(int productId, int colorId);
 }

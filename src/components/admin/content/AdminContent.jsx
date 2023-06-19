@@ -372,8 +372,8 @@ function AdminContent(props) {
     for(var i = 0; i < color.length; i++){
       arr.push(
         <div className="grid_t">
-          <input type="text" className="gr-6 mb-2" defaultValue={color[i]} id={color[i]} onChange={chnageColor}/>
-          <input type="button" className="gr-6 mb-2" value="DELETE" id={color[i]} onClick={deleteColor}/>
+          <input type="text" className="gr-6 mb-2" defaultValue={color[i].color} id={color[i].colorId} onChange={chnageColor}/>
+          <input type="button" className="gr-6 mb-2" value="DELETE" id={color[i].colorId} onClick={deleteColor}/>
         </div>
       );
     }
