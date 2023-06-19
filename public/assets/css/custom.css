@@ -465,3 +465,17 @@ td{
   background-color: #f97070;
   color: white !important;
 }
+
+
+.ql-align-center{
+  text-align: center !important;
+}
+
+
+.ql-align-right{
+  text-align: center !important;
+}
+
+.ql-align-left{
+  text-align: center !important;
+}
