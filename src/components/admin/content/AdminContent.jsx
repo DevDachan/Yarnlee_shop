@@ -10,6 +10,7 @@ import 'react-quill/dist/quill.snow.css' // Quill 에디터 스타일시트
 import ImageUploader from 'quill-image-uploader'
 import Quill from 'quill';
 
+
 Quill.register('modules/imageUploader', ImageUploader);
 
 const Wrapper = styled.div`
@@ -31,13 +32,15 @@ function AdminContent(props) {
   const { search } = useLocation();
   const {productId} = queryString.parse(search);
   const [product, setProduct] = useState();
+  const [detail, setDetail] = useState();
+
   const [color, setColor] = useState();
   const [show, setShow] = useState(false);
   const [relandering, setRelangering] = useState();
   const quillRef = useRef();
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
-
+  const [modalContent, setModalContent] = useState();
 
   useEffect(() => {
     if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
@@ -54,6 +57,7 @@ function AdminContent(props) {
       //handle success
       setProduct(response.data.product);
       setColor(response.data.color);
+      setDetail(response.data.product.detail);
     })
     .catch(function(error){
       //handle error
@@ -201,31 +205,35 @@ function AdminContent(props) {
       const editor = quillRef.current.getEditor();
       const content = editor.root.innerHTML;
       // 내용 추출 후 처리 로직 작성
-      let id = productId;
-
-      const formData = new FormData();
-      formData.append("id", id);
-      formData.append("content", content);
-
-      axios({
-        method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/product/changeDetail',
-        data: formData
-      })
-      .then(function (response){
-        //handle success
-        setProduct(response.data);
-      })
-      .catch(function(error){
-        //handle error
-        console.log(error);
-      })
-      .then(function(){
-        // always executed
-      });
+      setDetail(content);
     }
   }
 
+  const saveDetail = (e) =>{
+    const formData = new FormData();
+    formData.append("id", productId);
+    formData.append("content", detail);
+
+    axios({
+      method: "post",
+      url: 'http://104.198.11.59:8090/shop-backend/product/changeDetail',
+      data: formData
+    })
+    .then(function (response){
+      //handle success
+      setProduct(response.data);
+      setModalContent("저장이 완료 되었습니다");
+      setShow(true);
+    })
+    .catch(function(error){
+      //handle error
+      console.log(error);
+    })
+    .then(function(){
+      // always executed
+    });
+
+  }
 
   const makeContent= (e) => {
     e = e.replace(/&lt;/g, "<");
@@ -461,14 +469,26 @@ function AdminContent(props) {
           </div>
           <ReactQuill
             ref={quillRef}
-            value={product?.detail || ''}
+            value={detail? detail : ''}
             modules={quillModules}
-            onBlur={changeDetail}
+            onChange={changeDetail}
             theme="snow"
           />
+          <button onClick={saveDetail} >저장하기</button>
 
         </div>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>안내</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {modalContent}
+        </Modal.Body>
+        <Modal.Footer>
+          <button onClick={handleClose}>닫기</button>
+        </Modal.Footer>
+      </Modal>
     </Wrapper>
   );
 }
