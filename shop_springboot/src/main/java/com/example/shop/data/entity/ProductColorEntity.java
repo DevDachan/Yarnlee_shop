@@ -27,12 +27,16 @@ public class ProductColorEntity {
   @Id
   int productId;
   @Id
+  int colorId;
+
   String color;
+
 
 
   public ProductColorDTO toDto(){
     return ProductColorDTO.builder()
         .productId(productId)
+        .colorId(colorId)
         .color(color)
         .build();
   }

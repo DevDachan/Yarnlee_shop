@@ -1,5 +1,6 @@
 package com.example.shop.data.service.Impl;
 
+import com.example.shop.data.dto.ProductColorDTO;
 import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
@@ -39,13 +40,9 @@ public class ProductServiceImpl implements ProductService {
     return productDTO;
   }
   @Override
-  public List<String> getColor(int productId){
-    List<ProductColorEntity> colorDTOList = productDataHandeler.getColor(productId);
-    List<String> colorList = new ArrayList();
+  public List<ProductColorDTO> getColor(int productId){
+    List<ProductColorDTO> colorList = productDataHandeler.getColor(productId);
 
-    for(ProductColorEntity temp : colorDTOList){
-      colorList.add(temp.getColor());
-    }
     return colorList;
   }
 
@@ -68,13 +65,13 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public void changeColor(int productId,String color,String content){productDataHandeler.changeColor(productId, color,content);}
+  public void changeColor(int productId,int colorId,String color){productDataHandeler.changeColor(productId, colorId,color);}
 
   @Override
-  public void deleteColor(int productId,String color){productDataHandeler.deleteColor(productId, color);}
+  public void deleteColor(int productId,int colorId){productDataHandeler.deleteColor(productId, colorId);}
 
   @Override
-  public void insertColor(int productId,String color){productDataHandeler.insertColor(productId,color);}
+  public void insertColor(int productId,int colorId){productDataHandeler.insertColor(productId,colorId);}
 
   @Override
   public void changeId(int id, int nextId){

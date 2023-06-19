@@ -76,7 +76,7 @@ public class NoticeController {
   ){
     try {
       // 파일 저장 디렉토리 경로
-      String uploadDir = "../build\\noticeImage/";
+      String uploadDir = "../build/noticeImage/";
 
       int randomId = imageService.getRandomId();
 

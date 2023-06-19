@@ -1,5 +1,6 @@
 package com.example.shop.data.handler;
 
+import com.example.shop.data.dto.ProductColorDTO;
 import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
@@ -10,19 +11,19 @@ public interface ProductDataHandler {
 
   ProductEntity getProductEntity(int productId);
 
-  List<ProductColorEntity> getColor(int productId);
+  List<ProductColorDTO> getColor(int productId);
 
   List<ProductEntity> getProductListEntity();
 
 
-  void changeColor(int productId,String color,String content);
+  void changeColor(int productId,int colorId,String color);
 
-  void deleteColor(int productId,String color);
+  void deleteColor(int productId,int colorId);
 
   void deleteProduct(int productId);
 
 
-  void insertColor(int productId, String color);
+  void insertColor(int productId, int colorId);
 
   void changePosition(int id, int nextId);
 
