@@ -195,7 +195,7 @@ function AdminOrderHistroy(props) {
     }
   }
   const previewImage = (e) =>{
-    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}></img>);
+    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}></img>);
     setModealYesNo(false);
     setShow(true);
     sendSMS();
@@ -341,7 +341,7 @@ function AdminOrderHistroy(props) {
                   <input type="button" className="mb-3 mr3 imagebtn" onClick={changeImage} value="REUPLOAD" />
                   <input type="button" className="mb-3 imagebtn" onClick={previewImage} value="PREVIEW" />
                 </div>
-                <img className="detail_img" src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}
+                <img className="detail_img" src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}
                 alt=""/>
                 </>
               }

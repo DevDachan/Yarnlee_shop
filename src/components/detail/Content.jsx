@@ -98,7 +98,7 @@ function Content(props) {
           <div className="row detail_main_nav">
 
             <div className="col-6-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"../productImage/"+product.imageId+".jpg"} alt="" /></span>
+              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://104.198.11.59/productImage/"+product.imageId+".jpg"} alt="" /></span>
             </div>
 
             <div className="col-6-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>

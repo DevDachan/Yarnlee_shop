@@ -97,7 +97,7 @@ function OrderHistroy(props) {
               </div>
 
               <div className="gr-12 mt3">
-                <img className="detail_img" src={"../userImage/"+orderDetail.imageId+".jpg"}
+                <img className="detail_img" src={"http://104.198.11.59/userImage/"+orderDetail.imageId+".jpg"}
                 alt=""
                 />
               </div>
