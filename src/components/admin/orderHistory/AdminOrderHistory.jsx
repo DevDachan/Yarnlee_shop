@@ -33,6 +33,7 @@ function AdminOrderHistroy(props) {
   const [orderState, setOrderState] = useState();
   const [modealYesNo, setModealYesNo] = useState(false);
   const [parcelNum, setParcelNum] = useState();
+  const [parcelType, setParcelType] = useState();
 
   const [show, setShow] = useState(false);
   const [modalContent, setModalContent] = useState();
@@ -76,6 +77,7 @@ function AdminOrderHistroy(props) {
         }else{
           setParcelNum(response.data.order.parcelNum);
         }
+        setParcelType(response.data.order.parcelType);
       }
 
     })
@@ -141,6 +143,8 @@ function AdminOrderHistroy(props) {
     formData.append("addressDetail", addressDetail);
     formData.append("imageId", uploadImage);
     formData.append("state", orderState);
+    formData.append("parcelType", parcelType);
+    formData.append("parcelNum", parcelType);
 
     axios({
       method: "post",
@@ -301,7 +305,7 @@ function AdminOrderHistroy(props) {
                 <h2 className="mg0">주문자 이름</h2>
               </div>
               <div className="gr-8">
-                <input type="text" className="prl1" id="ip_name" defaultValue={name}></input>
+                <input type="text" className="prl1" id="ip_name" defaultValue={name} onChange={(e) => setName(e.target.value)}></input>
               </div>
 
 
@@ -320,13 +324,13 @@ function AdminOrderHistroy(props) {
                 />
               </div>
               <div className="gr-8 mt3">
-                <input type="text" className="prl1"  disabled id="zoneCode" value={zoneCode} required />
+                <input type="text" className="prl1"  disabled id="zoneCode" value={zoneCode} required onChange={(e) => setZonecode(e.target.value)}/>
               </div>
               <div className="gr-12">
-                <input type="text" className="prl1"  disabled id="address" value={address} required />
+                <input type="text" className="prl1"  disabled id="address" value={address} required onChange={(e) => setAddress(e.target.value)}/>
               </div>
               <div className="gr-12">
-                <input type="text" required className="prl1" id="address_detail" defaultValue={orderDetail == undefined? "": orderDetail.addressDetail}/>
+                <input type="text" required className="prl1" id="address_detail" defaultValue={orderDetail == undefined? "": orderDetail.addressDetail} onChange={(e) => setAddressDetail(e.target.value)}/>
               </div>
 
               <div className="gr-12 mt3">
