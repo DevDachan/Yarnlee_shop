@@ -85,7 +85,7 @@ function AdminNoticeEdit(props) {
         const imageUrl = response.data;
         const editor = quillRef.current.getEditor();
         const cursorPosition = editor.getSelection().index;
-        editor.insertEmbed(cursorPosition, "image", "../noticeImage/"+imageUrl+".jpg");
+        editor.insertEmbed(cursorPosition, "image", "http://104.198.11.59/noticeImage/"+imageUrl+".jpg");
 
       } catch (error) {
         console.log(error);

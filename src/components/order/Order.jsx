@@ -202,7 +202,7 @@ function Order(props) {
   }
 
   const previewImage = (e) =>{
-    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}></img>);
+    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}></img>);
     setShow(true);
   }
 
@@ -213,7 +213,7 @@ function Order(props) {
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-1" >
-                <span className="image main order_span_img"><img className="order_img" src={"../productImage/"+productImageId+".jpg"} alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={"http://104.198.11.59/productImage/"+productImageId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-11 calign">
                 <h1>{productName}</h1>
@@ -305,7 +305,7 @@ function Order(props) {
                         <input type="button" className="mb-3 mr3 imagebtn" onClick={changeImage} value="REUPLOAD" />
                         <input type="button" className="mb-3 imagebtn" onClick={previewImage} value="PREVIEW" />
                       </div>
-                      <img className="detail_img" src={uploadImage == undefined ? "" :"../userImage/"+uploadImage+".jpg"}
+                      <img className="detail_img" src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}
                       alt=""/>
                       </>
                     }

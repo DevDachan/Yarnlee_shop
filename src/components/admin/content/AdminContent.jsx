@@ -255,7 +255,7 @@ function AdminContent(props) {
         const imageUrl = response.data;
         const editor = quillRef.current.getEditor();
         const cursorPosition = editor.getSelection().index;
-        editor.insertEmbed(cursorPosition, "image", "../productImage/"+imageUrl+".jpg");
+        editor.insertEmbed(cursorPosition, "image", "http://104.198.11.59/productImage/"+imageUrl+".jpg");
         } catch (error) {
         console.log(error);
       }
@@ -299,7 +299,12 @@ function AdminContent(props) {
   const insertColor =  (e) =>{
     const formData = new FormData();
     formData.append("productId", productId);
-    formData.append("colorId", color.length);
+    console.log(color);
+    if(color == null){
+      formData.append("colorId", 0);
+    }else{
+      formData.append("colorId", color.length);
+    }
 
     axios({
       method: "post",
@@ -407,7 +412,7 @@ function AdminContent(props) {
 
             <div className="col-12-medium" id="admin-imgDiv">
               <span className="image main detail_span_img">
-                <img className="main_img" src={product == undefined ? "" :"../productImage/"+product.imageId+".jpg"}
+                <img className="main_img" src={product == undefined ? "" :"http://104.198.11.59/productImage/"+product.imageId+".jpg"}
                 alt=""
                 onClick={changeImage}
                 />
