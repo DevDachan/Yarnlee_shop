@@ -11,9 +11,11 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -209,15 +211,11 @@ public class ProductController {
       String uploadDir = "../build/productImage/";
 
       int randomId = imageService.getRandomId();
-
       // 파일 저장할 경로
       String fileName = randomId + ".jpg";
       Path filePath = Paths.get(uploadDir, fileName);
-
       file.transferTo(filePath); // 파일 다운로드
 
-
-      // 성공적으로 저장되었을 때 반환할 응답
       return randomId;
     } catch (Exception e) {
       // 저장 중 에러가 발생한 경우 반환할 응답
@@ -236,12 +234,19 @@ public class ProductController {
       String uploadDir = "../build/productImage/";
 
       int randomId = imageService.getRandomId();
+      int height = 800;
+      int width = 800;
 
       // 파일 저장할 경로
       String fileName = randomId + ".jpg";
       Path filePath = Paths.get(uploadDir, fileName);
 
       file.transferTo(filePath); // 파일 다운로드
+      String thumDir = "../build/thumbnails/";
+      Path thumPath = Paths.get(thumDir, fileName);
+      Thumbnails.of(file.getInputStream())
+          .size(width, height)
+          .toFile(thumPath.toFile());
 
       productService.changeImageId(productId, randomId);
       // 성공적으로 저장되었을 때 반환할 응답

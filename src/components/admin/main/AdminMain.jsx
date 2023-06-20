@@ -212,7 +212,7 @@ function AdminMain(props) {
       arr.push(
         <article>
           <span className="image">
-            <img src={"productImage/"+productList[i].imageId+".jpg"} alt="" />
+            <img src={"thumbnails/"+productList[i].imageId+".jpg"} alt="" />
           </span>
           <a>
             <input type="text" className="ip-admin-product" id={productList[i].id} onChange={ (e) => changeName(e)} defaultValue={productList[i].name} />

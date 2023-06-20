@@ -23,7 +23,12 @@ public class NoticeDAOImpl implements NoticeDAO {
 
   @Override
   public void createNotice(String currentTime){
-    int id = noticeRepository.getMaxNoticeId() + 1;
+
+    Integer id = noticeRepository.getMaxNoticeId();
+    if(id == null){
+      id = 0;
+    }
+
     NoticeEntity notice = new NoticeEntity(id,"Title","",0,currentTime);
     noticeRepository.save(notice);
   }
