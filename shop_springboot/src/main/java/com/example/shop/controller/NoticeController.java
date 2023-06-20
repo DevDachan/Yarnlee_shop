@@ -7,6 +7,8 @@ import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.NoticeService;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,7 @@ public class NoticeController {
       @RequestParam String id
   ){
     if(adminService.checkAdmin(hashKey,id)){
-      LocalDateTime currentTime = LocalDateTime.now();
+      ZonedDateTime currentTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
       String formattedTime = currentTime.format(formatter);
       noticeService.createNotice(formattedTime);
