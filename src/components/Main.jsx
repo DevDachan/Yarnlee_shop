@@ -83,7 +83,7 @@ function Main(props) {
       <Wrapper>
           <div id="main">
             <div className="inner mg0">
-              <header>
+              <header className="main-header">
                 <h1>Only Handmade</h1>
                 <h2 style={{whiteSpace: "pre"}}>{mainContent}</h2>
               </header>
