@@ -5,13 +5,13 @@ import com.example.shop.data.entity.ProductEntity;
 import java.util.List;
 
 public interface ProductDAO {
-  ProductEntity saveProduct(ProductEntity productEntity);
+
+  ProductEntity createProduct();
   ProductEntity getProduct (int productId);
 
   List<ProductColorEntity> getColor(int productId);
 
   List<ProductEntity> getProductList();
-  void createProduct();
 
   void changeColor(int productId, int colorId, String color);
 

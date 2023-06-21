@@ -21,11 +21,12 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
     @Autowired
     public ProductDataHandlerImpl(ProductDAO productDAO) {this.productDAO = productDAO;}
 
-    @Override
-    public ProductEntity saveProductEntity(ProductDTO productDto){
-      ProductEntity productEntity = productDto.toEntity();
-      return productDAO.saveProduct(productEntity);
-    }
+
+  @Override
+  public ProductDTO createProduct(){
+    ProductEntity product = productDAO.createProduct();
+    return product.toDto();
+  }
 
   @Override
   public ProductEntity getProductEntity(int productId){
@@ -84,6 +85,4 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   @Override
   public void changeDetail(int id, String content){ productDAO.changeDetail(id, content); };
 
-  @Override
-  public void createProduct(){ productDAO.createProduct();}
 }

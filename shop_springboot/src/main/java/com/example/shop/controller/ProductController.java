@@ -2,6 +2,7 @@ package com.example.shop.controller;
 
 
 import com.example.shop.data.dto.ProductDTO;
+import com.example.shop.data.service.HitsService;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.ProductService;
 import com.example.shop.data.service.AdminService;
@@ -15,7 +16,6 @@ import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -27,22 +27,16 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class ProductController {
   private ProductService productService;
   private ImageService imageService;
-
+  private HitsService hitsService;
   private AdminService adminService;
 
   @Autowired
   public ProductController(ProductService productService,ImageService imageService,
-      AdminService adminService) {
+      AdminService adminService, HitsService hitsService) {
     this.imageService = imageService;
     this.productService = productService;
     this.adminService = adminService;
-  }
-
-
-  @PostMapping(value="/insert")
-  public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDto) {
-    ProductDTO response = productService.saveProduct(productDto);
-    return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
+    this.hitsService = hitsService;
   }
 
   @GetMapping(value = "/select/id/{productId}")
@@ -170,7 +164,8 @@ public class ProductController {
   @GetMapping(value = "/createProduct")
   public HashMap<String,Object> createProduct() {
     HashMap<String,Object> map = new HashMap<>();
-    productService.createProduct();
+    ProductDTO response = productService.createProduct();
+    hitsService.saveHits(response.getId(),"product");
     List<ProductDTO> productDTO = productService.getProductList();
 
     map.put("productContent", productDTO);
