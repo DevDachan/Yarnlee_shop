@@ -39,6 +39,16 @@ footer{
 article{
   width: 25vw !important;
   height: 25vw !important;
+  min-width: 185px !important;
+  min-height: 185px !important;
+}
+
+.main-header{
+  margin: 0 0 2em 2em;
+}
+
+.tiles{
+  justify-content: center;
 }
 
 .changeState{

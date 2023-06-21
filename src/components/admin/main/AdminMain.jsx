@@ -315,7 +315,7 @@ function AdminMain(props) {
       <Wrapper>
           <div id="main">
             <div className="inner mg0">
-              <header>
+              <header className="main-header">
                 <textarea placeholder="메인 화면에서 나타날 내용 입력"
                   onKeyDown={resize} onKeyUp={resize} onFocus={resize}
                   onChange={ (e) => changeMainContent(e)} defaultValue={mainContent} >

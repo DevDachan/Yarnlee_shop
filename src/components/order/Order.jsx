@@ -213,7 +213,7 @@ function Order(props) {
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-1" >
-                <span className="image main order_span_img"><img className="order_img" src={"http://104.198.11.59/thumbnails/"+productImageId+".jpg"} alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={"http://104.198.11.59/thumbnails/"+thumbnailImageId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-11 calign">
                 <h1>{productName}</h1>
