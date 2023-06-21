@@ -7,7 +7,8 @@ import com.example.shop.data.repository.ProductColorRepository;
 import java.util.List;
 
 public interface ProductService {
-  ProductDTO saveProduct(ProductDTO productDto);
+
+  ProductDTO createProduct();
   ProductDTO getProduct(int productId);
   List<ProductDTO> getProductList();
   List<ProductColorDTO>  getColor(int productId);
@@ -15,7 +16,6 @@ public interface ProductService {
   void deleteColor(int productId,int colorId);
   void deleteProduct(int productId);
   void insertColor(int productId, int colorId);
-  void createProduct();
   void changeId(int id, int nextId);
   void changeName(int id, String content);
   void changePrice(int id, int content);

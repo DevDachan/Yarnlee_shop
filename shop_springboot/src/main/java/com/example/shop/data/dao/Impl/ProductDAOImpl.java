@@ -29,15 +29,17 @@ public class ProductDAOImpl implements ProductDAO {
   }
 
   @Override
+  public ProductEntity createProduct(){
+    int id = productRepository.maxId() +1;
+    productRepository.createProduct(id);
+    return productRepository.getById(id);
+  }
+
+  @Override
   public List<ProductColorEntity> getColor(int productId){
     return productColorRepository.getColor(productId);
   }
 
-  @Override
-  public ProductEntity saveProduct(ProductEntity productEntity){
-    productRepository.save(productEntity);
-    return productEntity;
-  }
   @Override
   public ProductEntity getProduct(int productId){
     ProductEntity productEntity = productRepository.getById(productId);
@@ -96,11 +98,6 @@ public class ProductDAOImpl implements ProductDAO {
     productRepository.changeDetail(id,content);
   }
 
-  @Override
-  public void createProduct(){
-    int id = productRepository.maxId() +1;
-    productRepository.createProduct(id);
-  }
 
 }
 

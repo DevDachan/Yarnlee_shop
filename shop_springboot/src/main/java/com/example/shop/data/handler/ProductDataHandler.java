@@ -7,8 +7,7 @@ import com.example.shop.data.entity.ProductEntity;
 import java.util.List;
 
 public interface ProductDataHandler {
-  ProductEntity saveProductEntity(ProductDTO productDto);
-
+  ProductDTO createProduct();
   ProductEntity getProductEntity(int productId);
 
   List<ProductColorDTO> getColor(int productId);
@@ -38,5 +37,4 @@ public interface ProductDataHandler {
   void changeSubDetail(int id, String content);
   void changeDetail(int id, String content);
 
-  void createProduct();
 }

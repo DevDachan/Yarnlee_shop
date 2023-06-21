@@ -24,13 +24,6 @@ public class ProductServiceImpl implements ProductService {
 
   // Service(Client) <-> Controller : DTO
   // Service <-> DAO(DB) : Entity
-  @Override
-  public ProductDTO saveProduct(ProductDTO productDto){
-    ProductEntity productEntity = productDataHandeler.saveProductEntity(productDto);
-
-    ProductDTO productDTO = productEntity.toDto();
-    return productDTO;
-  }
 
   @Override
   public ProductDTO getProduct(int productId){
@@ -100,5 +93,8 @@ public class ProductServiceImpl implements ProductService {
   public void changeDetail(int id, String content){ productDataHandeler.changeDetail(id,content); }
 
   @Override
-  public void createProduct(){productDataHandeler.createProduct();}
+  public ProductDTO createProduct(){
+    ProductDTO productDTO = productDataHandeler.createProduct();
+    return productDTO;
+  }
 }
