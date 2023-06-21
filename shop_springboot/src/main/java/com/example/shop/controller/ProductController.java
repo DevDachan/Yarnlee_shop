@@ -42,6 +42,7 @@ public class ProductController {
   @GetMapping(value = "/select/id/{productId}")
   public Map<String, Object> getProduct(@PathVariable int productId) {
     Map<String, Object> formData = new HashMap<>();
+    hitsService.upHits(productId);
 
     formData.put("product" ,productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));

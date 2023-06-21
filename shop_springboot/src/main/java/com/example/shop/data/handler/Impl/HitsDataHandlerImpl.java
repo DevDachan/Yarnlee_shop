@@ -22,4 +22,9 @@ public class HitsDataHandlerImpl implements HitsDataHandler {
       hitsDAO.saveUser(hitsDTO.toEntity());
     }
 
+    @Override
+    public void upHits(int id){
+      hitsDAO.upHits(id);
+    }
+
 }

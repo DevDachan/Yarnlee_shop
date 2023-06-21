@@ -23,5 +23,17 @@ public class HitsDAOImpl implements HitsDAO {
     hitsRepository.save(hitsEntity);
   }
 
+
+  @Override
+  public void upHits(int id){
+    Optional<HitsEntity> optionalHits = hitsRepository.findById(id);
+    if(optionalHits.isPresent()){
+      HitsEntity hits = optionalHits.get();
+      hits.setCount(hits.getCount()+1);
+      hitsRepository.save(hits);
+    }
+  }
+
+
 }
 

@@ -27,4 +27,10 @@ public class HitsServiceImpl implements HitsService {
 
     return hitsDTO;
   }
+
+  @Override
+  public void upHits(int id){
+    hitsDataHandeler.upHits(id);
+  }
+
 }
