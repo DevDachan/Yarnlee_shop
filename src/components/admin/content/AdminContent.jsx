@@ -33,6 +33,7 @@ function AdminContent(props) {
   const {productId} = queryString.parse(search);
   const [product, setProduct] = useState();
   const [detail, setDetail] = useState();
+  const [hits, setHits] = useState();
 
   const [color, setColor] = useState();
   const [show, setShow] = useState(false);
@@ -51,10 +52,11 @@ function AdminContent(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/product/select/id/'+productId
+      url: 'http://104.198.11.59:8090/shop-backend/product/adminSelect/id/'+productId
     })
     .then(function (response){
       //handle success
+      //setHits(response.data.hits);
       setProduct(response.data.product);
       setColor(response.data.color);
       setDetail(response.data.product.detail);
@@ -414,6 +416,7 @@ function AdminContent(props) {
     <Wrapper>
       <div className="detail_main" id="main">
         <div className="inner">
+          <h3> 현재 조회수 : {hits} </h3>
           <input type="text" className="ip-admin-content-head" defaultValue={product == undefined ? "":product.name} onChange={changeName}></input>
 
           <div className="row mt-2 detail_main_nav">
