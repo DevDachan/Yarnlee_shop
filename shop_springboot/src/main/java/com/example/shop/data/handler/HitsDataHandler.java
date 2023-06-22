@@ -7,4 +7,6 @@ public interface HitsDataHandler {
 
   void upHits(int id);
 
+  int getHits(int id);
+
 }

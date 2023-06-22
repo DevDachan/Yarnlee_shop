@@ -33,4 +33,9 @@ public class HitsServiceImpl implements HitsService {
     hitsDataHandeler.upHits(id);
   }
 
+  @Override
+  public int getHits(int id){
+    return hitsDataHandeler.getHits(id);
+  }
+
 }

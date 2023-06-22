@@ -27,4 +27,10 @@ public class HitsDataHandlerImpl implements HitsDataHandler {
       hitsDAO.upHits(id);
     }
 
+    @Override
+    public int getHits(int id){
+      return hitsDAO.getHits(id);
+    }
+
+
 }
