@@ -34,6 +34,11 @@ public class HitsDAOImpl implements HitsDAO {
     }
   }
 
+  @Override
+  public int getHits(int id){
+    return hitsRepository.getHits(id);
+  }
+
 
 }
 

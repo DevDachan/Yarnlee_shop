@@ -49,6 +49,18 @@ public class ProductController {
     return formData;
   }
 
+  @GetMapping(value = "/adminSelect/id/{productId}")
+  public Map<String, Object> getAdminProduct(@PathVariable int productId) {
+    Map<String, Object> formData = new HashMap<>();
+    hitsService.upHits(productId);
+    formData.put("hits", hitsService.getHits(productId));
+    formData.put("product" ,productService.getProduct(productId));
+    formData.put("color", productService.getColor(productId));
+    return formData;
+  }
+
+
+
   @PostMapping(value = "/changeColor")
   public Map<String, Object> changeColor(@RequestParam("productId") int productId,
       @RequestParam("colorId") int colorId,

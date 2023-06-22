@@ -6,4 +6,6 @@ public interface HitsDAO {
   void saveUser(HitsEntity hitsEntity);
 
   void upHits(int id);
+
+  int getHits(int id);
 }
