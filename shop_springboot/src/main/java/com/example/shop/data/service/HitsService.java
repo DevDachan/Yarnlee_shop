@@ -5,8 +5,8 @@ import com.example.shop.data.dto.HitsDTO;
 public interface HitsService {
   HitsDTO saveHits(int id, String type);
 
-  void upHits(int id);
+  void upHits(int id, String type);
 
-  int getHits(int id);
+  int getHits(int id, String type);
 
 }

@@ -42,7 +42,7 @@ public class ProductController {
   @GetMapping(value = "/select/id/{productId}")
   public Map<String, Object> getProduct(@PathVariable int productId) {
     Map<String, Object> formData = new HashMap<>();
-    hitsService.upHits(productId);
+    hitsService.upHits(productId,"product");
 
     formData.put("product" ,productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
@@ -52,13 +52,11 @@ public class ProductController {
   @GetMapping(value = "/adminSelect/id/{productId}")
   public Map<String, Object> getAdminProduct(@PathVariable int productId) {
     Map<String, Object> formData = new HashMap<>();
-    hitsService.upHits(productId);
-    formData.put("hits", hitsService.getHits(productId));
+    formData.put("hits", hitsService.getHits(productId,"product"));
     formData.put("product" ,productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
   }
-
 
 
   @PostMapping(value = "/changeColor")
@@ -169,7 +167,7 @@ public class ProductController {
   public HashMap<String,Object> getProductList() {
     HashMap<String,Object> map = new HashMap<String,Object>();
     List<ProductDTO> productDTO = productService.getProductList();
-
+    hitsService.upHits(0,"main");
     map.put("productContent", productDTO);
     return map;
   }

@@ -29,13 +29,13 @@ public class HitsServiceImpl implements HitsService {
   }
 
   @Override
-  public void upHits(int id){
-    hitsDataHandeler.upHits(id);
+  public void upHits(int id, String type){
+    hitsDataHandeler.upHits(id, type);
   }
 
   @Override
-  public int getHits(int id){
-    return hitsDataHandeler.getHits(id);
+  public int getHits(int id, String type){
+    return hitsDataHandeler.getHits(id,type);
   }
 
 }

@@ -23,13 +23,13 @@ public class HitsDataHandlerImpl implements HitsDataHandler {
     }
 
     @Override
-    public void upHits(int id){
-      hitsDAO.upHits(id);
+    public void upHits(int id, String type){
+      hitsDAO.upHits(id, type);
     }
 
     @Override
-    public int getHits(int id){
-      return hitsDAO.getHits(id);
+    public int getHits(int id, String type){
+      return hitsDAO.getHits(id,type);
     }
 
 
