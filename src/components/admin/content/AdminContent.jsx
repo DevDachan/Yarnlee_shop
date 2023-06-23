@@ -56,7 +56,7 @@ function AdminContent(props) {
     })
     .then(function (response){
       //handle success
-      //setHits(response.data.hits);
+      setHits(response.data.hits);
       setProduct(response.data.product);
       setColor(response.data.color);
       setDetail(response.data.product.detail);
