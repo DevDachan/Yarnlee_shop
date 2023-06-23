@@ -25,8 +25,8 @@ public class HitsDAOImpl implements HitsDAO {
 
 
   @Override
-  public void upHits(int id){
-    Optional<HitsEntity> optionalHits = hitsRepository.findById(id);
+  public void upHits(int id, String type){
+    Optional<HitsEntity> optionalHits = hitsRepository.getHits(id,type);
     if(optionalHits.isPresent()){
       HitsEntity hits = optionalHits.get();
       hits.setCount(hits.getCount()+1);
@@ -35,10 +35,9 @@ public class HitsDAOImpl implements HitsDAO {
   }
 
   @Override
-  public int getHits(int id){
-    return hitsRepository.getHits(id);
+  public int getHits(int id, String type){
+    return hitsRepository.getCount(id,type);
   }
-
 
 }
 

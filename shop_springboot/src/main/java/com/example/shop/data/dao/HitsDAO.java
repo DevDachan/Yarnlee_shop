@@ -5,7 +5,7 @@ import com.example.shop.data.entity.HitsEntity;
 public interface HitsDAO {
   void saveUser(HitsEntity hitsEntity);
 
-  void upHits(int id);
+  void upHits(int id, String type);
 
-  int getHits(int id);
+  int getHits(int id, String type);
 }
