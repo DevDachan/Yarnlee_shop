@@ -3,6 +3,7 @@ package com.example.shop.controller;
 
 import com.example.shop.data.dto.AdminDTO;
 import com.example.shop.data.service.AdminService;
+import com.example.shop.data.service.HitsService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -23,9 +24,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class AdminController {
   private AdminService adminService;
 
+  private HitsService hitsService;
   @Autowired
-  public AdminController(AdminService adminService) {
+  public AdminController(AdminService adminService, HitsService hitsService) {
     this.adminService = adminService;
+    this.hitsService = hitsService;
   }
 
   @PostMapping(value = "/adminLogin")
@@ -50,8 +53,11 @@ public class AdminController {
     Optional<AdminDTO> optionalOrderDTO = adminService.getAdmin("order");
     AdminDTO order = optionalOrderDTO.get();
 
+    int hits = hitsService.getHits(0,"");
     formData.put("main", main.getHashKey());
     formData.put("order", order.getHashKey());
+    formData.put("hits", String.valueOf(hits));
+
     return formData;
   }
 
