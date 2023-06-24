@@ -26,7 +26,7 @@ function AdminMain(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
-
+  const [hits, setHits] = useState(0);
 
   useEffect(() => {
     if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
@@ -57,6 +57,7 @@ function AdminMain(props) {
       //handle success
       setMainContent(response.data.main);
       setOrderContent(response.data.order);
+      setHits(response.data.hits);
     })
     .catch(function(error){
       //handle error
