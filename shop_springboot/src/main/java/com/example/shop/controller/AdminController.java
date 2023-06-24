@@ -53,7 +53,7 @@ public class AdminController {
     Optional<AdminDTO> optionalOrderDTO = adminService.getAdmin("order");
     AdminDTO order = optionalOrderDTO.get();
 
-    int hits = hitsService.getHits(0,"");
+    int hits = hitsService.getHits(0,"main");
     formData.put("main", main.getHashKey());
     formData.put("order", order.getHashKey());
     formData.put("hits", String.valueOf(hits));
