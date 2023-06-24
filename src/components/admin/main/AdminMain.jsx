@@ -322,6 +322,9 @@ function AdminMain(props) {
                   onChange={ (e) => changeMainContent(e)} defaultValue={mainContent} >
                 </textarea>
               </header>
+              <h3>
+                메인 화면 조회수 : {hits}
+              </h3>
               <section className="tiles mt2">
               {
                 productList == undefined ? "": makeProductContent()
