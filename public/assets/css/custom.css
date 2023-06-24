@@ -489,3 +489,17 @@ td{
 .ql-align-left{
   text-align: center !important;
 }
+
+
+.icon-kakaotalk{
+  background-image: url("/images/kakaotalk.png");
+  background-size: cover; /* 이미지를 적절히 크기에 맞게 조정 */
+  border: 0px !important;
+}
+
+
+.icon-instagram{
+  background-image: url("/images/instagram.png");
+  background-size: cover; /* 이미지를 적절히 크기에 맞게 조정 */
+  border: 0px !important;
+}
