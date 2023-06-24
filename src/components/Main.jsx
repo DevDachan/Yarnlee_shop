@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     min-width: 750px;
-    min-height: 80vh;
+    min-height: 70vh;
 `;
 
 function Main(props) {

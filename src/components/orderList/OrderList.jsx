@@ -12,6 +12,7 @@ const Wrapper = styled.div`
     margin-bottom: 8em;
     margin:auto;
     min-width: 750px;
+    min-height: 70vh;    
 `;
 
 function OrderList(props) {
