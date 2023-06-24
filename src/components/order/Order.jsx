@@ -58,7 +58,6 @@ function Order(props) {
         setZonecode(response.data.zoneCode);
         setAddressDetail(response.data.addressDetail);
         setName(response.data.name);
-        setUploadImage(response.data.imageId);
       })
       .catch(function(error){
         //handle error

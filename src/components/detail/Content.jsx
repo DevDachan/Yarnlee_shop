@@ -44,7 +44,7 @@ function Content(props) {
           productName: product.name,
           deliveryCost: document.getElementById("select_parcel").value == "반값 택배" ? product.deliveryCostHalf : product.deliveryCostGeneral,
           parcelType: document.getElementById("select_parcel").value,
-          productImageId: product.imageId,
+          thumbnailImageId: product.imageId,
           color: document.getElementById("select_color").value,
         },
       });
