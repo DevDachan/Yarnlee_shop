@@ -29,7 +29,7 @@ public class NoticeDAOImpl implements NoticeDAO {
       id = 0;
     }
 
-    NoticeEntity notice = new NoticeEntity(id,"Title","",0,currentTime);
+    NoticeEntity notice = new NoticeEntity(id+1,"Title","",0,currentTime);
     noticeRepository.save(notice);
   }
   @Override
