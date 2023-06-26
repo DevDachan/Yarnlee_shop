@@ -59,6 +59,25 @@ article{
   width: 100%;
 }
 
+#state-open{
+  background-color: #09dfff;
+  color: white !important;
+  box-shadow: none;
+}
+#state-open:hover{
+  background-color: #06b4ce;
+}
+
+#state-close{
+  background-color: #ee5050;
+  color: white !important;
+  box-shadow: none;
+}
+
+#state-close:hover{
+  background-color: red;
+}
+
 
 .ql-editor > p > img{
   width: 70%;
