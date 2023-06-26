@@ -39,6 +39,7 @@ function Order(props) {
   useEffect(() => {
     if (location.state == null) {
       navigate('../');
+      window.location.reload();
     }
   }, [location, navigate]);
 
@@ -67,6 +68,10 @@ function Order(props) {
         // always executed
       });
     }
+    if(location.state.state == "close"){
+      navigate('../');
+      window.location.reload();
+    }
 
     axios({
       method: "get",
@@ -75,6 +80,7 @@ function Order(props) {
     .then(function (response){
       //handle success
       setOrderContent(response.data);
+
     })
     .catch(function(error){
       //handle error
