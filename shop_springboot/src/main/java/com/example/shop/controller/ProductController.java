@@ -179,6 +179,15 @@ public class ProductController {
     return map;
   }
 
+  @GetMapping(value = "/adminProductList")
+  public HashMap<String,Object> getAdminProductList() {
+    HashMap<String,Object> map = new HashMap<String,Object>();
+    List<ProductDTO> productDTO = productService.getProductList();
+    map.put("productContent", productDTO);
+    return map;
+  }
+
+
   @GetMapping(value = "/createProduct")
   public HashMap<String,Object> createProduct() {
     HashMap<String,Object> map = new HashMap<>();
