@@ -503,3 +503,13 @@ td{
   background-size: cover; /* 이미지를 적절히 크기에 맞게 조정 */
   border: 0px !important;
 }
+
+
+.title{
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.title:hover{
+  color: #b6b6b6;
+}

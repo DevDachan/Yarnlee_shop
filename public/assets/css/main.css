@@ -2838,6 +2838,9 @@ input, select, textarea {
 
 	#header {
 		padding: 8em 0 0.1em 0 ;
+  	background-image: url("/images/background.png");
+		background-size: cover; /* 이미지를 적절히 크기에 맞게 조정 */
+	  background-repeat: no-repeat; /* 이미지 반복 없음 */
 	}
 
 		#header .logo {
