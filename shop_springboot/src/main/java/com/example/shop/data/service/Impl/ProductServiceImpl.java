@@ -93,6 +93,8 @@ public class ProductServiceImpl implements ProductService {
   public void changeDetail(int id, String content){ productDataHandeler.changeDetail(id,content); }
 
   @Override
+  public void changeState(int id){productDataHandeler.changeState(id);}
+  @Override
   public ProductDTO createProduct(){
     ProductDTO productDTO = productDataHandeler.createProduct();
     return productDTO;

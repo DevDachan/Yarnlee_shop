@@ -8,19 +8,16 @@ public interface ProductDAO {
 
   ProductEntity createProduct();
   ProductEntity getProduct (int productId);
-
   List<ProductColorEntity> getColor(int productId);
-
   List<ProductEntity> getProductList();
-
   void changeColor(int productId, int colorId, String color);
-
   void deleteColor(int productId,int colorId);
 
   void deleteProduct(int productId);
 
   void insertColor(int productId, int colorId);
 
+  void changeState(int id);
   void changePosition(int id, int nextId);
 
   void changeName(int id, String content);

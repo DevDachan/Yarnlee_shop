@@ -133,6 +133,13 @@ public class ProductController {
     productService.changeDeliveryTime(productId,content);
   }
 
+  @PostMapping(value = "/changeState")
+  public void changeState(@RequestParam("id") int productId) {
+
+    productService.changeState(productId);
+  }
+
+
   @PostMapping(value = "/changeDeliveryCostHalf")
   public void changeDeliveryCostHalf(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
@@ -176,6 +183,7 @@ public class ProductController {
   public HashMap<String,Object> createProduct() {
     HashMap<String,Object> map = new HashMap<>();
     ProductDTO response = productService.createProduct();
+
     hitsService.saveHits(response.getId(),"product");
     List<ProductDTO> productDTO = productService.getProductList();
 

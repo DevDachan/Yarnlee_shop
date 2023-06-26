@@ -17,6 +17,7 @@ public interface ProductService {
   void deleteProduct(int productId);
   void insertColor(int productId, int colorId);
   void changeId(int id, int nextId);
+  void changeState(int id);
   void changeName(int id, String content);
   void changePrice(int id, int content);
   void changeDeliveryTime(int id, String content);

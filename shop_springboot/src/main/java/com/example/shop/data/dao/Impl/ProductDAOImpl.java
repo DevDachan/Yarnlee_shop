@@ -52,6 +52,16 @@ public class ProductDAOImpl implements ProductDAO {
   }
 
   @Override
+  public void changeState(int id){
+    ProductEntity product = productRepository.getById(id);
+    if(product.getState().equals("open")){
+      product.setState("close");
+    }else{
+      product.setState("open");
+    }
+    productRepository.save(product);
+  }
+  @Override
   public void changeColor(int productId, int colorId, String color){
     productColorRepository.changeColor(productId, colorId, color);
   }

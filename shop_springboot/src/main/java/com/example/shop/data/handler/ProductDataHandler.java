@@ -14,6 +14,7 @@ public interface ProductDataHandler {
 
   List<ProductEntity> getProductListEntity();
 
+  void changeState(int id);
 
   void changeColor(int productId,int colorId,String color);
 
