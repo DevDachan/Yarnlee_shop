@@ -211,6 +211,29 @@ function AdminContent(props) {
     }
   }
 
+  const changeState = (e) =>{
+    if(product.state != e.target.value){
+      const formData = new FormData();
+      formData.append("id", productId);
+      axios({
+        method: "post",
+        url: 'http://104.198.11.59:8090/shop-backend/product/changeState',
+        data: formData
+      })
+      .then(function (response){
+        //handle success
+        setRelangering("");
+      })
+      .catch(function(error){
+        //handle error
+        console.log(error);
+      })
+      .then(function(){
+        // always executed
+      });
+    }
+  }
+
   const saveDetail = (e) =>{
     const formData = new FormData();
     formData.append("id", productId);
@@ -469,6 +492,17 @@ function AdminContent(props) {
               <input type="button"  value="+" onClick={insertColor}/>
             </div>
 
+            <div className="mt3 mb1">
+              <h3> 상품 상태 </h3>
+              <div className="grid_t">
+                <div className="gr-6">
+                  <input type="radio" id="state-open" name="state-open" value="open" onClick={changeState}/>
+                    <label for="state-open">OPEN</label>
+                  <input type="radio" id="state-close" name="state-open" value="close" onClick={changeState}/>
+                    <label for="state-close">CLOSE</label>
+                </div>
+              </div>
+            </div>
           </div>
           <ReactQuill
             ref={quillRef}

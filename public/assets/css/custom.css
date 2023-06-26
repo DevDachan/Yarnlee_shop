@@ -47,6 +47,10 @@ article{
   margin: 0 0 2em 2em;
 }
 
+#main{
+  margin-top: 4em;
+}
+
 .tiles{
   justify-content: center;
 }
