@@ -35,7 +35,7 @@ function AdminMain(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/product/productList'
+      url: 'http://104.198.11.59:8090/shop-backend/product/adminProductList'
     })
     .then(function (response){
       //handle success
