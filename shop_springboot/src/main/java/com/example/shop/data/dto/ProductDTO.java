@@ -42,6 +42,9 @@ public class ProductDTO {
 
   @NotNull int position;
 
+  @NotNull String state;
+
+
   public ProductEntity toEntity(){
     return ProductEntity.builder()
         .id(id)
@@ -54,6 +57,7 @@ public class ProductDTO {
         .deliveryCostHalf(deliveryCostHalf)
         .imageId(imageId)
         .position(position)
+        .state(state)
         .build();
   }
 

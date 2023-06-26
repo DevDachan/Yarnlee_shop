@@ -53,6 +53,8 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   public void changePosition(int id, int nextId){ productDAO.changePosition(id, nextId); };
 
   @Override
+  public void changeState(int id){productDAO.changeState(id);}
+  @Override
   public void changeColor(int productId,int colorId,String content){ productDAO.changeColor(productId, colorId,content);}
 
   @Override

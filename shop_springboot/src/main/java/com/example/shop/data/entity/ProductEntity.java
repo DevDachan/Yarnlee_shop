@@ -39,6 +39,7 @@ public class ProductEntity{
 
   String imageId;
 
+  String state;
   int position;
   public ProductDTO toDto(){
     return ProductDTO.builder()
@@ -52,6 +53,7 @@ public class ProductEntity{
         .deliveryCostHalf(deliveryCostHalf)
         .imageId(imageId)
         .position(position)
+        .state(state)
         .build();
   }
 }
