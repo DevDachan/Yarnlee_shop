@@ -89,6 +89,7 @@ function Content(props) {
     }
     return arr;
   }
+  console.log(product);
 
   return (
     <Wrapper>
@@ -140,7 +141,13 @@ function Content(props) {
               </div>
 
               <div className="col-sm-12 calign">
-                <button className="bt_order" onClick={orderClick}> Order </button>
+              {
+                product == undefined ?
+                  "": product.state == "open"?
+                    <button className="bt_order" onClick={orderClick}> Order </button>
+                    :
+                    <button className="bt_order" disabled> 품절 </button>
+              }
               </div>
 
             </div>
