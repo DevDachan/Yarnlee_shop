@@ -36,6 +36,9 @@ function Order(props) {
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
+  const [loadingCheck, setLoadingCheck] = useState(false);
+  const { cancel, token } = axios.CancelToken.source();
+
   useEffect(() => {
     if (location.state == null) {
       navigate('../');
@@ -200,6 +203,11 @@ function Order(props) {
     setShow(true);
   }
 
+  const cancelLoading = e => {
+    setLoadingCheck(false);
+    cancel("cancel");
+  }
+
 
   return (
       <Wrapper>
@@ -328,6 +336,18 @@ function Order(props) {
             <button onClick={handleClose}>닫기</button>
           </Modal.Footer>
         </Modal>
+
+        {
+          loadingCheck ?
+            <div className="loading-container" style={{height: height, width:width}}>
+            <Loading
+              type="spin"
+              message={"프로젝트 정보를 불러오고 있습니다."}
+              cancelLoading={cancelLoading}
+            />
+            </div>
+           :
+           ""}
       </Wrapper>
   );
 }
