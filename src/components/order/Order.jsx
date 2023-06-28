@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 
 import Phone from "./Phone";
 import PostSelector from "./PostSelector";
-
+import Loading from "./Loading";
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -36,7 +36,7 @@ function Order(props) {
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
-  const [loadingCheck, setLoadingCheck] = useState(false);
+  const [loadingCheck, setLoadingCheck] = useState(true);
   const { cancel, token } = axios.CancelToken.source();
 
   useEffect(() => {
@@ -207,8 +207,13 @@ function Order(props) {
     setLoadingCheck(false);
     cancel("cancel");
   }
+  const html = document.documentElement;
+  const body = document.body;
+  const height = Math.max(html.clientHeight, html.scrollHeight, html.offsetHeight,
+                          body.clientHeight, body.scrollHeight, body.offsetHeight);
 
-
+  const width = Math.max(html.clientWidth, html.scrollWidth, html.offsetWidth,
+                         body.clientWidth, body.scrollWidth, body.offsetWidth);
   return (
       <Wrapper>
         <div className="order_main" id="main">
@@ -342,7 +347,7 @@ function Order(props) {
             <div className="loading-container" style={{height: height, width:width}}>
             <Loading
               type="spin"
-              message={"프로젝트 정보를 불러오고 있습니다."}
+              message={"주문 정보를 확인하고 있습니다."}
               cancelLoading={cancelLoading}
             />
             </div>
