@@ -89,9 +89,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -115,9 +112,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -141,9 +135,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -167,9 +158,6 @@ function AdminContent(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-      })
-      .then(function(){
-        // always executed
       });
     }
   }
@@ -194,9 +182,6 @@ function AdminContent(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-      })
-      .then(function(){
-        // always executed
       });
     }
   }
@@ -226,9 +211,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
 
   }
@@ -252,9 +234,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
 
   }
@@ -320,9 +299,6 @@ function AdminContent(props) {
         .catch(function(error){
           //handle error
           console.log(error);
-        })
-        .then(function(){
-          // always executed
         });
       }
     }
@@ -331,7 +307,6 @@ function AdminContent(props) {
   const insertColor =  (e) =>{
     const formData = new FormData();
     formData.append("productId", productId);
-    console.log(color);
     if(color == null){
       formData.append("colorId", 0);
     }else{
@@ -350,9 +325,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -374,9 +346,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -396,9 +365,6 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 

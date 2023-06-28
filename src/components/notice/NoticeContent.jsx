@@ -44,9 +44,6 @@ function NoticeContent(props) {
       })
       .catch(function(error){
         //handle error
-      })
-      .then(function(){
-        // always executed
       });
     }, []);
 

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     margin-bottom: 8em;
     margin:auto;
     min-width: 750px;
-    min-height: 70vh;    
+    min-height: 70vh;
 `;
 
 function OrderList(props) {
@@ -56,9 +56,6 @@ function OrderList(props) {
         })
         .catch(function(error){
           //handle error
-        })
-        .then(function(){
-          // always executed
         });
       }
 

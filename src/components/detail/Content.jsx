@@ -71,9 +71,6 @@ function Content(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
 
   },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
@@ -89,7 +86,6 @@ function Content(props) {
     }
     return arr;
   }
-  console.log(product);
 
   return (
     <Wrapper>

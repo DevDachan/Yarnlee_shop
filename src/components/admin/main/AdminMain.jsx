@@ -44,9 +44,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
 
     axios({
@@ -62,11 +59,7 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
-
 
 
   },[]);
@@ -93,9 +86,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -117,9 +107,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -143,9 +130,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -170,9 +154,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -198,9 +179,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -283,9 +261,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
 
@@ -301,9 +276,6 @@ function AdminMain(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   }
   function resize(e) {

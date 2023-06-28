@@ -34,9 +34,6 @@ function Main(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
 
     axios({
@@ -50,9 +47,6 @@ function Main(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
 
   },[]);

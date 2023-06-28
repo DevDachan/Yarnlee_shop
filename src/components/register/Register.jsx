@@ -85,9 +85,6 @@ function Register(props) {
         .catch(function(error){
           //handle error
           console.log(error);
-        })
-        .then(function(){
-          // always executed
         });
       }
     }
@@ -114,9 +111,6 @@ function Register(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-      })
-      .then(function(){
-        // always executed
       });
     }
 
@@ -212,9 +206,6 @@ function Register(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-      })
-      .then(function(){
-        // always executed
       });
     }
 
