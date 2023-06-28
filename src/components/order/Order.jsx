@@ -63,9 +63,6 @@ function Order(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-      })
-      .then(function(){
-        // always executed
       });
     }
     if(location.state.state == "close"){
@@ -85,9 +82,6 @@ function Order(props) {
     .catch(function(error){
       //handle error
       console.log(error);
-    })
-    .then(function(){
-      // always executed
     });
   },[])
 
@@ -165,9 +159,6 @@ function Order(props) {
       .catch(function(error){
         //handle error
         console.log(error);
-      })
-      .then(function(){
-        // always executed
       });
     }
   }
@@ -199,9 +190,6 @@ function Order(props) {
         .catch(function(error){
           //handle error
           console.log(error);
-        })
-        .then(function(){
-          // always executed
         });
       }
     }

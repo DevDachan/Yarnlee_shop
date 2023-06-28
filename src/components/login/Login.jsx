@@ -72,13 +72,8 @@ function Login(props) {
             userName: "dachan"
           }
         });
-      })
-      .then(function(){
-        // always executed
       });
     }
-
-
 
 
     return (

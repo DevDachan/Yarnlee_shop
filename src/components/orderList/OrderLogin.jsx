@@ -68,9 +68,6 @@ function Login(props) {
       })
       .catch(function(error){
         //handle error
-      })
-      .then(function(){
-        // always executed
       });
     }
 
@@ -100,9 +97,6 @@ function Login(props) {
         })
         .catch(function(error){
           //handle error
-        })
-        .then(function(){
-          // always executed
         });
       }
     },[]);

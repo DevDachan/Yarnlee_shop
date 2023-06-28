@@ -51,9 +51,6 @@ function AdminNoticeContent(props) {
       })
       .catch(function(error){
         //handle error
-      })
-      .then(function(){
-        // always executed
       });
     }, []);
 
@@ -79,9 +76,6 @@ function AdminNoticeContent(props) {
       })
       .catch(function(error){
         //handle error
-      })
-      .then(function(){
-        // always executed
       });
     }
     return (
