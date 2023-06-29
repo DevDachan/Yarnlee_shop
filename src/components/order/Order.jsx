@@ -36,7 +36,7 @@ function Order(props) {
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
-  const [loadingCheck, setLoadingCheck] = useState(true);
+  const [loadingCheck, setLoadingCheck] = useState(false);
   const { cancel, token } = axios.CancelToken.source();
 
   useEffect(() => {
@@ -110,6 +110,7 @@ function Order(props) {
   }
 
   const order = (e) =>{
+    setLoadingCheck(true);
     e.preventDefault();
     if(uploadImage == -1 || uploadImage == undefined){
       setModalContent(<p> 입력되지 않은 정보가 존재합니다. </p>);
@@ -148,7 +149,8 @@ function Order(props) {
       axios({
         method: "post",
         url: 'http://104.198.11.59:8090/shop-backend/order/insert',
-        data: formData
+        data: formData,
+        cancelToken: token
       })
       .then(function (response){
         //handle success
@@ -207,13 +209,7 @@ function Order(props) {
     setLoadingCheck(false);
     cancel("cancel");
   }
-  const html = document.documentElement;
-  const body = document.body;
-  const height = Math.max(html.clientHeight, html.scrollHeight, html.offsetHeight,
-                          body.clientHeight, body.scrollHeight, body.offsetHeight);
 
-  const width = Math.max(html.clientWidth, html.scrollWidth, html.offsetWidth,
-                         body.clientWidth, body.scrollWidth, body.offsetWidth);
   return (
       <Wrapper>
         <div className="order_main" id="main">
@@ -342,17 +338,14 @@ function Order(props) {
           </Modal.Footer>
         </Modal>
 
-        {
-          loadingCheck ?
-            <div className="loading-container" style={{height: height, width:width}}>
-            <Loading
-              type="spin"
-              message={"주문 정보를 확인하고 있습니다."}
-              cancelLoading={cancelLoading}
-            />
-            </div>
-           :
-           ""}
+        <Loading
+          type="spin"
+          message={"주문 정보를 확인하고 있습니다."}
+          cancelLoading={cancelLoading}
+          show={loadingCheck}
+        />
+
+
       </Wrapper>
   );
 }

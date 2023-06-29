@@ -1,24 +1,35 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
+import Modal from 'react-bootstrap/Modal';
 
-function Loading({type, message,cancelLoading}) {
+
+function Loading({type, message,cancelLoading,show}) {
   return (
-    <div className="contentWrap">
-      <div className="div-loading" >
-        <h3 className="h3-loading">{message}</h3>
-        <ReactLoading
-          type={type}
-          style={{
-            margin:"auto",
-            height:'60%',
-            width:'60%'
-          }}
-        />
-        <div className="div-loading-cancel">
-          <button className="btn-loading-cancel" onClick={cancelLoading}> 취소 </button>
-        </div>
-      </div>
-    </div>
+    <>
+    <Modal show={show} onHide={cancelLoading}>
+      <Modal.Header>
+        <Modal.Title>주문</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+            <ReactLoading
+              type={type}
+              style={{
+                margin:"auto",
+                height:'50%',
+                width:'50%'
+              }}
+            />
+            <div>
+              <h3 className="mt3 calign">
+                주문 정보를 확인하는 중입니다.
+              </h3>
+            </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <button onClick={cancelLoading}>취소</button>
+      </Modal.Footer>
+    </Modal>
+    </>
   );
 }
 
