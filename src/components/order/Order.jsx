@@ -146,6 +146,8 @@ function Order(props) {
       formData.append("imageId", uploadImage);
       formData.append("state", "주문 완료");
       formData.append("parcelType", parcelType);
+
+      setLoadingCheck(true);
       axios({
         method: "post",
         url: 'http://104.198.11.59:8090/shop-backend/order/insert',
