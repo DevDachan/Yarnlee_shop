@@ -40,9 +40,8 @@
 
 <br/>
 
-#### 페이지 미리보기 [PAGE.md](https://github.com/DevDachan/Shopping_m/PAGE.md)
+#### 페이지 미리보기 [PAGE.md](https://github.com/DevDachan/Shopping_m/blob/main/PAGE.md)
 #### 쇼핑몰 바로가기 [Yarnlee](http://yarnlee.shop)
-
 <br/>
 
 
