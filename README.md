@@ -38,14 +38,12 @@
 ## :computer: 프로젝트 소개 \(개인\)
 **다음 주소찾기 API, 문자 전송 API등 오픈 API를 사용해 만들어진 개인 쇼핑몰 서비스입니다.**
 
-<img src="https://user-images.githubusercontent.com/111109411/230763151-8a9e4331-6210-41ad-b6d3-0fc18b54bdcb.png" width=70%>
+<br/>
 
-<img src="https://user-images.githubusercontent.com/111109411/228116610-551bbe11-6930-4e63-a223-67162b676135.png" width=70%>
+#### 페이지 미리보기 [PAGE.md](https://github.com/DevDachan/Shopping_m/PAGE.md)
+#### 쇼핑몰 바로가기 [Yarnlee](http://yarnlee.shop)
 
-<img src="https://user-images.githubusercontent.com/111109411/230763153-c666fbfd-e619-4911-a077-59dcd7eba5f7.png" width=70%>
-
-  
-  
+<br/>
 
 
 # 🗓️ 프로젝트 기간
