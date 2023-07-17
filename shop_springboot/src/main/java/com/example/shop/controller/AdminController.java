@@ -38,7 +38,7 @@ public class AdminController {
 
     if (optionalAdminDTO.isPresent()) {
       AdminDTO adminDTO = optionalAdminDTO.get();
-      if(adminDTO.getPassword().equals(jasyService.jasyptEncoding(postData.get("password")))) {
+      if(postData.get("password").equals(jasyService.jasyptDecoding(adminDTO.getPassword()))) {
         return adminDTO.getHashKey();
       }
       return "password";
