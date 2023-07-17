@@ -36,9 +36,20 @@ public class UserServiceImpl implements UserService {
     return resultDTO;
   }
 
+
   @Override
-  public Optional<UserDTO> getUser(String userId){
-    return userDataHandeler.getUserDTO(userId);
+  public UserDTO getUser(String userId){
+    Optional<UserDTO> optionalUserDTO = userDataHandeler.getUserDTO(userId);
+
+    if (optionalUserDTO.isPresent()) {
+      UserDTO userDTO = optionalUserDTO.get();
+      return userDTO;
+    }
+    return null;
+  }
+  @Override
+  public boolean checkPassword( UserDTO userDTO, String password){
+    return password.equals( jasyService.jasyptDecoding(userDTO.getPassword()));
   }
 
   @Override

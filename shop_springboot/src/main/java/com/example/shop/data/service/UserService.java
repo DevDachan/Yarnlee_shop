@@ -6,8 +6,10 @@ import java.util.Optional;
 
 public interface UserService {
   UserDTO saveUser(UserDTO userDTO);
-  Optional<UserDTO> getUser(String userId);
+  UserDTO getUser(String userId);
   boolean phoneDupCheck(String phone);
   boolean idDupCheck(String phone);
+
+  boolean checkPassword(UserDTO userDTO,String password);
 
 }

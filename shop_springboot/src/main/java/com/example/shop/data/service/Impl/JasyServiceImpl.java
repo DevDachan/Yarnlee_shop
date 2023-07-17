@@ -15,4 +15,12 @@ public class JasyServiceImpl implements JasyService {
     pbeEnc.setPassword(key);
     return pbeEnc.encrypt(value);
   }
+
+  public String jasyptDecoding(String value){
+    String key="Demo";
+    StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
+    pbeEnc.setAlgorithm("PBEWithMD5AndDES");
+    pbeEnc.setPassword(key);
+    return pbeEnc.decrypt(value);
+  }
 }
