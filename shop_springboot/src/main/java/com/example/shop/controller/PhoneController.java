@@ -63,7 +63,7 @@ public class PhoneController {
     phoneService.savePhone(phoneDTO);
 
     String content = "<YarnLee> \n"+ "인증번호: "+phoneDTO.getSecretKey()+ "\n";
-    MessageDTO messageDto = new MessageDTO(phoneDTO.getPhoneNum(),content);
+    MessageDTO messageDto = new MessageDTO(phoneDTO.getPhoneNum().replace("-",""),content);
     smsService.sendSms(messageDto);
     return phoneDTO;
   }
