@@ -37,11 +37,10 @@ public class UserController {
 
   @PostMapping(value = "/login")
   public UserDTO loginUser(@RequestBody Map<String, String> postData) {
-    Optional<UserDTO> optionalUserDTO = userService.getUser(postData.get("userId"));
-
-    if (optionalUserDTO.isPresent()) {
-      UserDTO userDTO = optionalUserDTO.get();
-      if(userDTO.getPassword().equals(postData.get("password"))) {
+    UserDTO userDTO = userService.getUser(postData.get("userId"));
+    System.out.println(userDTO);
+    if (userDTO != null) {
+      if(userService.checkPassword(userDTO, postData.get("password"))) {
         return userDTO;
       }
     }
@@ -50,10 +49,9 @@ public class UserController {
 
   @PostMapping(value = "/info")
   public UserDTO infoUser(@RequestParam("id") String id) {
-    Optional<UserDTO> optionalUserDTO = userService.getUser(id);
+    UserDTO userDTO = userService.getUser(id);
 
-    if (optionalUserDTO.isPresent()) {
-      UserDTO userDTO = optionalUserDTO.get();
+    if (userDTO != null) {
       userDTO.setPassword("");
       return userDTO;
     }
