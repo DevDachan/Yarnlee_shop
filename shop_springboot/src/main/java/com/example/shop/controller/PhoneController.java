@@ -63,8 +63,8 @@ public class PhoneController {
     phoneService.savePhone(phoneDTO);
 
     String content = "<YarnLee> \n"+ "인증번호: "+phoneDTO.getSecretKey()+ "\n";
-    MessageDTO adminMessageDto = new MessageDTO(adminPhone,content);
-    smsService.sendSms(adminMessageDto);
+    MessageDTO messageDto = new MessageDTO(phoneDTO.getPhoneNum(),content);
+    smsService.sendSms(messageDto);
     return phoneDTO;
   }
 

@@ -4,12 +4,11 @@ package com.example.shop.controller;
 import com.example.shop.data.dto.AdminDTO;
 import com.example.shop.data.service.AdminService;
 import com.example.shop.data.service.HitsService;
+import com.example.shop.data.service.JasyService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +22,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 public class AdminController {
   private AdminService adminService;
-
+  private JasyService jasyService;
   private HitsService hitsService;
   @Autowired
-  public AdminController(AdminService adminService, HitsService hitsService) {
+  public AdminController(AdminService adminService, HitsService hitsService,
+      JasyService jasyService) {
     this.adminService = adminService;
     this.hitsService = hitsService;
+    this.jasyService = jasyService;
   }
 
   @PostMapping(value = "/adminLogin")
@@ -37,7 +38,7 @@ public class AdminController {
 
     if (optionalAdminDTO.isPresent()) {
       AdminDTO adminDTO = optionalAdminDTO.get();
-      if(adminDTO.getPassword().equals(postData.get("password"))) {
+      if(adminDTO.getPassword().equals(jasyService.jasyptEncoding(postData.get("password")))) {
         return adminDTO.getHashKey();
       }
       return "password";
@@ -59,6 +60,11 @@ public class AdminController {
     formData.put("hits", String.valueOf(hits));
 
     return formData;
+  }
+
+  @GetMapping(value = "/test")
+  public String test(@RequestParam("content") String content){
+    return jasyService.jasyptEncoding(content);
   }
 
   @GetMapping(value = "/getMainContent")
