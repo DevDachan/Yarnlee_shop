@@ -7,6 +7,7 @@ import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserDataHandler;
 import com.example.shop.data.service.JasyService;
 import com.example.shop.data.service.UserService;
+import com.example.shop.jwt.JwtUtil;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,14 @@ public class UserServiceImpl implements UserService {
 
   JasyService jasyService;
 
+  private JwtUtil jwtUtil;
+
   @Autowired
-  public UserServiceImpl(UserDataHandler userDataHandler,JasyService jasyService){
+  public UserServiceImpl(UserDataHandler userDataHandler,JasyService jasyService,
+      JwtUtil jwtUtil){
     this.userDataHandeler = userDataHandler;
     this.jasyService = jasyService;
+    this.jwtUtil = jwtUtil;
   }
 
   // Service(Client) <-> Controller : DTO
@@ -47,6 +52,21 @@ public class UserServiceImpl implements UserService {
     }
     return null;
   }
+  @Override
+  public UserDTO login(String id, String password){
+    UserDTO userDTO = this.getUser(id);
+
+    if (userDTO != null) {
+      if(this.checkPassword(userDTO, password)) {
+        String authToken = jwtUtil.createAuthToken(id);
+
+        System.out.println(authToken);
+        return userDTO;
+      }
+    }
+    return null;
+  }
+
   @Override
   public boolean checkPassword( UserDTO userDTO, String password){
     return password.equals( jasyService.jasyptDecoding(userDTO.getPassword()));

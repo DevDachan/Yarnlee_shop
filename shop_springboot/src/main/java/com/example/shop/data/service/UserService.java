@@ -12,4 +12,6 @@ public interface UserService {
 
   boolean checkPassword(UserDTO userDTO,String password);
 
+  UserDTO login(String id, String password);
+
 }
