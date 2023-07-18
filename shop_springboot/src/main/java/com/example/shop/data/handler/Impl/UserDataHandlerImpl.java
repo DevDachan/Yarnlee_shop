@@ -1,9 +1,7 @@
 package com.example.shop.data.handler.Impl;
 
 import com.example.shop.data.dao.UserDAO;
-import com.example.shop.data.dto.AdminDTO;
 import com.example.shop.data.dto.UserDTO;
-import com.example.shop.data.entity.AdminEntity;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserDataHandler;
 import jakarta.transaction.Transactional;

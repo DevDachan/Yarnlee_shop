@@ -23,4 +23,5 @@ public class UserAuthDTO {
         .authToken(authToken)
         .refreshToken(refreshToken)
         .build();
+  }
 }

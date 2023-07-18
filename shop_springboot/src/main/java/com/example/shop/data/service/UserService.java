@@ -2,6 +2,7 @@ package com.example.shop.data.service;
 
 import com.example.shop.data.dto.AdminDTO;
 import com.example.shop.data.dto.UserDTO;
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserService {
@@ -12,6 +13,7 @@ public interface UserService {
 
   boolean checkPassword(UserDTO userDTO,String password);
 
-  UserDTO login(String id, String password);
+  Map<String, Object> login(String id, String password);
 
+  String authCheck(String id, String token);
 }
