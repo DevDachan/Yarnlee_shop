@@ -37,14 +37,7 @@ public class UserController {
 
   @PostMapping(value = "/login")
   public UserDTO loginUser(@RequestBody Map<String, String> postData) {
-    UserDTO userDTO = userService.getUser(postData.get("userId"));
-    System.out.println(userDTO);
-    if (userDTO != null) {
-      if(userService.checkPassword(userDTO, postData.get("password"))) {
-        return userDTO;
-      }
-    }
-    return null;
+    return userService.login(postData.get("userId"), postData.get("password"));
   }
 
   @PostMapping(value = "/info")
