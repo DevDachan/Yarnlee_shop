@@ -36,8 +36,13 @@ public class UserController {
   }
 
   @PostMapping(value = "/login")
-  public UserDTO loginUser(@RequestBody Map<String, String> postData) {
+  public Map<String, Object> loginUser(@RequestBody Map<String, String> postData) {
     return userService.login(postData.get("userId"), postData.get("password"));
+  }
+
+  @PostMapping(value = "/auth")
+  public String auth(@RequestBody Map<String, String> postData) {
+    return userService.authCheck(postData.get("id"), postData.get("token"));
   }
 
   @PostMapping(value = "/info")
