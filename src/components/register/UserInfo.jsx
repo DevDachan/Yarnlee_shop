@@ -40,8 +40,7 @@ function Register(props) {
 
 
     useEffect( () => {
-      if(sessionStorage.getItem("name") == null && sessionStorage.getItem("id") == null
-        && sessionStorage.getItem("name") == undefined && sessionStorage.getItem("id") == undefined
+      if(sessionStorage.getItem("jwt-auth-token") == null &&  sessionStorage.getItem("jwt-auth-token") == undefined
       ){
         sessionStorage.clear();
         navigate("../login");
@@ -49,6 +48,9 @@ function Register(props) {
         axios({
           method: "post",
           url: 'http://104.198.11.59:8090/shop-backend/user/info',
+          header:{
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+          },
           params: {
             id: sessionStorage.getItem("id")
           }
@@ -65,6 +67,8 @@ function Register(props) {
         })
         .catch(function(error){
           //handle error
+          sessionStorage.clear();
+          navigate("../login");
           console.log(error);
         });
       }
@@ -90,6 +94,9 @@ function Register(props) {
         axios({
           method: "post",
           url: 'http://104.198.11.59:8090/shop-backend/user/register',
+          header:{
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+          },
           data: {
             id: id,
             password: pwd,
@@ -104,8 +111,6 @@ function Register(props) {
           //handle success
 
           sessionStorage.setItem("id", id);
-          sessionStorage.setItem("name", userName);
-          sessionStorage.setItem("phoneNum", phoneNum);
 
           navigate('../', {
             state: {
@@ -115,6 +120,8 @@ function Register(props) {
         })
         .catch(function(error){
           //handle error
+          sessionStorage.clear();
+          navigate("../login");
           console.log(error);
         });
       }

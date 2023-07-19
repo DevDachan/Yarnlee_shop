@@ -100,6 +100,8 @@ function Login(props) {
         })
         .catch(function(error){
           //handle error
+          sessionStorage.clear();
+          navigate("../login");
         });
       }
     },[]);
