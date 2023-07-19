@@ -11,6 +11,8 @@ public interface OrderDAO {
   List<OrderEntity> getOrderAll();
   List<Integer> findDistinctId();
   List<OrderEntity> getOrderUsingPhone(String phoneNum, String name);
+  List<OrderEntity> getOrderUsingUserId(String userId);
+
   void changeState(String id,String state);
   void changeParcelType(String id, String data);
   void deleteOrder(String orderId);

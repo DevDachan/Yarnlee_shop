@@ -57,6 +57,12 @@ public class OrderDAOImpl implements OrderDAO {
   }
 
   @Override
+  public List<OrderEntity> getOrderUsingUserId(String userId){
+    return orderRepository.getOrderUsingUserId(userId);
+  }
+
+
+  @Override
   public List<OrderEntity> getOrderAll(){
     Sort sort = Sort.by(Sort.Direction.DESC, "orderDate");
     return orderRepository.findAll(sort);

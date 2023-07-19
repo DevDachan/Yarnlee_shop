@@ -120,8 +120,10 @@ public class OrderController {
 
     HashMap<String, Object> formData = new HashMap<>();
     List<OrderDTO> orderList = null;
-
-    if(type.equals("전화 번호")) {
+    
+    if(type.equals("사용자 인증")){
+      orderList = orderService.getOrderUsingUserId(name);
+    }else if(type.equals("전화 번호")) {
       orderList = orderService.getOrderUsingPhone(content,name);
     }else{
       OrderDTO temp = orderService.getOrder(Integer.parseInt(content));

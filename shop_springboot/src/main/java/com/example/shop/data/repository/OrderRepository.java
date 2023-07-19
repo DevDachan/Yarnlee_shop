@@ -27,4 +27,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, String> {
   @Query(value = "SELECT * FROM ordert WHERE order_phone LIKE(:phoneNum) AND order_name LIKE(:name) ORDER BY order_date DESC", nativeQuery = true)
   List<OrderEntity> getOrderUsingPhone(String phoneNum,String name);
 
+  @Query(value = "SELECT * FROM ordert WHERE user_id LIKE(:userId) ORDER BY order_date DESC", nativeQuery = true)
+  List<OrderEntity> getOrderUsingUserId(String userId);
 }
