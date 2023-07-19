@@ -12,5 +12,6 @@ public interface OrderService {
   List<OrderDTO> getOrderAll();
   OrderDTO getOrder(int productId);
   List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name);
+  List<OrderDTO> getOrderUsingUserId(String id);
 
 }

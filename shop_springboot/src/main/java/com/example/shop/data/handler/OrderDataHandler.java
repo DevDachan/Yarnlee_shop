@@ -14,5 +14,5 @@ public interface OrderDataHandler {
   List<Integer> findDistinctId();
 
   List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name);
-
+  List<OrderDTO> getOrderUsingUserId(String userId);
 }

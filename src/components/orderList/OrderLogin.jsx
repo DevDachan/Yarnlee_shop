@@ -74,16 +74,19 @@ function Login(props) {
 
     useEffect( () => {
 
-      if(sessionStorage.getItem("name") != null && sessionStorage.getItem("phone") != null
-        && sessionStorage.getItem("name") != undefined && sessionStorage.getItem("phone") != undefined
+      if(sessionStorage.getItem("jwt-auth-token") != null &&  sessionStorage.getItem("jwt-auth-token") != undefined
       ){
         const formData = new FormData();
-        formData.append("type", "전화 번호");
-        formData.append("name", sessionStorage.getItem("name"));
-        formData.append("content", sessionStorage.getItem("phone"));
+        formData.append("type", "사용자 인증");
+        formData.append("name", sessionStorage.getItem("id"));
+        formData.append("content", "");
+
         axios({
           method: "post",
           url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
+          header:{
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+          },
           data: formData
         })
         .then(function (response){

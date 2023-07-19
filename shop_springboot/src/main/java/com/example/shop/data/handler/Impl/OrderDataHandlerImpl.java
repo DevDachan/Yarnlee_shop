@@ -64,6 +64,20 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
       return orderDTO;
   }
   @Override
+  public List<OrderDTO> getOrderUsingUserId(String userId){
+    List<OrderEntity> orderEntity = orderDAO.getOrderUsingUserId(userId);
+    List<OrderDTO> orderDTO = new ArrayList<>();
+    if(orderEntity.size() == 0) return null;
+
+    for(OrderEntity temp : orderEntity){
+      OrderDTO orderTemp = temp.toDto();
+      orderDTO.add(orderTemp);
+    }
+
+    return orderDTO;
+  }
+
+  @Override
   public List<OrderDTO> getOrderAll(){
     List<OrderEntity> orderEntity = orderDAO.getOrderAll();
     List<OrderDTO> orderDTO = new ArrayList<>();

@@ -82,4 +82,10 @@ public class OrderServiceImpl implements OrderService {
   public List<OrderDTO> getOrderUsingPhone(String phoneNum, String name){
     return orderDataHandeler.getOrderUsingPhone(phoneNum, name);
   }
+
+  @Override
+  public List<OrderDTO> getOrderUsingUserId(String id){
+    return orderDataHandeler.getOrderUsingUserId(id);
+  }
+
 }
