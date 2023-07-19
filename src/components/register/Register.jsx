@@ -72,9 +72,10 @@ function Register(props) {
         .then(function (response){
           //handle success
 
-          sessionStorage.setItem("id", id);
-          sessionStorage.setItem("name", userName);
-          sessionStorage.setItem("phone", phoneNum);
+          sessionStorage.setItem("id", response.data.id);
+          sessionStorage.setItem("name", response.data.name);
+          sessionStorage.setItem("phone", response.data.phone);
+          sessionStorage.setItem("jwt-auth-token", response.data.token);
 
           navigate('../successRegister', {
             state: {
