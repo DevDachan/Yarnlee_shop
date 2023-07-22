@@ -30,6 +30,9 @@ public class JwtInterceptor implements HandlerInterceptor {
       jwtUtil.checkAndGetClaims(authToken);
       return true;
     }else{
+      System.out.println(request.getServletPath());
+      System.out.println(request.getHeader("jwt-auth-token"));
+
       throw new RuntimeException("인증 토큰이 없습니다");
     }
   }

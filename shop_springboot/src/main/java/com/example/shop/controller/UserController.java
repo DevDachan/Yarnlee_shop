@@ -49,8 +49,9 @@ public class UserController {
   }
 
   @PostMapping(value = "/info")
-  public UserDTO infoUser(@RequestParam("id") String id) {
-    UserDTO userDTO = userService.getUser(id);
+  public UserDTO infoUser(@RequestParam("id") String id,@RequestParam("key") String key ) {
+
+    UserDTO userDTO = userService.userInfo(id,key);
 
     if (userDTO != null) {
       userDTO.setPassword("");

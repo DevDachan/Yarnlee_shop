@@ -50,15 +50,33 @@ public class UserServiceImpl implements UserService {
 
 
   @Override
+  public UserDTO userInfo(String userId, String key){
+
+    Map<String, Object> content =  jwtUtil.checkAndGetClaims(key);
+    if(userId.equals(content.get("user"))){
+      Optional<UserDTO> optionalUserDTO = userDataHandeler.getUserDTO(userId);
+
+      if (optionalUserDTO.isPresent()) {
+        UserDTO userDTO = optionalUserDTO.get();
+        return userDTO;
+      }
+    }
+    return null;
+  }
+
+  @Override
   public UserDTO getUser(String userId){
+
     Optional<UserDTO> optionalUserDTO = userDataHandeler.getUserDTO(userId);
 
     if (optionalUserDTO.isPresent()) {
       UserDTO userDTO = optionalUserDTO.get();
       return userDTO;
     }
+
     return null;
   }
+
   @Override
   public Map<String, Object> login(String id, String password){
     UserDTO userDTO = this.getUser(id);

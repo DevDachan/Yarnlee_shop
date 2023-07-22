@@ -63,11 +63,6 @@ public class AdminController {
     return formData;
   }
 
-  @GetMapping(value = "/test")
-  public String test(@RequestParam("content") String content){
-    return jasyService.jasyptEncoding(content);
-  }
-
   @GetMapping(value = "/getMainContent")
   public String getMainContent(){
     Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin("main");

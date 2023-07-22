@@ -11,6 +11,7 @@ import com.example.shop.data.service.ProductService;
 import com.example.shop.data.service.SMSService;
 import com.example.shop.data.service.AdminService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -122,7 +123,8 @@ public class OrderController {
     List<OrderDTO> orderList = null;
     
     if(type.equals("사용자 인증")){
-      orderList = orderService.getOrderUsingUserId(name);
+      // content = key, name = id
+      orderList = orderService.getOrderUsingKey(content,name);
     }else if(type.equals("전화 번호")) {
       orderList = orderService.getOrderUsingPhone(content,name);
     }else{
