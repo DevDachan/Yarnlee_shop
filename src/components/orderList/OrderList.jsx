@@ -22,42 +22,40 @@ function OrderList(props) {
     const [orderList, setOrderList] = useState();
     const [productList, setProductList] = useState();
 
+
     useEffect(() => {
-      if(location.state == null && sessionStorage.getItem("phoneNum") == null && sessionStorage.getItem("orderNum") == null){
+      if(location.state == null && (sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined)){
         navigate('../orderLogin');
       }else if(location.state != null){
         setOrderList(location.state.list.orderList);
         setProductList(location.state.list.productList);
       }else{
+
         const formData = new FormData();
-        if(sessionStorage.getItem("phoneNum") != null){
-          formData.append("type", "전화 번호");
-          formData.append("name", sessionStorage.getItem("name") );
-          formData.append("content", sessionStorage.getItem("phoneNum") );
-        }else{
-          formData.append("type", "주문 번호");
-          formData.append("name", "none");
-          formData.append("content", document.getElementById("ip_order").value);
-        }
+        formData.append("type", "사용자 인증");
+        formData.append("name", sessionStorage.getItem("id"));
+        formData.append("content", "");
+
         axios({
           method: "post",
           url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
+          headers:{
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+          },
           data: formData
         })
         .then(function (response){
           //handle success
-          if(response.data == ""){
-            navigate('../orderLogin');
-          }else{
-            setOrderList(response.data.orderList);
-            setProductList(response.data.productList);
-          }
-
+          setOrderList(response.data);
+          setProductList(response.data);
         })
         .catch(function(error){
           //handle error
+          sessionStorage.clear();
+          navigate("../login");
         });
       }
+
 
     }, [location, navigate]);
 

@@ -47,12 +47,17 @@ function Order(props) {
   }, [location, navigate]);
 
   useEffect(() => {
-    if(sessionStorage.getItem("id") != null && sessionStorage.id != undefined ){
+    if(sessionStorage.getItem("jwt-auth-token") != null && sessionStorage.getItem("jwt-auth-token") != undefined ){
       const formData = new FormData();
       formData.append("id", sessionStorage.getItem("id"));
+      formData.append("key", sessionStorage.getItem("jwt-auth-token"));
+
       axios({
         method: "post",
         url: 'http://104.198.11.59:8090/shop-backend/user/info',
+        headers:{
+          "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+        },
         data: formData
       })
       .then(function (response){
@@ -65,7 +70,6 @@ function Order(props) {
       })
       .catch(function(error){
         //handle error
-        console.log(error);
       });
     }
     if(location.state.state == "close"){

@@ -48,7 +48,7 @@ function Register(props) {
         axios({
           method: "post",
           url: 'http://104.198.11.59:8090/shop-backend/user/info',
-          header:{
+          headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
           params: {
@@ -94,7 +94,7 @@ function Register(props) {
         axios({
           method: "post",
           url: 'http://104.198.11.59:8090/shop-backend/user/register',
-          header:{
+          headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
           data: {
