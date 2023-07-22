@@ -53,17 +53,23 @@ function Login(props) {
             setShow(true);
         }else{
           if(infoType == "전화 번호"){
-            sessionStorage.setItem('phoneNum', phoneNum);
-            sessionStorage.setItem('name', document.getElementById("ip_name").value);
+            navigate('../orderList', {
+              state: {
+                list: response.data,
+                phoneNum: phoneNum,
+                name: document.getElementById("ip_name").value
+              }
+            });
+
           }else{
-            sessionStorage.setItem('name', document.getElementById("ip_order").value);
+            navigate('../orderList', {
+              state: {
+                list: response.data,
+                name: document.getElementById("ip_order").value
+              }
+            });
           }
 
-          navigate('../orderList', {
-            state: {
-              list: response.data
-            }
-          });
         }
       })
       .catch(function(error){
@@ -79,24 +85,28 @@ function Login(props) {
         const formData = new FormData();
         formData.append("type", "사용자 인증");
         formData.append("name", sessionStorage.getItem("id"));
-        formData.append("content", "");
+        formData.append("content", sessionStorage.getItem("jwt-auth-token"));
 
         axios({
           method: "post",
           url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
-          header:{
+          headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
           data: formData
         })
         .then(function (response){
           //handle success
-          navigate('../orderList', {
-            state: {
-              list: response.data
-            }
-          });
-
+          if(response.data == null){
+            sessionStorage.clear();
+            navigate("../login");
+          }else{
+            navigate('../orderList', {
+              state: {
+                list: response.data
+              }
+            });
+          }
         })
         .catch(function(error){
           //handle error
