@@ -24,7 +24,9 @@ public class ShopApplication implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry){
     registry.addInterceptor(jwtInterceptor).addPathPatterns("/shop-backend/user/**")
-        .excludePathPatterns(Arrays.asList("/","/shop-backend/user/login"));
+        .excludePathPatterns(Arrays.asList("/","/shop-backend/user/login"
+            ,"/shop-backend/admin/getOrderContent"
+            ,"/shop-backend/order"));
   }
 
 }

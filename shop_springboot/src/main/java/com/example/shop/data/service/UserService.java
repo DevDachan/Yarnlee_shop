@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface UserService {
   UserDTO saveUser(UserDTO userDTO);
   UserDTO getUser(String userId);
+  UserDTO userInfo(String userId, String key);
+
   boolean phoneDupCheck(String phone);
   boolean idDupCheck(String phone);
 

@@ -4,9 +4,12 @@ package com.example.shop.data.service.Impl;
 import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.entity.OrderEntity;
 import com.example.shop.data.handler.OrderDataHandler;
+import com.example.shop.data.service.JasyService;
 import com.example.shop.data.service.OrderService;
+import com.example.shop.jwt.JwtUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +22,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class OrderServiceImpl implements OrderService {
   OrderDataHandler orderDataHandeler;
 
+  private JwtUtil jwtUtil;
+
   @Autowired
-  public OrderServiceImpl(OrderDataHandler orderDataHandeler){
+  public OrderServiceImpl(OrderDataHandler orderDataHandeler, JwtUtil jwtUtil ){
     this.orderDataHandeler = orderDataHandeler;
+    this.jwtUtil = jwtUtil;
   }
 
   // Service(Client) <-> Controller : DTO
@@ -84,8 +90,12 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public List<OrderDTO> getOrderUsingUserId(String id){
-    return orderDataHandeler.getOrderUsingUserId(id);
+  public List<OrderDTO> getOrderUsingKey(String key, String id){
+    Map<String, Object> content =  jwtUtil.checkAndGetClaims(key);
+    if(id.equals(content.get("user"))){
+      return orderDataHandeler.getOrderUsingUserId(id);
+    }
+    return null;
   }
 
 }
