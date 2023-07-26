@@ -52,7 +52,8 @@ function Register(props) {
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
           params: {
-            id: sessionStorage.getItem("id")
+            id: sessionStorage.getItem("id"),
+            key: sessionStorage.getItem("jwt-auth-token")
           }
         })
         .then(function (response){
@@ -69,7 +70,6 @@ function Register(props) {
           //handle error
           sessionStorage.clear();
           navigate("../login");
-          console.log(error);
         });
       }
     },[]);
@@ -122,7 +122,6 @@ function Register(props) {
           //handle error
           sessionStorage.clear();
           navigate("../login");
-          console.log(error);
         });
       }
     }
@@ -217,7 +216,6 @@ function Register(props) {
       })
       .catch(function(error){
         //handle error
-        console.log(error);
       });
     }
 
