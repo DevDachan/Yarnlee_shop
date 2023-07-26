@@ -37,7 +37,7 @@ function AdminNoticeContent(props) {
       }
       axios({
         method: "get",
-        url: 'http://104.198.11.59:8090/shop-backend/notice/getNoticeContent',
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
         params:{
           id: noticeId
         }
@@ -63,7 +63,7 @@ function AdminNoticeContent(props) {
     const deleteNotice = e =>{
       axios({
         method: "delete",
-        url: 'http://104.198.11.59:8090/shop-backend/notice/deleteNotice',
+        url: 'http://localhost:8090/shop-backend/notice/deleteNotice',
         params:{
           noticeId: noticeId,
           hashKey: sessionStorage.getItem("adminHash"),

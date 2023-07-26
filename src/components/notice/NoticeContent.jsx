@@ -30,7 +30,7 @@ function NoticeContent(props) {
       }
       axios({
         method: "get",
-        url: 'http://104.198.11.59:8090/shop-backend/notice/getNoticeContent',
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
         params:{
           id: noticeId
         }

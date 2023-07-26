@@ -24,9 +24,9 @@ function OrderList(props) {
 
 
     useEffect(() => {
-      if(location.state == null && (sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined)){
+      if((location.state == null || location.state == undefined) && (sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined)){
         navigate('../orderLogin');
-      }else if(location.state != null){
+      }else if(location.state != null && location.state != undefined){
         setOrderList(location.state.list.orderList);
         setProductList(location.state.list.productList);
       }else{
@@ -34,11 +34,10 @@ function OrderList(props) {
         const formData = new FormData();
         formData.append("type", "사용자 인증");
         formData.append("name", sessionStorage.getItem("id"));
-        formData.append("content", "");
-
+        formData.append("content", sessionStorage.getItem("jwt-auth-token"));
         axios({
           method: "post",
-          url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
+          url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
           headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
@@ -46,8 +45,8 @@ function OrderList(props) {
         })
         .then(function (response){
           //handle success
-          setOrderList(response.data);
-          setProductList(response.data);
+          setOrderList(response.data.orderList);
+          setProductList(response.data.productList);
         })
         .catch(function(error){
           //handle error
@@ -56,10 +55,9 @@ function OrderList(props) {
         });
       }
 
-
     }, [location, navigate]);
 
-    if (location.state == null && sessionStorage.getItem("phoneNum") == null && sessionStorage.getItem("orderNum") == null ) {
+    if (location.state == null && sessionStorage.getItem("jwt-auth-token") == null) {
        return null; // navigate 호출 후 컴포넌트의 렌더링을 중단
     }
 
@@ -70,7 +68,6 @@ function OrderList(props) {
       state: {
         orderDetail: orderList[id],
         productDetail: productList[id]
-
       }
       });
     }

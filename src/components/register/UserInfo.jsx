@@ -47,7 +47,7 @@ function Register(props) {
       }else{
         axios({
           method: "post",
-          url: 'http://104.198.11.59:8090/shop-backend/user/info',
+          url: 'http://localhost:8090/shop-backend/user/info',
           headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
@@ -93,7 +93,7 @@ function Register(props) {
       }else{
         axios({
           method: "post",
-          url: 'http://104.198.11.59:8090/shop-backend/user/register',
+          url: 'http://localhost:8090/shop-backend/user/register',
           headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
@@ -131,7 +131,7 @@ function Register(props) {
       if(!phoneDup && phoneNum != undefined && phoneNum.split("-").length -1 == 2){
         axios({
           method: "get",
-          url: 'http://104.198.11.59:8090/shop-backend/phone/checkAuth',
+          url: 'http://localhost:8090/shop-backend/phone/checkAuth',
           params: {
             phoneNum:phoneNum
           }
@@ -152,7 +152,7 @@ function Register(props) {
 
             axios({
               method: "post",
-              url: 'http://104.198.11.59:8090/shop-backend/phone/register',
+              url: 'http://localhost:8090/shop-backend/phone/register',
               data: formData
             })
             .then(function (response){
@@ -171,7 +171,7 @@ function Register(props) {
     const checkSecretKey = (e) =>{
       axios({
         method: "get",
-        url: 'http://104.198.11.59:8090/shop-backend/phone/checkKey',
+        url: 'http://localhost:8090/shop-backend/phone/checkKey',
         params:{
           phoneNum: phoneNum,
           secretKey : document.getElementById("ip-SecretKey").value
@@ -197,7 +197,7 @@ function Register(props) {
 
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/user/phoneCheck',
+        url: 'http://localhost:8090/shop-backend/user/phoneCheck',
         data: formData
       })
       .then(function (response){
