@@ -29,13 +29,16 @@ function AdminMain(props) {
   const [hits, setHits] = useState(0);
 
   useEffect(() => {
-    if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
+    if(sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined){
       navigate('../adminLogin');
     }
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/adminProductList'
+      url: 'http://localhost:8090/shop-backend/product/adminProductList',
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -43,12 +46,16 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/admin/getAllContent'
+      url: 'http://localhost:8090/shop-backend/admin/getAllContent',
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -58,7 +65,8 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
 
 
@@ -77,15 +85,17 @@ function AdminMain(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/admin/editMainContent',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
       setRelangering("");
     })
     .catch(function(error){
-      //handle error
-      console.log(error);
+      window.location.reload();
     });
   }
 
@@ -98,15 +108,17 @@ function AdminMain(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/admin/editOrderContent',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
       setRelangering("");
     })
     .catch(function(error){
-      //handle error
-      console.log(error);
+      window.location.reload();
     });
   }
 
@@ -121,15 +133,17 @@ function AdminMain(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changeName',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
       setRelangering("");
     })
     .catch(function(error){
-      //handle error
-      console.log(error);
+      window.location.reload();
     });
   }
 
@@ -145,15 +159,17 @@ function AdminMain(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changeSubDetail',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
       setRelangering("");
     })
     .catch(function(error){
-      //handle error
-      console.log(error);
+      window.location.reload();
     });
   }
 
@@ -167,6 +183,9 @@ function AdminMain(props) {
     axios({
       method: "get",
       url: 'http://localhost:8090/shop-backend/product/deleteProduct',
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      },
       params: {
         id: deleteId,
         adminId: sessionStorage.getItem("admin"),
@@ -177,8 +196,8 @@ function AdminMain(props) {
       window.location.reload();
     })
     .catch(function(error){
-      //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
   }
 
@@ -251,7 +270,10 @@ function AdminMain(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changePosition',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -260,22 +282,25 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      window.location.reload();
     });
   }
 
   const createProduct = (e) =>{
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/createProduct'
+      url: 'http://localhost:8090/shop-backend/product/createProduct',
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
       setProductList(response.data.productContent);
     })
     .catch(function(error){
-      //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
   }
   function resize(e) {

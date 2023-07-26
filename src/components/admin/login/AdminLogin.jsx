@@ -43,15 +43,17 @@ function AdminLogin(props) {
       })
       .then(function (response){
         //handle success
-        if(response.data == "id"){
+        if(response.data.id == "id"){
           setModalContent("아이디가 잘못되었습니다.");
           setShow(true);
-        }else if(response.data == "password"){
+        }else if(response.data.id == "password"){
           setModalContent("비밀번호가 잘못되었습니다.");
           setShow(true);
         }else{
-          sessionStorage.setItem("admin", id);
-          sessionStorage.setItem("adminHash", response.data);
+          sessionStorage.setItem("admin", response.data.id);
+          sessionStorage.setItem("adminHash", response.data.hashKey);
+          sessionStorage.setItem("jwt-auth-token", response.data.token);
+
           navigate('../adminMain');
           window.location.reload();
         }
