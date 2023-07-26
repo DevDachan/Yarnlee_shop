@@ -54,7 +54,7 @@ function Order(props) {
 
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/user/info',
+        url: 'http://localhost:8090/shop-backend/user/info',
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
         },
@@ -69,7 +69,8 @@ function Order(props) {
         setName(response.data.name);
       })
       .catch(function(error){
-        //handle error
+        sessionStorage.clear();
+        navigate("../login");
       });
     }
     if(location.state.state == "close"){
@@ -79,7 +80,7 @@ function Order(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/admin/getOrderContent'
+      url: 'http://localhost:8090/shop-backend/admin/getOrderContent'
     })
     .then(function (response){
       //handle success
@@ -87,8 +88,6 @@ function Order(props) {
 
     })
     .catch(function(error){
-      //handle error
-      console.log(error);
     });
   },[])
 
@@ -154,7 +153,7 @@ function Order(props) {
       setLoadingCheck(true);
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/order/insert',
+        url: 'http://localhost:8090/shop-backend/order/insert',
         data: formData,
         cancelToken: token
       })
@@ -187,7 +186,7 @@ function Order(props) {
 
         axios({
           method: "post",
-          url: 'http://104.198.11.59:8090/shop-backend/order/insertUserImage',
+          url: 'http://localhost:8090/shop-backend/order/insertUserImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -207,7 +206,7 @@ function Order(props) {
   }
 
   const previewImage = (e) =>{
-    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}></img>);
+    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"http://localhost/userImage/"+uploadImage+".jpg"}></img>);
     setShow(true);
   }
 
@@ -222,7 +221,7 @@ function Order(props) {
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-1" >
-                <span className="image main order_span_img"><img className="order_img" src={"http://104.198.11.59/thumbnails/"+thumbnailImageId+".jpg"} alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={"http://localhost/thumbnails/"+thumbnailImageId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-11 calign">
                 <h1>{productName}</h1>
@@ -314,7 +313,7 @@ function Order(props) {
                         <input type="button" className="mb-3 mr3 imagebtn" onClick={changeImage} value="REUPLOAD" />
                         <input type="button" className="mb-3 imagebtn" onClick={previewImage} value="PREVIEW" />
                       </div>
-                      <img className="detail_img" src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}
+                      <img className="detail_img" src={uploadImage == undefined ? "" :"http://localhost/userImage/"+uploadImage+".jpg"}
                       alt=""/>
                       </>
                     }

@@ -35,7 +35,7 @@ function AdminMain(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/product/adminProductList'
+      url: 'http://localhost:8090/shop-backend/product/adminProductList'
     })
     .then(function (response){
       //handle success
@@ -48,7 +48,7 @@ function AdminMain(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/admin/getAllContent'
+      url: 'http://localhost:8090/shop-backend/admin/getAllContent'
     })
     .then(function (response){
       //handle success
@@ -76,7 +76,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/admin/editMainContent',
+      url: 'http://localhost:8090/shop-backend/admin/editMainContent',
       data: formData
     })
     .then(function (response){
@@ -97,7 +97,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/admin/editOrderContent',
+      url: 'http://localhost:8090/shop-backend/admin/editOrderContent',
       data: formData
     })
     .then(function (response){
@@ -120,7 +120,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/changeName',
+      url: 'http://localhost:8090/shop-backend/product/changeName',
       data: formData
     })
     .then(function (response){
@@ -144,7 +144,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/changeSubDetail',
+      url: 'http://localhost:8090/shop-backend/product/changeSubDetail',
       data: formData
     })
     .then(function (response){
@@ -166,7 +166,7 @@ function AdminMain(props) {
     if(deleteId == 0) return null;
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/product/deleteProduct',
+      url: 'http://localhost:8090/shop-backend/product/deleteProduct',
       params: {
         id: deleteId,
         adminId: sessionStorage.getItem("admin"),
@@ -250,7 +250,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/changePosition',
+      url: 'http://localhost:8090/shop-backend/product/changePosition',
       data: formData
     })
     .then(function (response){
@@ -267,7 +267,7 @@ function AdminMain(props) {
   const createProduct = (e) =>{
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/product/createProduct'
+      url: 'http://localhost:8090/shop-backend/product/createProduct'
     })
     .then(function (response){
       //handle success

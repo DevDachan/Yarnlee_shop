@@ -30,6 +30,45 @@ function Login(props) {
     const handleOpen = () => setShow(true);
 
 
+    useEffect( () => {
+
+      if(sessionStorage.getItem("jwt-auth-token") != null &&  sessionStorage.getItem("jwt-auth-token") != undefined
+      ){
+        const formData = new FormData();
+        formData.append("type", "사용자 인증");
+        formData.append("name", sessionStorage.getItem("id"));
+        formData.append("content", sessionStorage.getItem("jwt-auth-token"));
+
+        axios({
+          method: "post",
+          url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
+          headers:{
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+          },
+          data: formData
+        })
+        .then(function (response){
+          //handle success
+          if(response.data == null){
+            sessionStorage.clear();
+            navigate("../login");
+          }else{
+            navigate('../orderList', {
+              state: {
+                list: response.data
+              }
+            });
+          }
+        })
+        .catch(function(error){
+          //handle error
+          sessionStorage.clear();
+          navigate("../login");
+        });
+      }
+    },[]);
+
+
     const onClick = (event) =>{
       event.preventDefault();
       const formData = new FormData();
@@ -44,7 +83,7 @@ function Login(props) {
       }
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
+        url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
         data: formData
       })
       .then(function (response){
@@ -77,44 +116,6 @@ function Login(props) {
       });
     }
 
-
-    useEffect( () => {
-
-      if(sessionStorage.getItem("jwt-auth-token") != null &&  sessionStorage.getItem("jwt-auth-token") != undefined
-      ){
-        const formData = new FormData();
-        formData.append("type", "사용자 인증");
-        formData.append("name", sessionStorage.getItem("id"));
-        formData.append("content", sessionStorage.getItem("jwt-auth-token"));
-
-        axios({
-          method: "post",
-          url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistory',
-          headers:{
-            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
-          },
-          data: formData
-        })
-        .then(function (response){
-          //handle success
-          if(response.data == null){
-            sessionStorage.clear();
-            navigate("../login");
-          }else{
-            navigate('../orderList', {
-              state: {
-                list: response.data
-              }
-            });
-          }
-        })
-        .catch(function(error){
-          //handle error
-          sessionStorage.clear();
-          navigate("../login");
-        });
-      }
-    },[]);
 
     const changeType = (e) =>{
       setInfoType(e.target.value);
