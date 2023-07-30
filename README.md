@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Shopping-SpringBoot&fontSize=70" width=100% />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=Yarnlee_Shop&fontSize=70" width=100% />
 
 
 <div align='center'>    
@@ -71,21 +71,23 @@
 - 쇼핑몰을 관리하며 사람들이 쉽게 주문이 가능하도록 해야 한다.
 - 관리자가 상품 관리를 위한 쉬운 인터페이스가 제공이 되어야 한다.
 - 서버-클라이언트 구조로 Spring Boot와 React를 사용함으로써 각각의 기능을 분리 시킨다.
-- 다양한 API를 사용해 고객으로부터 받는 데이터를 쉽게 관리한다
 
 
 ## 서비스 기능
 
 ### 사용자
 - 회원 가입 및 로그인
+- 상품 상세 정보
 - 주문
 - 주문 내역 확인
+- 공지사항 확인
 
 ### 관리자
 - 상품 등록 및 내용 수정
 - 메인 화면 수정
 - 전체 주문 내역 확인
-- 회원 정보 확인
+- 공지사항 수정
+- 전체 조회수 확인
 
 
 ## 사용 API
@@ -97,138 +99,6 @@
 - 전체적인 디자인이 아닌 각각의 페이지에 어떤 기능들을 넣을지 구상한 내용입니다.
 
 <br/>
-
-
-## 컴포넌트 구조
-```
-components
-|
-|   Main.jsx
-|   Nav.jsx
-|   NotFound.jsx
-|
-+---admin
-|   +---content
-|   |       AdminContent.jsx
-|   |
-|   +---main
-|   |   |   AdminMain.jsx
-|   |   |
-|   |   \---list
-|   |           AdminItemList.jsx
-|   |
-|   +---orderHistory
-|   |       AdminOrderHistory.jsx
-|   |
-|   \---orderList
-|           AdminOrderList.jsx
-|
-+---detail
-|       Content.jsx
-|
-+---list
-|       Item.jsx
-|       ItemList.jsx
-|
-+---login
-|       Login.jsx
-|
-+---order
-|       Order.jsx
-|       Phone.jsx
-|       PostSelector(past).jsx
-|       PostSelector.jsx
-|       Remittance.jsx
-|
-+---orderHistory
-|       OrderHistory.jsx
-|       OrderLogin.jsx
-|
-+---orderList
-|       OrderList.jsx
-|
-\---register
-        Register.jsx
-```
-
-
-## Spring Boot 
-
-```
-+---dao
-|   |   OrderDAO.java
-|   |   ProductDAO.java
-|   |   UserDAO.java
-|   |
-|   \---Impl
-|           OrderDAOImpl.java
-|           ProductDAOImpl.java
-|           UserDAOImpl.java
-|
-+---dto
-|       AdminDTO.java
-|       ImageDTO.java
-|       OrderDetailDTO.java
-|       OrderDTO.java
-|       ProductColorDTO.java
-|       ProductDTO.java
-|       UserDTO.java
-|
-+---entity
-|       AdminEntity.java
-|       BaseEntity.java
-|       ImageEntity.java
-|       OrderDetailEntity.java
-|       OrderEntity.java
-|       ProductColorEntity.java
-|       ProductEntity.java
-|       UserEntity.java
-|
-+---handler
-|   |   OrderDataHandler.java
-|   |   ProductDataHandler.java
-|   |   UserDataHandler.java
-|   |
-|   \---Impl
-|           OrderDataHandlerImpl.java
-|           ProductDataHandlerImpl.java
-|           UserDataHandlerImpl.java
-|
-+---repository
-|       OrderRepository.java
-|       ProductRepository.java
-|       UserRepository.java
-|
-\---service
-    |   OrderService.java
-    |   ProductService.java
-    |   UserService.java
-    |
-    \---Impl
-            OrderServiceImpl.java
-            ProductServiceImpl.java
-            UserServiceImpl.java
-```
-
-### Controller
-
-- HTTP 통신과 관련된 메소드를 관리하는 계층
-- Service계층의 데이터를 프론트 엔드 측으로 넘겨준다.
-
-
-### Service
-
-- 직접적인 사용자에게 반환한 데이터를 만드는 계층으로써 상품의 정보를 DB로부터 불러와 가공해 controller로 전달하는 계층
-
-### Data Handler
-
-- DAO 계층으로부터 Entity 형식의 데이터를 받아와 DTO형태의 데이터로 가공하는 계층
-- 주로 데이터 분석, 변환 작업등을 담당한다
-
-### DAO
-
-- DB로부터 데이터를 직접적으로 받아오는 작업을 담당하는 계층
-
 
 ### Repository
 
