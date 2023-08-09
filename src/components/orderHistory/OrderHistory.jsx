@@ -16,7 +16,7 @@ function OrderHistroy(props) {
 
   useEffect(() => {
     if (location.state == null) {
-      navigate('../');
+      navigate('../orderLogin');
     }
   }, [location, navigate]);
 

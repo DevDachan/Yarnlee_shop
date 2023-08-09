@@ -68,8 +68,15 @@ function Register(props) {
         })
         .catch(function(error){
           //handle error
-          sessionStorage.clear();
-          navigate("../login");
+          if(error.response.status === 401){
+            sessionStorage.clear();
+            navigate("../login");
+            window.location.reload();
+          }else if(error.response.status === 500){
+            sessionStorage.clear();
+            navigate("../");
+            window.location.reload();
+          }
         });
       }
     },[]);
@@ -120,8 +127,15 @@ function Register(props) {
         })
         .catch(function(error){
           //handle error
-          sessionStorage.clear();
-          navigate("../login");
+          if(error.response.status === 401){
+            sessionStorage.clear();
+            navigate("../login");
+            window.location.reload();
+          }else if(error.response.status === 500){
+            sessionStorage.clear();
+            navigate("../");
+            window.location.reload();
+          }
         });
       }
     }

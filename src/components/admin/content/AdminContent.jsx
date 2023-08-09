@@ -52,7 +52,11 @@ function AdminContent(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/adminSelect/id/'+productId
+      url: 'http://localhost:8090/shop-backend/product/adminSelect/id/'+productId,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
+
     })
     .then(function (response){
       //handle success
@@ -63,7 +67,8 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
   },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
 
@@ -80,7 +85,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changeName',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -88,7 +96,8 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
   }
 
@@ -103,7 +112,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changePrice',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -111,7 +123,8 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
   }
 
@@ -126,7 +139,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changeDeliveryTime',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -134,7 +150,8 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
   }
 
@@ -149,7 +166,10 @@ function AdminContent(props) {
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostHalf',
-        data: formData
+        data: formData,
+        headers:{
+          "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+        }
       })
       .then(function (response){
         //handle success
@@ -173,7 +193,10 @@ function AdminContent(props) {
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostGeneral',
-        data: formData
+        data: formData,
+        headers:{
+          "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+        }
       })
       .then(function (response){
         //handle success
@@ -202,7 +225,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changeState',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -223,7 +249,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changeDetail',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -290,8 +319,9 @@ function AdminContent(props) {
           url: 'http://localhost:8090/shop-backend/product/insertMainImage',
           data: formData,
           headers: {
-            'Content-Type': 'multipart/form-data'
-          },
+            'Content-Type': 'multipart/form-data',
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+          }
         })
         .then(function (response){
           setProduct(response.data);
@@ -316,7 +346,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/insertColor',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       setProduct(response.data.product);
@@ -337,7 +370,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/changeColor',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       setProduct(response.data.product);
@@ -356,7 +392,10 @@ function AdminContent(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/product/deleteColor',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       setProduct(response.data.product);
@@ -364,7 +403,8 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      sessionStorage.clear();
+      navigate("../adminLogin");
     });
   }
 
