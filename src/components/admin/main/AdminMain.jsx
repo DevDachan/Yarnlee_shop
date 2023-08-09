@@ -46,8 +46,10 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+      }
     });
 
     axios({
@@ -65,8 +67,11 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+      }
+
     });
 
 
@@ -176,6 +181,8 @@ function AdminMain(props) {
   const goDelete = (e) =>{
     setShow(true);
     setDeleteId(e.target.id);
+
+
   }
 
   const deleteProduct = (e) =>{
@@ -299,8 +306,10 @@ function AdminMain(props) {
       setProductList(response.data.productContent);
     })
     .catch(function(error){
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+      }
     });
   }
   function resize(e) {
