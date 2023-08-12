@@ -42,7 +42,7 @@ function Login(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/user/login',
+        url: 'http://104.198.11.59:8090/shop-backend/user/login',
         data: {
           userId: id,
           password: pwd

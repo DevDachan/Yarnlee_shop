@@ -30,7 +30,7 @@ function AdminOrderList(props) {
       }else{
         axios({
           method: "get",
-          url: 'http://localhost:8090/shop-backend/order/getAdminOrderList',
+          url: 'http://104.198.11.59:8090/shop-backend/order/getAdminOrderList',
           params:{
             hashKey: sessionStorage.getItem("adminHash"),
             id: sessionStorage.getItem("admin")

@@ -44,7 +44,7 @@ function AdminNoticeEdit(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/notice/getNoticeAdminContent',
+      url: 'http://104.198.11.59:8090/shop-backend/notice/getNoticeAdminContent',
       params:{
         id: noticeId
       },
@@ -101,7 +101,7 @@ function AdminNoticeEdit(props) {
       formData.append("file", file);
 
       try {
-        const response = await axios.post("http://localhost:8090/shop-backend/notice/insertImage", formData, {
+        const response = await axios.post("http://104.198.11.59:8090/shop-backend/notice/insertImage", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -110,7 +110,7 @@ function AdminNoticeEdit(props) {
         const imageUrl = response.data;
         const editor = quillRef.current.getEditor();
         const cursorPosition = editor.getSelection().index;
-        editor.insertEmbed(cursorPosition, "image", "http://localhost/noticeImage/"+imageUrl+".jpg");
+        editor.insertEmbed(cursorPosition, "image", "http://104.198.11.59/noticeImage/"+imageUrl+".jpg");
 
       } catch (error) {
         if(error.response.status === 401){
@@ -149,7 +149,7 @@ function AdminNoticeEdit(props) {
   const deleteNotice = e =>{
     axios({
       method: "delete",
-      url: 'http://localhost:8090/shop-backend/notice/deleteNotice',
+      url: 'http://104.198.11.59:8090/shop-backend/notice/deleteNotice',
       params:{
         noticeId: noticeId,
         hashKey: sessionStorage.getItem("adminHash"),
@@ -185,7 +185,7 @@ function AdminNoticeEdit(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/notice/changeContent',
+        url: 'http://104.198.11.59:8090/shop-backend/notice/changeContent',
         data: formData,
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -213,7 +213,7 @@ function AdminNoticeEdit(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/notice/changeTitle',
+      url: 'http://104.198.11.59:8090/shop-backend/notice/changeTitle',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")

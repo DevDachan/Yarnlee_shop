@@ -40,7 +40,7 @@ function OrderList(props) {
         formData.append("content", sessionStorage.getItem("jwt-auth-token"));
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/order/getOrderHistoryToken',
+          url: 'http://104.198.11.59:8090/shop-backend/order/getOrderHistoryToken',
           headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },

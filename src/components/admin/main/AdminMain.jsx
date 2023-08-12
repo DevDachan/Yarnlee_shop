@@ -36,7 +36,7 @@ function AdminMain(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/admin/productList',
+      url: 'http://104.198.11.59:8090/shop-backend/product/admin/productList',
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
@@ -75,7 +75,7 @@ function AdminMain(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/admin/getAllContent',
+      url: 'http://104.198.11.59:8090/shop-backend/admin/getAllContent',
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
@@ -131,7 +131,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/admin/editMainContent',
+      url: 'http://104.198.11.59:8090/shop-backend/admin/editMainContent',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -154,7 +154,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/admin/editOrderContent',
+      url: 'http://104.198.11.59:8090/shop-backend/admin/editOrderContent',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -179,7 +179,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeName',
+      url: 'http://104.198.11.59:8090/shop-backend/product/changeName',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -205,7 +205,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeSubDetail',
+      url: 'http://104.198.11.59:8090/shop-backend/product/changeSubDetail',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -231,7 +231,7 @@ function AdminMain(props) {
     if(deleteId == 0) return null;
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/deleteProduct',
+      url: 'http://104.198.11.59:8090/shop-backend/product/deleteProduct',
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       },
@@ -317,7 +317,7 @@ function AdminMain(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changePosition',
+      url: 'http://104.198.11.59:8090/shop-backend/product/changePosition',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -337,7 +337,7 @@ function AdminMain(props) {
   const createProduct = (e) =>{
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/createProduct',
+      url: 'http://104.198.11.59:8090/shop-backend/product/createProduct',
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }

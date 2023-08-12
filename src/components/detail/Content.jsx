@@ -45,7 +45,8 @@ function Content(props) {
           deliveryCost: document.getElementById("select_parcel").value == "반값 택배" ? product.deliveryCostHalf : product.deliveryCostGeneral,
           parcelType: document.getElementById("select_parcel").value,
           thumbnailImageId: product.imageId,
-          color: document.getElementById("select_color").value,
+          color: colorList[document.getElementById("select_color").value].color,
+          colorPrice: colorList[document.getElementById("select_color").value].addPrice
         },
       });
     } else if(document.getElementById("select_parcel").value == ""){
@@ -61,7 +62,7 @@ function Content(props) {
     }
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
+      url: 'http://104.198.11.59:8090/shop-backend/product/select/id/'+productId
     })
     .then(function (response){
       //handle success
@@ -81,7 +82,7 @@ function Content(props) {
 
     for(var i = 0; i < colorList.length; i++){
       arr.push(
-        <option value={colorList[i].color} key={i} className="option_select">{colorList[i].color}</option>
+        <option value={i} key={i} className="option_select">{colorList[i].color}</option>
       );
     }
     return arr;
@@ -95,7 +96,7 @@ function Content(props) {
           <div className="row detail_main_nav">
 
             <div className="col-6-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://localhost/productImage/"+product.imageId+".jpg"} alt="" /></span>
+              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://104.198.11.59/productImage/"+product.imageId+".jpg"} alt="" /></span>
             </div>
 
             <div className="col-6-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>
