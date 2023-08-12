@@ -8,7 +8,8 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css' // Quill 에디터 스타일시트
 import ImageUploader from 'quill-image-uploader'
 import Quill from 'quill';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -43,7 +44,7 @@ function AdminNoticeEdit(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
+      url: 'http://localhost:8090/shop-backend/notice/getNoticeAdminContent',
       params:{
         id: noticeId
       },
@@ -61,12 +62,28 @@ function AdminNoticeEdit(props) {
     .catch(function(error){
       if(error.response.status === 401){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
+
       }else if(error.response.status === 500){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
       }
     });
   }, []);
@@ -97,12 +114,9 @@ function AdminNoticeEdit(props) {
 
       } catch (error) {
         if(error.response.status === 401){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
+
         }else if(error.response.status === 500){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
         }
       }
@@ -150,14 +164,10 @@ function AdminNoticeEdit(props) {
       navigate("../adminNoticeMain");
     })
     .catch(function(error){
-      //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });
@@ -185,14 +195,10 @@ function AdminNoticeEdit(props) {
         //handle success
       })
       .catch(function(error){
-        //handle error
         if(error.response.status === 401){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
+
         }else if(error.response.status === 500){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
         }
       });
@@ -217,14 +223,10 @@ function AdminNoticeEdit(props) {
       //handle success
     })
     .catch(function(error){
-      //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });

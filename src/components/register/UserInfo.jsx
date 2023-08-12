@@ -5,6 +5,9 @@ import axios from "axios";
 import Phone from "../order/Phone";
 import PostSelector from "../order/PostSelector";
 import Modal from 'react-bootstrap/Modal';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 const Wrapper = styled.div`
     padding: 16px;
@@ -70,12 +73,28 @@ function Register(props) {
           //handle error
           if(error.response.status === 401){
             sessionStorage.clear();
-            navigate("../login");
-            window.location.reload();
+            Swal.fire({
+              icon: 'error',
+              title: '세션 만료',
+              text: '다시 로그인 해주시기 바랍니다.',
+              confirmButtonText: '확인'
+            }).then(() => {
+              navigate("../login");
+              window.location.reload();
+            });
+
           }else if(error.response.status === 500){
             sessionStorage.clear();
-            navigate("../");
-            window.location.reload();
+
+            Swal.fire({
+              icon: 'error',
+              title: '세션 만료',
+              text: '다시 로그인 해주시기 바랍니다.',
+              confirmButtonText: '확인'
+            }).then(() => {
+              navigate("../");
+              window.location.reload();
+            });
           }
         });
       }
@@ -129,12 +148,28 @@ function Register(props) {
           //handle error
           if(error.response.status === 401){
             sessionStorage.clear();
-            navigate("../login");
-            window.location.reload();
+            Swal.fire({
+              icon: 'error',
+              title: '세션 만료',
+              text: '다시 로그인 해주시기 바랍니다.',
+              confirmButtonText: '확인'
+            }).then(() => {
+              navigate("../login");
+              window.location.reload();
+            });
+
           }else if(error.response.status === 500){
             sessionStorage.clear();
-            navigate("../");
-            window.location.reload();
+
+            Swal.fire({
+              icon: 'error',
+              title: '세션 만료',
+              text: '다시 로그인 해주시기 바랍니다.',
+              confirmButtonText: '확인'
+            }).then(() => {
+              navigate("../");
+              window.location.reload();
+            });
           }
         });
       }

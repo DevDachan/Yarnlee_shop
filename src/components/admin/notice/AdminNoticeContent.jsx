@@ -4,7 +4,8 @@ import axios from "axios";
 import styled from "styled-components";
 import queryString from 'query-string';
 import Modal from 'react-bootstrap/Modal';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -37,7 +38,7 @@ function AdminNoticeContent(props) {
       }
       axios({
         method: "get",
-        url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeAdminContent',
         params:{
           id: noticeId
         },
@@ -55,12 +56,28 @@ function AdminNoticeContent(props) {
       .catch(function(error){
         if(error.response.status === 401){
           sessionStorage.clear();
-          navigate("../adminLogin");
-          window.location.reload();
+          Swal.fire({
+            icon: 'error',
+            title: '세션 만료',
+            text: '다시 로그인 해주시기 바랍니다.',
+            confirmButtonText: '확인'
+          }).then(() => {
+            navigate("../adminLogin");
+            window.location.reload();
+          });
+
         }else if(error.response.status === 500){
           sessionStorage.clear();
-          navigate("../adminLogin");
-          window.location.reload();
+
+          Swal.fire({
+            icon: 'error',
+            title: '세션 만료',
+            text: '다시 로그인 해주시기 바랍니다.',
+            confirmButtonText: '확인'
+          }).then(() => {
+            navigate("../adminLogin");
+            window.location.reload();
+          });
         }
       });
     }, []);
@@ -90,12 +107,9 @@ function AdminNoticeContent(props) {
       })
       .catch(function(error){
         if(error.response.status === 401){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
+
         }else if(error.response.status === 500){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
         }
       });

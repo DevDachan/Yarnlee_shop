@@ -3,7 +3,8 @@ import { useNavigate , useLocation} from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 const Wrapper = styled.div`
     padding: 0 2.5em;
     margin: 0 auto;
@@ -35,7 +36,7 @@ function AdminMain(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/adminProductList',
+      url: 'http://localhost:8090/shop-backend/product/admin/productList',
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
@@ -45,16 +46,30 @@ function AdminMain(props) {
       setProductList(response.data.productContent);
     })
     .catch(function(error){
-      //handle error
-      //handle error
       if(error.response.status === 401){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
+
       }else if(error.response.status === 500){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
       }
     });
 
@@ -73,15 +88,30 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
-      //handle error
       if(error.response.status === 401){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
+
       }else if(error.response.status === 500){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
       }
 
     });
@@ -215,8 +245,7 @@ function AdminMain(props) {
       window.location.reload();
     })
     .catch(function(error){
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      window.location.reload();
     });
   }
 
@@ -318,10 +347,7 @@ function AdminMain(props) {
       setProductList(response.data.productContent);
     })
     .catch(function(error){
-      if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
-      }
+      window.location.reload();
     });
   }
   function resize(e) {

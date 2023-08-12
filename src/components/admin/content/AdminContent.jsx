@@ -9,7 +9,8 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css' // Quill 에디터 스타일시트
 import ImageUploader from 'quill-image-uploader'
 import Quill from 'quill';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 Quill.register('modules/imageUploader', ImageUploader);
 
@@ -52,7 +53,7 @@ function AdminContent(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/product/adminSelect/id/'+productId,
+      url: 'http://localhost:8090/shop-backend/product/admin/adminSelect/id/'+productId,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
@@ -69,12 +70,28 @@ function AdminContent(props) {
       //handle error
       if(error.response.status === 401){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
+
       }else if(error.response.status === 500){
         sessionStorage.clear();
-        navigate("../adminLogin");
-        window.location.reload();
+
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
       }
     });
   },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
@@ -91,7 +108,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeName',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeName',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -104,15 +121,11 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
-
     });
   }
 
@@ -126,7 +139,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changePrice',
+      url: 'http://localhost:8090/shop-backend/product/admin/changePrice',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -137,14 +150,12 @@ function AdminContent(props) {
       setRelangering("");
     })
     .catch(function(error){
+
       //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });
@@ -160,7 +171,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeDeliveryTime',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeDeliveryTime',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -172,14 +183,10 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });
@@ -195,7 +202,7 @@ function AdminContent(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostHalf',
+        url: 'http://localhost:8090/shop-backend/product/admin/changeDeliveryCostHalf',
         data: formData,
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -207,14 +214,10 @@ function AdminContent(props) {
       })
       .catch(function(error){
         //handle error
-        //handle error
         if(error.response.status === 401){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
+
         }else if(error.response.status === 500){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
         }
       });
@@ -231,7 +234,7 @@ function AdminContent(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/product/changeDeliveryCostGeneral',
+        url: 'http://localhost:8090/shop-backend/product/admin/changeDeliveryCostGeneral',
         data: formData,
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -243,14 +246,10 @@ function AdminContent(props) {
       })
       .catch(function(error){
         //handle error
-        //handle error
         if(error.response.status === 401){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
+
         }else if(error.response.status === 500){
-          sessionStorage.clear();
-          navigate("../adminLogin");
           window.location.reload();
         }
       });
@@ -272,7 +271,7 @@ function AdminContent(props) {
     formData.append("id", productId);
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeState',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeState',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -284,14 +283,10 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });
@@ -305,7 +300,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeDetail',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeDetail',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -320,12 +315,9 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });
@@ -381,7 +373,7 @@ function AdminContent(props) {
         formData.append("productId", productId);
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/product/insertMainImage',
+          url: 'http://localhost:8090/shop-backend/product/admin/insertMainImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -394,12 +386,9 @@ function AdminContent(props) {
         .catch(function(error){
           //handle error
           if(error.response.status === 401){
-            sessionStorage.clear();
-            navigate("../adminLogin");
             window.location.reload();
+
           }else if(error.response.status === 500){
-            sessionStorage.clear();
-            navigate("../adminLogin");
             window.location.reload();
           }
         });
@@ -418,7 +407,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/insertColor',
+      url: 'http://localhost:8090/shop-backend/product/admin/insertColor',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -431,12 +420,9 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });
@@ -450,7 +436,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/changeColor',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeColor',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -463,12 +449,9 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });
@@ -480,7 +463,7 @@ function AdminContent(props) {
     formData.append("productId", productId);
     axios({
       method: "post",
-      url: 'http://localhost:8090/shop-backend/product/deleteColor',
+      url: 'http://localhost:8090/shop-backend/product/admin/deleteColor',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -493,12 +476,9 @@ function AdminContent(props) {
     .catch(function(error){
       //handle error
       if(error.response.status === 401){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
+
       }else if(error.response.status === 500){
-        sessionStorage.clear();
-        navigate("../adminLogin");
         window.location.reload();
       }
     });

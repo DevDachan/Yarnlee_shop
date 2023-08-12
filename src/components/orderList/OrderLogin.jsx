@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import Phone from "../order/Phone";
 
 
@@ -41,7 +42,7 @@ function Login(props) {
 
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/order/getOrderHistory',
+          url: 'http://localhost:8090/shop-backend/order/getOrderHistoryToken',
           headers:{
             "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           },
@@ -62,14 +63,12 @@ function Login(props) {
         })
         .catch(function(error){
           //handle error
+          //handle error
           if(error.response.status === 401){
             sessionStorage.clear();
-            navigate("../login");
-            window.location.reload();
+
           }else if(error.response.status === 500){
             sessionStorage.clear();
-            navigate("../");
-            window.location.reload();
           }
         });
       }
