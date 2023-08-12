@@ -298,6 +298,10 @@ td{
   grid-template-columns: repeat(12, 1fr);
 }
 
+.grid_t_3{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr 1fr);
+}
 
 .gr-1{
   grid-column: auto / span 1;

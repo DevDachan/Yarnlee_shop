@@ -23,12 +23,15 @@ public class ProductColorDTO {
   @NotNull
   private String color;
 
+  @NotNull
+  private int addPrice;
 
   public ProductColorEntity toEntity(){
     return ProductColorEntity.builder()
         .productId(productId)
         .colorId(colorId)
         .color(color)
+        .addPrice(addPrice)
         .build();
   }
 

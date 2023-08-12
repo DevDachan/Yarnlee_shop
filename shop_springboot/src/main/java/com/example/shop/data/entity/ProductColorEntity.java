@@ -31,13 +31,14 @@ public class ProductColorEntity {
 
   String color;
 
-
+  int addPrice;
 
   public ProductColorDTO toDto(){
     return ProductColorDTO.builder()
         .productId(productId)
         .colorId(colorId)
         .color(color)
+        .addPrice(addPrice)
         .build();
   }
 }

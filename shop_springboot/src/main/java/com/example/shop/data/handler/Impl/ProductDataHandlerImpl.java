@@ -58,6 +58,9 @@ public class ProductDataHandlerImpl implements ProductDataHandler {
   public void changeColor(int productId,int colorId,String content){ productDAO.changeColor(productId, colorId,content);}
 
   @Override
+  public void changeColorPrice(int productId,int colorId,int price){ productDAO.changeColorPrice(productId, colorId,price);}
+
+  @Override
   public void deleteColor(int productId,int colorId){productDAO.deleteColor(productId, colorId);}
 
   @Override

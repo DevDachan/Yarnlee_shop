@@ -13,9 +13,13 @@ public interface ProductColorRepository extends JpaRepository<ProductColorEntity
   @Query(value = "UPDATE product_color SET color=:content WHERE product_id=:productId AND color_id = :colorId" , nativeQuery = true)
   void changeColor(int productId, int colorId, String content);
 
+  @Query(value = "UPDATE product_color SET add_price=:content WHERE product_id=:productId AND color_id = :colorId" , nativeQuery = true)
+  void changePrice(int productId, int colorId, int content);
+
+
   @Query(value = "DELETE FROM product_color WHERE product_id=:productId AND color_id = :colorId" , nativeQuery = true)
   void deleteColor(int productId, int colorId);
 
-  @Query(value = "INSERT INTO product_color VALUES(:productId, :colorId, 'color')" , nativeQuery = true)
+  @Query(value = "INSERT INTO product_color VALUES(:productId, :colorId, 'color',0)" , nativeQuery = true)
   void insertColor(int productId, int colorId);
 }

@@ -11,6 +11,7 @@ public interface ProductDAO {
   List<ProductColorEntity> getColor(int productId);
   List<ProductEntity> getProductList();
   void changeColor(int productId, int colorId, String color);
+  void changeColorPrice(int productId, int colorId, int price);
   void deleteColor(int productId,int colorId);
 
   void deleteProduct(int productId);

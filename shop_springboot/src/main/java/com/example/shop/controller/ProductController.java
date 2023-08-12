@@ -71,6 +71,20 @@ public class ProductController {
     formData.put("color", productService.getColor(productId));
     return formData;
   }
+  @PostMapping(value = "/admin/changeColorPrice")
+  public Map<String, Object> changeColorPrice(@RequestParam("productId") int productId,
+      @RequestParam("colorId") int colorId,
+      @RequestParam("colorPrice") int price) {
+    Map<String, Object> formData = new HashMap<>();
+
+    productService.changeColorPrice(productId,colorId,price);
+
+    formData.put("product" ,productService.getProduct(productId));
+    formData.put("color", productService.getColor(productId));
+    return formData;
+  }
+
+
 
   @PostMapping(value = "/admin/insertColor")
   public Map<String, Object> insertColor(@RequestParam("productId") int productId,

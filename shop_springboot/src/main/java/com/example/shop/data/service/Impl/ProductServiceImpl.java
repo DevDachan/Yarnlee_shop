@@ -61,6 +61,9 @@ public class ProductServiceImpl implements ProductService {
   public void changeColor(int productId,int colorId,String color){productDataHandeler.changeColor(productId, colorId,color);}
 
   @Override
+  public void changeColorPrice(int productId,int colorId,int price){productDataHandeler.changeColorPrice(productId, colorId,price);}
+
+  @Override
   public void deleteColor(int productId,int colorId){productDataHandeler.deleteColor(productId, colorId);}
 
   @Override
