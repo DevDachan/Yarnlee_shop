@@ -33,18 +33,24 @@ public class AdminController {
   }
 
   @PostMapping(value = "/adminLogin")
-  public String adminLogin(@RequestBody Map<String, String> postData) {
+  public Map<String, Object> adminLogin(@RequestBody Map<String, String> postData) {
     Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin(postData.get("id"));
 
+    Map<String, Object> map = new HashMap<>();
     if (optionalAdminDTO.isPresent()) {
       AdminDTO adminDTO = optionalAdminDTO.get();
       if(postData.get("password").equals(jasyService.jasyptDecoding(adminDTO.getPassword()))) {
+        map.put("id", adminDTO.getId());
+        map.put("hashKey", adminDTO.getHashKey());
+        map.put("token", adminService.getToken(adminDTO.getHashKey()));
 
-        return adminDTO.getHashKey();
+        return map;
       }
-      return "password";
+      map.put("id","password");
+      return map;
     }
-    return "id";
+    map.put("id","id");
+    return map;
   }
 
   @GetMapping(value = "/getAllContent")

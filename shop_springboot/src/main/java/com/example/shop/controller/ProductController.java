@@ -49,7 +49,7 @@ public class ProductController {
     return formData;
   }
 
-  @GetMapping(value = "/adminSelect/id/{productId}")
+  @GetMapping(value = "/admin/adminSelect/id/{productId}")
   public Map<String, Object> getAdminProduct(@PathVariable int productId) {
     Map<String, Object> formData = new HashMap<>();
     formData.put("hits", hitsService.getHits(productId,"product"));
@@ -59,7 +59,7 @@ public class ProductController {
   }
 
 
-  @PostMapping(value = "/changeColor")
+  @PostMapping(value = "/admin/changeColor")
   public Map<String, Object> changeColor(@RequestParam("productId") int productId,
       @RequestParam("colorId") int colorId,
       @RequestParam("colorContent") String color) {
@@ -72,7 +72,7 @@ public class ProductController {
     return formData;
   }
 
-  @PostMapping(value = "/insertColor")
+  @PostMapping(value = "/admin/insertColor")
   public Map<String, Object> insertColor(@RequestParam("productId") int productId,
       @RequestParam("colorId") int colorId
   ) {
@@ -85,7 +85,7 @@ public class ProductController {
     return formData;
   }
 
-  @PostMapping(value = "/deleteColor")
+  @PostMapping(value = "/admin/deleteColor")
   public Map<String, Object> deleteColor(@RequestParam("productId") int productId,
       @RequestParam("colorId") int colorId) {
     Map<String, Object> formData = new HashMap<>();
@@ -97,7 +97,7 @@ public class ProductController {
     return formData;
   }
 
-  @GetMapping(value = "/deleteProduct")
+  @GetMapping(value = "/admin/deleteProduct")
   public String deleteProduct(
       @RequestParam String hashKey,
       @RequestParam int id,
@@ -113,54 +113,54 @@ public class ProductController {
 
 
 
-  @PostMapping(value = "/changeName")
+  @PostMapping(value = "/admin/changeName")
   public void changeName(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
     productService.changeName(productId,content);
   }
 
-  @PostMapping(value = "/changePrice")
+  @PostMapping(value = "/admin/changePrice")
   public void changePrice(@RequestParam("id") int productId,
       @RequestParam("content") int content) {
 
     productService.changePrice(productId,content);
   }
 
-  @PostMapping(value = "/changeDeliveryTime")
+  @PostMapping(value = "/admin/changeDeliveryTime")
   public void changeDeliveryTime(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
     productService.changeDeliveryTime(productId,content);
   }
 
-  @PostMapping(value = "/changeState")
+  @PostMapping(value = "/admin/changeState")
   public void changeState(@RequestParam("id") int productId) {
 
     productService.changeState(productId);
   }
 
 
-  @PostMapping(value = "/changeDeliveryCostHalf")
+  @PostMapping(value = "/admin/changeDeliveryCostHalf")
   public void changeDeliveryCostHalf(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
     productService.changeDeliveryCostHalf(productId,content);
   }
 
-  @PostMapping(value = "/changeDeliveryCostGeneral")
+  @PostMapping(value = "/admin/changeDeliveryCostGeneral")
   public void changeDeliveryCostGeneral(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
     productService.changeDeliveryCostGeneral(productId,content);
   }
 
-  @PostMapping(value = "/changeSubDetail")
+  @PostMapping(value = "/admin/changeSubDetail")
   public void changeSubDetail(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
     productService.changeSubDetail(productId,content);
   }
 
-  @PostMapping(value = "/changeDetail")
+  @PostMapping(value = "/admin/changeDetail")
   public ProductDTO changeDetail(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
@@ -179,7 +179,7 @@ public class ProductController {
     return map;
   }
 
-  @GetMapping(value = "/adminProductList")
+  @GetMapping(value = "/admin/productList")
   public HashMap<String,Object> getAdminProductList() {
     HashMap<String,Object> map = new HashMap<String,Object>();
     List<ProductDTO> productDTO = productService.getProductList();
@@ -188,7 +188,7 @@ public class ProductController {
   }
 
 
-  @GetMapping(value = "/createProduct")
+  @GetMapping(value = "/admin/createProduct")
   public HashMap<String,Object> createProduct() {
     HashMap<String,Object> map = new HashMap<>();
     ProductDTO response = productService.createProduct();
@@ -201,7 +201,7 @@ public class ProductController {
   }
 
 
-  @PostMapping(value = "/changePosition")
+  @PostMapping(value = "/admin/changePosition")
   public HashMap<String,Object> changePosition(
       @RequestParam String direction,
       @RequestParam int position
@@ -225,7 +225,7 @@ public class ProductController {
     return map;
   }
 
-  @PostMapping(value = "/insertImage")
+  @PostMapping(value = "/admin/insertImage")
   public int uploadImage(
       @RequestParam("file") MultipartFile file
     ){
@@ -247,7 +247,7 @@ public class ProductController {
     }
   }
 
-  @PostMapping(value = "/insertMainImage")
+  @PostMapping(value = "/admin/insertMainImage")
   public ProductDTO uploadMainImage(
       @RequestParam("file") MultipartFile file,
       @RequestParam("productId") int productId
