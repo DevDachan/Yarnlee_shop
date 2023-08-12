@@ -46,6 +46,9 @@ function AdminNoticeEdit(props) {
       url: 'http://localhost:8090/shop-backend/notice/getNoticeContent',
       params:{
         id: noticeId
+      },
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
     })
     .then(function (response){
@@ -56,10 +59,15 @@ function AdminNoticeEdit(props) {
       setNotice(response.data);
     })
     .catch(function(error){
-      //handle error
-    })
-    .then(function(){
-      // always executed
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   }, []);
 
@@ -88,7 +96,15 @@ function AdminNoticeEdit(props) {
         editor.insertEmbed(cursorPosition, "image", "http://localhost/noticeImage/"+imageUrl+".jpg");
 
       } catch (error) {
-        console.log(error);
+        if(error.response.status === 401){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }else if(error.response.status === 500){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }
       }
     };
   };
@@ -124,6 +140,9 @@ function AdminNoticeEdit(props) {
         noticeId: noticeId,
         hashKey: sessionStorage.getItem("adminHash"),
         id: sessionStorage.getItem("admin")
+      },
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
     })
     .then(function (response){
@@ -132,9 +151,15 @@ function AdminNoticeEdit(props) {
     })
     .catch(function(error){
       //handle error
-    })
-    .then(function(){
-      // always executed
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   }
 
@@ -151,14 +176,25 @@ function AdminNoticeEdit(props) {
       axios({
         method: "post",
         url: 'http://localhost:8090/shop-backend/notice/changeContent',
-        data: formData
+        data: formData,
+        headers:{
+          "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+        }
       })
       .then(function (response){
         //handle success
       })
       .catch(function(error){
         //handle error
-        console.log(error);
+        if(error.response.status === 401){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }else if(error.response.status === 500){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }
       });
     }
   }
@@ -172,14 +208,25 @@ function AdminNoticeEdit(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/notice/changeTitle',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
 
   }

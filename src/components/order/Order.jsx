@@ -69,8 +69,14 @@ function Order(props) {
         setName(response.data.name);
       })
       .catch(function(error){
-        sessionStorage.clear();
-        navigate("../login");
+
+          // 로그인 계정이 없으면 그냥 전체 정보를 비워놓으면 됨
+          if(error.response.status === 401){
+            sessionStorage.clear();
+
+          }else if(error.response.status === 500){
+            sessionStorage.clear();
+          }
       });
     }
     if(location.state.state == "close"){

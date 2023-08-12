@@ -4,6 +4,11 @@ import Modal from 'react-bootstrap/Modal';
 
 
 function Loading({type, message,cancelLoading,show}) {
+
+  if(show == true){
+    window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  }
+
   return (
     <>
     <Modal show={show} onHide={cancelLoading}>
