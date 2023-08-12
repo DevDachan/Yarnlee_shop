@@ -28,7 +28,7 @@ function AdminNoticeMain(props) {
       }
       axios({
         method: "get",
-        url: 'http://localhost:8090/shop-backend/notice/getNoticeAdminList',
+        url: 'http://104.198.11.59:8090/shop-backend/notice/getNoticeAdminList',
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
         }
@@ -69,7 +69,7 @@ function AdminNoticeMain(props) {
     const createNotice = (e) =>{
       axios({
         method: "get",
-        url: 'http://localhost:8090/shop-backend/notice/createNotice',
+        url: 'http://104.198.11.59:8090/shop-backend/notice/createNotice',
         params:{
           id: sessionStorage.getItem("admin"),
           hashKey: sessionStorage.getItem("adminHash")

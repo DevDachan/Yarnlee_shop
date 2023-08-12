@@ -54,7 +54,7 @@ function Order(props) {
 
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/user/info',
+        url: 'http://104.198.11.59:8090/shop-backend/user/info',
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
         },
@@ -86,7 +86,7 @@ function Order(props) {
 
     axios({
       method: "get",
-      url: 'http://localhost:8090/shop-backend/admin/getOrderContent'
+      url: 'http://104.198.11.59:8090/shop-backend/admin/getOrderContent'
     })
     .then(function (response){
       //handle success
@@ -106,11 +106,12 @@ function Order(props) {
   const productId = location.state.productId;
   const productName = location.state.productName;
   const color = location.state.color;
+  const colorPrice = location.state.colorPrice;
   const numberOfProduct = location.state.productNum;
 
   const deliveryCost = location.state.deliveryCost;
   const parcelType = location.state.parcelType;
-  const totalCost = numberOfProduct * location.state.productPrice + deliveryCost;
+  const totalCost = numberOfProduct * location.state.productPrice + deliveryCost + colorPrice;
   const thumbnailImageId = location.state.thumbnailImageId;
 
 
@@ -159,7 +160,7 @@ function Order(props) {
       setLoadingCheck(true);
       axios({
         method: "post",
-        url: 'http://localhost:8090/shop-backend/order/insert',
+        url: 'http://104.198.11.59:8090/shop-backend/order/insert',
         data: formData,
         cancelToken: token
       })
@@ -192,7 +193,7 @@ function Order(props) {
 
         axios({
           method: "post",
-          url: 'http://localhost:8090/shop-backend/order/insertUserImage',
+          url: 'http://104.198.11.59:8090/shop-backend/order/insertUserImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -212,7 +213,7 @@ function Order(props) {
   }
 
   const previewImage = (e) =>{
-    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"http://localhost/userImage/"+uploadImage+".jpg"}></img>);
+    setModalContent(<img style={{width: "100%"}} src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}></img>);
     setShow(true);
   }
 
@@ -227,7 +228,7 @@ function Order(props) {
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-1" >
-                <span className="image main order_span_img"><img className="order_img" src={"http://localhost/thumbnails/"+thumbnailImageId+".jpg"} alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={"http://104.198.11.59/thumbnails/"+thumbnailImageId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-11 calign">
                 <h1>{productName}</h1>
@@ -243,7 +244,7 @@ function Order(props) {
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
-                  <p>상품 금액: {numberOfProduct * location.state.productPrice}원 , 배송비: {deliveryCost}원</p>
+                  <p>상품 금액: {numberOfProduct * location.state.productPrice}원 , {colorPrice != 0 ? "추가금액"+colorPrice+"원":""},  배송비: {deliveryCost}원</p>
                   <h3> 총액 : {totalCost}원 </h3>
                 </div>
               </div>
@@ -319,7 +320,7 @@ function Order(props) {
                         <input type="button" className="mb-3 mr3 imagebtn" onClick={changeImage} value="REUPLOAD" />
                         <input type="button" className="mb-3 imagebtn" onClick={previewImage} value="PREVIEW" />
                       </div>
-                      <img className="detail_img" src={uploadImage == undefined ? "" :"http://localhost/userImage/"+uploadImage+".jpg"}
+                      <img className="detail_img" src={uploadImage == undefined ? "" :"http://104.198.11.59/userImage/"+uploadImage+".jpg"}
                       alt=""/>
                       </>
                     }
