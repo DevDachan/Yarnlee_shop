@@ -67,8 +67,15 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   },[]); //마지막에 아무 파라미터를 안넣어줌으로써 페이지가 처음 로드 될 때만 적용
 
@@ -96,8 +103,16 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
+
     });
   }
 
@@ -123,8 +138,15 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   }
 
@@ -150,8 +172,16 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      //handle error
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   }
 
@@ -177,7 +207,16 @@ function AdminContent(props) {
       })
       .catch(function(error){
         //handle error
-        console.log(error);
+        //handle error
+        if(error.response.status === 401){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }else if(error.response.status === 500){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }
       });
     }
   }
@@ -204,7 +243,16 @@ function AdminContent(props) {
       })
       .catch(function(error){
         //handle error
-        console.log(error);
+        //handle error
+        if(error.response.status === 401){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }else if(error.response.status === 500){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }
       });
     }
   }
@@ -236,7 +284,16 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      //handle error
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
 
   }
@@ -262,7 +319,15 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
 
   }
@@ -328,7 +393,15 @@ function AdminContent(props) {
         })
         .catch(function(error){
           //handle error
-          console.log(error);
+          if(error.response.status === 401){
+            sessionStorage.clear();
+            navigate("../adminLogin");
+            window.location.reload();
+          }else if(error.response.status === 500){
+            sessionStorage.clear();
+            navigate("../adminLogin");
+            window.location.reload();
+          }
         });
       }
     }
@@ -357,7 +430,15 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   }
 
@@ -381,7 +462,15 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   }
 
@@ -403,8 +492,15 @@ function AdminContent(props) {
     })
     .catch(function(error){
       //handle error
-      sessionStorage.clear();
-      navigate("../adminLogin");
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
+      }
     });
   }
 

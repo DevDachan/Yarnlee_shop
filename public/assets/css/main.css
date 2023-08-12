@@ -3547,9 +3547,17 @@ input, select, textarea {
   margin: 0.25rem;
 }
 
+@media (min-width: 576px) and (pointer: coarse) {
+  /* 모바일 환경에 대한 스타일 */
+	.modal-dialog {
+		max-width: 50vw;
+		margin: 50% auto !important;
+	}
+}
+
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 500px;
+    max-width: 50vw;
     margin: 1.75rem auto;
   }
 
@@ -3565,6 +3573,7 @@ input, select, textarea {
     max-width: 300px;
   }
 }
+
 @media (min-width: 992px) {
   .modal-lg,
 .modal-xl {

@@ -25,7 +25,10 @@ function AdminNoticeMain(props) {
       }
       axios({
         method: "get",
-        url: 'http://localhost:8090/shop-backend/notice/getNoticeList'
+        url: 'http://localhost:8090/shop-backend/notice/getNoticeList',
+        headers:{
+          "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+        }
       })
       .then(function (response){
         setNoticeList(response.data);
@@ -33,9 +36,15 @@ function AdminNoticeMain(props) {
       })
       .catch(function(error){
         //handle error
-      })
-      .then(function(){
-        // always executed
+        if(error.response.status === 401){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }else if(error.response.status === 500){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }
       });
     }, []);
 
@@ -46,6 +55,9 @@ function AdminNoticeMain(props) {
         params:{
           id: sessionStorage.getItem("admin"),
           hashKey: sessionStorage.getItem("adminHash")
+        },
+        headers:{
+          "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
         }
       })
       .then(function (response){
@@ -54,9 +66,15 @@ function AdminNoticeMain(props) {
       })
       .catch(function(error){
         //handle error
-      })
-      .then(function(){
-        // always executed
+        if(error.response.status === 401){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }else if(error.response.status === 500){
+          sessionStorage.clear();
+          navigate("../adminLogin");
+          window.location.reload();
+        }
       });
     }
 

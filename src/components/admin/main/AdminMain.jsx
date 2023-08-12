@@ -46,9 +46,15 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
+      //handle error
       if(error.response.status === 401){
         sessionStorage.clear();
         navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
       }
     });
 
@@ -67,9 +73,15 @@ function AdminMain(props) {
     })
     .catch(function(error){
       //handle error
+      //handle error
       if(error.response.status === 401){
         sessionStorage.clear();
         navigate("../adminLogin");
+        window.location.reload();
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+        navigate("../adminLogin");
+        window.location.reload();
       }
 
     });
