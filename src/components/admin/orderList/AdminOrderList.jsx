@@ -2,6 +2,9 @@ import React, { useState ,useEffect } from "react";
 import { useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -45,9 +48,31 @@ function AdminOrderList(props) {
         })
         .catch(function(error){
           //handle error
-        })
-        .then(function(){
-          // always executed
+          if(error.response.status === 401){
+            sessionStorage.clear();
+            Swal.fire({
+              icon: 'error',
+              title: '세션 만료',
+              text: '다시 로그인 해주시기 바랍니다.',
+              confirmButtonText: '확인'
+            }).then(() => {
+              navigate("../adminLogin");
+              window.location.reload();
+            });
+
+          }else if(error.response.status === 500){
+            sessionStorage.clear();
+
+            Swal.fire({
+              icon: 'error',
+              title: '세션 만료',
+              text: '다시 로그인 해주시기 바랍니다.',
+              confirmButtonText: '확인'
+            }).then(() => {
+              navigate("../adminLogin");
+              window.location.reload();
+            });
+          }
         });
       }
 

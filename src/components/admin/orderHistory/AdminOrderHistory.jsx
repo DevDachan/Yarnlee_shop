@@ -5,7 +5,8 @@ import axios from "axios";
 import Modal from 'react-bootstrap/Modal';
 import Phone from "../../order/Phone";
 import PostSelector from "../../order/PostSelector";
-
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 const Wrapper = styled.div`
     padding: 16px;
     width: calc(100% - 32px);
@@ -54,6 +55,9 @@ function AdminOrderHistroy(props) {
         hashKey: sessionStorage.getItem("adminHash"),
         id: sessionStorage.getItem("admin"),
         orderId: location.state.orderId,
+      },
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
     })
     .then(function (response){
@@ -83,9 +87,31 @@ function AdminOrderHistroy(props) {
     })
     .catch(function(error){
       //handle error
-    })
-    .then(function(){
-      // always executed
+      if(error.response.status === 401){
+        sessionStorage.clear();
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
+
+      }else if(error.response.status === 500){
+        sessionStorage.clear();
+
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
+      }
     });
   },[]);
 
@@ -104,6 +130,9 @@ function AdminOrderHistroy(props) {
         hashKey: sessionStorage.getItem("adminHash"),
         id: sessionStorage.getItem("admin"),
         orderId: orderDetail.id
+      },
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
     })
     .then(function (response){
@@ -112,7 +141,7 @@ function AdminOrderHistroy(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      window.location.reload();
     });
   }
 
@@ -146,7 +175,10 @@ function AdminOrderHistroy(props) {
     axios({
       method: "post",
       url: 'http://localhost:8090/shop-backend/order/edit',
-      data: formData
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
     })
     .then(function (response){
       //handle success
@@ -154,7 +186,7 @@ function AdminOrderHistroy(props) {
     })
     .catch(function(error){
       //handle error
-      console.log(error);
+      window.location.reload();
     });
   }
 
@@ -174,8 +206,9 @@ function AdminOrderHistroy(props) {
           url: 'http://localhost:8090/shop-backend/order/insertUserImage',
           data: formData,
           headers: {
-            'Content-Type': 'multipart/form-data'
-          },
+            'Content-Type': 'multipart/form-data',
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+          }
         })
         .then(function (response){
           if(response.data != -1){
@@ -184,7 +217,7 @@ function AdminOrderHistroy(props) {
         })
         .catch(function(error){
           //handle error
-          console.log(error);
+          window.location.reload();
         });
       }
     }
@@ -202,6 +235,9 @@ function AdminOrderHistroy(props) {
      params: {
       id: orderDetail.id,
       state: e.target.value
+     },
+     headers:{
+       "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
      }
    })
    .then(function (response){
@@ -209,7 +245,7 @@ function AdminOrderHistroy(props) {
    })
    .catch(function(error){
      //handle error
-     console.log(error);
+     window.location.reload();
    });
  }
 
@@ -221,13 +257,16 @@ function AdminOrderHistroy(props) {
      params: {
       id: orderDetail.id,
       data: e.target.value
+     },
+     headers:{
+       "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
      }
    })
    .then(function (response){
    })
    .catch(function(error){
      //handle error
-     console.log(error);
+     window.location.reload();
    });
  }
 
