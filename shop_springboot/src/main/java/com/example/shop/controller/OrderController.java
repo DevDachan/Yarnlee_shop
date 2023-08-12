@@ -148,6 +148,35 @@ public class OrderController {
     }
   }
 
+
+  @PostMapping(value = "/getOrderHistoryToken")
+  public Map<String, Object> getOrderHistoryToken(
+      @RequestParam String type,
+      @RequestParam String content,
+      @RequestParam String name
+  ){
+
+    HashMap<String, Object> formData = new HashMap<>();
+    List<OrderDTO> orderList = null;
+
+
+    // content = key, name = id
+    orderList = orderService.getOrderUsingKey(content,name);
+
+    if(orderList == null || orderList.size() == 0){
+      return null;
+    }else {
+      ArrayList<ProductDTO> productList = new ArrayList<>();
+      for(OrderDTO temp : orderList){
+        productList.add(productService.getProduct(temp.getProductId()));
+      }
+
+      formData.put("orderList", orderList);
+      formData.put("productList", productList);
+      return formData;
+    }
+  }
+
   @PostMapping(value = "/insertUserImage")
   public int uploadImage(
       @RequestParam("file") MultipartFile file

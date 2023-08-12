@@ -54,6 +54,21 @@ public class NoticeController {
     return noticeList;
   }
 
+  // 토큰 확인을 위한 분기
+  @GetMapping(value = "/getNoticeAdminList")
+  public List<NoticeDTO> getNoticeAdminList(){
+    List<NoticeDTO> noticeList = noticeService.getNoticeAll();
+
+    return noticeList;
+  }
+
+  @GetMapping(value = "/getNoticeAdminContent")
+  public Optional<NoticeDTO> getNoticeAdmin(@RequestParam int id){
+    Optional<NoticeDTO> noticeList = noticeService.getNotice(id);
+    noticeService.upHits(id);
+    return noticeList;
+  }
+
   @GetMapping(value = "/createNotice")
   public List<NoticeDTO> createNotice(
       @RequestParam String hashKey,
@@ -67,10 +82,6 @@ public class NoticeController {
     }
     return this.getNoticeList();
   }
-
-
-
-
 
   @PostMapping(value = "/insertImage")
   public int uploadImage(
