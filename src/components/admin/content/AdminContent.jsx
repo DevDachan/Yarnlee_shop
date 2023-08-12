@@ -457,6 +457,35 @@ function AdminContent(props) {
     });
   }
 
+  const changeColorPrice = (e) =>{
+    const formData = new FormData();
+    formData.append("colorId", e.target.id);
+    formData.append("colorPrice", e.target.value);
+    formData.append("productId", productId);
+
+    axios({
+      method: "post",
+      url: 'http://localhost:8090/shop-backend/product/admin/changeColorPrice',
+      data: formData,
+      headers:{
+        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
+      }
+    })
+    .then(function (response){
+      setProduct(response.data.product);
+      setColor(response.data.color);
+    })
+    .catch(function(error){
+      //handle error
+      if(error.response.status === 401){
+        window.location.reload();
+
+      }else if(error.response.status === 500){
+        window.location.reload();
+      }
+    });
+  }
+
   const deleteColor =  (e) =>{
     const formData = new FormData();
     formData.append("colorId", e.target.id);
@@ -489,10 +518,13 @@ function AdminContent(props) {
     var arr = [];
 
     for(var i = 0; i < color.length; i++){
+
       arr.push(
-        <div className="grid_t">
-          <input type="text" className="gr-6 mb-2" defaultValue={color[i].color} id={color[i].colorId} onChange={chnageColor}/>
+        <div className="grid_t_3">
+          <input type="text" className="gr-6 mb-2" placeHolder="색상" defaultValue={color[i].color} id={color[i].colorId} onChange={chnageColor}/>
+          <input type="number" className="gr-6 mb-2" placeHolder="추가 금액" defaultValue={color[i].addPrice == 0 ? "":color[i].addPrice} id={color[i].colorId} onChange={changeColorPrice}/>
           <input type="button" className="gr-6 mb-2" value="DELETE" id={color[i].colorId} onClick={deleteColor}/>
+
         </div>
       );
     }
@@ -566,28 +598,30 @@ function AdminContent(props) {
               </div>
 
             </div>
-
-            <div className="mt3 mb1">
-              <h3> Color </h3>
-                {color == undefined ? "" : makeColorList()}
-              <input type="button"  value="+" onClick={insertColor}/>
-            </div>
-
-            <div className="mt3 mb1">
-              <h3> 상품 상태 </h3>
-              <div className="grid_t">
-                <div className="gr-6">
-                  {
-                    product == undefined ? "" :
-                      product.state == "open"?
-                      <input type="button" id="state-open" name="state-open" value="open" onClick={changeState}/>
-                      :
-                      <input type="button" id="state-close" name="state-open" value="close" onClick={changeState}/>
-                  }
-                </div>
+          </div>
+          <div className="mt3 mb1">
+            <h3> 상품 상태 </h3>
+            <div className="grid_t">
+              <div className="gr-6">
+                {
+                  product == undefined ? "" :
+                    product.state == "open"?
+                    <input type="button" id="state-open" name="state-open" value="open" onClick={changeState}/>
+                    :
+                    <input type="button" id="state-close" name="state-open" value="close" onClick={changeState}/>
+                }
               </div>
             </div>
           </div>
+
+          <div className="mt3 mb1">
+            <h3> Color </h3>
+              {color == undefined ? "" : makeColorList()}
+            <input type="button"  value="+" onClick={insertColor}/>
+          </div>
+
+
+
           <ReactQuill
             ref={quillRef}
             value={detail? detail : ''}

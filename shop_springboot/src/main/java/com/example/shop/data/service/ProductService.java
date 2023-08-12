@@ -13,6 +13,7 @@ public interface ProductService {
   List<ProductDTO> getProductList();
   List<ProductColorDTO>  getColor(int productId);
   void changeColor(int productId,int colorId,String content);
+  void changeColorPrice(int productId,int colorId,int price);
   void deleteColor(int productId,int colorId);
   void deleteProduct(int productId);
   void insertColor(int productId, int colorId);

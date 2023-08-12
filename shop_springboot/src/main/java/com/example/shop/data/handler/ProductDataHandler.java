@@ -18,6 +18,8 @@ public interface ProductDataHandler {
 
   void changeColor(int productId,int colorId,String color);
 
+  void changeColorPrice(int productId,int colorId,int price);
+
   void deleteColor(int productId,int colorId);
 
   void deleteProduct(int productId);
