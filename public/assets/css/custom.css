@@ -598,3 +598,11 @@ td{
 div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm{
   color: #fff !important;
 }
+.swal2-cancel{
+  color: #fff !important;
+}
+
+.ql-video{
+  width: 80vw;
+  height: 50vw;
+}
