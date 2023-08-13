@@ -357,7 +357,49 @@ function AdminContent(props) {
         console.log(error);
       }
     };
-  };
+  }
+
+  const linkHandler = () => {
+    Swal.fire({
+     title: 'Youtube Link',
+     input: 'url',
+     inputLabel: 'ex) https://www.youtube.com/watch?v=vR5Fss-xsO4',
+     showCancelButton: true,
+     inputValidator: (value) => {
+       if (!value ) {
+         return '링크를 입력해주세요';
+       }else if(!value.includes("youtube.com")){
+         return '올바른 입력해주세요';
+       }
+     },
+     preConfirm: (url) => {
+       if(url.includes("youtube.com")){
+         var imageUrl;
+         if(url.includes("watch?v=")){
+           imageUrl = url.split("watch?v=")[1];
+         }else if(url.includes("shorts/")){
+           imageUrl = url.split("shorts/")[1];
+         }
+         const makeUrl = "https://www.youtube.com/embed/"+imageUrl;
+         const embed = (
+                <iframe width="560" height="315"
+                src={`${makeUrl}`}
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; clipboard-write; encrypted-media;
+                gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+              );
+         const editor = quillRef.current.getEditor();
+         var cursorPosition = editor.selection.savedRange.index;
+         if(cursorPosition == 0){
+           cursorPosition = editor.getLength()-1;
+         }
+         editor.insertEmbed(cursorPosition, "video", makeUrl);
+       }
+     }
+   });
+
+  }
 
   const changeImage = (e) =>{
     var input = document.createElement("input");
@@ -539,11 +581,12 @@ function AdminContent(props) {
         [{ 'color': [] }, { 'background': [] }],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }],
         [{ 'align': [] }],
-        ['link', 'image']
+        ['link'],['image']
       ],
         // custom 핸들러 설정
       handlers: {
           image: imageHandler, // 이미지 tool 사용에 대한 핸들러 설정
+          link: linkHandler    // 유튜브 링크 사용에 대한 핸들러 설정
       }
     },
   }), []);
