@@ -34,6 +34,9 @@ function AdminOrderList(props) {
           params:{
             hashKey: sessionStorage.getItem("adminHash"),
             id: sessionStorage.getItem("admin")
+          },
+          headers:{
+            "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
           }
         })
         .then(function (response){
