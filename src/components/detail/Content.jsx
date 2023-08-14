@@ -35,23 +35,26 @@ function Content(props) {
   };
 
   const orderClick = () => {
-    if (document.getElementById("select_color").value !== "" && document.getElementById("select_parcel").value !== "") {
+    //&& document.getElementById("select_parcel").value !== ""
+    if (document.getElementById("select_color").value !== "") {
       navigate("/order", {
         state: {
           productId: 1,
           productNum: numberRef.current.value,
           productPrice: product.price,
           productName: product.name,
-          deliveryCost: document.getElementById("select_parcel").value == "반값 택배" ? product.deliveryCostHalf : product.deliveryCostGeneral,
-          parcelType: document.getElementById("select_parcel").value,
+          deliveryCost: product.deliveryCostGeneral,
+          parcelType: "일반 택배",
           thumbnailImageId: product.imageId,
           color: colorList[document.getElementById("select_color").value].color,
           colorPrice: colorList[document.getElementById("select_color").value].addPrice
         },
       });
-    } else if(document.getElementById("select_parcel").value == ""){
-      document.getElementById("alert_p").innerText = "배송 유형을 선택해주세요!";
-    }else{
+    }
+    //else if(document.getElementById("select_parcel").value == ""){
+    //  document.getElementById("alert_p").innerText = "배송 유형을 선택해주세요!";
+    //}
+    else{
       document.getElementById("alert_p").innerText = "색상을 선택해주세요!";
     }
   };
@@ -105,15 +108,6 @@ function Content(props) {
                 <h2 className="calign">판매 가격: {product == undefined ? "":product.price}원</h2>
                 <h2 className="calign">배송 예정일 : {product == undefined ? "":product.deliveryTime} </h2>
               </div>
-
-              <div className="col-12-medium mb1">
-                <select id="select_parcel" defaultValue="">
-                  <option value="" disabled className="option_select">배송 유형</option>
-                  <option value="일반 택배" className="option_select">일반 택배({product == undefined ? "":product.deliveryCostGeneral}원)</option>
-                  <option value="반값 택배" className="option_select">반값 택배({product == undefined ? "":product.deliveryCostHalf}원)</option>
-                </select>
-              </div>
-
               <div className="col-12-medium mb1">
                 <select id="select_color" defaultValue="">
                   <option value="" disabled className="option_select">색상</option>
@@ -160,4 +154,17 @@ function Content(props) {
   );
 }
 
+
+/*
+
+<div className="col-12-medium mb1">
+  <select id="select_parcel" defaultValue="">
+    <option value="" disabled className="option_select">배송 유형</option>
+    <option value="일반 택배" className="option_select">일반 택배({product == undefined ? "":product.deliveryCostGeneral}원)</option>
+    <option value="반값 택배" className="option_select">반값 택배({product == undefined ? "":product.deliveryCostHalf}원)</option>
+  </select>
+</div>
+
+
+*/
 export default Content;
