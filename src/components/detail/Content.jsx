@@ -107,6 +107,8 @@ function Content(props) {
               <div className="col-12-medium mt2">
                 <h2 className="calign">판매 가격: {product == undefined ? "":product.price}원</h2>
                 <h2 className="calign">배송 예정일 : {product == undefined ? "":product.deliveryTime} </h2>
+                <h2 className="calign">배송비 : {product == undefined ? "":product.deliveryCostGeneral} </h2>
+
               </div>
               <div className="col-12-medium mb1">
                 <select id="select_color" defaultValue="">
