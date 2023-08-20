@@ -28,6 +28,8 @@ function OrderHistroy(props) {
   const orderDetail = location.state.orderDetail;
   const productDetail = location.state.productDetail;
 
+  console.log(productDetail);
+console.log(orderDetail);
   const Wrapper = styled.div`
       padding: 16px;
       width: calc(100% - 32px);
@@ -44,7 +46,7 @@ function OrderHistroy(props) {
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-2" id="">
-                <span className="image main order_span_img"><img className="order_img" src="images/pic13.jpg" alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={productDetail == undefined ? "":"http://104.198.11.59/productImage/"+productDetail.imageId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-10 calign">
                 <h1>{orderDetail.name}</h1>
@@ -56,7 +58,7 @@ function OrderHistroy(props) {
                 </div>
                 <div className="gr-8 calign" style={{paddingTop: "20px"}}>
                   <div>
-                    서클 토트백 | 그린 | 수량 1
+                    {productDetail.name} | {orderDetail.color} | 수량 {orderDetail.num}
                   </div>
                 </div>
                 <div className="gr-12 calign" style={{borderTop: "3px solid rgb(98 217 182)", paddingTop: "20px"}}>
