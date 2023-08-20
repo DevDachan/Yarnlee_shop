@@ -147,17 +147,17 @@ function AdminOrderHistroy(props) {
 
 
   const editOrder = (e) =>{
-    setModalFunction(() => yseEdit);
+    setModalFunction(() => yesEdit);
     setModealYesNo(true);
     setModalContent("수정하시겠습니까?");
     setShow(true);
   }
 
-  const yseEdit = (e) => {
+  const yesEdit = (e) => {
     const formData = new FormData();
     formData.append("id", orderDetail.id); //default for DTO
-    formData.append("orderDate", "2023-05-23");
-    formData.append("userId", "guest");
+    formData.append("orderDate", orderDetail.orderDate);
+    formData.append("userId", orderDetail.userId);
     formData.append("productId", productDetail.id);
     formData.append("color", orderDetail.color);
     formData.append("num", orderDetail.num);
@@ -277,7 +277,7 @@ function AdminOrderHistroy(props) {
           <div className="inner mg0">
             <div className="grid_t">
               <div className="gr-2" id="">
-                <span className="image main order_span_img"><img className="order_img" src="images/pic13.jpg" alt="" /></span>
+                <span className="image main order_span_img"><img className="order_img" src={productDetail == undefined ? "":"http://104.198.11.59/productImage/"+productDetail.imageId+".jpg"} alt="" /></span>
               </div>
               <div className="gr-10 calign">
                 <h1>{productDetail == undefined? "" : productDetail.name}</h1>
