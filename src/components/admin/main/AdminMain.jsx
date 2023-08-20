@@ -30,7 +30,7 @@ function AdminMain(props) {
   const [hits, setHits] = useState(0);
 
   useEffect(() => {
-    if(sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined){
+    if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined || sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined){
       navigate('../adminLogin');
     }
 

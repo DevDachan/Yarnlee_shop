@@ -31,7 +31,7 @@ function AdminNoticeContent(props) {
     const [notice, setNotice] = useState();
 
     useEffect(() => {
-      if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined){
+      if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined || sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined){
         navigate('../adminLogin');
       }else if(noticeId == null){
         navigate("../adminNoticeMain");
