@@ -32,7 +32,17 @@ function AdminNoticeContent(props) {
 
     useEffect(() => {
       if(sessionStorage.getItem("admin") == null || sessionStorage.getItem("admin") == undefined || sessionStorage.getItem("jwt-auth-token") == null || sessionStorage.getItem("jwt-auth-token") == undefined){
-        navigate('../adminLogin');
+        sessionStorage.clear();
+
+        Swal.fire({
+          icon: 'error',
+          title: '세션 만료',
+          text: '다시 로그인 해주시기 바랍니다.',
+          confirmButtonText: '확인'
+        }).then(() => {
+          navigate("../adminLogin");
+          window.location.reload();
+        });
       }else if(noticeId == null){
         navigate("../adminNoticeMain");
       }
