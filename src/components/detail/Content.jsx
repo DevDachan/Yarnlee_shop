@@ -39,7 +39,7 @@ function Content(props) {
     if (document.getElementById("select_color").value !== "") {
       navigate("/order", {
         state: {
-          productId: 1,
+          productId: product.productId,
           productNum: numberRef.current.value,
           productPrice: product.price,
           productName: product.name,
