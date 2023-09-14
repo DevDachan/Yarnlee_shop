@@ -98,10 +98,10 @@ function Content(props) {
           <div className="row detail_main_nav justify-content-center">
 
             <div className="col-6-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://localhost/productImage/"+product.imageId+".jpg"} alt="" /></span>
+              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://localhost:3000/productImage/"+product.imageId+".jpg"} alt="" /></span>
             </div>
 
-            <div className="col-6-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>
+            <div className="col-6-medium calign" id="selectDiv">
 
               <div className="col-12-medium mt2">
                 <h2 className="calign">판매 가격: {product == undefined ? "":product.price}원</h2>

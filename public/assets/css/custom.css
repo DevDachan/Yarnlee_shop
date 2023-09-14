@@ -99,8 +99,9 @@ article{
   width : 50% !important;
 }
 .main_img{
-  width: 100% !important;
-  height: 100% !important;
+  width: 90% !important;
+  height: 90% !important;
+  margin:auto;
 }
 
 .detail_span_img{
@@ -218,9 +219,18 @@ select option[value=""][disabled] {
   white-space: nowrap;
 }
 
+.btn-searchAddress{
+  font-size: 0.8em;
+  height: 3.5em;
+  padding: 0 1.25em 0 1.6em;
+  display: inline-block;
+  font-weight: 900;
+}
+
 #lb_image:hover{
   color: #f2849e !important;
-box-shadow: inset 0 0 0 2px #f2849e;
+  box-shadow: inset 0 0 0 2px #f2849e;
+  width: 100%;
 }
 
 input{
@@ -302,12 +312,19 @@ td{
 
 
 .order_main{
-  margin: 2rem !important;
-  width: 80% !important;
+  width: 100% !important;
 }
 .grid_t{
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+}
+
+.order-table{
+  font-size: 0.5em;
+}
+
+.order-form{
+  font-size: 0.7em;
 }
 
 .grid_t_3{
@@ -617,4 +634,10 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm{
 .ql-video{
   width: 80vw;
   height: 50vw;
+}
+
+
+
+@@media (min-width:) {
+
 }
