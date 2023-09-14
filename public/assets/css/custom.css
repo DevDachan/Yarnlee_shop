@@ -3,7 +3,20 @@ footer{
   min-width: 750px;
 }
 
+header{
+  min-width: 750px !important;
+  width: 100vw !important;
+}
 
+.is-preload{
+  min-width: 750px !important;
+  width: 100vw !important;
+}
+
+.header-title{
+  width: 50% !important;
+  padding-right: 0px !important;
+}
 
 #h3-SecretKey, #ip-SecretKey, #bt-OkSecretKey{
   display: none;
@@ -45,10 +58,12 @@ article{
 
 .main-header{
   margin: 0 0 2em 2em;
+  width: 100%;
 }
 
 #main{
   margin-top: 4em;
+  width: 100%;
 }
 
 .tiles{

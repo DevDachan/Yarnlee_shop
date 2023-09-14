@@ -63,7 +63,7 @@ function AdminContent(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/adminSelect/id/'+productId,
+      url: 'http://localhost:8090/shop-backend/product/admin/adminSelect/id/'+productId,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
       }
@@ -118,7 +118,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeName',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeName',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -149,7 +149,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/changePrice',
+      url: 'http://localhost:8090/shop-backend/product/admin/changePrice',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -181,7 +181,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeDeliveryTime',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeDeliveryTime',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -212,7 +212,7 @@ function AdminContent(props) {
 
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeDeliveryCostHalf',
+        url: 'http://localhost:8090/shop-backend/product/admin/changeDeliveryCostHalf',
         data: formData,
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -244,7 +244,7 @@ function AdminContent(props) {
 
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeDeliveryCostGeneral',
+        url: 'http://localhost:8090/shop-backend/product/admin/changeDeliveryCostGeneral',
         data: formData,
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -281,7 +281,7 @@ function AdminContent(props) {
     formData.append("id", productId);
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeState',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeState',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -310,7 +310,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeDetail',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeDetail',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -354,7 +354,7 @@ function AdminContent(props) {
       formData.append("file", file);
 
       try {
-        const response = await axios.post("http://104.198.11.59:8090/shop-backend/product/insertImage", formData, {
+        const response = await axios.post("http://localhost:8090/shop-backend/product/insertImage", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -362,7 +362,7 @@ function AdminContent(props) {
         const imageUrl = response.data;
         const editor = quillRef.current.getEditor();
         const cursorPosition = editor.getSelection().index;
-        editor.insertEmbed(cursorPosition, "image", "http://104.198.11.59/productImage/"+imageUrl+".jpg");
+        editor.insertEmbed(cursorPosition, "image", "http://localhost/productImage/"+imageUrl+".jpg");
         } catch (error) {
         console.log(error);
       }
@@ -425,7 +425,7 @@ function AdminContent(props) {
         formData.append("productId", productId);
         axios({
           method: "post",
-          url: 'http://104.198.11.59:8090/shop-backend/product/admin/insertMainImage',
+          url: 'http://localhost:8090/shop-backend/product/admin/insertMainImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -459,7 +459,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/insertColor',
+      url: 'http://localhost:8090/shop-backend/product/admin/insertColor',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -488,7 +488,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeColor',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeColor',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -517,7 +517,7 @@ function AdminContent(props) {
 
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/changeColorPrice',
+      url: 'http://localhost:8090/shop-backend/product/admin/changeColorPrice',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -544,7 +544,7 @@ function AdminContent(props) {
     formData.append("productId", productId);
     axios({
       method: "post",
-      url: 'http://104.198.11.59:8090/shop-backend/product/admin/deleteColor',
+      url: 'http://localhost:8090/shop-backend/product/admin/deleteColor',
       data: formData,
       headers:{
         "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
@@ -612,7 +612,7 @@ function AdminContent(props) {
 
             <div className="col-12-medium" id="admin-imgDiv">
               <span className="image main detail_span_img">
-                <img className="main_img" src={product == undefined ? "" :"http://104.198.11.59/productImage/"+product.imageId+".jpg"}
+                <img className="main_img" src={product == undefined ? "" :"http://localhost/productImage/"+product.imageId+".jpg"}
                 alt=""
                 onClick={changeImage}
                 />
