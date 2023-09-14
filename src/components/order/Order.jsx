@@ -114,7 +114,6 @@ function Order(props) {
   const totalCost = numberOfProduct * location.state.productPrice + deliveryCost + colorPrice;
   const thumbnailImageId = location.state.thumbnailImageId;
 
-
   const goBack = (e) =>{
     navigate(-1);
   }

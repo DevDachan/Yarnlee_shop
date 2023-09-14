@@ -5,14 +5,14 @@ import queryString from 'query-string';
 import axios from "axios";
 
 const Wrapper = styled.div`
-  padding: 16px;
+  padding: 4em 2.5em 0 2.5em;
   width: calc(100% - 32px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
-  min-width: 920px;
+  min-width: 750px;
 `;
 
 
@@ -39,7 +39,7 @@ function Content(props) {
     if (document.getElementById("select_color").value !== "") {
       navigate("/order", {
         state: {
-          productId: product.productId,
+          productId: product.id,
           productNum: numberRef.current.value,
           productPrice: product.price,
           productName: product.name,
@@ -65,7 +65,7 @@ function Content(props) {
     }
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/product/select/id/'+productId
+      url: 'http://localhost:8090/shop-backend/product/select/id/'+productId
     })
     .then(function (response){
       //handle success
@@ -96,10 +96,10 @@ function Content(props) {
       <div className="detail_main" id="main">
         <div className="inner">
           <h1>{product == undefined ? "":product.name}</h1>
-          <div className="row detail_main_nav">
+          <div className="row detail_main_nav justify-content-center">
 
             <div className="col-6-medium" id="imgDiv">
-              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://104.198.11.59/productImage/"+product.imageId+".jpg"} alt="" /></span>
+              <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://localhost/productImage/"+product.imageId+".jpg"} alt="" /></span>
             </div>
 
             <div className="col-6-medium calign" id="selectDiv" style={{paddingTop: "10%"}}>
