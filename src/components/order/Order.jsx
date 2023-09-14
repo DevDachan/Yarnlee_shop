@@ -225,7 +225,7 @@ function Order(props) {
       <Wrapper>
         <div className="order_main" id="main">
           <div className="inner mg0">
-            <div className="grid_t">
+            <div className="grid_t order-table">
               <div className="gr-1" >
                 <span className="image main order_span_img"><img className="order_img" src={"http://104.198.11.59/thumbnails/"+thumbnailImageId+".jpg"} alt="" /></span>
               </div>
@@ -269,7 +269,7 @@ function Order(props) {
                 :""}
             </div>
 
-            <form onSubmit={order}>
+            <form className="order-form" onSubmit={order}>
               <div className="grid_t" style={{padding: "30px", boxShadow: "3px 3px 3px 3px rgb(98 217 182)"}}>
                 <div className="gr-4 calign pt1">
                   <h2 className="mg0">주문자 이름</h2>
