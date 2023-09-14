@@ -17,7 +17,6 @@ const Wrapper = styled.div`
     justify-content: center;
     margin-bottom: 8em;
     min-height: 70vh;
-    min-width: 750px;
 `;
 
 function Login(props) {

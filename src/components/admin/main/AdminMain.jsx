@@ -13,7 +13,6 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 800px;
 `;
 
 
@@ -41,7 +40,7 @@ function AdminMain(props) {
       }).then(() => {
         navigate("../adminLogin");
         window.location.reload();
-      });  
+      });
     }
 
     axios({

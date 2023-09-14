@@ -15,14 +15,13 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 Quill.register('modules/imageUploader', ImageUploader);
 
 const Wrapper = styled.div`
-  padding: 16px;
+  padding: 4em 2.5em 0 2.5em;
   width: calc(100% - 32px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: auto;
-  min-width: 920px;
 `;
 
 
