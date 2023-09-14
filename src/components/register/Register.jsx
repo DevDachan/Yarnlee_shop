@@ -14,7 +14,6 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 8em;
-    min-width: 720px;
 `;
 
 function Register(props) {

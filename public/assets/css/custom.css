@@ -1,15 +1,12 @@
 footer{
   width: 100vw;
-  min-width: 750px;
 }
 
-header{
-  min-width: 750px !important;
+#header{
   width: 100vw !important;
 }
 
 .is-preload{
-  min-width: 750px !important;
   width: 100vw !important;
 }
 

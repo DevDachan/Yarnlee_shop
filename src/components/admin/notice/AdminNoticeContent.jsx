@@ -15,7 +15,6 @@ const Wrapper = styled.div`
     justify-content: center;
     margin-bottom: 8em;
     margin:auto;
-    min-width: 750px;
 `;
 
 function AdminNoticeContent(props) {

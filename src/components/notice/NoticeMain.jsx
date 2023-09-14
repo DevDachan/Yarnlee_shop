@@ -10,7 +10,6 @@ const Wrapper = styled.div`
     align-items: center;
     margin-bottom: 8em;
     margin:auto;
-    min-width: 750px;
     min-height: 70vh;
 `;
 
