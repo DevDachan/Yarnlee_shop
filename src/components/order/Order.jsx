@@ -54,7 +54,7 @@ function Order(props) {
 
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/user/info',
+        url: 'http://localhost:8090/shop-backend/user/info',
         headers:{
           "jwt-auth-token": sessionStorage.getItem("jwt-auth-token")
         },
@@ -86,12 +86,11 @@ function Order(props) {
 
     axios({
       method: "get",
-      url: 'http://104.198.11.59:8090/shop-backend/admin/getOrderContent'
+      url: 'http://localhost:8090/shop-backend/admin/getOrderContent'
     })
     .then(function (response){
       //handle success
       setOrderContent(response.data);
-
     })
     .catch(function(error){
     });
@@ -159,7 +158,7 @@ function Order(props) {
       setLoadingCheck(true);
       axios({
         method: "post",
-        url: 'http://104.198.11.59:8090/shop-backend/order/insert',
+        url: 'http://localhost:8090/shop-backend/order/insert',
         data: formData,
         cancelToken: token
       })
@@ -192,7 +191,7 @@ function Order(props) {
 
         axios({
           method: "post",
-          url: 'http://104.198.11.59:8090/shop-backend/order/insertUserImage',
+          url: 'http://localhost:8090/shop-backend/order/insertUserImage',
           data: formData,
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -287,13 +286,13 @@ function Order(props) {
                   <Phone phoneNum={phoneNum || ""} setPhoneNum={setPhoneNum}/ >
                 </div>
 
-                <div className="gr-4 calign mt3">
+                <div className="gr-6 calign mt3">
                   <PostSelector
                     setAddress = {setAddress || ""}
                     setZonecode = {setZonecode || ""}
                   />
                 </div>
-                <div className="gr-8 mt3">
+                <div className="gr-6 mt3">
                   <input type="text" className="prl1"  disabled id="zoneCode" value={zoneCode} required />
                 </div>
                 <div className="gr-12">
@@ -305,9 +304,11 @@ function Order(props) {
                   />
                 </div>
 
-                <div className="gr-12 mt3">
+                <div className="gr-4 mt3">
+                  <h2 > 송금 내역 </h2>
+                </div>
+                <div className="gr-8 mt3">
                   <span className="image main detail_span_img">
-                    <h2 > 송금 내역 </h2>
                     {
                       uploadImage == undefined ?
                       <>

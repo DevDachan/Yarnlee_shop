@@ -99,8 +99,8 @@ article{
   width : 50% !important;
 }
 .main_img{
-  width: 90% !important;
-  height: 90% !important;
+  width: 80% !important;
+  height: 80% !important;
   margin:auto;
 }
 
@@ -161,9 +161,7 @@ input::-webkit-inner-spin-button {
 .detail_main{
   margin: 2rem !important;
 }
-.detail_main_nav{
-  margin: 0 0 3rem 0 !important;
-}
+
 
 #imgDiv{
   height: 100%;
@@ -208,6 +206,7 @@ select option[value=""][disabled] {
   font-size: 0.8em;
   font-weight: 900;
   height: 3.5em;
+  width: 100%;
   letter-spacing: 0.35em;
   line-height: 3.45em;
   overflow: hidden;
@@ -634,10 +633,4 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm{
 .ql-video{
   width: 80vw;
   height: 50vw;
-}
-
-
-
-@@media (min-width:) {
-
 }
