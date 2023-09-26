@@ -95,7 +95,7 @@ function Content(props) {
       <div className="detail_main" id="main">
         <div className="inner">
           <h1>{product == undefined ? "":product.name}</h1>
-          <div className="row detail_main_nav justify-content-center">
+          <div className="row justify-content-center">
 
             <div className="col-6-medium" id="imgDiv">
               <span className="image main detail_span_img"><img className="main_img" src={product == undefined ? "":"http://localhost:3000/productImage/"+product.imageId+".jpg"} alt="" /></span>
