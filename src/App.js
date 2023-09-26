@@ -13,6 +13,8 @@ import NotFound from "./components/NotFound";
 import Nav from "./components/Nav";
 import Main from "./components/Main";
 import Content from "./components/detail/Content";
+import ContentReview from "./components/detail/ContentReview";
+
 import Order from "./components/order/Order";
 import SuccessOrder from "./components/order/SuccessOrder";
 import Login from "./components/login/Login";
@@ -46,6 +48,8 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/logout" element={<Logout />}></Route>
         <Route path="/content" element={<Content />}></Route>
+        <Route path="/contentReview" element={<ContentReview />}></Route>
+
         <Route path="/order" element={<Order />}></Route>
         <Route path="/successOrder" element={<SuccessOrder />}></Route>
         <Route path="/orderLogin" element={<OrderLogin />}></Route>
