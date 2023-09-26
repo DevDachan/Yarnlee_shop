@@ -36,7 +36,7 @@ public class UserController {
   }
 
   @PostMapping(value="/register")
-  public ResponseEntity<Map<String, Object>> register(@Valid @RequestBody UserDTO userDto) {
+  public ResponseEntity<Map<String, Object>> createProduct(@Valid @RequestBody UserDTO userDto) {
     UserDTO user = userService.saveUser(userDto);
     Map<String,Object> response = userService.login(user.getId(), user.getPassword());
 
