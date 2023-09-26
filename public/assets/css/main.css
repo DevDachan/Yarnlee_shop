@@ -646,6 +646,11 @@ input, select, textarea {
 					width: 50%;
 				}
 
+				.row > .col-6-large {
+					width: 25%;
+				}
+
+
 				.row > .off-6-xlarge {
 					margin-left: 50%;
 				}
@@ -888,7 +893,7 @@ input, select, textarea {
 				}
 
 				.row > .col-6-large {
-					width: 50%;
+					width: 25%;
 				}
 
 				.row > .off-6-large {
@@ -1137,6 +1142,10 @@ input, select, textarea {
 					width: 50%;
 				}
 
+				.row > .col-6-large {
+					width: 50%;
+				}
+
 				.row > .off-6-medium {
 					margin-left: 50%;
 				}
@@ -1373,6 +1382,12 @@ input, select, textarea {
 				.row > .col-5-small {
 					width: 41.66667%;
 				}
+
+
+				.row > .col-6-large {
+					width: 50%;
+				}
+
 
 				.row > .off-5-small {
 					margin-left: 41.66667%;
@@ -1611,6 +1626,12 @@ input, select, textarea {
 				.row > .col-4-xsmall {
 					width: 33.33333%;
 				}
+
+				.row > .col-6-large {
+					width: 50%;
+				}
+
+
 
 				.row > .off-4-xsmall {
 					margin-left: 33.33333%;
