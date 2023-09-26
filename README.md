@@ -101,24 +101,33 @@
 
 ## 백엔드 구조
 
+Controller -> Service -> DataHandler -> DAO -> DB
+
 ### Controller
-
-### Configuration
-
-### Data
 | 이름 |  설명  | 제공 API |
 |------|---|---|
-| Admin |  관리자가 사용하는 API | |
-| Hits |  조회수와 관련된 API | |
-| Image | Image는 페이지 않에서 업로드,삭제되는 API | |
-| Jasy |  Jasy는 사용자 데이터 암호화를 위해 사용합니다 | |
-| Notice | 공지사항과 관련된 API | |
-| Order |  주문 사항에 대한 API | |
-| Phone |  핸드폰 인증과 관련해서 관리합니다 | |
-| Product | 상품에 관련한 CRUD에 대한 API | |
+| Admin |  관리자가 사용하는 API | adminLogin(),  getAllContent(), getMainContent(), getOrderContent(), editMainContent(), editOrderContent()|
+| Notice | 공지사항과 관련된 API |  getNoticeList(),  getNotice(),  getNoticeAdminList(),  getNoticeAdmin(), createNotice(),  uploadImage(),changeContent(), changeTitle(),  deleteNotice(), upHits()|
+| Order |  주문 사항에 대한 API |  insertOrder(), editProduct(),  changeParcelNum(), getOrder(),   getOrderHistory(),  getOrderHistoryToken(),  uploadImage(),  getAdminOrderList(), getAdminOrderList(), changeOrderState(), sendSms(), deleteOrder() |
+| Phone |  핸드폰 인증과 관련해서 관리합니다 | sendSms(),  registerPhone(),  checkDup(),  checkKey(),checkAuth(),   sendMessage()|
+| Product | 상품에 관련한 CRUD에 대한 API | getProduct(),  getAdminProduct(), changeColor(),   changeColorPrice(), insertColor(),  deleteColor(),  deleteProduct(),   changeName(), changePrice(), changeDeliveryTime(), changeState(), changeDeliveryCostHalf(), changeDeliveryCostGeneral(),   changeSubDetail(), changeDetail(),  getProductList() , getAdminProductList() , createProduct(), changePosition(), uploadImage(), uploadMainImage()|
 | Review | 리뷰에 관련한 API | |
-| SMS |  문자전송을 위한 API | |
-| User |  사용자에 대한 API | |
+| User |  사용자에 대한 API | loginUser(),register(),   auth(), infoUser(),  checkIdDup(), checkPhoneDup()|
+
+### Data
+| 이름 |  설명  |
+|------|---|
+| Admin |  관리자 | 
+| Hits |  조회수 |
+| Image | Image 이름  |
+| Jasy |  Jasy 사용자 데이터 암호화|
+| Notice | 공지사항 |
+| Order |  주문 사항|
+| Phone |  핸드폰 인증|
+| Product | 상품 정보 |
+| Review | 리뷰 정보 |
+| SMS |  문자전송 |
+| User |  사용자 정보 |
 
 ## 프론트엔드 구조
 
