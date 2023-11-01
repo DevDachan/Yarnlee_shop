@@ -13,9 +13,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDAOImpl implements UserDAO {
 
-  UserRepository userRepository;
+  private final  UserRepository userRepository;
 
-  AdminRepository adminRepository;
+  private final AdminRepository adminRepository;
 
 
   @Override

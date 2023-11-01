@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PhoneDAOImpl implements PhoneDAO {
 
-  PhoneRepository phoneRepository;
+  private final PhoneRepository phoneRepository;
 
   @Override
   public void resetSecretKey(String phoneNum, String newKey){

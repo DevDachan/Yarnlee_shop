@@ -5,12 +5,14 @@ import com.example.shop.data.dao.ReviewDAO;
 import com.example.shop.data.entity.ReviewEntity;
 import com.example.shop.data.repository.ReviewRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ReviewDAOImpl implements ReviewDAO {
 
-  ReviewRepository reviewRepository;
+  private final ReviewRepository reviewRepository;
 
   @Override
   public boolean insert(ReviewEntity review) {

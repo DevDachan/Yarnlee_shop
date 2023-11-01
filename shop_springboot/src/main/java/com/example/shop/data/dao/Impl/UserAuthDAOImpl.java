@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserAuthDAOImpl implements UserAuthDAO {
 
-  UserAuthRepository userAuthRepository;
+  private final UserAuthRepository userAuthRepository;
 
   @Override
   public void insertAuth(UserAuthEntity user) {

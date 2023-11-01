@@ -12,21 +12,21 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class HitsDataHandlerImpl implements HitsDataHandler {
 
-    HitsDAO hitsDAO;
+  private final HitsDAO hitsDAO;
 
-    @Override
-    public void saveHits(HitsDTO hitsDTO){
-      hitsDAO.saveUser(hitsDTO.toEntity());
-    }
+  @Override
+  public void saveHits(HitsDTO hitsDTO) {
+    hitsDAO.saveUser(hitsDTO.toEntity());
+  }
 
-    @Override
-    public void upHits(int id, String type){
-      hitsDAO.upHits(id, type);
-    }
+  @Override
+  public void upHits(int id, String type) {
+    hitsDAO.upHits(id, type);
+  }
 
-    @Override
-    public int getHits(int id, String type){
-      return hitsDAO.getHits(id,type);
-    }
+  @Override
+  public int getHits(int id, String type) {
+    return hitsDAO.getHits(id, type);
+  }
 
 }

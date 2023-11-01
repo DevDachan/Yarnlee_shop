@@ -19,16 +19,16 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-  UserAuthDataHandler userAuthDataHandeler;
+  private final UserAuthDataHandler userAuthDataHandeler;
 
-  UserDataHandler userDataHandeler;
+  private final UserDataHandler userDataHandeler;
 
-  JasyService jasyService;
+  private final JasyService jasyService;
 
   private JwtUtil jwtUtil;
 
   @Override
-  public UserDTO saveUser(UserDTO userDTO){
+  public UserDTO saveUser(UserDTO userDTO) {
     userDTO.setPassword(jasyService.jasyptEncoding(userDTO.getPassword()));
     UserEntity userEntity = userDataHandeler.saveUser(userDTO);
 
@@ -38,10 +38,10 @@ public class UserServiceImpl implements UserService {
 
 
   @Override
-  public UserDTO userInfo(String userId, String key){
+  public UserDTO userInfo(String userId, String key) {
 
-    Map<String, Object> content =  jwtUtil.checkAndGetClaims(key);
-    if(userId.equals(content.get("user"))){
+    Map<String, Object> content = jwtUtil.checkAndGetClaims(key);
+    if (userId.equals(content.get("user"))) {
       Optional<UserDTO> optionalUserDTO = userDataHandeler.getUserDTO(userId);
 
       if (optionalUserDTO.isPresent()) {
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserDTO getUser(String userId){
+  public UserDTO getUser(String userId) {
 
     Optional<UserDTO> optionalUserDTO = userDataHandeler.getUserDTO(userId);
 
@@ -66,17 +66,17 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public Map<String, Object> login(String id, String password){
+  public Map<String, Object> login(String id, String password) {
     UserDTO userDTO = this.getUser(id);
     Map<String, Object> form = new HashMap<>();
     if (userDTO != null) {
-      if(this.checkPassword(userDTO, password)) {
+      if (this.checkPassword(userDTO, password)) {
         String authToken = jwtUtil.createAuthToken(id);
         userAuthDataHandeler.insertAuth(id, authToken);
-        form.put("token",authToken);
-        form.put("id",userDTO.getId());
-        form.put("name",userDTO.getName());
-        form.put("phone",userDTO.getPhone());
+        form.put("token", authToken);
+        form.put("id", userDTO.getId());
+        form.put("name", userDTO.getName());
+        form.put("phone", userDTO.getPhone());
 
         return form;
       }
@@ -85,27 +85,27 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public String authCheck(String id, String token){
+  public String authCheck(String id, String token) {
     System.out.println(jwtUtil.checkAndGetClaims(token));
-    Map<String, Object> content =  jwtUtil.checkAndGetClaims(token);
-    if(id.equals(content.get("user"))){
+    Map<String, Object> content = jwtUtil.checkAndGetClaims(token);
+    if (id.equals(content.get("user"))) {
       return "Success";
     }
     return "Fail";
   }
 
   @Override
-  public boolean checkPassword( UserDTO userDTO, String password){
-    return password.equals( jasyService.jasyptDecoding(userDTO.getPassword()));
+  public boolean checkPassword(UserDTO userDTO, String password) {
+    return password.equals(jasyService.jasyptDecoding(userDTO.getPassword()));
   }
 
   @Override
-  public boolean phoneDupCheck(String phone){
+  public boolean phoneDupCheck(String phone) {
     return userDataHandeler.phoneDupCheck(phone);
   }
 
   @Override
-  public boolean idDupCheck(String id){
+  public boolean idDupCheck(String id) {
     return userDataHandeler.idDupCheck(id);
   }
 

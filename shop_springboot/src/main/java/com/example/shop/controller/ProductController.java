@@ -27,10 +27,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class ProductController {
 
-  private ProductService productService;
-  private ImageService imageService;
-  private HitsService hitsService;
-  private AdminService adminService;
+  private final ProductService productService;
+  private final ImageService imageService;
+  private final HitsService hitsService;
+  private final AdminService adminService;
 
   @GetMapping(value = "/select/id/{productId}")
   public Map<String, Object> getProduct(@PathVariable int productId) {

@@ -14,31 +14,35 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
-    AdminDataHandler adminDataHandeler;
-    JwtUtil jwtUtil;
 
-    @Override
-    public Optional<AdminDTO>  getAdmin(String id){
-      Optional<AdminEntity> optionalAdminEntity = adminDataHandeler.getAdminDTO(id);;
-      if(optionalAdminEntity.isPresent()){
-        AdminEntity adminEntity = optionalAdminEntity.get();
-        AdminDTO adminDTO = adminEntity.toDto();
-        return Optional.ofNullable(adminDTO);
-      }else{
-        return Optional.empty();
-      }
+  private final AdminDataHandler adminDataHandeler;
+  private final JwtUtil jwtUtil;
+
+  @Override
+  public Optional<AdminDTO> getAdmin(String id) {
+    Optional<AdminEntity> optionalAdminEntity = adminDataHandeler.getAdminDTO(id);
+    ;
+    if (optionalAdminEntity.isPresent()) {
+      AdminEntity adminEntity = optionalAdminEntity.get();
+      AdminDTO adminDTO = adminEntity.toDto();
+      return Optional.ofNullable(adminDTO);
+    } else {
+      return Optional.empty();
     }
+  }
 
-    @Override
-    public String getToken(String key){
-      return jwtUtil.createAuthToken(key);
-    }
+  @Override
+  public String getToken(String key) {
+    return jwtUtil.createAuthToken(key);
+  }
 
-    @Override
-    public void editContent(String id, String content){
-      adminDataHandeler.editContent(id,content);
-    }
+  @Override
+  public void editContent(String id, String content) {
+    adminDataHandeler.editContent(id, content);
+  }
 
-    @Override
-    public boolean checkAdmin(String hashKey, String id){return adminDataHandeler.checkAdmin(hashKey, id);}
+  @Override
+  public boolean checkAdmin(String hashKey, String id) {
+    return adminDataHandeler.checkAdmin(hashKey, id);
+  }
 }

@@ -18,9 +18,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-  OrderDataHandler orderDataHandeler;
+  private final OrderDataHandler orderDataHandeler;
 
-  private JwtUtil jwtUtil;
+  private final JwtUtil jwtUtil;
 
   @Override
   public OrderDTO saveOrder(OrderDTO orderDTO) {

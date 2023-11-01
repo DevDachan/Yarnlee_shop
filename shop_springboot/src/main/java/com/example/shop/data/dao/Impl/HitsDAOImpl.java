@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class HitsDAOImpl implements HitsDAO {
 
-  HitsRepository hitsRepository;
+  private final HitsRepository hitsRepository;
 
   @Override
   public void saveUser(HitsEntity hitsEntity) {

@@ -13,32 +13,33 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class PhoneServiceImpl implements PhoneService {
-    PhoneDataHandler phoneDataHandler;
 
-    @Override
-    public void savePhone(PhoneDTO phoneDTO){
-      phoneDataHandler.save(phoneDTO);
-    }
+  private final PhoneDataHandler phoneDataHandler;
 
-    @Override
-    public Optional<PhoneDTO> getPhone(String phoneNum){
-        return phoneDataHandler.getPhone(phoneNum);
-    }
+  @Override
+  public void savePhone(PhoneDTO phoneDTO) {
+    phoneDataHandler.save(phoneDTO);
+  }
 
-    @Override
-    public void resetSecretKey(String phoneNum){
-        Random random = new Random();
-        random.setSeed(System.nanoTime());
-        int min = 100000, max = 999999;
-        String newKey = String.valueOf(random.nextInt((max - min) + min));
-        phoneDataHandler.resetSecretKey(phoneNum,newKey);
-    }
+  @Override
+  public Optional<PhoneDTO> getPhone(String phoneNum) {
+    return phoneDataHandler.getPhone(phoneNum);
+  }
 
-    @Override
-    public String getRandomKey(){
-        Random random = new Random();
-        random.setSeed(System.nanoTime());
-        int min = 100000, max = 999999;
-        return String.valueOf(random.nextInt((max - min) + min));
-    }
+  @Override
+  public void resetSecretKey(String phoneNum) {
+    Random random = new Random();
+    random.setSeed(System.nanoTime());
+    int min = 100000, max = 999999;
+    String newKey = String.valueOf(random.nextInt((max - min) + min));
+    phoneDataHandler.resetSecretKey(phoneNum, newKey);
+  }
+
+  @Override
+  public String getRandomKey() {
+    Random random = new Random();
+    random.setSeed(System.nanoTime());
+    int min = 100000, max = 999999;
+    return String.valueOf(random.nextInt((max - min) + min));
+  }
 }

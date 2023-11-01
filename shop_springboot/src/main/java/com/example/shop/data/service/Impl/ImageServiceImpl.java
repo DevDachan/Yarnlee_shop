@@ -12,25 +12,26 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService {
-    ImageRepository imageRepository;
 
-    @Override
-    public int getRandomId(){
-      List<Integer> randomIdList = imageRepository.findAllId();
+  private final ImageRepository imageRepository;
 
-      int randomId = 0;
-      int min = 100000, max = 999999;
-      Random random = new Random();
-      random.setSeed(System.nanoTime());
+  @Override
+  public int getRandomId() {
+    List<Integer> randomIdList = imageRepository.findAllId();
 
-      for(int i = 0 ; ; i++){
-        randomId = random.nextInt((max - min) + min);
-        if(randomIdList.indexOf(randomId) == -1){ // idList에 없는 랜덤 id가 결정되면
-          imageRepository.addId(randomId);
-          break;
-        }
+    int randomId = 0;
+    int min = 100000, max = 999999;
+    Random random = new Random();
+    random.setSeed(System.nanoTime());
+
+    for (int i = 0; ; i++) {
+      randomId = random.nextInt((max - min) + min);
+      if (randomIdList.indexOf(randomId) == -1) { // idList에 없는 랜덤 id가 결정되면
+        imageRepository.addId(randomId);
+        break;
       }
-
-      return randomId;
     }
+
+    return randomId;
+  }
 }

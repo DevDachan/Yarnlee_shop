@@ -27,9 +27,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class NoticeController {
 
-  private NoticeService noticeService;
-  private AdminService adminService;
-  private ImageService imageService;
+  private final NoticeService noticeService;
+  private final AdminService adminService;
+  private final ImageService imageService;
 
   @GetMapping(value = "/getNoticeList")
   public List<NoticeDTO> getNoticeList() {

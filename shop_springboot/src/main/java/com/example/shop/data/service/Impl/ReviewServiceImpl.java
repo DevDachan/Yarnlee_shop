@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
-  ReviewDataHandler reviewDataHandeler;
+  private final ReviewDataHandler reviewDataHandeler;
 
   @Override
   public List<ReviewDTO> getReview(int productId) {

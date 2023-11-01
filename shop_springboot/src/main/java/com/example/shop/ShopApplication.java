@@ -2,7 +2,6 @@ package com.example.shop;
 
 import com.example.shop.Interceptor.JwtInterceptor;
 import java.util.Arrays;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,7 +18,6 @@ public class ShopApplication implements WebMvcConfigurer {
   public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
 	}
-
 
   @Override
   public void addInterceptors(InterceptorRegistry registry){

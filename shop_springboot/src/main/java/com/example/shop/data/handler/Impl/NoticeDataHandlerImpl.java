@@ -16,45 +16,52 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class NoticeDataHandlerImpl implements NoticeDataHandler {
 
-    NoticeDAO noticeDAO;
-    @Override
-    public void createNotice(String currentTime){
-      noticeDAO.createNotice(currentTime);
+  private final NoticeDAO noticeDAO;
+
+  @Override
+  public void createNotice(String currentTime) {
+    noticeDAO.createNotice(currentTime);
+  }
+
+  @Override
+  public List<NoticeDTO> getNoticeAll() {
+    List<NoticeEntity> noticeEntityList = noticeDAO.getNoticeAll();
+    List<NoticeDTO> noticeDTOList = new ArrayList<>();
+    for (NoticeEntity temp : noticeEntityList) {
+      noticeDTOList.add(temp.toDto());
     }
+    return noticeDTOList;
+  }
 
-    @Override
-    public List<NoticeDTO> getNoticeAll() {
-      List<NoticeEntity> noticeEntityList = noticeDAO.getNoticeAll();
-      List<NoticeDTO> noticeDTOList = new ArrayList<>();
-      for (NoticeEntity temp : noticeEntityList) {
-        noticeDTOList.add(temp.toDto());
-      }
-      return noticeDTOList;
+  @Override
+  public Optional<NoticeDTO> getNotice(int id) {
+    Optional<NoticeEntity> optionalNoticeEntity = noticeDAO.getNotice(id);
+    if (optionalNoticeEntity.isPresent()) {
+      NoticeEntity userEntity = optionalNoticeEntity.get();
+      NoticeDTO userDTO = userEntity.toDto();
+      return Optional.ofNullable(userDTO);
+    } else {
+      return Optional.empty();
     }
+  }
 
-    @Override
-    public Optional<NoticeDTO> getNotice(int id){
-      Optional<NoticeEntity> optionalNoticeEntity = noticeDAO.getNotice(id);
-      if(optionalNoticeEntity.isPresent()){
-        NoticeEntity userEntity = optionalNoticeEntity.get();
-        NoticeDTO userDTO = userEntity.toDto();
-        return Optional.ofNullable(userDTO);
-      }else{
-        return Optional.empty();
-      }
-    }
+  @Override
+  public void changeContent(int id, String content) {
+    noticeDAO.changeContent(id, content);
+  }
 
-    @Override
-    public void changeContent(int id, String content){ noticeDAO.changeContent(id,content); }
+  @Override
+  public void changeTitle(int id, String content) {
+    noticeDAO.changeTitle(id, content);
+  }
 
-    @Override
-    public void changeTitle(int id, String content){ noticeDAO.changeTitle(id,content); }
+  @Override
+  public void upHits(int id) {
+    noticeDAO.upHits(id);
+  }
 
-    @Override
-    public void upHits(int id){ noticeDAO.upHits(id);}
-
-    @Override
-    public void deleteNotice(int id){
-      noticeDAO.deleteNotice(id);
-    }
+  @Override
+  public void deleteNotice(int id) {
+    noticeDAO.deleteNotice(id);
+  }
 }

@@ -13,27 +13,29 @@ import org.springframework.stereotype.Component;
 @Transactional
 @RequiredArgsConstructor
 public class PhoneDataHandlerImpl implements PhoneDataHandler {
-    PhoneDAO phoneDAO;
-    @Override
-    public void resetSecretKey(String phoneNum, String newKey){
-      phoneDAO.resetSecretKey(phoneNum,newKey);
-    }
 
-    @Override
-    public void save(PhoneDTO phoneDTO){
-      phoneDAO.save(phoneDTO.toEntity());
-    }
+  private final PhoneDAO phoneDAO;
 
-    @Override
-    public Optional<PhoneDTO> getPhone(String phoneNum){
+  @Override
+  public void resetSecretKey(String phoneNum, String newKey) {
+    phoneDAO.resetSecretKey(phoneNum, newKey);
+  }
 
-      Optional<PhoneEntity> optionalPhoneEntity = phoneDAO.getPhone(phoneNum);
-      if(optionalPhoneEntity.isPresent()){
-        PhoneEntity phoneEntity = optionalPhoneEntity.get();
-        PhoneDTO phoneDTO = phoneEntity.toDto();
-        return Optional.ofNullable(phoneDTO);
-      }else{
-        return Optional.empty();
-      }
+  @Override
+  public void save(PhoneDTO phoneDTO) {
+    phoneDAO.save(phoneDTO.toEntity());
+  }
+
+  @Override
+  public Optional<PhoneDTO> getPhone(String phoneNum) {
+
+    Optional<PhoneEntity> optionalPhoneEntity = phoneDAO.getPhone(phoneNum);
+    if (optionalPhoneEntity.isPresent()) {
+      PhoneEntity phoneEntity = optionalPhoneEntity.get();
+      PhoneDTO phoneDTO = phoneEntity.toDto();
+      return Optional.ofNullable(phoneDTO);
+    } else {
+      return Optional.empty();
     }
+  }
 }

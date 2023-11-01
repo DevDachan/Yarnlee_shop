@@ -14,32 +14,32 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserDataHandlerImpl implements UserDataHandler {
 
-    UserDAO userDAO;
+  private final UserDAO userDAO;
 
-    @Override
-    public UserEntity saveUser(UserDTO userDTO){
-      return userDAO.saveUser(userDTO.toEntity());
-    }
+  @Override
+  public UserEntity saveUser(UserDTO userDTO) {
+    return userDAO.saveUser(userDTO.toEntity());
+  }
 
-    @Override
-    public Optional<UserDTO> getUserDTO(String userId){
-      Optional<UserEntity> optionalUserEntity = userDAO.getUser(userId);
-      if(optionalUserEntity.isPresent()){
-        UserEntity userEntity = optionalUserEntity.get();
-        UserDTO userDTO = userEntity.toDto();
-        return Optional.ofNullable(userDTO);
-      }else{
-        return Optional.empty();
-      }
+  @Override
+  public Optional<UserDTO> getUserDTO(String userId) {
+    Optional<UserEntity> optionalUserEntity = userDAO.getUser(userId);
+    if (optionalUserEntity.isPresent()) {
+      UserEntity userEntity = optionalUserEntity.get();
+      UserDTO userDTO = userEntity.toDto();
+      return Optional.ofNullable(userDTO);
+    } else {
+      return Optional.empty();
     }
+  }
 
-    @Override
-    public boolean phoneDupCheck(String phone){
-      return userDAO.phoneDupCheck(phone);
-    }
+  @Override
+  public boolean phoneDupCheck(String phone) {
+    return userDAO.phoneDupCheck(phone);
+  }
 
-    @Override
-    public boolean idDupCheck(String id){
-      return userDAO.idDupCheck(id);
-    }
+  @Override
+  public boolean idDupCheck(String id) {
+    return userDAO.idDupCheck(id);
+  }
 }

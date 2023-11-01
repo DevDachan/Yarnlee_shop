@@ -30,8 +30,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class PhoneController {
 
-  private PhoneService phoneService;
-  private SMSService smsService;
+  private final PhoneService phoneService;
+  private final SMSService smsService;
 
   @Value("${naver-cloud-sms.senderPhone}")
   private String adminPhone;

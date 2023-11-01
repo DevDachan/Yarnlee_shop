@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductDAOImpl implements ProductDAO {
 
-  ProductRepository productRepository;
+  private final ProductRepository productRepository;
 
-  ProductColorRepository productColorRepository;
+  private final  ProductColorRepository productColorRepository;
 
-  HitsRepository hitsRepository;
+  private final HitsRepository hitsRepository;
 
   @Override
   public ProductEntity createProduct() {

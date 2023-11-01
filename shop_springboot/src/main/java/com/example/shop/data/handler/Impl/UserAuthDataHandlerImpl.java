@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserAuthDataHandlerImpl implements UserAuthDataHandler {
 
-    UserAuthDAO userAuthDAO;
+  private final UserAuthDAO userAuthDAO;
 
-    @Override
-    public void insertAuth(String id, String authToken){
-      UserAuthEntity user = new UserAuthEntity(id, authToken,"");
-      userAuthDAO.insertAuth(user);
-    }
+  @Override
+  public void insertAuth(String id, String authToken) {
+    UserAuthEntity user = new UserAuthEntity(id, authToken, "");
+    userAuthDAO.insertAuth(user);
+  }
 }

@@ -14,23 +14,24 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class JwtUtil {
+
   @Value("${jwt.salt}")
   private String salt;
 
   @Value("${jwt.expmin}")
   private Long expireMin;
 
-  public String createAuthToken(String email){
+  public String createAuthToken(String email) {
     return create(email, "authToken", expireMin);
   }
 
-  private String create(String id, String subject, long expireMin){
+  private String create(String id, String subject, long expireMin) {
     final JwtBuilder builder = Jwts.builder();
 
     builder.setSubject(subject)
         .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * expireMin));
 
-    if(id != null){
+    if (id != null) {
       builder.claim("user", id);
     }
 
@@ -42,7 +43,7 @@ public class JwtUtil {
     return jwt;
   }
 
-  public Map<String, Object> checkAndGetClaims(String jwt){
+  public Map<String, Object> checkAndGetClaims(String jwt) {
     Jws<Claims> claims =
         Jwts.parser().setSigningKey(salt.getBytes()).parseClaimsJws(jwt);
 

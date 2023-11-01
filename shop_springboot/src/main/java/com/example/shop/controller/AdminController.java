@@ -23,9 +23,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class AdminController {
 
-  private AdminService adminService;
-  private JasyService jasyService;
-  private HitsService hitsService;
+  private final AdminService adminService;
+  private final JasyService jasyService;
+  private final HitsService hitsService;
 
   @PostMapping(value = "/adminLogin")
   public Map<String, Object> adminLogin(@RequestBody Map<String, String> postData) {

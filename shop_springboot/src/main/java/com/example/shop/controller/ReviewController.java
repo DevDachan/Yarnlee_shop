@@ -23,8 +23,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class ReviewController {
 
-  private ReviewService reviewService;
-  private AdminService adminService;
+  private final ReviewService reviewService;
+  private final AdminService adminService;
 
   @PostMapping(value = "/insert")
   public String insertReview(

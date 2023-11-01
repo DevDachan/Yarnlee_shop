@@ -10,19 +10,20 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class JasyServiceImpl implements JasyService {
-    public String jasyptEncoding(String value){
-      String key="Demo";
-      StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
-      pbeEnc.setAlgorithm("PBEWithMD5AndDES");
-      pbeEnc.setPassword(key);
-      return pbeEnc.encrypt(value);
-    }
 
-    public String jasyptDecoding(String value){
-      String key="Demo";
-      StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
-      pbeEnc.setAlgorithm("PBEWithMD5AndDES");
-      pbeEnc.setPassword(key);
-      return pbeEnc.decrypt(value);
-    }
+  public String jasyptEncoding(String value) {
+    String key = "Demo";
+    StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
+    pbeEnc.setAlgorithm("PBEWithMD5AndDES");
+    pbeEnc.setPassword(key);
+    return pbeEnc.encrypt(value);
+  }
+
+  public String jasyptDecoding(String value) {
+    String key = "Demo";
+    StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
+    pbeEnc.setAlgorithm("PBEWithMD5AndDES");
+    pbeEnc.setPassword(key);
+    return pbeEnc.decrypt(value);
+  }
 }

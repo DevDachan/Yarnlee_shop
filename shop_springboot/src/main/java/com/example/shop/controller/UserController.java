@@ -20,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RequiredArgsConstructor
 public class UserController {
 
-  private UserService userService;
+  private final UserService userService;
 
   @PostMapping(value = "/login")
   public Map<String, Object> loginUser(@RequestBody Map<String, String> postData) {

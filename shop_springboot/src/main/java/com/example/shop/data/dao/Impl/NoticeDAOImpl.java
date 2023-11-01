@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class NoticeDAOImpl implements NoticeDAO {
 
-  NoticeRepository noticeRepository;
+  private final NoticeRepository noticeRepository;
 
   @Override
   public void createNotice(String currentTime) {

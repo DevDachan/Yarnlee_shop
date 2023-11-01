@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class OrderDAOImpl implements OrderDAO {
 
-  OrderRepository orderRepository;
+  private final OrderRepository orderRepository;
 
   @Override
   public OrderEntity saveOrder(OrderEntity orderEntity) {

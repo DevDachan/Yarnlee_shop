@@ -15,25 +15,25 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ReviewDataHandlerImpl implements ReviewDataHandler {
 
-    ReviewDAO reviewDAO;
+  private final ReviewDAO reviewDAO;
 
-    @Override
-    public void delete(int reviewId) {
-      reviewDAO.delete(reviewId);
+  @Override
+  public void delete(int reviewId) {
+    reviewDAO.delete(reviewId);
+  }
+
+  @Override
+  public List<ReviewDTO> getReview(int productId) {
+    List<ReviewEntity> reviewEntityList = reviewDAO.getReview(productId);
+    List<ReviewDTO> reviewDTOList = new ArrayList<>();
+    for (ReviewEntity temp : reviewEntityList) {
+      reviewDTOList.add(temp.toDto());
     }
+    return reviewDTOList;
+  }
 
-    @Override
-    public List<ReviewDTO> getReview(int productId) {
-      List<ReviewEntity> reviewEntityList = reviewDAO.getReview(productId);
-      List<ReviewDTO> reviewDTOList = new ArrayList<>();
-      for (ReviewEntity temp : reviewEntityList) {
-        reviewDTOList.add(temp.toDto());
-      }
-      return reviewDTOList;
-    }
-
-    @Override
-    public boolean insert(ReviewDTO reviewDto) {
+  @Override
+  public boolean insert(ReviewDTO reviewDto) {
     return reviewDAO.insert(reviewDto.toEntity());
   }
 }

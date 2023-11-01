@@ -11,24 +11,25 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class HitsServiceImpl implements HitsService {
-    HitsDataHandler hitsDataHandeler;
 
-    @Override
-    public HitsDTO saveHits(int id, String type){
-      HitsDTO hitsDTO = new HitsDTO(id,type,0);
-      hitsDataHandeler.saveHits(hitsDTO);
+  private final HitsDataHandler hitsDataHandeler;
 
-      return hitsDTO;
-    }
+  @Override
+  public HitsDTO saveHits(int id, String type) {
+    HitsDTO hitsDTO = new HitsDTO(id, type, 0);
+    hitsDataHandeler.saveHits(hitsDTO);
 
-    @Override
-    public void upHits(int id, String type){
-      hitsDataHandeler.upHits(id, type);
-    }
+    return hitsDTO;
+  }
 
-    @Override
-    public int getHits(int id, String type){
-    return hitsDataHandeler.getHits(id,type);
+  @Override
+  public void upHits(int id, String type) {
+    hitsDataHandeler.upHits(id, type);
+  }
+
+  @Override
+  public int getHits(int id, String type) {
+    return hitsDataHandeler.getHits(id, type);
   }
 
 }

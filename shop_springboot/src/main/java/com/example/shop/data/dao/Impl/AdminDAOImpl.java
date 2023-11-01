@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AdminDAOImpl implements AdminDAO {
 
-  AdminRepository adminRepository;
+  private final AdminRepository adminRepository;
 
   @Override
   public Optional<AdminEntity> getAdmin(String id) {
