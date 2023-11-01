@@ -1,7 +1,6 @@
 package com.example.shop.controller;
 
 import com.example.shop.data.dto.NoticeDTO;
-import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.service.AdminService;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.NoticeService;
@@ -11,8 +10,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,25 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/shop-backend/notice")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class NoticeController {
   private NoticeService noticeService;
   private AdminService adminService;
   private ImageService imageService;
-  @Autowired
-  public NoticeController(NoticeService noticeService,ImageService imageService,
-      AdminService adminService)
-  {
-    this.imageService = imageService;
-    this.adminService = adminService;
-    this.noticeService = noticeService;
-  }
-
   @GetMapping(value = "/getNoticeList")
   public List<NoticeDTO> getNoticeList(){
     List<NoticeDTO> noticeList = noticeService.getNoticeAll();

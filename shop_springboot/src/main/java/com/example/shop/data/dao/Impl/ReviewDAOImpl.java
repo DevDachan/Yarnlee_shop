@@ -37,7 +37,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
   @Override
   public List<ReviewEntity> getReview(int productId) {
-    reviewRepository.findAll(String.valueOf(productId));
+    reviewRepository.findAll();
     return null;
   }
 

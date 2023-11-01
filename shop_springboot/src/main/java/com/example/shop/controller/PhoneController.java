@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
@@ -29,19 +30,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/phone")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class PhoneController {
   private PhoneService phoneService;
   private SMSService smsService;
 
   @Value("${naver-cloud-sms.senderPhone}")
   private String adminPhone;
-
-
-  @Autowired
-  public PhoneController(PhoneService phoneService,SMSService smsService) {
-    this.smsService = smsService;
-    this.phoneService = phoneService;
-  }
 
   @GetMapping("/send")
   public String getSmsPage() {

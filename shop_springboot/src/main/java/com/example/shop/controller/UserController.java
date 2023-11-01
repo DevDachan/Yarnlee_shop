@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/user")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class UserController {
   private UserService userService;
-
-  @Autowired
-  public UserController(UserService userService) {
-    this.userService = userService;
-  }
-
 
   @PostMapping(value = "/login")
   public Map<String, Object> loginUser(@RequestBody Map<String, String> postData) {

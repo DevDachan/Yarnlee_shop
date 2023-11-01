@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/order")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class OrderController {
   private OrderService orderService;
   private ProductService productService;
@@ -57,16 +59,6 @@ public class OrderController {
 
   @Value("${naver-cloud-sms.senderPhone}")
   private String adminPhone;
-
-  @Autowired
-  public OrderController(OrderService orderService,ProductService productService,
-      ImageService imageService, AdminService adminService,SMSService smsService) {
-    this.orderService = orderService;
-    this.productService = productService;
-    this.imageService = imageService;
-    this.adminService = adminService;
-    this.smsService = smsService;
-  }
 
   @PostMapping(value="/insert")
   public int insertOrder(@Valid OrderDTO orderDto)

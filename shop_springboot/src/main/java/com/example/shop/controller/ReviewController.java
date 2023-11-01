@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +22,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/review")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class ReviewController {
   private ReviewService reviewService;
   private AdminService adminService;
-  @Autowired
-  public ReviewController(ReviewService reviewService, AdminService adminService) {
-    this.adminService = adminService;
-    this.reviewService = reviewService;
-  }
-
 
   @PostMapping(value = "/insert")
   public String insertReview(

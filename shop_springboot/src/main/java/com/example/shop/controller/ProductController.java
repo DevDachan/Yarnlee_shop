@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,20 +25,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/product")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class ProductController {
   private ProductService productService;
   private ImageService imageService;
   private HitsService hitsService;
   private AdminService adminService;
-
-  @Autowired
-  public ProductController(ProductService productService,ImageService imageService,
-      AdminService adminService, HitsService hitsService) {
-    this.imageService = imageService;
-    this.productService = productService;
-    this.adminService = adminService;
-    this.hitsService = hitsService;
-  }
 
   @GetMapping(value = "/select/id/{productId}")
   public Map<String, Object> getProduct(@PathVariable int productId) {

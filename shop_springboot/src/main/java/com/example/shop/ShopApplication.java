@@ -25,26 +25,11 @@ public class ShopApplication implements WebMvcConfigurer {
   public void addInterceptors(InterceptorRegistry registry){
     registry.addInterceptor(jwtInterceptor)
         .addPathPatterns(Arrays.asList(
-           "/shop-backend/user/info",
-           "/shop-backend/user/info",
+           "/shop-backend/user/**",
            "/admin/**",
-           "/shop-backend/product/adminProductList",
-            "/shop-backend/product/changeName",
-            "/shop-backend/product/changeSubDetail",
-            "/shop-backend/product/deleteProduct",
-            "/shop-backend/notice/getNoticeAdminContent",
-            "/shop-backend/notice/getNoticeAdminList",
-            "/shop-backend/notice/deleteNotice",
-            "/shop-backend/notice/createNotice",
-            "/shop-backend/notice/changeContent",
-            "/shop-backend/notice/changeTitle",
-            "/shop-backend/order/getOrderHistoryToken",
-            "/shop-backend/order/delete",
-            "/shop-backend/order/edit",
-            "/shop-backend/order/changeOrderState",
-            "/shop-backend/order/changeParcelNum",
-            "/shop-backend/order/getAdminOrderHistory",
-            "/shop-backend/order/getAdminOrderList",
+            "/shop-backend/product/**",
+            "/shop-backend/notice/**",
+            "/shop-backend/order/**",
             "/shop-backend/product/adminSelect",
             "/shop-backend/product/admin/**"
         ))

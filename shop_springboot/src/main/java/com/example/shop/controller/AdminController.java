@@ -8,6 +8,7 @@ import com.example.shop.data.service.JasyService;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,17 +21,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @RestController
 @RequestMapping("/shop-backend/admin")
 @EnableWebMvc
+@RequiredArgsConstructor
 public class AdminController {
   private AdminService adminService;
   private JasyService jasyService;
   private HitsService hitsService;
-  @Autowired
-  public AdminController(AdminService adminService, HitsService hitsService,
-      JasyService jasyService) {
-    this.adminService = adminService;
-    this.hitsService = hitsService;
-    this.jasyService = jasyService;
-  }
 
   @PostMapping(value = "/adminLogin")
   public Map<String, Object> adminLogin(@RequestBody Map<String, String> postData) {
