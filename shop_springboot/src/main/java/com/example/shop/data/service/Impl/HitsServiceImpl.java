@@ -3,38 +3,31 @@ package com.example.shop.data.service.Impl;
 import com.example.shop.data.dto.HitsDTO;
 import com.example.shop.data.handler.HitsDataHandler;
 import com.example.shop.data.service.HitsService;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Service
 @EnableWebMvc
+@RequiredArgsConstructor
 public class HitsServiceImpl implements HitsService {
-  HitsDataHandler hitsDataHandeler;
+    HitsDataHandler hitsDataHandeler;
 
-  @Autowired
-  public HitsServiceImpl(HitsDataHandler hitsDataHandeler){
-    this.hitsDataHandeler = hitsDataHandeler;
-  }
+    @Override
+    public HitsDTO saveHits(int id, String type){
+      HitsDTO hitsDTO = new HitsDTO(id,type,0);
+      hitsDataHandeler.saveHits(hitsDTO);
 
-  // Service(Client) <-> Controller : DTO
-  // Service <-> DAO(DB) : Entity
-  @Override
-  public HitsDTO saveHits(int id, String type){
-    HitsDTO hitsDTO = new HitsDTO(id,type,0);
-    hitsDataHandeler.saveHits(hitsDTO);
+      return hitsDTO;
+    }
 
-    return hitsDTO;
-  }
+    @Override
+    public void upHits(int id, String type){
+      hitsDataHandeler.upHits(id, type);
+    }
 
-  @Override
-  public void upHits(int id, String type){
-    hitsDataHandeler.upHits(id, type);
-  }
-
-  @Override
-  public int getHits(int id, String type){
+    @Override
+    public int getHits(int id, String type){
     return hitsDataHandeler.getHits(id,type);
   }
 

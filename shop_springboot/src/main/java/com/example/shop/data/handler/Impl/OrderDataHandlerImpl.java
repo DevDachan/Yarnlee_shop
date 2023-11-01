@@ -7,52 +7,63 @@ import com.example.shop.data.handler.OrderDataHandler;
 import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @Transactional
+@RequiredArgsConstructor
 public class OrderDataHandlerImpl implements OrderDataHandler {
 
-  OrderDAO orderDAO;
+    OrderDAO orderDAO;
 
-  @Autowired
-  public OrderDataHandlerImpl(OrderDAO orderDAO) {this.orderDAO = orderDAO;}
+    @Override
+    public OrderEntity saveOrder(OrderDTO orderDTO){
+      OrderEntity orderEntity = orderDTO.toEntity();
+      return orderDAO.saveOrder(orderEntity);
+    }
 
-  @Override
-  public OrderEntity saveOrder(OrderDTO orderDTO){
-    OrderEntity orderEntity = orderDTO.toEntity();
-    return orderDAO.saveOrder(orderEntity);
-  }
+    @Override
+    public void changeState(String id,String state){orderDAO.changeState(id,state);}
 
-  @Override
-  public void changeState(String id,String state){orderDAO.changeState(id,state);}
-
-  @Override
-  public void changeParcelType(String id,String data){orderDAO.changeParcelType(id,data);}
+    @Override
+    public void changeParcelType(String id,String data){orderDAO.changeParcelType(id,data);}
 
 
-  @Override
-  public OrderDTO getOrder(int orderId){
-    OrderEntity orderEntity = orderDAO.getOrder(orderId);
-    if(orderEntity == null) return null;
+    @Override
+    public OrderDTO getOrder(int orderId){
+      OrderEntity orderEntity = orderDAO.getOrder(orderId);
+      if(orderEntity == null) return null;
 
-    OrderDTO orderDTO = orderEntity.toDto();
+      OrderDTO orderDTO = orderEntity.toDto();
 
-    return orderDTO;
-  }
+      return orderDTO;
+    }
 
-  @Override
-  public void deleteOrder(String orderId){
-      orderDAO.deleteOrder(orderId);
-  }
+    @Override
+    public void deleteOrder(String orderId){
+        orderDAO.deleteOrder(orderId);
+    }
 
-  @Override
-  public List<Integer> findDistinctId(){ return orderDAO.findDistinctId(); }
+    @Override
+    public List<Integer> findDistinctId(){ return orderDAO.findDistinctId(); }
 
-  @Override
-  public List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name){
-      List<OrderEntity> orderEntity = orderDAO.getOrderUsingPhone(phoneNum, Name);
+    @Override
+    public List<OrderDTO> getOrderUsingPhone(String phoneNum, String Name){
+        List<OrderEntity> orderEntity = orderDAO.getOrderUsingPhone(phoneNum, Name);
+        List<OrderDTO> orderDTO = new ArrayList<>();
+        if(orderEntity.size() == 0) return null;
+
+        for(OrderEntity temp : orderEntity){
+          OrderDTO orderTemp = temp.toDto();
+          orderDTO.add(orderTemp);
+        }
+
+        return orderDTO;
+    }
+    @Override
+    public List<OrderDTO> getOrderUsingUserId(String userId){
+      List<OrderEntity> orderEntity = orderDAO.getOrderUsingUserId(userId);
       List<OrderDTO> orderDTO = new ArrayList<>();
       if(orderEntity.size() == 0) return null;
 
@@ -62,33 +73,20 @@ public class OrderDataHandlerImpl implements OrderDataHandler {
       }
 
       return orderDTO;
-  }
-  @Override
-  public List<OrderDTO> getOrderUsingUserId(String userId){
-    List<OrderEntity> orderEntity = orderDAO.getOrderUsingUserId(userId);
-    List<OrderDTO> orderDTO = new ArrayList<>();
-    if(orderEntity.size() == 0) return null;
-
-    for(OrderEntity temp : orderEntity){
-      OrderDTO orderTemp = temp.toDto();
-      orderDTO.add(orderTemp);
     }
 
-    return orderDTO;
-  }
+    @Override
+    public List<OrderDTO> getOrderAll(){
+      List<OrderEntity> orderEntity = orderDAO.getOrderAll();
+      List<OrderDTO> orderDTO = new ArrayList<>();
+      if(orderEntity.size() == 0) return null;
 
-  @Override
-  public List<OrderDTO> getOrderAll(){
-    List<OrderEntity> orderEntity = orderDAO.getOrderAll();
-    List<OrderDTO> orderDTO = new ArrayList<>();
-    if(orderEntity.size() == 0) return null;
+      for(OrderEntity temp : orderEntity){
+        OrderDTO orderTemp = temp.toDto();
+        orderDTO.add(orderTemp);
+      }
 
-    for(OrderEntity temp : orderEntity){
-      OrderDTO orderTemp = temp.toDto();
-      orderDTO.add(orderTemp);
+      return orderDTO;
     }
-
-    return orderDTO;
-  }
 
 }

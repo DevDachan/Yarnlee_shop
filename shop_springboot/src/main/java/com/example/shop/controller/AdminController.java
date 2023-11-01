@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class AdminController {
+
   private AdminService adminService;
   private JasyService jasyService;
   private HitsService hitsService;
@@ -30,42 +30,39 @@ public class AdminController {
   @PostMapping(value = "/adminLogin")
   public Map<String, Object> adminLogin(@RequestBody Map<String, String> postData) {
     Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin(postData.get("id"));
-
     Map<String, Object> map = new HashMap<>();
     if (optionalAdminDTO.isPresent()) {
       AdminDTO adminDTO = optionalAdminDTO.get();
-      if(postData.get("password").equals(jasyService.jasyptDecoding(adminDTO.getPassword()))) {
+      if (postData.get("password").equals(jasyService.jasyptDecoding(adminDTO.getPassword()))) {
         map.put("id", adminDTO.getId());
         map.put("hashKey", adminDTO.getHashKey());
         map.put("token", adminService.getToken(adminDTO.getHashKey()));
-
         return map;
       }
-      map.put("id","password");
+      map.put("id", "password");
       return map;
     }
-    map.put("id","id");
+    map.put("id", "id");
     return map;
   }
 
   @GetMapping(value = "/getAllContent")
-  public Map<String,String> getAllContent(){
+  public Map<String, String> getAllContent() {
     Map<String, String> formData = new HashMap<>();
     Optional<AdminDTO> optionalMainDTO = adminService.getAdmin("main");
     AdminDTO main = optionalMainDTO.get();
     Optional<AdminDTO> optionalOrderDTO = adminService.getAdmin("order");
     AdminDTO order = optionalOrderDTO.get();
 
-    int hits = hitsService.getHits(0,"main");
+    int hits = hitsService.getHits(0, "main");
     formData.put("main", main.getHashKey());
     formData.put("order", order.getHashKey());
     formData.put("hits", String.valueOf(hits));
-
     return formData;
   }
 
   @GetMapping(value = "/getMainContent")
-  public String getMainContent(){
+  public String getMainContent() {
     Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin("main");
     AdminDTO main = optionalAdminDTO.get();
 
@@ -73,7 +70,7 @@ public class AdminController {
   }
 
   @GetMapping(value = "/getOrderContent")
-  public String getOrderContent(){
+  public String getOrderContent() {
     Optional<AdminDTO> optionalAdminDTO = adminService.getAdmin("order");
     AdminDTO main = optionalAdminDTO.get();
 
@@ -90,6 +87,4 @@ public class AdminController {
   public void editOrderContent(@RequestParam("content") String content) {
     adminService.editContent("order", content);
   }
-
-
 }

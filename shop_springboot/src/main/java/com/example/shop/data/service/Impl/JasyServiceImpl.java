@@ -1,26 +1,28 @@
 package com.example.shop.data.service.Impl;
 
 import com.example.shop.data.service.JasyService;
+import lombok.RequiredArgsConstructor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Service
 @EnableWebMvc
+@RequiredArgsConstructor
 public class JasyServiceImpl implements JasyService {
-  public String jasyptEncoding(String value){
-    String key="Demo";
-    StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
-    pbeEnc.setAlgorithm("PBEWithMD5AndDES");
-    pbeEnc.setPassword(key);
-    return pbeEnc.encrypt(value);
-  }
+    public String jasyptEncoding(String value){
+      String key="Demo";
+      StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
+      pbeEnc.setAlgorithm("PBEWithMD5AndDES");
+      pbeEnc.setPassword(key);
+      return pbeEnc.encrypt(value);
+    }
 
-  public String jasyptDecoding(String value){
-    String key="Demo";
-    StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
-    pbeEnc.setAlgorithm("PBEWithMD5AndDES");
-    pbeEnc.setPassword(key);
-    return pbeEnc.decrypt(value);
-  }
+    public String jasyptDecoding(String value){
+      String key="Demo";
+      StandardPBEStringEncryptor pbeEnc = new StandardPBEStringEncryptor();
+      pbeEnc.setAlgorithm("PBEWithMD5AndDES");
+      pbeEnc.setPassword(key);
+      return pbeEnc.decrypt(value);
+    }
 }

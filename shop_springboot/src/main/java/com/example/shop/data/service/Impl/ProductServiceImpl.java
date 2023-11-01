@@ -2,28 +2,20 @@ package com.example.shop.data.service.Impl;
 
 import com.example.shop.data.dto.ProductColorDTO;
 import com.example.shop.data.dto.ProductDTO;
-import com.example.shop.data.entity.ProductColorEntity;
 import com.example.shop.data.entity.ProductEntity;
 import com.example.shop.data.handler.ProductDataHandler;
 import com.example.shop.data.service.ProductService;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Service
 @EnableWebMvc
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
   ProductDataHandler productDataHandeler;
-
-  @Autowired
-  public ProductServiceImpl(ProductDataHandler productDataHandler){
-    this.productDataHandeler = productDataHandler;
-  }
-
-  // Service(Client) <-> Controller : DTO
-  // Service <-> DAO(DB) : Entity
 
   @Override
   public ProductDTO getProduct(int productId){

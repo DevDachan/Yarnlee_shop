@@ -1,7 +1,5 @@
 package com.example.shop.data.repository;
 
-
-
 import com.example.shop.data.entity.NoticeEntity;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

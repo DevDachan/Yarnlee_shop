@@ -6,17 +6,15 @@ import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserDataHandler;
 import jakarta.transaction.Transactional;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @Transactional
+@RequiredArgsConstructor
 public class UserDataHandlerImpl implements UserDataHandler {
 
     UserDAO userDAO;
-
-    @Autowired
-    public UserDataHandlerImpl(UserDAO userDAO) {this.userDAO = userDAO;}
 
     @Override
     public UserEntity saveUser(UserDTO userDTO){

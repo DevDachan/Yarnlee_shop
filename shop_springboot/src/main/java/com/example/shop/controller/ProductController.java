@@ -1,12 +1,10 @@
 package com.example.shop.controller;
 
-
 import com.example.shop.data.dto.ProductDTO;
+import com.example.shop.data.service.AdminService;
 import com.example.shop.data.service.HitsService;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.ProductService;
-import com.example.shop.data.service.AdminService;
-import jakarta.validation.Valid;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -14,11 +12,12 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import net.coobird.thumbnailator.Thumbnails;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -27,6 +26,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class ProductController {
+
   private ProductService productService;
   private ImageService imageService;
   private HitsService hitsService;
@@ -35,9 +35,9 @@ public class ProductController {
   @GetMapping(value = "/select/id/{productId}")
   public Map<String, Object> getProduct(@PathVariable int productId) {
     Map<String, Object> formData = new HashMap<>();
-    hitsService.upHits(productId,"product");
+    hitsService.upHits(productId, "product");
 
-    formData.put("product" ,productService.getProduct(productId));
+    formData.put("product", productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
   }
@@ -45,8 +45,8 @@ public class ProductController {
   @GetMapping(value = "/admin/adminSelect/id/{productId}")
   public Map<String, Object> getAdminProduct(@PathVariable int productId) {
     Map<String, Object> formData = new HashMap<>();
-    formData.put("hits", hitsService.getHits(productId,"product"));
-    formData.put("product" ,productService.getProduct(productId));
+    formData.put("hits", hitsService.getHits(productId, "product"));
+    formData.put("product", productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
   }
@@ -58,25 +58,25 @@ public class ProductController {
       @RequestParam("colorContent") String color) {
     Map<String, Object> formData = new HashMap<>();
 
-    productService.changeColor(productId,colorId,color);
+    productService.changeColor(productId, colorId, color);
 
-    formData.put("product" ,productService.getProduct(productId));
+    formData.put("product", productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
   }
+
   @PostMapping(value = "/admin/changeColorPrice")
   public Map<String, Object> changeColorPrice(@RequestParam("productId") int productId,
       @RequestParam("colorId") int colorId,
       @RequestParam("colorPrice") int price) {
     Map<String, Object> formData = new HashMap<>();
 
-    productService.changeColorPrice(productId,colorId,price);
+    productService.changeColorPrice(productId, colorId, price);
 
-    formData.put("product" ,productService.getProduct(productId));
+    formData.put("product", productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
   }
-
 
 
   @PostMapping(value = "/admin/insertColor")
@@ -87,7 +87,7 @@ public class ProductController {
 
     productService.insertColor(productId, colorId);
 
-    formData.put("product" ,productService.getProduct(productId));
+    formData.put("product", productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
   }
@@ -97,9 +97,9 @@ public class ProductController {
       @RequestParam("colorId") int colorId) {
     Map<String, Object> formData = new HashMap<>();
 
-    productService.deleteColor(productId,colorId);
+    productService.deleteColor(productId, colorId);
 
-    formData.put("product" ,productService.getProduct(productId));
+    formData.put("product", productService.getProduct(productId));
     formData.put("color", productService.getColor(productId));
     return formData;
   }
@@ -109,35 +109,34 @@ public class ProductController {
       @RequestParam String hashKey,
       @RequestParam int id,
       @RequestParam String adminId
-      ) {
-    if(!adminService.checkAdmin(hashKey,adminId)){
+  ) {
+    if (!adminService.checkAdmin(hashKey, adminId)) {
       return "AuthFail";
     }
 
-    productService.deleteProduct(id) ;
+    productService.deleteProduct(id);
     return "delete";
   }
-
 
 
   @PostMapping(value = "/admin/changeName")
   public void changeName(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
-    productService.changeName(productId,content);
+    productService.changeName(productId, content);
   }
 
   @PostMapping(value = "/admin/changePrice")
   public void changePrice(@RequestParam("id") int productId,
       @RequestParam("content") int content) {
 
-    productService.changePrice(productId,content);
+    productService.changePrice(productId, content);
   }
 
   @PostMapping(value = "/admin/changeDeliveryTime")
   public void changeDeliveryTime(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
-    productService.changeDeliveryTime(productId,content);
+    productService.changeDeliveryTime(productId, content);
   }
 
   @PostMapping(value = "/admin/changeState")
@@ -151,44 +150,44 @@ public class ProductController {
   public void changeDeliveryCostHalf(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
-    productService.changeDeliveryCostHalf(productId,content);
+    productService.changeDeliveryCostHalf(productId, content);
   }
 
   @PostMapping(value = "/admin/changeDeliveryCostGeneral")
   public void changeDeliveryCostGeneral(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
-    productService.changeDeliveryCostGeneral(productId,content);
+    productService.changeDeliveryCostGeneral(productId, content);
   }
 
   @PostMapping(value = "/admin/changeSubDetail")
   public void changeSubDetail(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
-    productService.changeSubDetail(productId,content);
+    productService.changeSubDetail(productId, content);
   }
 
   @PostMapping(value = "/admin/changeDetail")
   public ProductDTO changeDetail(@RequestParam("id") int productId,
       @RequestParam("content") String content) {
 
-    productService.changeDetail(productId,content);
+    productService.changeDetail(productId, content);
 
     ProductDTO productDTO = productService.getProduct(productId);
     return productDTO;
   }
 
   @GetMapping(value = "/productList")
-  public HashMap<String,Object> getProductList() {
-    HashMap<String,Object> map = new HashMap<String,Object>();
+  public HashMap<String, Object> getProductList() {
+    HashMap<String, Object> map = new HashMap<String, Object>();
     List<ProductDTO> productDTO = productService.getProductList();
-    hitsService.upHits(0,"main");
+    hitsService.upHits(0, "main");
     map.put("productContent", productDTO);
     return map;
   }
 
   @GetMapping(value = "/admin/productList")
-  public HashMap<String,Object> getAdminProductList() {
-    HashMap<String,Object> map = new HashMap<String,Object>();
+  public HashMap<String, Object> getAdminProductList() {
+    HashMap<String, Object> map = new HashMap<String, Object>();
     List<ProductDTO> productDTO = productService.getProductList();
     map.put("productContent", productDTO);
     return map;
@@ -196,11 +195,11 @@ public class ProductController {
 
 
   @GetMapping(value = "/admin/createProduct")
-  public HashMap<String,Object> createProduct() {
-    HashMap<String,Object> map = new HashMap<>();
+  public HashMap<String, Object> createProduct() {
+    HashMap<String, Object> map = new HashMap<>();
     ProductDTO response = productService.createProduct();
 
-    hitsService.saveHits(response.getId(),"product");
+    hitsService.saveHits(response.getId(), "product");
     List<ProductDTO> productDTO = productService.getProductList();
 
     map.put("productContent", productDTO);
@@ -209,16 +208,16 @@ public class ProductController {
 
 
   @PostMapping(value = "/admin/changePosition")
-  public HashMap<String,Object> changePosition(
+  public HashMap<String, Object> changePosition(
       @RequestParam String direction,
       @RequestParam int position
-      ) {
-    HashMap<String,Object> map = new HashMap<String,Object>();
+  ) {
+    HashMap<String, Object> map = new HashMap<String, Object>();
 
     var nextPosition = 0;
-    if(direction.equals("up") ){
+    if (direction.equals("up")) {
       nextPosition = position - 1;
-    }else{
+    } else {
       nextPosition = position + 1;
     }
 
@@ -235,7 +234,7 @@ public class ProductController {
   @PostMapping(value = "/admin/insertImage")
   public int uploadImage(
       @RequestParam("file") MultipartFile file
-    ){
+  ) {
     try {
       // 파일 저장 디렉토리 경로
       String uploadDir = "../build/productImage/";
@@ -258,7 +257,7 @@ public class ProductController {
   public ProductDTO uploadMainImage(
       @RequestParam("file") MultipartFile file,
       @RequestParam("productId") int productId
-  ){
+  ) {
     try {
       // 파일 저장 디렉토리 경로
       String uploadDir = "../build/productImage/";

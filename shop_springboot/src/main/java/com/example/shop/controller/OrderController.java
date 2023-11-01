@@ -5,13 +5,12 @@ import com.example.shop.data.dto.MessageDTO;
 import com.example.shop.data.dto.OrderDTO;
 import com.example.shop.data.dto.ProductDTO;
 import com.example.shop.data.dto.SmsResponseDTO;
+import com.example.shop.data.service.AdminService;
 import com.example.shop.data.service.ImageService;
 import com.example.shop.data.service.OrderService;
 import com.example.shop.data.service.ProductService;
 import com.example.shop.data.service.SMSService;
-import com.example.shop.data.service.AdminService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -24,17 +23,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +44,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class OrderController {
+
   private OrderService orderService;
   private ProductService productService;
 
@@ -60,31 +57,30 @@ public class OrderController {
   @Value("${naver-cloud-sms.senderPhone}")
   private String adminPhone;
 
-  @PostMapping(value="/insert")
+  @PostMapping(value = "/insert")
   public int insertOrder(@Valid OrderDTO orderDto)
       throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException, InvalidKeyException, JsonProcessingException {
 
     orderDto.setId(orderService.getRandomId());
     OrderDTO response = orderService.saveOrder(orderDto);
 
-    String content = "<YarnLee> \n"+ "주문자 : "+orderDto.getOrderName()+ "\n" +
-        "주문번호: "+ orderDto.getId() + "\n"
+    String content = "<YarnLee> \n" + "주문자 : " + orderDto.getOrderName() + "\n" +
+        "주문번호: " + orderDto.getId() + "\n"
         + "송금내역이 확인되는대로 연락드리겠습니다";
-    MessageDTO messageDto = new MessageDTO(orderDto.getOrderPhone().replace("-","")
-        ,content);
+    MessageDTO messageDto = new MessageDTO(orderDto.getOrderPhone().replace("-", "")
+        , content);
     SmsResponseDTO sendResult = smsService.sendSms(messageDto);
 
-    content = "<YarnLee> \n"+ "주문자 : "+orderDto.getOrderName()+ "\n" +
-        "주문번호: "+ orderDto.getId() + "\n"
+    content = "<YarnLee> \n" + "주문자 : " + orderDto.getOrderName() + "\n" +
+        "주문번호: " + orderDto.getId() + "\n"
         + "새로운 주문이 들어왔습니다.";
-    MessageDTO adminMessageDto = new MessageDTO(adminPhone,content);
+    MessageDTO adminMessageDto = new MessageDTO(adminPhone, content);
     smsService.sendSms(adminMessageDto);
-
 
     return orderDto.getId();
   }
 
-  @PostMapping(value="/edit")
+  @PostMapping(value = "/edit")
   public ResponseEntity<OrderDTO> editProduct(@Valid OrderDTO orderDTO) {
     OrderDTO response = orderService.saveOrder(orderDTO);
     return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
@@ -94,7 +90,7 @@ public class OrderController {
   public void changeParcelNum(
       @RequestParam String id,
       @RequestParam String data
-    ) {
+  ) {
     orderService.changeParcelType(id, data);
   }
 
@@ -104,33 +100,34 @@ public class OrderController {
 
     return orderDTO;
   }
+
   @PostMapping(value = "/getOrderHistory")
   public Map<String, Object> getOrderHistory(
       @RequestParam String type,
       @RequestParam String content,
       @RequestParam String name
-      ){
+  ) {
 
     HashMap<String, Object> formData = new HashMap<>();
     List<OrderDTO> orderList = null;
-    
-    if(type.equals("사용자 인증")){
+
+    if (type.equals("사용자 인증")) {
       // content = key, name = id
-      orderList = orderService.getOrderUsingKey(content,name);
-    }else if(type.equals("전화 번호")) {
-      orderList = orderService.getOrderUsingPhone(content,name);
-    }else{
+      orderList = orderService.getOrderUsingKey(content, name);
+    } else if (type.equals("전화 번호")) {
+      orderList = orderService.getOrderUsingPhone(content, name);
+    } else {
       OrderDTO temp = orderService.getOrder(Integer.parseInt(content));
-      if(temp != null){
+      if (temp != null) {
         orderList = List.of(orderService.getOrder(Integer.parseInt(content)));
       }
     }
 
-    if(orderList == null || orderList.size() == 0){
+    if (orderList == null || orderList.size() == 0) {
       return null;
-    }else {
+    } else {
       ArrayList<ProductDTO> productList = new ArrayList<>();
-      for(OrderDTO temp : orderList){
+      for (OrderDTO temp : orderList) {
         productList.add(productService.getProduct(temp.getProductId()));
       }
 
@@ -143,23 +140,21 @@ public class OrderController {
 
   @PostMapping(value = "/getOrderHistoryToken")
   public Map<String, Object> getOrderHistoryToken(
-      @RequestParam String type,
       @RequestParam String content,
       @RequestParam String name
-  ){
+  ) {
 
     HashMap<String, Object> formData = new HashMap<>();
     List<OrderDTO> orderList = null;
 
-
     // content = key, name = id
-    orderList = orderService.getOrderUsingKey(content,name);
+    orderList = orderService.getOrderUsingKey(content, name);
 
-    if(orderList == null || orderList.size() == 0){
+    if (orderList == null || orderList.size() == 0) {
       return null;
-    }else {
+    } else {
       ArrayList<ProductDTO> productList = new ArrayList<>();
-      for(OrderDTO temp : orderList){
+      for (OrderDTO temp : orderList) {
         productList.add(productService.getProduct(temp.getProductId()));
       }
 
@@ -172,7 +167,7 @@ public class OrderController {
   @PostMapping(value = "/insertUserImage")
   public int uploadImage(
       @RequestParam("file") MultipartFile file
-  ){
+  ) {
     int randomId = -1;
     try {
       // 파일 저장 디렉토리 경로
@@ -199,23 +194,23 @@ public class OrderController {
   public Map<String, Object> getAdminOrderList(
       @RequestParam String hashKey,
       @RequestParam String id
-  ){
-    if(!adminService.checkAdmin(hashKey,id)){
+  ) {
+    if (!adminService.checkAdmin(hashKey, id)) {
       return null;
     }
 
     HashMap<String, Object> formData = new HashMap<>();
-    List<OrderDTO> orderList = orderService.getOrderAll();
+    List<OrderDTO> allList = orderService.getOrderAll();
 
-    if(orderList == null || orderList.size() == 0){
+    if (allList == null || allList.size() == 0) {
       return null;
-    }else {
+    } else {
       ArrayList<ProductDTO> productList = new ArrayList<>();
-      for(OrderDTO temp : orderList){
+      for (OrderDTO temp : allList) {
         productList.add(productService.getProduct(temp.getProductId()));
       }
 
-      formData.put("orderList", orderList);
+      formData.put("orderList", allList);
       formData.put("productList", productList);
       return formData;
     }
@@ -226,8 +221,9 @@ public class OrderController {
       @RequestParam String hashKey,
       @RequestParam String id,
       @RequestParam int orderId
-      ){
-    if(!adminService.checkAdmin(hashKey,id)){
+  ) {
+
+    if (!adminService.checkAdmin(hashKey, id)) {
       return null;
     }
 
@@ -242,8 +238,8 @@ public class OrderController {
   }
 
   @GetMapping("/changeOrderState")
-  public void changeOrderState(@RequestParam String id, @RequestParam String state){
-    orderService.changeState(id,state);
+  public void changeOrderState(@RequestParam String id, @RequestParam String state) {
+    orderService.changeState(id, state);
   }
 
 
@@ -253,7 +249,8 @@ public class OrderController {
   }
 
   @PostMapping("/sms/send")
-  public String sendSms(MessageDTO messageDto, Model model) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+  public String sendSms(MessageDTO messageDto, Model model)
+      throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
     SmsResponseDTO response = smsService.sendSms(messageDto);
     model.addAttribute("response", response);
     return "result";
@@ -264,9 +261,8 @@ public class OrderController {
       @RequestParam String orderId,
       @RequestParam String hashKey,
       @RequestParam String id) {
-    if(adminService.checkAdmin(hashKey,id)) {
+    if (adminService.checkAdmin(hashKey, id)) {
       orderService.deleteOrder(orderId);
     }
   }
-
 }

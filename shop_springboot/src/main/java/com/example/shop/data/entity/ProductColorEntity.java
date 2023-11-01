@@ -1,26 +1,19 @@
 package com.example.shop.data.entity;
 
 import com.example.shop.data.dto.ProductColorDTO;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
+@Data
+@Builder
 @Entity
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@ToString
 @IdClass(ProductColorId.class)
 @Table(name = "product_color")
 public class ProductColorEntity {

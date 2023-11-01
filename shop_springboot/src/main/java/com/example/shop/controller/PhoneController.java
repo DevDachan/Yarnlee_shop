@@ -14,13 +14,10 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +29,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @RequiredArgsConstructor
 public class PhoneController {
+
   private PhoneService phoneService;
   private SMSService smsService;
 
@@ -45,30 +43,31 @@ public class PhoneController {
 
   @PostMapping("/sms/send")
   public String sendSms(
-      MessageDTO messageDto, Model model) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
+      MessageDTO messageDto, Model model)
+      throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
     SmsResponseDTO response = smsService.sendSms(messageDto);
     model.addAttribute("response", response);
     return "result";
   }
 
-  @PostMapping(value="/register")
+  @PostMapping(value = "/register")
   public PhoneDTO registerPhone(@Valid PhoneDTO phoneDTO)
       throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException, InvalidKeyException, JsonProcessingException {
     phoneDTO.setSecretKey(phoneService.getRandomKey());
     phoneService.savePhone(phoneDTO);
 
-    String content = "<YarnLee> \n"+ "인증번호: "+phoneDTO.getSecretKey()+ "\n";
-    MessageDTO messageDto = new MessageDTO(phoneDTO.getPhoneNum().replace("-",""),content);
+    String content = "<YarnLee> \n" + "인증번호: " + phoneDTO.getSecretKey() + "\n";
+    MessageDTO messageDto = new MessageDTO(phoneDTO.getPhoneNum().replace("-", ""), content);
     smsService.sendSms(messageDto);
     return phoneDTO;
   }
 
   @GetMapping("/checkDup")
-  public String checkDup(@RequestParam String phoneNum){
+  public String checkDup(@RequestParam String phoneNum) {
     Optional<PhoneDTO> phone = phoneService.getPhone(phoneNum);
-    if(phone.isPresent()){
+    if (phone.isPresent()) {
       return "Dup";
-    }else{
+    } else {
       return "NoDup";
     }
   }
@@ -77,19 +76,19 @@ public class PhoneController {
   public String checkKey(
       @RequestParam String phoneNum,
       @RequestParam String secretKey
-  ){
+  ) {
     Optional<PhoneDTO> optionalPhoneDTO = phoneService.getPhone(phoneNum);
-    if(optionalPhoneDTO.isPresent()){
+    if (optionalPhoneDTO.isPresent()) {
       PhoneDTO phone = optionalPhoneDTO.get();
-      if(phone.getSecretKey().equals(secretKey)){
+      if (phone.getSecretKey().equals(secretKey)) {
         phone.setCheckAuth("Yes");
         phoneService.savePhone(phone);
         return "Success";
-      }else{
+      } else {
         return "Fail";
       }
 
-    }else{
+    } else {
       return "Fail";
     }
   }
@@ -97,12 +96,12 @@ public class PhoneController {
   @GetMapping("/checkAuth")
   public String checkAuth(
       @RequestParam String phoneNum
-  ){
+  ) {
     Optional<PhoneDTO> optionalPhoneDTO = phoneService.getPhone(phoneNum);
-    if(optionalPhoneDTO.isPresent()){
+    if (optionalPhoneDTO.isPresent()) {
       PhoneDTO phone = optionalPhoneDTO.get();
       return phone.getCheckAuth();
-    }else{
+    } else {
       return "No";
     }
   }
@@ -111,11 +110,11 @@ public class PhoneController {
   public void sendMessage(String phoneNum)
       throws UnsupportedEncodingException, NoSuchAlgorithmException, URISyntaxException, InvalidKeyException, JsonProcessingException {
     Optional<PhoneDTO> optionalPhoneDTO = phoneService.getPhone(phoneNum);
-    if(optionalPhoneDTO.isPresent()){
+    if (optionalPhoneDTO.isPresent()) {
       phoneService.resetSecretKey(phoneNum);
       PhoneDTO phone = optionalPhoneDTO.get();
-      String content = "<YarnLee> \n"+ "인증번호: "+phone.getSecretKey()+ "\n";
-      MessageDTO adminMessageDto = new MessageDTO(adminPhone,content);
+      String content = "<YarnLee> \n" + "인증번호: " + phone.getSecretKey() + "\n";
+      MessageDTO adminMessageDto = new MessageDTO(adminPhone, content);
       smsService.sendSms(adminMessageDto);
     }
   }

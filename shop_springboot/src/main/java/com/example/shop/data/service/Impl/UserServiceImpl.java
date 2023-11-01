@@ -1,8 +1,6 @@
 package com.example.shop.data.service.Impl;
 
-import com.example.shop.data.dto.AdminDTO;
 import com.example.shop.data.dto.UserDTO;
-import com.example.shop.data.entity.AdminEntity;
 import com.example.shop.data.entity.UserEntity;
 import com.example.shop.data.handler.UserAuthDataHandler;
 import com.example.shop.data.handler.UserDataHandler;
@@ -12,12 +10,13 @@ import com.example.shop.jwt.JwtUtil;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Service
 @EnableWebMvc
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
   UserAuthDataHandler userAuthDataHandeler;
@@ -28,17 +27,6 @@ public class UserServiceImpl implements UserService {
 
   private JwtUtil jwtUtil;
 
-  @Autowired
-  public UserServiceImpl(UserDataHandler userDataHandler,JasyService jasyService,
-      JwtUtil jwtUtil, UserAuthDataHandler userAuthDataHandeler){
-    this.userAuthDataHandeler = userAuthDataHandeler;
-    this.userDataHandeler = userDataHandler;
-    this.jasyService = jasyService;
-    this.jwtUtil = jwtUtil;
-  }
-
-  // Service(Client) <-> Controller : DTO
-  // Service <-> DAO(DB) : Entity
   @Override
   public UserDTO saveUser(UserDTO userDTO){
     userDTO.setPassword(jasyService.jasyptEncoding(userDTO.getPassword()));
